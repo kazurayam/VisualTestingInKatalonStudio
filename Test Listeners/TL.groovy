@@ -23,7 +23,9 @@ import com.kms.katalon.core.context.TestCaseContext
 import com.kms.katalon.core.context.TestSuiteContext
 
 import com.kms.katalon.core.configuration.RunConfiguration
+
 import com.kazurayam.ksbackyard.screenshotsupport.ScreenshotRepository
+import com.kazurayam.ksbackyard.screenshotsupport.Timestamp
 
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -37,9 +39,10 @@ class TL {
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
 		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
-		String testSuiteId = testSuiteContext.getTestSuiteId()
-		ScreenshotRepository scRepos = ScreenshotRepository.getInstance(projectDir, testSuiteId)
-		WebUI.comment(">>> got instance of ${scRepos.toString()}")
+		ScreenshotRepository scRepos = ScreenshotRepository.getInstance(projectDir)
+		scRepos.setCurrentTestSuiteId(testSuiteContext.getTestSuiteId())
+		scRepos.setCurrentTimestamp(new Timestamp())
+		WebUI.comment(">>> got ScreenshotRepository instance: ${scRepos.toString()}")
 	}
 
 	/**
@@ -48,7 +51,8 @@ class TL {
 	 */
 	@AfterTestSuite
 	def aterTestSuite(TestSuiteContext testSuiteContext) {
-		//println testSuiteContext.getTestSuiteId()
+		ScreenshotRepository scRepos = ScreenshotRepository.getInstance()
+		WebUI.comment(">>> testSuiteId: ${scRepos.getCurrentTestSuiteId()}")
 	}
 	
 	/**
@@ -57,7 +61,8 @@ class TL {
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
-		
+		ScreenshotRepository scRepos = ScreenshotRepository.getInstance()
+		scRepos.setCurrentTestCaseId(testCaseContext.getTestCaseId())
 	}
 
 	/**
@@ -68,6 +73,10 @@ class TL {
 	def afterTestCase(TestCaseContext testCaseContext) {
 		//println testCaseContext.getTestCaseId()
 		//println testCaseContext.getTestCaseStatus()
+		ScreenshotRepository scRepos = ScreenshotRepository.getInstance()
+		scRepos.setCurrentTestCaseStatus(testCaseContext.getTestCaseStatus())
+		WebUI.comment(">>> testCaseId: ${scRepos.getCurrentTestCaseId()}")
+		WebUI.comment(">>> testCaseStatus: ${scRepos.getCurrentTestCaseStatus()}")
 	}
 
 }
