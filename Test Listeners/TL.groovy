@@ -39,9 +39,8 @@ class TL {
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
 		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
-		ScreenshotRepository scRepos = ScreenshotRepository.getInstance(projectDir)
-		scRepos.setCurrentTestSuiteId(testSuiteContext.getTestSuiteId())
-		scRepos.setCurrentTimestamp(new Timestamp())
+		ScreenshotRepository scRepos = 
+			ScreenshotRepository.getInstance(projectDir, testSuiteContext.getTestSuiteId())
 		WebUI.comment(">>> got ScreenshotRepository instance: ${scRepos.toString()}")
 	}
 
@@ -71,8 +70,6 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
-		//println testCaseContext.getTestCaseId()
-		//println testCaseContext.getTestCaseStatus()
 		ScreenshotRepository scRepos = ScreenshotRepository.getInstance()
 		scRepos.setCurrentTestCaseStatus(testCaseContext.getTestCaseStatus())
 		WebUI.comment(">>> testCaseId: ${scRepos.getCurrentTestCaseId()}")
