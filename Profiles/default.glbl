@@ -4,4 +4,9 @@
    <name>default</name>
    <tag></tag>
    <defaultProfile>true</defaultProfile>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>null</initValue>
+      <name>SCREENSHOT_REPOSITORY</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

@@ -23,10 +23,7 @@ import com.kms.katalon.core.context.TestCaseContext
 import com.kms.katalon.core.context.TestSuiteContext
 
 import com.kms.katalon.core.configuration.RunConfiguration
-
 import com.kazurayam.ksbackyard.screenshotsupport.ScreenshotRepository
-import com.kazurayam.ksbackyard.screenshotsupport.Timestamp
-
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -38,10 +35,11 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
-		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
-		ScreenshotRepository scRepos = 
-			ScreenshotRepository.getInstance(projectDir, testSuiteContext.getTestSuiteId())
+		Path screenshotsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Screenshots')
+		ScreenshotRepository scRepos = new ScreenshotRepository(screenshotsDir, testSuiteContext.getTestSuiteId())
 		WebUI.comment(">>> got ScreenshotRepository instance: ${scRepos.toString()}")
+		// save the ScreenshotRepository instance into a GlobalVariable
+		GlobalVariable.SCREENSHOT_REPOSITORY = scRepos
 	}
 
 	/**
@@ -49,8 +47,9 @@ class TL {
 	 * @param testSuiteContext: related information of the executed test suite.
 	 */
 	@AfterTestSuite
-	def aterTestSuite(TestSuiteContext testSuiteContext) {
-		ScreenshotRepository scRepos = ScreenshotRepository.getInstance()
+	def afterTestSuite(TestSuiteContext testSuiteContext) {
+		// need explicitly cast the instance of java.lang.Object to its native class
+		def scRepos = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
 		WebUI.comment(">>> testSuiteId: ${scRepos.getCurrentTestSuiteId()}")
 	}
 	
@@ -60,7 +59,7 @@ class TL {
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
-		ScreenshotRepository scRepos = ScreenshotRepository.getInstance()
+		def scRepos = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
 		scRepos.setCurrentTestCaseId(testCaseContext.getTestCaseId())
 	}
 
@@ -70,7 +69,7 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
-		ScreenshotRepository scRepos = ScreenshotRepository.getInstance()
+		def scRepos = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
 		scRepos.setCurrentTestCaseStatus(testCaseContext.getTestCaseStatus())
 		WebUI.comment(">>> testCaseId: ${scRepos.getCurrentTestCaseId()}")
 		WebUI.comment(">>> testCaseStatus: ${scRepos.getCurrentTestCaseStatus()}")
