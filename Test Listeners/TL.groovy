@@ -24,6 +24,7 @@ import com.kms.katalon.core.context.TestSuiteContext
 
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kazurayam.ksbackyard.screenshotsupport.ScreenshotRepository
+import com.kazurayam.ksbackyard.screenshotsupport.ImageMagickVisualTestingDriver
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -35,11 +36,10 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
+		GlobalVariable.CURRENT_TESTSUITE_ID = testSuiteContext.getTestSuiteId()
 		Path screenshotsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Screenshots')
-		ScreenshotRepository scRepos = new ScreenshotRepository(screenshotsDir, testSuiteContext.getTestSuiteId())
-		WebUI.comment(">>> got ScreenshotRepository instance: ${scRepos.toString()}")
-		// save the ScreenshotRepository instance into a GlobalVariable
-		GlobalVariable.SCREENSHOT_REPOSITORY = scRepos
+		ScreenshotRepository scRepo = new ScreenshotRepository(screenshotsDir, testSuiteContext.getTestSuiteId())
+		GlobalVariable.SCREENSHOT_REPOSITORY = scRepo
 	}
 
 	/**
@@ -48,9 +48,12 @@ class TL {
 	 */
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
-		// need explicitly cast the instance of java.lang.Object to its native class
-		def scRepos = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
-		WebUI.comment(">>> testSuiteId: ${scRepos.getCurrentTestSuiteId()}")
+		ScreenshotRepository scRepo = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
+		scRepo.makeIndex()
+		ImageMagickVisualTestingDriver imvt = new ImageMagickVisualTestingDriver(scRepo)
+		Path vtDir = Paths.get(RunConfiguration.getProjectDir()).resolve('VisualTesting')
+		imvt.setOutputDir(vtDir)
+		imvt.execute()
 	}
 	
 	/**
@@ -59,8 +62,7 @@ class TL {
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
-		def scRepos = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
-		scRepos.setCurrentTestCaseId(testCaseContext.getTestCaseId())
+		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
 	}
 
 	/**
@@ -69,10 +71,6 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
-		def scRepos = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
-		scRepos.setCurrentTestCaseStatus(testCaseContext.getTestCaseStatus())
-		WebUI.comment(">>> testCaseId: ${scRepos.getCurrentTestCaseId()}")
-		WebUI.comment(">>> testCaseStatus: ${scRepos.getCurrentTestCaseStatus()}")
 	}
 
 }
