@@ -16,11 +16,13 @@ WebUI.navigateToUrl('http://demoaut.katalon.com/')
 WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make Appointment'), 10, FailureHandling.OPTIONAL)
 
 ScreenshotRepository scRepo = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
-Path imageFile = scRepo.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
+assert scRepo != null
+
+Path imageFile = scRepo.resolveScreenshotFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(imageFile.toString())
 
 // one more shot
-Path imageFile1 = scRepo.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '.1')
+Path imageFile1 = scRepo.resolveScreenshotFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '.1')
 WebUI.takeScreenshot(imageFile1.toString())
 
 /*

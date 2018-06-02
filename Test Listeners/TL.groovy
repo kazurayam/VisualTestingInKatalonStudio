@@ -24,6 +24,7 @@ import com.kms.katalon.core.context.TestSuiteContext
 
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kazurayam.ksbackyard.screenshotsupport.ScreenshotRepository
+import com.kazurayam.ksbackyard.screenshotsupport.ScreenshotRepositoryFactory
 import com.kazurayam.ksbackyard.screenshotsupport.ImageMagickVisualTestingDriver
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -36,10 +37,11 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
-		GlobalVariable.CURRENT_TESTSUITE_ID = testSuiteContext.getTestSuiteId()
 		Path screenshotsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Screenshots')
-		ScreenshotRepository scRepo = new ScreenshotRepository(screenshotsDir, testSuiteContext.getTestSuiteId())
+		ScreenshotRepository scRepo = ScreenshotRepositoryFactory.createInstance(screenshotsDir, testSuiteContext.getTestSuiteId())
+		assert scRepo != null
 		GlobalVariable.SCREENSHOT_REPOSITORY = scRepo
+		assert GlobalVariable.SCREENSHOT_REPOSITORY != null
 	}
 
 	/**
@@ -49,7 +51,7 @@ class TL {
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
 		ScreenshotRepository scRepo = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
-		scRepo.makeIndex()
+		scRepo.report()
 		ImageMagickVisualTestingDriver imvt = new ImageMagickVisualTestingDriver(scRepo)
 		Path vtDir = Paths.get(RunConfiguration.getProjectDir()).resolve('VisualTesting')
 		imvt.setOutputDir(vtDir)

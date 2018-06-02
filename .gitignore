@@ -14,6 +14,7 @@ Libs/
 ## I do not want Report to be published
 Reports/
 /bin/
+Screenshots/
 
 # hide my sensitive information
 /katalon.properties
