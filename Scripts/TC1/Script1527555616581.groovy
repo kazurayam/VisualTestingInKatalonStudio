@@ -21,46 +21,11 @@ assert scRepo != null
 Path imageFile = scRepo.resolveScreenshotFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(imageFile.toString())
 
-// one more shot
 Path imageFile1 = scRepo.resolveScreenshotFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '.1')
 WebUI.takeScreenshot(imageFile1.toString())
 
-/*
-WebUI.setText(findTestObject('Page_CURA Healthcare Service/input_username'), 'John Doe')
-
-WebUI.setText(findTestObject('Page_CURA Healthcare Service/input_password'), 'ThisIsNotAPassword')
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/footer_CURA Healthcare Service'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/button_Login'))
-
-WebUI.selectOptionByValue(findTestObject('Page_CURA Healthcare Service/select_Tokyo CURA Healthcare C'), 'Hongkong CURA Healthcare Center', 
-    true)
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/input_hospital_readmission'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/input_programs'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/div_input-group-addon'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/td_31'))
-
-WebUI.setText(findTestObject('Page_CURA Healthcare Service/textarea_comment'), 'This is a comment')
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/button_Book Appointment'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/p_Hongkong CURA Healthcare Cen'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/p_Yes'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/p_Medicaid'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/p_31052018'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/p_This is a comment'))
-
-WebUI.click(findTestObject('Page_CURA Healthcare Service/a_Go to Homepage'))
-*/
+Path imageFile2 = scRepo.resolveScreenshotFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '.2')
+WebUI.takeScreenshot(imageFile2.toString())
 
 WebUI.closeBrowser()
 

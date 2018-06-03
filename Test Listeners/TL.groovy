@@ -38,8 +38,8 @@ class TL {
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
 		Path screenshotsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Screenshots')
-		ScreenshotRepository scRepo = ScreenshotRepositoryFactory.createInstance(screenshotsDir, testSuiteContext.getTestSuiteId())
-		assert scRepo != null
+		ScreenshotRepository scRepo = 
+			ScreenshotRepositoryFactory.createInstance(screenshotsDir, testSuiteContext.getTestSuiteId())
 		GlobalVariable.SCREENSHOT_REPOSITORY = scRepo
 		assert GlobalVariable.SCREENSHOT_REPOSITORY != null
 	}
@@ -54,7 +54,7 @@ class TL {
 		scRepo.report()
 		ImageMagickVisualTestingDriver imvt = new ImageMagickVisualTestingDriver(scRepo)
 		Path vtDir = Paths.get(RunConfiguration.getProjectDir()).resolve('VisualTesting')
-		imvt.setOutputDir(vtDir)
+		imvt.setOutput(vtDir)
 		imvt.execute()
 	}
 	
@@ -73,6 +73,12 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
+		ScreenshotRepository scRepo = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
+		if (scRepo != null) {
+			def testCaseId = testCaseContext.getTestCaseId()
+			def testCaseStatus = testCaseContext.getTestCaseStatus()
+			scRepo.setTestCaseStatus(testCaseId, testCaseStatus)
+		}
 	}
 
 }
