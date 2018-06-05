@@ -1,33 +1,19 @@
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
-import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import java.nio.file.Path
+import java.nio.file.Paths
 
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
-import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kazurayam.kstestresults.Helpers
+import com.kazurayam.kstestresults.TestResults
+import com.kazurayam.kstestresults.TestResultsFactory
 
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
-
-import internal.GlobalVariable as GlobalVariable
-
-import com.kms.katalon.core.annotation.BeforeTestCase
-import com.kms.katalon.core.annotation.BeforeTestSuite
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
+import com.kms.katalon.core.annotation.BeforeTestCase
+import com.kms.katalon.core.annotation.BeforeTestSuite
+import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.context.TestCaseContext
 import com.kms.katalon.core.context.TestSuiteContext
 
-import com.kms.katalon.core.configuration.RunConfiguration
-import com.kazurayam.ksbackyard.screenshotsupport.ScreenshotRepository
-import com.kazurayam.ksbackyard.screenshotsupport.ScreenshotRepositoryFactory
-import com.kazurayam.ksbackyard.screenshotsupport.ImageMagickVisualTestingDriver
-import java.nio.file.Path
-import java.nio.file.Paths
+import internal.GlobalVariable as GlobalVariable
 
 class TL {
 	
@@ -37,11 +23,12 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
-		Path screenshotsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Screenshots')
-		ScreenshotRepository scRepo = 
-			ScreenshotRepositoryFactory.createInstance(screenshotsDir, testSuiteContext.getTestSuiteId())
-		GlobalVariable.SCREENSHOT_REPOSITORY = scRepo
-		assert GlobalVariable.SCREENSHOT_REPOSITORY != null
+		Path resultsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
+		Helpers.ensureDirs(resultsDir)
+		TestResults testResults = 
+			TestResultsFactory.createInstance(resultsDir, testSuiteContext.getTestSuiteId())
+		GlobalVariable.TEST_RESULTS = testResults
+		assert GlobalVariable.TEST_RESULTS != null
 	}
 
 	/**
@@ -50,12 +37,8 @@ class TL {
 	 */
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
-		ScreenshotRepository scRepo = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
-		scRepo.report()
-		ImageMagickVisualTestingDriver imvt = new ImageMagickVisualTestingDriver(scRepo)
-		Path vtDir = Paths.get(RunConfiguration.getProjectDir()).resolve('VisualTesting')
-		imvt.setOutput(vtDir)
-		imvt.execute()
+		TestResults testResults = (TestResults)GlobalVariable.TEST_RESULTS
+		testResults.report()
 	}
 	
 	/**
@@ -73,11 +56,11 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
-		ScreenshotRepository scRepo = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
-		if (scRepo != null) {
+		TestResults testResults = (TestResults)GlobalVariable.TEST_RESULTS
+		if (testResults != null) {
 			def testCaseId = testCaseContext.getTestCaseId()
 			def testCaseStatus = testCaseContext.getTestCaseStatus()
-			scRepo.setTestCaseStatus(testCaseId, testCaseStatus)
+			testResults.setTcStatus(testCaseId, testCaseStatus)
 		}
 	}
 

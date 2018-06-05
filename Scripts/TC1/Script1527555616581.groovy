@@ -2,7 +2,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import java.nio.file.Path
 
-import com.kazurayam.ksbackyard.screenshotsupport.ScreenshotRepository
+import com.kazurayam.kstestresults.TestResults
 
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -15,16 +15,16 @@ WebUI.navigateToUrl('http://demoaut.katalon.com/')
 
 WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make Appointment'), 10, FailureHandling.OPTIONAL)
 
-ScreenshotRepository scRepo = (ScreenshotRepository)GlobalVariable.SCREENSHOT_REPOSITORY
-assert scRepo != null
+TestResults testResults = (TestResults)GlobalVariable.TEST_RESULTS
+assert testResults != null
 
-Path imageFile = scRepo.resolveScreenshotFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
+Path imageFile = testResults.resolveMaterialFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(imageFile.toString())
 
-Path imageFile1 = scRepo.resolveScreenshotFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '.1')
+Path imageFile1 = testResults.resolveMaterialFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '.1')
 WebUI.takeScreenshot(imageFile1.toString())
 
-Path imageFile2 = scRepo.resolveScreenshotFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '.2')
+Path imageFile2 = testResults.resolveMaterialFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '.2')
 WebUI.takeScreenshot(imageFile2.toString())
 
 WebUI.closeBrowser()

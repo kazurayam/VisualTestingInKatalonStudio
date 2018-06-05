@@ -6,12 +6,12 @@
    <defaultProfile>true</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>null</initValue>
-      <name>SCREENSHOT_REPOSITORY</name>
+      <initValue>''</initValue>
+      <name>CURRENT_TESTCASE_ID</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
-      <name>CURRENT_TESTCASE_ID</name>
+      <initValue>null</initValue>
+      <name>TEST_RESULTS</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>
