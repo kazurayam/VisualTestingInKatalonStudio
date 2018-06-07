@@ -17,6 +17,7 @@ import internal.GlobalVariable as GlobalVariable
 
 class TL {
 	
+	static Path resultsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
 	/**
 	 * Executes before every test suite starts.
 	 * @param testSuiteContext: related information of the executed test suite.
@@ -24,7 +25,6 @@ class TL {
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
 		//
-		Path resultsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
 		Helpers.ensureDirs(resultsDir)
 		GlobalVariable.RESULTS_DIR = resultsDir
 		//
@@ -50,7 +50,7 @@ class TL {
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
 		if (GlobalVariable.TEST_RESULTS == null) {
-			GlobalVariable.TEST_RESULTS = TestResultsFactory.createInstance((Path)GlobalVariable.RESULTS_DIR)
+			GlobalVariable.TEST_RESULTS = TestResultsFactory.createInstance(resultsDir)
 		}
 		//
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
@@ -63,11 +63,9 @@ class TL {
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
 		TestResults testResults = (TestResults)GlobalVariable.TEST_RESULTS
-		if (testResults != null) {
-			def testCaseId = testCaseContext.getTestCaseId()
-			def testCaseStatus = testCaseContext.getTestCaseStatus()
-			testResults.setTcStatus(testCaseId, testCaseStatus)
-		}
+		def testCaseId = testCaseContext.getTestCaseId()
+		def testCaseStatus = testCaseContext.getTestCaseStatus()
+		testResults.setTcStatus(testCaseId, testCaseStatus)
 	}
 
 }
