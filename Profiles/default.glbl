@@ -5,13 +5,19 @@
    <tag></tag>
    <defaultProfile>true</defaultProfile>
    <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>CURRENT_TESTCASE_ID</name>
+      <description>&lt;project dir>/.Repository as an instance of java.nio.file.Path </description>
+      <initValue>null</initValue>
+      <name>RESULTS_DIR</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
-      <description></description>
+      <description>an instance of com.kazurayam.testresults.TestResults</description>
       <initValue>null</initValue>
       <name>TEST_RESULTS</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>e.g., 'Test Cases/TC1'</description>
+      <initValue>''</initValue>
+      <name>CURRENT_TESTCASE_ID</name>
+   </GlobalVariableEntity>
+
 </GlobalVariableEntities>

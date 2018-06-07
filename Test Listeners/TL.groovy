@@ -23,12 +23,14 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
+		//
 		Path resultsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
 		Helpers.ensureDirs(resultsDir)
+		GlobalVariable.RESULTS_DIR = resultsDir
+		//
 		TestResults testResults = 
 			TestResultsFactory.createInstance(resultsDir, testSuiteContext.getTestSuiteId())
 		GlobalVariable.TEST_RESULTS = testResults
-		assert GlobalVariable.TEST_RESULTS != null
 	}
 
 	/**
@@ -43,10 +45,14 @@ class TL {
 	
 	/**
 	 * Executes before every test case starts.
-	 * @param testCaseContext related information of the executed test case.
+	 * @param testCaseContext relate information of the executed test case.
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
+		if (GlobalVariable.TEST_RESULTS == null) {
+			GlobalVariable.TEST_RESULTS = TestResultsFactory.createInstance((Path)GlobalVariable.RESULTS_DIR)
+		}
+		//
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
 	}
 
