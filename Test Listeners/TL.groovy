@@ -1,9 +1,9 @@
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.kstestresults.Helpers
-import com.kazurayam.kstestresults.TestResults
-import com.kazurayam.kstestresults.TestResultsFactory
+import com.kazurayam.carmina.Helpers
+import com.kazurayam.carmina.TestResultsRepository
+import com.kazurayam.carmina.TestResultsRepositoryFactory
 
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
@@ -28,9 +28,9 @@ class TL {
 		Helpers.ensureDirs(resultsDir)
 		GlobalVariable.RESULTS_DIR = resultsDir
 		//
-		TestResults testResults = 
-			TestResultsFactory.createInstance(resultsDir, testSuiteContext.getTestSuiteId())
-		GlobalVariable.TEST_RESULTS = testResults
+		TestResultsRepository trr = 
+			TestResultsRepositoryFactory.createInstance(resultsDir, testSuiteContext.getTestSuiteId())
+		GlobalVariable.TRREPOSITORY = trr
 	}
 
 	/**
@@ -39,8 +39,8 @@ class TL {
 	 */
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
-		TestResults testResults = (TestResults)GlobalVariable.TEST_RESULTS
-		testResults.report()
+		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TRREPOSITORY
+		trr.report()
 	}
 	
 	/**
@@ -49,8 +49,8 @@ class TL {
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
-		if (GlobalVariable.TEST_RESULTS == null) {
-			GlobalVariable.TEST_RESULTS = TestResultsFactory.createInstance(resultsDir)
+		if (GlobalVariable.TRREPOSITORY == null) {
+			GlobalVariable.TRREPOSITORY = TestResultsRepositoryFactory.createInstance(resultsDir)
 		}
 		//
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
@@ -62,10 +62,10 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
-		TestResults testResults = (TestResults)GlobalVariable.TEST_RESULTS
+		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TRREPOSITORY
 		def testCaseId = testCaseContext.getTestCaseId()
 		def testCaseStatus = testCaseContext.getTestCaseStatus()
-		testResults.setTcStatus(testCaseId, testCaseStatus)
+		trr.setTcStatus(testCaseId, testCaseStatus)
 	}
 
 }
