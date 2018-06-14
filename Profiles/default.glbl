@@ -17,6 +17,6 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>null</initValue>
-      <name>TRREPOSITORY</name>
+      <name>TEST_RESULTS_REPOSITORY</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

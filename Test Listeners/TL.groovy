@@ -18,6 +18,7 @@ import internal.GlobalVariable as GlobalVariable
 class TL {
 	
 	static Path resultsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
+	
 	/**
 	 * Executes before every test suite starts.
 	 * @param testSuiteContext: related information of the executed test suite.
@@ -30,7 +31,7 @@ class TL {
 		//
 		TestResultsRepository trr = 
 			TestResultsRepositoryFactory.createInstance(resultsDir, testSuiteContext.getTestSuiteId())
-		GlobalVariable.TRREPOSITORY = trr
+		GlobalVariable.TEST_RESULTS_REPOSITORY = trr
 	}
 
 	/**
@@ -39,7 +40,8 @@ class TL {
 	 */
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
-		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TRREPOSITORY
+		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
+		assert trr != null
 		trr.report()
 	}
 	
@@ -49,8 +51,8 @@ class TL {
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
-		if (GlobalVariable.TRREPOSITORY == null) {
-			GlobalVariable.TRREPOSITORY = TestResultsRepositoryFactory.createInstance(resultsDir)
+		if (GlobalVariable.TEST_RESULTS_REPOSITORY == null) {
+			GlobalVariable.TEST_RESULTS_REPOSITORY = TestResultsRepositoryFactory.createInstance(resultsDir)
 		}
 		//
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
@@ -62,10 +64,11 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
-		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TRREPOSITORY
+		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
+		assert trr != null
 		def testCaseId = testCaseContext.getTestCaseId()
 		def testCaseStatus = testCaseContext.getTestCaseStatus()
-		trr.setTcStatus(testCaseId, testCaseStatus)
+		trr.setTestCaseStatus(testCaseId, testCaseStatus)
 	}
 
 }
