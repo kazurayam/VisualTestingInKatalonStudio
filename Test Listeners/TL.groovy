@@ -29,8 +29,8 @@ class TL {
 		Helpers.ensureDirs(resultsDir)
 		GlobalVariable.RESULTS_DIR = resultsDir
 		//
-		TestResultsRepository trr = 
-			TestResultsRepositoryFactory.createInstance(resultsDir, testSuiteContext.getTestSuiteId())
+		TestResultsRepository trr = TestResultsRepositoryFactory.createInstance(resultsDir)
+		trr.setCurrentTestSuite(testSuiteContext.getTestSuiteId())
 		GlobalVariable.TEST_RESULTS_REPOSITORY = trr
 	}
 
