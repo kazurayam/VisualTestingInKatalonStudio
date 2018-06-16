@@ -19,6 +19,10 @@ class TL {
 	
 	static Path resultsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
 	
+	static {
+		Helpers.ensureDirs(resultsDir)
+	}
+	
 	/**
 	 * Executes before every test suite starts.
 	 * @param testSuiteContext: related information of the executed test suite.
@@ -26,23 +30,11 @@ class TL {
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
 		//
-		Helpers.ensureDirs(resultsDir)
 		GlobalVariable.RESULTS_DIR = resultsDir
 		//
 		TestResultsRepository trr = TestResultsRepositoryFactory.createInstance(resultsDir)
 		trr.setCurrentTestSuite(testSuiteContext.getTestSuiteId())
 		GlobalVariable.TEST_RESULTS_REPOSITORY = trr
-	}
-
-	/**
-	 * Executes after every test suite ends.
-	 * @param testSuiteContext: related information of the executed test suite.
-	 */
-	@AfterTestSuite
-	def afterTestSuite(TestSuiteContext testSuiteContext) {
-		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
-		assert trr != null
-		trr.report()
 	}
 	
 	/**
@@ -54,7 +46,6 @@ class TL {
 		if (GlobalVariable.TEST_RESULTS_REPOSITORY == null) {
 			GlobalVariable.TEST_RESULTS_REPOSITORY = TestResultsRepositoryFactory.createInstance(resultsDir)
 		}
-		//
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
 	}
 
@@ -69,6 +60,17 @@ class TL {
 		def testCaseId = testCaseContext.getTestCaseId()
 		def testCaseStatus = testCaseContext.getTestCaseStatus()
 		trr.setTestCaseStatus(testCaseId, testCaseStatus)
+	}
+
+	/**
+	 * Executes after every test suite ends.
+	 * @param testSuiteContext: related information of the executed test suite.
+	 */
+	@AfterTestSuite
+	def afterTestSuite(TestSuiteContext testSuiteContext) {
+		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
+		assert trr != null
+		trr.report()
 	}
 
 }

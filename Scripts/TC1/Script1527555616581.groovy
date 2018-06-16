@@ -2,6 +2,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import java.nio.file.Path
 
+import com.kazurayam.carmina.FileType
 import com.kazurayam.carmina.TestResultsRepository
 
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
@@ -17,11 +18,11 @@ WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make A
 TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
 assert trr != null
 
-Path pngFile = trr.resolvePngFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
+Path pngFile = trr.resolveMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), FileType.PNG)
 WebUI.takeScreenshot(pngFile.toString())
 WebUI.comment("took a screenshot at ${pngFile.toString()}")
 
-Path pngFile1 = trr.resolvePngFilePath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), '1')
+Path pngFile1 = trr.resolveMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), 'oneMore', FileType.PNG)
 WebUI.takeScreenshot(pngFile1.toString())
 WebUI.comment("took a screenshot at ${pngFile1.toString()}")
 

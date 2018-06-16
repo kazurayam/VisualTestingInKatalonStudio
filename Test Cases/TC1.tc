@@ -3,6 +3,7 @@
    <description></description>
    <name>TC1</name>
    <tag></tag>
-   <comment></comment>
+   <comment>took a screenshot at $pngFile.toString()
+took a screenshot at $pngFile1.toString()</comment>
    <testCaseGuid>9d5a7861-86d7-4968-a912-e8bf5e351018</testCaseGuid>
 </TestCaseEntity>
