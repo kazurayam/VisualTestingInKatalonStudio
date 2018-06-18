@@ -12,8 +12,10 @@ import com.kms.katalon.core.annotation.BeforeTestSuite
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.context.TestCaseContext
 import com.kms.katalon.core.context.TestSuiteContext
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
+import com.kms.katalon.core.configuration.RunConfiguration
 
 class TL {
 	
@@ -31,9 +33,13 @@ class TL {
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
 		//
 		GlobalVariable.RESULTS_DIR = resultsDir
+
+		Path reportFolder = Paths.get(RunConfiguration.getReportFolder())
+		// for example, reportFolder = C:/Users/username/katalon-workspace/VisualTestingWithKatalonStudio/Reports/TS1/20180618_165141
+
 		//
 		TestResultsRepository trr = TestResultsRepositoryFactory.createInstance(resultsDir)
-		trr.setCurrentTestSuite(testSuiteContext.getTestSuiteId())
+		trr.setCurrentTestSuite(testSuiteContext.getTestSuiteId(), reportFolder.getFileName().toString())
 		GlobalVariable.TEST_RESULTS_REPOSITORY = trr
 	}
 	
@@ -68,6 +74,10 @@ class TL {
 	 */
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
+		
+		def reportFolder = RunConfiguration.getReportFolder()
+		WebUI.comment("#afterTestSuite reportFolder=${reportFolder}")
+		
 		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
 		assert trr != null
 		trr.report()
