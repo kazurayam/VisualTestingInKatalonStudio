@@ -18,19 +18,18 @@ import internal.GlobalVariable as GlobalVariable
 
 class TL {
 	
-	static Path reportFolder
-	
 	static {
-		reportFolder = Paths.get(RunConfiguration.getReportFolder())
-		// for example, reportFolder = C:/Users/username/temp/ksproject/Reports/TS1/20180618_165141
+		Path materialsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
+		// for example, materialsDir = C:/Users/username/temp/ksproject/Materials
+		Helpers.ensureDirs(materialsDir)
 		
-		Path materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
-		// for example, resultsFolder = C:/Users/username/temp/ksproject/Materials
-		
-		TestMaterialsRepository tmr = TestMaterialsRepositoryFactory.createInstance(materialsFolder)
+		TestMaterialsRepository tmr = TestMaterialsRepositoryFactory.createInstance(materialsDir)
 		GlobalVariable.TEST_MATERIALS_REPOSITORY = tmr
-		WebUI.comment("GlobalVariable.TEST_MATERIALS_REPOSITORY has been set with an instance of TestMaterialsRepository(${tmr.getBaseDir().toString()})")
+		WebUI.comment("GlobalVariable.TEST_MATERIALS_REPOSITORY has been set with an instance of " +
+			"TestMaterialsRepository(${tmr.getBaseDir().toString()})")
 	}
+	
+	
 	
 	/**
 	 * Executes before every test suite starts.
@@ -38,10 +37,15 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
+		
+		Path reportDir = Paths.get(RunConfiguration.getReportFolder())
+		// for example, reportDir = C:/Users/username/temp/ksproject/Reports/TS1/20180618_165141
+		
 		// Inform the TestMaterialsRepository object of which Test Suite is current.
 		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
-		tmr.setCurrentTestSuite(testSuiteContext.getTestSuiteId(), reportFolder.getFileName().toString())
+		tmr.setCurrentTestSuite(testSuiteContext.getTestSuiteId(), reportDir.getFileName().toString())
 	}
+	
 	
 	/**
 	 * Executes before every test case starts.
@@ -52,6 +56,7 @@ class TL {
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
 	}
 
+	
 	/**
 	 * Executes after every test case ends.
 	 * @param testCaseContext related information of the executed test case.
