@@ -15,6 +15,8 @@ WebUI.navigateToUrl('http://demoaut.katalon.com/')
 WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make Appointment'),
 	10, FailureHandling.CONTINUE_ON_FAILURE)
 
+assert GlobalVariable.TEST_MATERIALS_REPOSITORY != null
+
 TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
 assert tmr != null
 

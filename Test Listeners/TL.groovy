@@ -26,10 +26,10 @@ class TL {
 		
 		Path materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
 		// for example, resultsFolder = C:/Users/username/temp/ksproject/Materials
-		Helpers.ensureDirs(materialsFolder)
 		
-		TestMaterialsRepository trr = TestMaterialsRepositoryFactory.createInstance(materialsFolder)
-		GlobalVariable.TEST_MATERIALS_REPOSITORY = trr
+		TestMaterialsRepository tmr = TestMaterialsRepositoryFactory.createInstance(materialsFolder)
+		GlobalVariable.TEST_MATERIALS_REPOSITORY = tmr
+		WebUI.comment("GlobalVariable.TEST_MATERIALS_REPOSITORY has been set with an instance of TestMaterialsRepository(${tmr.getBaseDir().toString()})")
 	}
 	
 	/**
@@ -58,10 +58,6 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
-		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
-		def testCaseId = testCaseContext.getTestCaseId()
-		def testCaseStatus = testCaseContext.getTestCaseStatus()
-		tmr.setTestCaseStatus(testCaseId, testCaseStatus)
 	}
 
 	/**
