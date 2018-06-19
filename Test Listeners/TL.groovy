@@ -2,8 +2,8 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 import com.kazurayam.carmina.Helpers
-import com.kazurayam.carmina.TestResultsRepository
-import com.kazurayam.carmina.TestResultsRepositoryFactory
+import com.kazurayam.carmina.TestMaterialsRepository
+import com.kazurayam.carmina.TestMaterialsRepositoryFactory
 
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
@@ -24,12 +24,12 @@ class TL {
 		reportFolder = Paths.get(RunConfiguration.getReportFolder())
 		// for example, reportFolder = C:/Users/username/temp/ksproject/Reports/TS1/20180618_165141
 		
-		Path resultsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
-		// for example, resultsFolder = C:/Users/username/temp/ksproject/Results
-		Helpers.ensureDirs(resultsFolder)
+		Path materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
+		// for example, resultsFolder = C:/Users/username/temp/ksproject/Materials
+		Helpers.ensureDirs(materialsFolder)
 		
-		TestResultsRepository trr = TestResultsRepositoryFactory.createInstance(resultsFolder)
-		GlobalVariable.TEST_RESULTS_REPOSITORY = trr
+		TestMaterialsRepository trr = TestMaterialsRepositoryFactory.createInstance(materialsFolder)
+		GlobalVariable.TEST_MATERIALS_REPOSITORY = trr
 	}
 	
 	/**
@@ -38,8 +38,9 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
-		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
-		trr.setCurrentTestSuite(testSuiteContext.getTestSuiteId(), reportFolder.getFileName().toString())
+		// Inform the TestMaterialsRepository object of which Test Suite is current.
+		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
+		tmr.setCurrentTestSuite(testSuiteContext.getTestSuiteId(), reportFolder.getFileName().toString())
 	}
 	
 	/**
@@ -57,10 +58,10 @@ class TL {
 	 */
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
-		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
+		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
 		def testCaseId = testCaseContext.getTestCaseId()
 		def testCaseStatus = testCaseContext.getTestCaseStatus()
-		trr.setTestCaseStatus(testCaseId, testCaseStatus)
+		tmr.setTestCaseStatus(testCaseId, testCaseStatus)
 	}
 
 	/**
@@ -69,8 +70,8 @@ class TL {
 	 */
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
-		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
-		trr.makeIndex()
+		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
+		tmr.makeIndex()
 	}
 
 }
