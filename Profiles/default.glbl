@@ -5,11 +5,6 @@
    <tag></tag>
    <defaultProfile>true</defaultProfile>
    <GlobalVariableEntity>
-      <description>&lt;project dir>/.Repository as an instance of java.nio.file.Path </description>
-      <initValue>null</initValue>
-      <name>RESULTS_DIR</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
       <description>e.g., 'Test Cases/TC1'</description>
       <initValue>''</initValue>
       <name>CURRENT_TESTCASE_ID</name>

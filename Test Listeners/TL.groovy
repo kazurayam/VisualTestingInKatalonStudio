@@ -15,14 +15,21 @@ import com.kms.katalon.core.context.TestSuiteContext
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
-import com.kms.katalon.core.configuration.RunConfiguration
 
 class TL {
 	
-	static Path resultsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
+	static Path reportFolder
 	
 	static {
-		Helpers.ensureDirs(resultsDir)
+		reportFolder = Paths.get(RunConfiguration.getReportFolder())
+		// for example, reportFolder = C:/Users/username/temp/ksproject/Reports/TS1/20180618_165141
+		
+		Path resultsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Results')
+		// for example, resultsFolder = C:/Users/username/temp/ksproject/Results
+		Helpers.ensureDirs(resultsFolder)
+		
+		TestResultsRepository trr = TestResultsRepositoryFactory.createInstance(resultsFolder)
+		GlobalVariable.TEST_RESULTS_REPOSITORY = trr
 	}
 	
 	/**
@@ -31,16 +38,8 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
-		//
-		GlobalVariable.RESULTS_DIR = resultsDir
-
-		Path reportFolder = Paths.get(RunConfiguration.getReportFolder())
-		// for example, reportFolder = C:/Users/username/katalon-workspace/VisualTestingWithKatalonStudio/Reports/TS1/20180618_165141
-
-		//
-		TestResultsRepository trr = TestResultsRepositoryFactory.createInstance(resultsDir)
+		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
 		trr.setCurrentTestSuite(testSuiteContext.getTestSuiteId(), reportFolder.getFileName().toString())
-		GlobalVariable.TEST_RESULTS_REPOSITORY = trr
 	}
 	
 	/**
@@ -49,9 +48,6 @@ class TL {
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
-		if (GlobalVariable.TEST_RESULTS_REPOSITORY == null) {
-			GlobalVariable.TEST_RESULTS_REPOSITORY = TestResultsRepositoryFactory.createInstance(resultsDir)
-		}
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
 	}
 
@@ -62,7 +58,6 @@ class TL {
 	@AfterTestCase
 	def afterTestCase(TestCaseContext testCaseContext) {
 		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
-		assert trr != null
 		def testCaseId = testCaseContext.getTestCaseId()
 		def testCaseStatus = testCaseContext.getTestCaseStatus()
 		trr.setTestCaseStatus(testCaseId, testCaseStatus)
@@ -74,13 +69,8 @@ class TL {
 	 */
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
-		
-		def reportFolder = RunConfiguration.getReportFolder()
-		WebUI.comment("#afterTestSuite reportFolder=${reportFolder}")
-		
 		TestResultsRepository trr = (TestResultsRepository)GlobalVariable.TEST_RESULTS_REPOSITORY
-		assert trr != null
-		trr.report()
+		trr.makeIndex()
 	}
 
 }
