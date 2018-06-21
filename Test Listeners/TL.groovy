@@ -4,6 +4,7 @@ import java.nio.file.Paths
 import com.kazurayam.carmina.Helpers
 import com.kazurayam.carmina.TestMaterialsRepository
 import com.kazurayam.carmina.TestMaterialsRepositoryFactory
+import com.kazurayam.carmina.Indexer
 
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
@@ -74,7 +75,11 @@ class TL {
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
 		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
-		tmr.makeIndex()
+		Indexer indexer = new Indexer(tmr.getBaseDir())
+		def testSuiteId = testSuiteContext.getTestSuiteId()
+		Path reportDir = Paths.get(RunConfiguration.getReportFolder())
+		def testSuiteTimestamp = reportDir.getFileName().toString()    // e.g., '20180618_165141'
+		indexer.makeIndex(testSuiteId, testSuiteTimestamp)
 	}
 
 }
