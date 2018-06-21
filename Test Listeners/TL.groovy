@@ -37,13 +37,15 @@ class TL {
 	 */
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
+		def testSuiteId = testSuiteContext.getTestSuiteId()
 		
-		Path reportDir = Paths.get(RunConfiguration.getReportFolder())
 		// for example, reportDir = C:/Users/username/temp/ksproject/Reports/TS1/20180618_165141
+		Path reportDir = Paths.get(RunConfiguration.getReportFolder())
+		def testSuiteTimestamp = reportDir.getFileName().toString()    // e.g., '20180618_165141'
+		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
 		
 		// Inform the TestMaterialsRepository object of which Test Suite is current.
-		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
-		tmr.setCurrentTestSuite(testSuiteContext.getTestSuiteId(), reportDir.getFileName().toString())
+		tmr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
 	}
 	
 	
@@ -53,7 +55,7 @@ class TL {
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
-		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()
+		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()   //  e.g., 'Test Cases/TC1'
 	}
 
 	
