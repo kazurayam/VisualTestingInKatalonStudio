@@ -75,11 +75,8 @@ class TL {
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
 		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
-		Indexer indexer = new Indexer(tmr.getBaseDir())
-		def testSuiteId = testSuiteContext.getTestSuiteId()
-		Path reportDir = Paths.get(RunConfiguration.getReportFolder())
-		def testSuiteTimestamp = reportDir.getFileName().toString()    // e.g., '20180618_165141'
-		indexer.makeIndex(testSuiteId, testSuiteTimestamp)
+		Path index = tmr.makeIndex()
+		WebUI.comment("created ${index.toString()}")
 	}
 
 }
