@@ -2,8 +2,8 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 import com.kazurayam.carmina.material.Helpers
-import com.kazurayam.carmina.material.TestMaterialsRepository
-import com.kazurayam.carmina.material.TestMaterialsRepositoryFactory
+import com.kazurayam.carmina.material.MaterialRepository
+import com.kazurayam.carmina.material.MaterialRepositoryFactory
 import com.kazurayam.carmina.material.Indexer
 
 import com.kms.katalon.core.annotation.AfterTestCase
@@ -20,16 +20,14 @@ import internal.GlobalVariable as GlobalVariable
 class TL {
 	
 	static {
-		Path materialsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
+		Path materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
 		// for example, materialsDir = C:/Users/username/temp/ksproject/Materials
-		Helpers.ensureDirs(materialsDir)
 		
-		TestMaterialsRepository tmr = TestMaterialsRepositoryFactory.createInstance(materialsDir)
-		GlobalVariable.TEST_MATERIALS_REPOSITORY = tmr
-		WebUI.comment("GlobalVariable.TEST_MATERIALS_REPOSITORY has been set with an instance of " +
-			"TestMaterialsRepository(${tmr.getBaseDir().toString()})")
+		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder)
+		GlobalVariable.MATERIAL_REPOSITORY = mr
+		WebUI.comment("Instance of MaterialRepository(${mr.getBaseDir().toString()})" + 
+			" is set to GlobalVariable.MATERIAL_REPOSITORY")
 	}
-	
 	
 	
 	/**
@@ -43,10 +41,10 @@ class TL {
 		// for example, reportDir = C:/Users/username/temp/ksproject/Reports/TS1/20180618_165141
 		Path reportDir = Paths.get(RunConfiguration.getReportFolder())
 		def testSuiteTimestamp = reportDir.getFileName().toString()    // e.g., '20180618_165141'
-		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
+		MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 		
 		// Inform the TestMaterialsRepository object of which Test Suite is current.
-		tmr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
+		mr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
 	}
 	
 	
@@ -74,9 +72,9 @@ class TL {
 	 */
 	@AfterTestSuite
 	def afterTestSuite(TestSuiteContext testSuiteContext) {
-		TestMaterialsRepository tmr = (TestMaterialsRepository)GlobalVariable.TEST_MATERIALS_REPOSITORY
-		Path index = tmr.makeIndex()
-		WebUI.comment("created ${index.toString()}")
+		MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
+		Path index = mr.makeIndex()
+		WebUI.comment("Material Repository has created ${index.toString()}")
 	}
 
 }

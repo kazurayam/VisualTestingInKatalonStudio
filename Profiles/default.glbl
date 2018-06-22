@@ -12,6 +12,6 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>null</initValue>
-      <name>TEST_MATERIALS_REPOSITORY</name>
+      <name>MATERIAL_REPOSITORY</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>
