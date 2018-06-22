@@ -3,10 +3,10 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.carmina.FileType
-import com.kazurayam.carmina.Helpers
-import com.kazurayam.carmina.TestMaterialsRepository
-import com.kazurayam.carmina.TestMaterialsRepositoryFactory
+import com.kazurayam.carmina.material.FileType
+import com.kazurayam.carmina.material.Helpers
+import com.kazurayam.carmina.material.TestMaterialsRepository
+import com.kazurayam.carmina.material.TestMaterialsRepositoryFactory
 
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI

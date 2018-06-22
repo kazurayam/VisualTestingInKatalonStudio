@@ -1,10 +1,10 @@
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.carmina.Helpers
-import com.kazurayam.carmina.TestMaterialsRepository
-import com.kazurayam.carmina.TestMaterialsRepositoryFactory
-import com.kazurayam.carmina.Indexer
+import com.kazurayam.carmina.material.Helpers
+import com.kazurayam.carmina.material.TestMaterialsRepository
+import com.kazurayam.carmina.material.TestMaterialsRepositoryFactory
+import com.kazurayam.carmina.material.Indexer
 
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
