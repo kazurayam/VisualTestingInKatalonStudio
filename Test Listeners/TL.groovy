@@ -22,6 +22,7 @@ class TL {
 	static {
 		Path materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
 		// for example, materialsDir = C:/Users/username/temp/ksproject/Materials
+		Helpers.ensureDirs(materialsFolder)
 		
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder)
 		GlobalVariable.MATERIAL_REPOSITORY = mr
