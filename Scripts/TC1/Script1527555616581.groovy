@@ -13,8 +13,12 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.configuration.RunConfiguration
 import internal.GlobalVariable as GlobalVariable
 
+/**
+ * Take a screenshot of a Web page, save PNG file to make it a Material
+ */
 WebUI.openBrowser('')
 WebUI.navigateToUrl('http://demoaut.katalon.com/')
+WebUI.maximizeWindow()
 WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make Appointment'),
 	10, FailureHandling.STOP_ON_FAILURE)
 
