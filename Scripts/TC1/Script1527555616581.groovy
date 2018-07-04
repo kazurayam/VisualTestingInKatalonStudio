@@ -13,6 +13,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.configuration.RunConfiguration
 import internal.GlobalVariable as GlobalVariable
 
+
 /**
  * Take a screenshot of a Web page, save PNG file to make it a Material
  */
