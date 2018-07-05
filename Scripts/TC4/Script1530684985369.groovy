@@ -19,6 +19,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUiBuiltInKe
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import com.kms.katalon.core.webui.driver.DriverFactory
+import com.kms.katalon.core.configuration.RunConfiguration
+
 
 /**
  * This test case retrieve various information about runtime environement
@@ -27,7 +29,7 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 
 
 /**
- * know of the environement
+ * know of the System environement
  */
 Properties props = System.getProperties()
 List<String> keys = new ArrayList<String>(props.keySet())
@@ -51,6 +53,6 @@ WebUI.comment(">>> DriverFactory.getRemoteWebDriverServerType()=${DriverFactory.
 WebUI.closeBrowser()
 
 /**
- * know of WebDriver
+ * know of RunConfiguration
  */
-WebDriver driver = DriverFactory.getWebDriver()
+WebUI.comment(">>> RunConfiguration.getOS()=${RunConfiguration.getOS()}")  // 'Windows 7 64bit', 'Mac OSX xxx' etc

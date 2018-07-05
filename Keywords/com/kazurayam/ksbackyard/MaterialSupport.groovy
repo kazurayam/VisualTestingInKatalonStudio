@@ -1,5 +1,7 @@
 package com.kazurayam.ksbackyard
 
+import com.kazurayam.carmina.material.FileType
+
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -16,15 +18,19 @@ import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.driver.DriverFactory
 
 
+
 class MaterialSupport {
+
+	static Path DEFAULT_DOWNLOAD_DIR = Paths.get(System.getProperty('user.home'), 'Downloads')
 	
 	@Keyword
 	def openReticentBrowser() {
 		FirefoxProfile profile = new FirefoxProfile()
 		profile.setPreference('browser.download.useDownloadDir', true)
-		profile.setPreference('browser.download.folderList', 1)         // use user.home/Downlods/
+		profile.setPreference('browser.download.folderList', 1)
+		profile.setPreference('browser.download.dir', DEFAULT_DOWNLOAD_DIR.toString())
 		profile.setPreference('browser.helperApps.neverAsk.saveToDisk',
-			'application/pdf,application/vnd.ms-excel')
+				FileType.getAllMimeTypes())
 		profile.setPreference('pdfjs.disabled', true)
 		FirefoxOptions options = new FirefoxOptions().setProfile(profile)
 		FirefoxDriver driver = new FirefoxDriver(options)
@@ -58,5 +64,4 @@ class MaterialSupport {
 		}
 		return pathLatest
 	}
-
 }
