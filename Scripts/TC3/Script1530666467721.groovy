@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver
 
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.webui.driver.WebUIDriverType
 
 // Test Listener TS1 sets System.setProperty('webdriver.chrome.driver', <path to chromedriver.exe>)
 if (System.getProperty('webdriver.chrome.driver') == null) {

@@ -23,8 +23,7 @@ import internal.GlobalVariable
 def pageUrl = 'http://spreadsheetpage.com/index.php/file/C35/P10/'
 
 // open a browser
-//WebUI.openBrowser('')
-CustomKeywords.'com.kazurayam.ksbackyard.MaterialSupport.openReticentBrowser'()
+WebUI.openBrowser('')
 
 // Navigate to the page
 WebUI.navigateToUrl(pageUrl)
@@ -45,7 +44,7 @@ WebUI.delay(3)
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 Path xlsFile = mr.resolveMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), 'smilechart.xls', FileType.XLS)
-CustomKeywords.'com.kazurayam.ksbackyard.MaterialSupport.importDownloadedFileAsMaterial'(xlsFile)
+//CustomKeywords.'com.kazurayam.ksbackyard.MaterialSupport.importDownloadedFileAsMaterial'(xlsFile)
 
 WebUI.closeBrowser()
 
