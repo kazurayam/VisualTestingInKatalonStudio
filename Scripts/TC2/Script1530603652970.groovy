@@ -1,19 +1,18 @@
 import java.nio.file.Path
 
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.firefox.FirefoxDriver
-import org.openqa.selenium.firefox.FirefoxProfile
-import org.openqa.selenium.firefox.FirefoxOptions
+import org.openqa.selenium.chrome.ChromeDriver
 
 import com.kazurayam.carmina.material.FileType
 import com.kazurayam.carmina.material.MaterialRepository
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testobject.ConditionType as ConditionType
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.webui.driver.DriverFactory
+import com.kms.katalon.core.webui.driver.WebUIDriverType
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable
-
 /**
  * https://forum.katalon.com/discussion/4662/download-files-from-web-ui-not-working
  * https://forum.katalon.com/discussion/6670/how-to-open-firefox-in-private-browsing-mode
@@ -23,7 +22,20 @@ import internal.GlobalVariable
 def pageUrl = 'http://spreadsheetpage.com/index.php/file/C35/P10/'
 
 // open a browser
-WebUI.openBrowser('')
+def openMyBrowser() {
+	WebUIDriverType executedBrowser = DriverFactory.getExecutedBrowser()
+	switch(executedBrowser) {
+		case WebUIDriverType.CHROME_DRIVER:           // "Chrome"
+			// On my machine, Katalon Studio fails to open Chrome browser. I have to open chrome myself.
+			System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
+			WebDriver driver = new ChromeDriver()
+			DriverFactory.changeWebDriver(driver)
+			break
+		default:
+			WebUI.openBrowser('')
+	}
+}
+openMyBrowser()
 
 // Navigate to the page
 WebUI.navigateToUrl(pageUrl)

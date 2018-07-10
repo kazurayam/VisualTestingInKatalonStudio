@@ -1,11 +1,12 @@
 import java.nio.file.Path
 import java.nio.file.Paths
 
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.chrome.ChromeDriver
+
 import com.kazurayam.carmina.material.Helpers
 import com.kazurayam.carmina.material.MaterialRepository
 import com.kazurayam.carmina.material.MaterialRepositoryFactory
-import com.kazurayam.carmina.material.Indexer
-
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
 import com.kms.katalon.core.annotation.BeforeTestCase
@@ -13,9 +14,11 @@ import com.kms.katalon.core.annotation.BeforeTestSuite
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.context.TestCaseContext
 import com.kms.katalon.core.context.TestSuiteContext
+
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
+
 
 class TL {
 	
@@ -57,6 +60,7 @@ class TL {
 	def beforeTestCase(TestCaseContext testCaseContext) {
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()   //  e.g., 'Test Cases/TC1'
 	}
+	
 
 	
 	/**
