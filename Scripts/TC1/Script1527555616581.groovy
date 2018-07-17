@@ -26,13 +26,13 @@ WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make A
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
-Path pngFile = mr.resolveMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), FileType.PNG)
+Path pngFile = mr.resolveScreenshotFileAsMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(pngFile.toString())
 WebUI.comment("saved a screenshot into ${pngFile.toString()}")
 
-Path pngFile1 = mr.resolveMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), 'oneMore', FileType.PNG)
-WebUI.takeScreenshot(pngFile1.toString())
-WebUI.comment("saved a screenshot into ${pngFile1.toString()}")
+Path pngFileOnceMore = mr.resolveScreenshotFileAsMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
+WebUI.takeScreenshot(pngFileOnceMore.toString())
+WebUI.comment("saved a screenshot into ${pngFileOnceMore.toString()}")
 
 WebUI.closeBrowser()
 

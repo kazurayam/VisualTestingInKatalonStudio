@@ -26,7 +26,8 @@ def openMyBrowser() {
 	WebUIDriverType executedBrowser = DriverFactory.getExecutedBrowser()
 	switch(executedBrowser) {
 		case WebUIDriverType.CHROME_DRIVER:           // "Chrome"
-			// On my machine, Katalon Studio fails to open Chrome browser. I have to open chrome myself.
+			// On my machine, Katalon Studio fails to open Chrome browser due to a known reason. 
+		    // Therefore I have to open chrome myself.
 			System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
 			WebDriver driver = new ChromeDriver()
 			DriverFactory.changeWebDriver(driver)
@@ -36,7 +37,7 @@ def openMyBrowser() {
 	}
 }
 openMyBrowser()
-
+WebUI.maximizeWindow()
 // Navigate to the page
 WebUI.navigateToUrl(pageUrl)
 
@@ -47,16 +48,18 @@ testObject.addProperty('xpath', ConditionType.EQUALS, '//a[text()="smilechart.xl
 // wait for page to load
 WebUI.verifyElementPresent(testObject, 10, FailureHandling.STOP_ON_FAILURE)
 
+// delete files with similar name out of Downloads directory
+MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
+assert mr != null
+mr.deleteDownloadedFilesFromDownloadsDir('smilechart.xls')
+
 // click the anchor to download a Excel file
 WebUI.click(testObject)
 
 // stay for some seconds to wait for the file to be downloaded 
 WebUI.delay(3)
 
-MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
-assert mr != null
-Path xlsFile = mr.resolveMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl(), 'smilechart.xls', FileType.XLS)
-//CustomKeywords.'com.kazurayam.ksbackyard.MaterialSupport.importDownloadedFileAsMaterial'(xlsFile)
+Path xlsFile = mr.importDownloadedFileAsMaterial(GlobalVariable.CURRENT_TESTCASE_ID, 'smilechart.xls')
 
 WebUI.closeBrowser()
 
