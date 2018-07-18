@@ -3,10 +3,10 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.carmina.material.FileType
-import com.kazurayam.carmina.material.Helpers
-import com.kazurayam.carmina.material.MaterialRepository
-import com.kazurayam.carmina.material.MaterialRepositoryFactory
+import com.kazurayam.material.FileType
+import com.kazurayam.material.Helpers
+import com.kazurayam.material.MaterialRepository
+import com.kazurayam.material.MaterialRepositoryFactory
 
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -26,11 +26,11 @@ WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make A
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
-Path pngFile = mr.resolveScreenshotFileAsMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
+Path pngFile = mr.resolveScreenshotMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(pngFile.toString())
 WebUI.comment("saved a screenshot into ${pngFile.toString()}")
 
-Path pngFileOnceMore = mr.resolveScreenshotFileAsMaterial(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
+Path pngFileOnceMore = mr.resolveScreenshotMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(pngFileOnceMore.toString())
 WebUI.comment("saved a screenshot into ${pngFileOnceMore.toString()}")
 

@@ -3,8 +3,8 @@ import java.nio.file.Path
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 
-import com.kazurayam.carmina.material.FileType
-import com.kazurayam.carmina.material.MaterialRepository
+import com.kazurayam.material.FileType
+import com.kazurayam.material.MaterialRepository
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testobject.ConditionType as ConditionType
 import com.kms.katalon.core.testobject.TestObject as TestObject
@@ -51,7 +51,7 @@ WebUI.verifyElementPresent(testObject, 10, FailureHandling.STOP_ON_FAILURE)
 // delete files with similar name out of Downloads directory
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
-mr.deleteDownloadedFilesFromDownloadsDir('smilechart.xls')
+mr.deleteFilesInDownloadsDir('smilechart.xls')
 
 // click the anchor to download a Excel file
 WebUI.click(testObject)
@@ -59,7 +59,7 @@ WebUI.click(testObject)
 // stay for some seconds to wait for the file to be downloaded 
 WebUI.delay(3)
 
-Path xlsFile = mr.importDownloadedFileAsMaterial(GlobalVariable.CURRENT_TESTCASE_ID, 'smilechart.xls')
+Path xlsFile = mr.importFileFromDownloadsDir(GlobalVariable.CURRENT_TESTCASE_ID, 'smilechart.xls')
 
 WebUI.closeBrowser()
 

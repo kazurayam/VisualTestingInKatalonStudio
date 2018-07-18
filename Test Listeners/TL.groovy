@@ -4,9 +4,9 @@ import java.nio.file.Paths
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 
-import com.kazurayam.carmina.material.Helpers
-import com.kazurayam.carmina.material.MaterialRepository
-import com.kazurayam.carmina.material.MaterialRepositoryFactory
+import com.kazurayam.material.Helpers
+import com.kazurayam.material.MaterialRepository
+import com.kazurayam.material.MaterialRepositoryFactory
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
 import com.kms.katalon.core.annotation.BeforeTestCase
