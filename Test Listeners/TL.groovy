@@ -1,12 +1,10 @@
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.chrome.ChromeDriver
-
 import com.kazurayam.material.Helpers
 import com.kazurayam.material.MaterialRepository
 import com.kazurayam.material.MaterialRepositoryFactory
+
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
 import com.kms.katalon.core.annotation.BeforeTestCase
@@ -14,7 +12,6 @@ import com.kms.katalon.core.annotation.BeforeTestSuite
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.context.TestCaseContext
 import com.kms.katalon.core.context.TestSuiteContext
-
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
@@ -24,7 +21,7 @@ class TL {
 	
 	static {
 		Path materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
-		// for example, materialsDir = C:/Users/username/temp/ksproject/Materials
+		// for example, materialsFolder == C:/Users/username/katalon-workspace/ksproject/Materials
 		Helpers.ensureDirs(materialsFolder)
 		
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder)

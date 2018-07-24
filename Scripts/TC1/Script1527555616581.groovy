@@ -1,16 +1,11 @@
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import java.nio.file.Path
-import java.nio.file.Paths
 
-import com.kazurayam.material.FileType
-import com.kazurayam.material.Helpers
 import com.kazurayam.material.MaterialRepository
-import com.kazurayam.material.MaterialRepositoryFactory
-
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.configuration.RunConfiguration
+
 import internal.GlobalVariable as GlobalVariable
 
 
