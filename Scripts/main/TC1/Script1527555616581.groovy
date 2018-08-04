@@ -21,6 +21,8 @@ WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make A
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
+WebUI.comment("Test Case '${GlobalVariable.CURRENT_TESTCASE_ID}' started")
+
 Path pngFile = mr.resolveScreenshotMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(pngFile.toString())
 WebUI.comment("saved a screenshot into ${pngFile.toString()}")

@@ -61,5 +61,8 @@ WebUI.delay(3)
 
 Path xlsFile = mr.importFileFromDownloadsDir(GlobalVariable.CURRENT_TESTCASE_ID, 'smilechart.xls')
 
+// this will fail
+WebUI.verifyElementText(testObject, 'foo')
+
 WebUI.closeBrowser()
 
