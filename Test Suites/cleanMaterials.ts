@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>TS1</name>
+   <name>cleanMaterials</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-08-07T11:32:11</lastRun>
+   <lastRun>2018-08-13T16:09:49</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>82201e03-8189-4f3d-b473-552f77cf12d2</testSuiteGuid>
+   <testSuiteGuid>ed06a55e-1ed2-450e-a659-370ff308e1a1</testSuiteGuid>
    <testCaseLink>
-      <guid>86fd09b7-94eb-4a89-a409-39d39f9d504d</guid>
+      <guid>a3e3eb6c-5641-4fe6-a932-22c2de7fcd4e</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/my test cases/TC1</testCaseId>
-   </testCaseLink>
-   <testCaseLink>
-      <guid>66227b51-9868-4793-92fc-a82bc1485a27</guid>
-      <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
-      <testCaseId>Test Cases/my test cases/TC2</testCaseId>
+      <testCaseId>Test Cases/cleanMaterials</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

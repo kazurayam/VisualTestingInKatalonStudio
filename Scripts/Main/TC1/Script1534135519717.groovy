@@ -23,11 +23,11 @@ assert mr != null
 
 WebUI.comment("Test Case '${GlobalVariable.CURRENT_TESTCASE_ID}' started")
 
-Path pngFile = mr.resolveScreenshotMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
+Path pngFile = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(pngFile.toString())
 WebUI.comment("saved a screenshot into ${pngFile.toString()}")
 
-Path pngFileOnceMore = mr.resolveScreenshotMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
+Path pngFileOnceMore = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, WebUI.getUrl())
 WebUI.takeScreenshot(pngFileOnceMore.toString())
 WebUI.comment("saved a screenshot into ${pngFileOnceMore.toString()}")
 

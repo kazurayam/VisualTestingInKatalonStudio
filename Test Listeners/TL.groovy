@@ -17,6 +17,16 @@ import internal.GlobalVariable as GlobalVariable
 
 class TL {
 	
+	static Path reportDir
+	static Path materialsFolder
+	
+	static {
+		// for example, reportDir = C:/Users/username/katalon-workspace/UsingMaterialsDemo/Reports/TS1/20180618_165141
+		reportDir = Paths.get(RunConfiguration.getReportFolder())
+		materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
+		// for example, materialsFolder == C:/Users/username/katalon-workspace/UsingMaterialsDemo/Materials
+	}
+	
 	/**
 	 * Executes before every test suite starts.
 	 * @param testSuiteContext: related information of the executed test suite.
@@ -24,20 +34,13 @@ class TL {
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
 		def testSuiteId = testSuiteContext.getTestSuiteId()
-		
-		// for example, reportDir = C:/Users/username/temp/ksproject/Reports/TS1/20180618_165141
-		Path reportDir = Paths.get(RunConfiguration.getReportFolder())
 		def testSuiteTimestamp = reportDir.getFileName().toString()    // e.g., '20180618_165141'
-		
-		Path materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
-		// for example, materialsFolder == C:/Users/username/katalon-workspace/ksproject/Materials
 		Helpers.ensureDirs(materialsFolder)
-		
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder)
-		WebUI.comment(">>> testSuiteId is '${testSuiteId}', testSuiteTimestamp is '${testSuiteTimestamp}'")
 		mr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
-		
 		GlobalVariable.MATERIAL_REPOSITORY = mr
+		
+		WebUI.comment(">>> testSuiteId is '${testSuiteId}', testSuiteTimestamp is '${testSuiteTimestamp}'")
 		WebUI.comment(">>> Instance of MaterialRepository(${mr.getBaseDir().toString()})" +
 			" is set to GlobalVariable.MATERIAL_REPOSITORY")
 	}
@@ -49,6 +52,10 @@ class TL {
 	 */
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
+		if (GlobalVariable.MATERIAL_REPOSITORY == null) {
+			MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder)
+			GlobalVariable.MATERIAL_REPOSITORY = mr
+		}
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()   //  e.g., 'Test Cases/TC1'
 	}
 
