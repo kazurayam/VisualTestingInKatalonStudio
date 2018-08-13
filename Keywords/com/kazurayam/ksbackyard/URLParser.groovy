@@ -13,7 +13,7 @@ public class URLParser {
 		// each query param
 		return queryParams.collectEntries { param -> param.split('=').collect { URLDecoder.decode(it,'UTF-8') }}
 	}
-	
+
 	static String queryParameter(String urlString, String name) {
 		def mapParams = queryParameters(urlString)
 		return mapParams[name]

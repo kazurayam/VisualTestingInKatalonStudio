@@ -11,7 +11,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords
 
 
 class Assert {
-	
+
 	/**
 	 * Refresh browser
 	 */
@@ -21,5 +21,4 @@ class Assert {
 			KeywordUtil.markFailed(message)
 		}
 	}
-
 }
