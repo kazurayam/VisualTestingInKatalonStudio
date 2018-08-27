@@ -1,6 +1,6 @@
 import java.nio.file.Paths
 
-import com.kazurayam.material.Helpers
+import com.kazurayam.materials.Helpers
 
 /**
  * delete the contents under the ./Materials directory

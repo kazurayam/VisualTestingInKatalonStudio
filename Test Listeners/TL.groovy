@@ -1,10 +1,9 @@
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.material.Helpers
-import com.kazurayam.material.MaterialRepository
-import com.kazurayam.material.MaterialRepositoryFactory
-
+import com.kazurayam.materials.Helpers
+import com.kazurayam.materials.MaterialRepository
+import com.kazurayam.materials.MaterialRepositoryFactory
 import com.kms.katalon.core.annotation.BeforeTestCase
 import com.kms.katalon.core.annotation.BeforeTestSuite
 import com.kms.katalon.core.configuration.RunConfiguration

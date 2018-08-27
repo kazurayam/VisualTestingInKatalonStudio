@@ -1,11 +1,14 @@
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import internal.GlobalVariable as GlobalVariable
 
-import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import java.nio.file.Path
 
-import com.kazurayam.material.MaterialRepository
+import com.kazurayam.materials.MaterialRepository
+import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+
+import internal.GlobalVariable as GlobalVariable
+
+
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 

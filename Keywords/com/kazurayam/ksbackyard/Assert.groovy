@@ -1,24 +1,59 @@
 package com.kazurayam.ksbackyard
 
-import org.openqa.selenium.By
-import org.openqa.selenium.WebElement
+import static com.kms.katalon.core.model.FailureHandling.CONTINUE_ON_FAILURE
 
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.logging.KeywordLogger
+import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.util.KeywordUtil
-import com.kms.katalon.core.webui.exception.WebElementNotFoundException
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords
 
+// see https://forum.katalon.com/discussion/2269/keywordutil-markfailed-method for failure handling
 
 class Assert {
 
+	private static KeywordLogger logger = new KeywordLogger()
+
 	/**
-	 * Refresh browser
+	 *
 	 */
 	@Keyword
-	static def assertTrue(String message, Boolean condition) {
+	static def assertTrue(String message, Boolean condition,
+			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
 		if (!condition) {
-			KeywordUtil.markFailed(message)
+			stepFailed(message, flowControl)
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Keyword
+	static def assertEquals(String message, String expected, String actual,
+			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
+		if (expected != actual) {
+			stepFailed(message, flowControl)
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Keyword
+	static def assertEquals(String message, Number expected, Number actual,
+			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
+		if (expected != actual) {
+			stepFailed(message, flowControl)
+		}
+	}
+
+	private static def stepFailed(String message, FailureHandling flowControl) {
+		if (flowControl == FailureHandling.OPTIONAL) {
+			logger.logWarning(message)
+		} else if (flowControl == FailureHandling.CONTINUE_ON_FAILURE) {
+			logger.logFailed(message)
+		} else {// flowControl == FailureHandling.STOP_ON_FAILURE
+			logger.logFailed(message)
+			KeywordUtil.markFailedAndStop(message)
 		}
 	}
 }
