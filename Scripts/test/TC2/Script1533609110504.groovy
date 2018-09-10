@@ -3,7 +3,7 @@ import java.nio.file.Path
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 
-import com.kazurayam.material.MaterialRepository
+import com.kazurayam.materials.MaterialRepository
 
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testobject.ConditionType as ConditionType
