@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description>open Google Chrome</description>
-   <name>TC3</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>06f771df-3282-400e-9dbc-8949088d1b1f</testCaseGuid>
-</TestCaseEntity>

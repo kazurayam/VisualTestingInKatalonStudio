@@ -1,9 +1,14 @@
 import java.nio.file.Paths
-
+import com.kms.katalon.core.configuration.RunConfiguration
 import com.kazurayam.materials.Helpers
+import com.kazurayam.materials.MaterialRepository
+
+import internal.GlobalVariable
 
 /**
- * delete the contents under the ./Materials directory
- * while preseving it undeleted
+ * delete the contents of the Materials directory
  */
-Helpers.deleteDirectoryContents(Paths.get('./Materials'))
+MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
+assert mr != null
+
+Helpers.deleteDirectoryContents(mr.getBaseDir())
