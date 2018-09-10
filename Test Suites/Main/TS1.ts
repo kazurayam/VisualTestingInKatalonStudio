@@ -4,7 +4,7 @@
    <name>TS1</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-09-10T09:27:50</lastRun>
+   <lastRun>2018-09-10T11:18:39</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
@@ -16,11 +16,5 @@
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
       <testCaseId>Test Cases/Main/Basic</testCaseId>
-   </testCaseLink>
-   <testCaseLink>
-      <guid>66227b51-9868-4793-92fc-a82bc1485a27</guid>
-      <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
-      <testCaseId>Test Cases/test/TC2</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

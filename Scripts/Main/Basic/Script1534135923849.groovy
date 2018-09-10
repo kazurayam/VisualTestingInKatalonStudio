@@ -10,8 +10,9 @@ import java.time.temporal.TemporalAccessor
 import com.kazurayam.materials.MaterialRepository
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-
+import org.openqa.selenium.WebDriver
 import internal.GlobalVariable as GlobalVariable
 
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
@@ -19,26 +20,21 @@ assert mr != null
 
 WebUI.openBrowser('')
 WebUI.setViewPortSize(1024, 768)
-
+WebDriver driver = DriverFactory.getWebDriver()
 
 if (RunConfiguration.getExecutionProfile() == 'develop') {
+	// open the mimic CURA Homepage and take entire page screenshot
 	WebUI.navigateToUrl('http://demoaut-mimic.kazurayam.com')
-	// The CURA Homepage opens
-	WebUI.verifyElementPresent(findTestObject('Page_CuraHomepage/a_Make Appointment'),
-		10, FailureHandling.STOP_ON_FAILURE)
-	// takes Screenshot of the CURA Homepage
-	Path png1 = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "CURA_Homepage.png")
-	WebUI.takeScreenshot(png1.toString())
-	WebUI.navigateToUrl("http://${GlobalVariable.Hostname}/")
 } else {
+	// open the production CURA Homepage and take entire page screenshot
 	WebUI.navigateToUrl("http://${GlobalVariable.Hostname}/")
-	// The CURA Homepage opens
-	WebUI.verifyElementPresent(findTestObject('Page_CuraHomepage/a_Make Appointment'),
-		10, FailureHandling.STOP_ON_FAILURE)
-	// takes Screenshot of the CURA Homepage
-	Path png1 = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "CURA_Homepage.png")
-	WebUI.takeScreenshot(png1.toString())
 }
+WebUI.verifyElementPresent(findTestObject('Page_CuraHomepage/a_Make Appointment'),
+		10, FailureHandling.STOP_ON_FAILURE)
+
+Path png1 = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "CURA_Homepage.png")
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png1.toFile(), 500)
+
 
 // Make AppointmentボタンをクリックしてLogin画面を呼び出しUsernameとPasswordを入力しログインするまでを
 // 別のTest Caseで実行する
@@ -66,13 +62,19 @@ WebUI.setText(findTestObject('Page_CuraAppointment/input_visit_date'), visitDate
 
 WebUI.setText(findTestObject('Page_CuraAppointment/textarea_comment'), 'This is a comment')
 
-// takes Screenshot of the CURA Appointment
+// move the viewport to the top
+WebUI.scrollToPosition(0, 0)
+WebUI.comment("********************** scrolled to the top ******************************")
+WebUI.delay(1)
+
+// takes Screenshot of the CURA Appointment page
 Path png3 = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "CURA_Appointment.png")
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png3.toFile(), 500)
 WebUI.takeScreenshot(png3.toString())
 
-WebUI.click(findTestObject('Page_CuraAppointment/button_Book Appointment'))
-
 // ここで確認ページに遷移
+
+WebUI.click(findTestObject('Page_CuraAppointment/button_Book Appointment'))
 
 WebUI.verifyElementPresent(findTestObject('Page_AppointmentConfirmation/a_Go to Homepage'),
 	10, FailureHandling.STOP_ON_FAILURE)
@@ -112,7 +114,8 @@ if (comment != null) {
 
 // takes Screenshot of the Appointment Confirmation page
 Path png4 = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "CURA_AppointmentConfirmation.png")
-WebUI.takeScreenshot(png4.toString())
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png4.toFile(), 500)
+
 
 WebUI.click(findTestObject('Page_AppointmentConfirmation/a_Go to Homepage'))
 
@@ -123,6 +126,6 @@ WebUI.verifyElementPresent(findTestObject('Page_CuraHomepage/a_Make Appointment'
 
 // takes Screenshot of the Homepage revisited
 Path png5 = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "CURA_Homepage_revisited.png")
-WebUI.takeScreenshot(png5.toString())
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png5.toFile(), 500)
 
 WebUI.closeBrowser()
