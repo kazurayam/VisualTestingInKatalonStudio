@@ -13,6 +13,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import org.openqa.selenium.WebDriver
+import org.openqa.selenium.Keys as Keys
 import internal.GlobalVariable as GlobalVariable
 
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
@@ -59,18 +60,17 @@ WebUI.click(findTestObject('Page_CuraAppointment/input_programs'))
 def visitDate = LocalDateTime.now().plusWeeks(1)
 def visitDateStr = DateTimeFormatter.ofPattern("dd/MM/yyyy").format(visitDate)
 WebUI.setText(findTestObject('Page_CuraAppointment/input_visit_date'), visitDateStr)
+// date picker のダイアログを閉じるため Enterを押す
+WebUI.sendKeys(findTestObject('Page_CuraAppointment/input_visit_date'), Keys.chord(Keys.ENTER))
 
+// コメントを入力
 WebUI.setText(findTestObject('Page_CuraAppointment/textarea_comment'), 'This is a comment')
 
-// move the viewport to the top
-WebUI.scrollToPosition(0, 0)
-WebUI.comment("********************** scrolled to the top ******************************")
-WebUI.delay(1)
 
 // takes Screenshot of the CURA Appointment page
 Path png3 = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "CURA_Appointment.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png3.toFile(), 500)
-WebUI.takeScreenshot(png3.toString())
+
 
 // ここで確認ページに遷移
 
