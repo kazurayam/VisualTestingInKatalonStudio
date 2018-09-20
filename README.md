@@ -13,7 +13,7 @@ primitive *Visual Testing* in Katalon Studio.
 
 # Problem to solve
 
-What do I mean by the word *Visutal Testing*?
+What do I mean by the word *Visutal Testing*? Any toolset that provides a solution to my requirements as follows, I would regard it a *Visual Testing* solution.
 
 - Often I have to look at the pages of a Web site. Maybe I am a developer, a designer or a tester of the site.
 - I want to look at as many pages as possible. Coverage matters.
@@ -25,10 +25,12 @@ If the target Web site has 100 pages, it would take over 60 minutes to go throug
 
 - I want to automate it somehow.
 
-Any toolset that provides a solution to my requirements above, I would regard it a *Visual Testing* solution.
 
 
 # Solution
+
+I have made another project titled ['UsingMaterialsInKatalonStudio'](https://github.com/kazurayam/UsingMaterialsInKatalonStudio). This project demonstrates how to take multiple screenshots of web pages and store them into a well-structured file system tree. I named it as **Materials** diretory.
+
 
 
 # Setup
