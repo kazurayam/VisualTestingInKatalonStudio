@@ -3,29 +3,29 @@ Visual Testing in Katalon Studio
 
 # What is this repository?
 
-This is a [Katalon Studio] project for demonstration purpose. You can clone This
+This is a [Katalon Studio](https://www.katalon.com/) project for demonstration purpose. You can clone this
 out to your PC and run it with your Katalon Studio.
 
 This project was developed using Katalon Studio 5.7.0.
 
 This project demonstrates how to perform a
-primitive 'Visual Testing' in Katalon Studio.
+primitive *Visual Testing* in Katalon Studio.
 
 # Problem to solve
 
-What do I mean by the word 'Visutal Testing'?
+What do I mean by the word *Visutal Testing*?
 
-- I often look at the pages of the Web site which we are responsible for.
+- Often I have to look at the pages of a Web site. Maybe I am a developer, a designer or a tester of the site.
 - I want to look at as many pages as possible. Coverage matters.
-- I want to compare the view of 2 environments --- Production and Development.
-- I want to find out any difference between the two if there is any.
+- I want to compare the view of 2 environments; e.g. Production and Development.
 - I want to take screen shots of pages as evidence
+- I want to find out any difference in view between the two.
 
-If your target Web site has 100 pages, it might take you over 60 minutes to go through them. It's too tiring, too boring. Therefore I would add the final term:
+If the target Web site has 100 pages, it would take over 60 minutes to go through them. It's too tiring, too boring. I can not continue the job everyday! Therefore I would add the final term:
 
 - I want to automate it somehow.
 
-Any toolset that provides a solution to my requirements above, I would regard it a 'Visual Testing' solution.
+Any toolset that provides a solution to my requirements above, I would regard it a *Visual Testing* solution.
 
 
 # Solution
