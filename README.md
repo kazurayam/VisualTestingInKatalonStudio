@@ -15,8 +15,8 @@ primitive *Visual Testing* in Katalon Studio.
 
 What do I mean by the word *Visutal Testing*? Any toolset that provides a solution to my requirements as follows, I would regard it a *Visual Testing* solution.
 
-- Often I have to look at the pages of a Web site. Maybe I am a developer, a designer or a tester of the site.
-- I want to look at as many pages as possible. Coverage matters.
+- Often I have to look at the pages of a Web site. Maybe I am a developer, a designer, a tester or just a fan of the site.
+- I want to look at as many pages of the site as possible. Coverage matters.
 - I want to compare the view of 2 environments; e.g. Production and Development.
 - I want to take screen shots of pages as evidence
 - I want to find out any difference in view between the two.
@@ -37,11 +37,20 @@ I have made another project titled ['UsingMaterialsInKatalonStudio'](https://git
 
 # Description
 
+- http://demoaut.katalon.com/  --- called *Production environement*
+- http://demoaut-mimic.kazurayam.com/ --- called *Development environement*
+
 ## How to run the demo
 
 ## Demo specification
 
 ## Output
+
+| Production | Development |
+|:-----------|:------------|
+| ![Production](docs/images/Production_CURA_Homepage.png) | ![Development](docs/images/Development_CURA_Homepage.png) |
+
+![ImageDiff](docs/images/ImageDiff_CURA_Homepage.png)
 
 # Related resources
 
