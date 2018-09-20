@@ -50,6 +50,8 @@ I have made another project titled ['UsingMaterialsInKatalonStudio'](https://git
 |:-----------|:------------|
 | ![Production](docs/images/Production_CURA_Homepage.png) | ![Development](docs/images/Development_CURA_Homepage.png) |
 
+![index](docs/images/Materials_index.png)
+
 ![ImageDiff](docs/images/ImageDiff_CURA_Homepage.png)
 
 # Related resources
