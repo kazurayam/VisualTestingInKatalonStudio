@@ -1,0 +1,31 @@
+フォルダー パスの一覧
+ボリューム シリアル番号は DAFE-2537 です
+C:\USERS\QCQ0264\KATALON-WORKSPACE\VISUALTESTINGINKATALONSTUDIO\MATERIALS
+│  index.html
+│  
+├─ImageDiff
+│  └─20180920_165545
+│      └─ImageDiff
+│              CURA_Appointment.20180920_165543_product-20180920_165544_develop.(0.00).png
+│              CURA_AppointmentConfirmation.20180920_165543_product-20180920_165544_develop.(0.00).png
+│              CURA_Homepage.20180920_165543_product-20180920_165544_develop.(6.30)FAILED.png
+│              CURA_Homepage_revisited.20180920_165543_product-20180920_165544_develop.(0.00).png
+│              CURA_Login.20180920_165543_product-20180920_165544_develop.(0.00).png
+│              
+└─Main.TS1
+    ├─20180920_165543
+    │  └─Main.Basic
+    │          CURA_Appointment.png
+    │          CURA_AppointmentConfirmation.png
+    │          CURA_Homepage.png
+    │          CURA_Homepage_revisited.png
+    │          CURA_Login.png
+    │          
+    └─20180920_165544
+        └─Main.Basic
+                CURA_Appointment.png
+                CURA_AppointmentConfirmation.png
+                CURA_Homepage.png
+                CURA_Homepage_revisited.png
+                CURA_Login.png
+                
