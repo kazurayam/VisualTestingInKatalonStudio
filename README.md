@@ -58,16 +58,37 @@ In there I have developed Katalon Custume Keyword [com.kazurayam.ksbackyard.Scre
 1. start Katalon Studio, open this project
 1. in `Tests Explorer` pane, click `Test Suites`
 1. choose and open a Test Suite Collection `Execute`
-1. `Execute` assumes you have Firefox browser installed. In not, pls install Firefox
-1. execute the Test Suite Collection. it will take a few minuites to finish.
+1. `Execute` assumes you have Firefox browser installed. In not, please install Firefox
+1. execute the Test Suite Collection. it will take a few minutes to finish.
 1. find the resulting file `<projectDir>/Materials/index.html`, open it with your favorite web browser.  
 
-<p style="color: grey;">Unfortunately you can not view the `<projectDir>/Materials` directory and its contents inside Katalon Studio. I would recommend you to create a Bookmark in your browser to the `<projectDir>/Materials/index.html` file for quick access.<p>
+Unfortunately you can not view the  `<projectDir>/Materials` directory and its contents inside Katalon Studio. I would recommend you to create a Bookmark in your browser to the `<projectDir>/Materials/index.html` file for quick access.
 
 # Description the demo
 
-- http://demoaut.katalon.com/  --- called *Production environment*
-- http://demoaut-mimic.kazurayam.com/ --- called *Development environment*
+The Test Suite Collection `Executes` calls Test Suite `Main/TS1` twice; each time targeting the following URLs:
+1. http://demoaut.katalon.com/  --- called *Production environment*
+2. http://demoaut-mimic.kazurayam.com/ --- called *Development environment*
+
+The Test Suite `Main/TS1` visits the target URL and traverse pages while taking screen shots. Directory named  `./Materials/Main.TS1/yyyyMMdd_hhmmss/Main.Basic` will be created where 5 PNG files are stored.
+
+`Executes` calls Test Suite `ImageDiff`. The Test Suite `ImageDiff` scans 2 directories previously created by `Main/TS1` and compares pairs of PNG files with same file name: e.g. `CURA_Homepage.png`. `ImageDiff` generates an PNG file in directory named `./Materials/ImageDiff/yyyyMMdd_hhmmss/ImageDiff`. If any visual difference found, the generated PNG file will show the difference in red color like this:
+![ImageDiff](docs/images/CURA_Homepage.diff.png)
+
+### ImageDiff filename
+The file name of ImageDiff will be in the format as follows
+
+1. e.g.
+`CURA_Homepage.20180920_165543_product-20180920_165544_develop.(6.30)FAILED.png`
+1. prefix part `CURA_Homepage` is equal to the file name prefix of the source image file `CURA_Homepage.png`
+2. middle part `yyyyMMdd_hhmmss_PPPPPPP` is equal to the timestamp when test suite `Main/TS` was executed, and `PPPPPPP` is the Katalon Execution Profile applied to the test suite execution.
+3. `(6.30)` is called *diff%* = number of read pixcels(differences) / (width * hight of page) * 100
+4. `FAILED` is marked by the test suite `ImageDiff`. The Test Case `ImageDiff` has the following code:
+```
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.makeDiffs'(
+    'product', 'develop', 'Main/TS1', 3.68)
+```
+The 4th argument is called *criteria%*. If the difference is larger than the criteria% specified, then the generated ImageDiff file will be marked `FAILED`. This mark enables CSS in ./Materials/index.html to show the line highlighted.
 
 ## Output
 
