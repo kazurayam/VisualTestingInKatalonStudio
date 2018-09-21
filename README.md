@@ -18,10 +18,10 @@ What do I mean by the word *Visutal Testing*? Any toolset that provides a soluti
 - Often I have to look at the pages of a Web site. Maybe I am a developer, a designer, a tester or just a fan of the site.
 - I want to look at as many pages of the site as possible. Wide coverage matters.
 - I want to compare the view of 2 environments; e.g. Production and Development.
-- I want to take full-page screen shots as evidence
+- I want to take full-page screen shots of all pages as evidence
 - After taking screenshots, I want to check them to find out if there are any differences in view between the two.
 
-If the target Web site has 100 pages, it would take me more than 60 minutes to go through them. It's too tiring, too boring. I don't want to do the job everyday! Therefore I would add the final term:
+If the target Web site has 100 pages, it would take me more than 60 minutes to run through. It's too tiring, too boring. I don't like doing the job everyday! Therefore I would add the final term:
 
 - I want to automate it.
 
@@ -30,19 +30,24 @@ If the target Web site has 100 pages, it would take me more than 60 minutes to g
 In terms of coding test scripts, I found 2 problems.
 
 1. I want to make 2 sets of screen shot files on the local disk of my PC and reuse them. In order to do that, I need to design a specification how the file paths format should be. I would make a Script which writes a file and another script which reads the file; both scripts need to be aware of the path format and respect it. I would call a set of files compliant to the path format spec as `MaterialRepository`. I need a set of Java/Groovy library (jar) which implements `MaterialRepository`.
-1. [org.openqa.selenium.TakesScreenshot()](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/TakesScreenshot.html) enables taking screen shots. But the image taken by this is not full-page.
+1. [org.openqa.selenium.TakesScreenshot#getScreenshotAs(output)](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/TakesScreenshot.html) enables taking screen shots. But the image taken by this is often not full-page size. The  API doc says <blockquote>this makes a best effort depending on the browser to return the following in order of preference: - The entire content of the HTML element - The visible portion of the HTML element</blockquote>
 
 # Solution
 
 As for the file path problem,
-I have developed another project titled ['UsingMaterialsInKatalonStudio'](https://github.com/kazurayam/UsingMaterialsInKatalonStudio). This project demonstrates how to take multiple sets of web page screen shots and store them into a well-structured file system tree. Another GitHub repository [`Materials`](https://github.com/kazurayam/Materials) implements the tree and provides access methods.
+I have developed another project titled:
+- ['UsingMaterialsInKatalonStudio'](https://github.com/kazurayam/UsingMaterialsInKatalonStudio)
+
+This project demonstrates how to take multiple sets of web page screen shots and store them into a well-structured file system tree. This demo project uses another GitHub repository
+- [`Materials`](https://github.com/kazurayam/Materials)
+This implements the file tree and provides access methods.
 
 As for the full-page screenshot problem, I found that the library [`aShot`](https://github.com/yandex-qatools/ashot) solves like a charm. I wrote a report how I utilized aShot in Katalon Studio:
 - [Entire page screenshot by aShot in Katalon Studio](https://github.com/kazurayam/EntirePageScreenshotByAShotInKatalonStudio)
 
-I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java). This utility class enabled me to check very easily how much differences there are amongst 2 images.
-
-I have developed another GibHub repository [`ksbackyard`](https://github.com/kazurayam/ksbackyard). In there I have developed Katalon Custume Keyword [com.kazurayam.ksbackyard.ScreenshotDriver](https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy). ScreenshotDriver is just a small wrapper for aShot. This makes it a bit easier to use aShot functionality in Katalon Test Cases.
+I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java). This utility class enabled me to check very easily how much differences there are amongst 2 images. I wanted to use `ImageDiff` in Katalon Studio. So I have developed another GibHub repository
+- [`ksbackyard`](https://github.com/kazurayam/ksbackyard).
+In there I have developed Katalon Custume Keyword [com.kazurayam.ksbackyard.ScreenshotDriver](https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy). ScreenshotDriver is just a small wrapper for aShot. This makes it a bit easier to use aShot functionality in Katalon Test Cases.
 
 # Setup
 
@@ -52,6 +57,13 @@ I have developed another GibHub repository [`ksbackyard`](https://github.com/kaz
 - http://demoaut-mimic.kazurayam.com/ --- called *Development environement*
 
 ## How to run the demo
+
+1. git clone this project
+1. start Katalon Studio, open this project
+1. in the `Tests Explorer` pane, open `TestSuites`
+1. choose the Test Suite Collection `Execute`
+1.
+
 
 ## Output
 
