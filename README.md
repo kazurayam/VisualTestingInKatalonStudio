@@ -36,9 +36,9 @@ In terms of coding test scripts, I found 2 problems.
 
 As for the file path problem,
 I have developed another project titled:
-- ['UsingMaterialsInKatalonStudio'](https://github.com/kazurayam/UsingMaterialsInKatalonStudio)
+- [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio)
 
-This project demonstrates how to take multiple sets of web page screen shots and store them into a well-structured file system tree. This demo project uses another GitHub repository
+This project demonstrates how to take multiple sets of web page screen shots and store them into a well-structured file system tree. This demo project uses another GitHub repository:
 - [`Materials`](https://github.com/kazurayam/Materials)
 
 This implements the file tree and provides access methods.
@@ -46,26 +46,28 @@ This implements the file tree and provides access methods.
 As for the full-page screenshot problem, I found that the library [`aShot`](https://github.com/yandex-qatools/ashot) solves like a charm. I wrote a report how I utilized aShot in Katalon Studio:
 - [Entire page screenshot by aShot in Katalon Studio](https://github.com/kazurayam/EntirePageScreenshotByAShotInKatalonStudio)
 
-I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java). This utility class enabled me to check very easily how much differences there are amongst 2 images. I wanted to use `ImageDiff` in Katalon Studio. So I have developed another GibHub repository
+I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java). This utility class enables me to check very easily how much differences there are amongst 2 images. I wanted to use `ImageDiff` in Katalon Studio. So I have developed another GibHub repository
 - [`ksbackyard`](https://github.com/kazurayam/ksbackyard).
 
 In there I have developed Katalon Custume Keyword [com.kazurayam.ksbackyard.ScreenshotDriver](https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy). ScreenshotDriver is just a small wrapper for aShot. This makes it a bit easier to use aShot functionality in Katalon Test Cases.
 
-# Setup
 
-# Description the demo
-
-- http://demoaut.katalon.com/  --- called *Production environement*
-- http://demoaut-mimic.kazurayam.com/ --- called *Development environement*
-
-## How to run the demo
+# How to run the demo
 
 1. git clone this project
 1. start Katalon Studio, open this project
-1. in the `Tests Explorer` pane, open `TestSuites`
-1. choose the Test Suite Collection `Execute`
-1.
+1. in `Tests Explorer` pane, click `Test Suites`
+1. choose and open a Test Suite Collection `Execute`
+1. `Execute` assumes you have Firefox browser installed. In not, pls install Firefox
+1. execute the Test Suite Collection. it will take a few minuites to finish.
+1. find the resulting file `<projectDir>/Materials/index.html`, open it with your favorite web browser.  
 
+<p style="color: grey;">Unfortunately you can not view the `<projectDir>/Materials` directory and its contents inside Katalon Studio. I would recommend you to create a Bookmark in your browser to the `<projectDir>/Materials/index.html` file for quick access.<p>
+
+# Description the demo
+
+- http://demoaut.katalon.com/  --- called *Production environment*
+- http://demoaut-mimic.kazurayam.com/ --- called *Development environment*
 
 ## Output
 
