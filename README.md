@@ -25,22 +25,24 @@ If the target Web site has 100 pages, it would take me more than 60 minutes to g
 
 - I want to automate it.
 
-## More specific problems
+## More specificcally ...
 
 In terms of coding test scripts, I found 2 problems.
 
-1. I want to make 2 sets of screen shot files on the local disk of my PC and reuse them. I need to define a specification how the  file paths should be. A Script which writes a file and another script which reads the file, both scripts need to be aware of the path format and respect it. I would call a set of files compliant to the path format spec as `MaterialRepository`. I need a set of Java/Groovy library (jar) which implements `MaterialRepository`.
-1. [org.openqa.selenium.TakesScreenshot()](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/TakesScreenshot.html) enables to take screen shot. But the image taken is not full-page; show the image of viewport only.
+1. I want to make 2 sets of screen shot files on the local disk of my PC and reuse them. In order to do that, I need to design a specification how the file paths format should be. I would make a Script which writes a file and another script which reads the file; both scripts need to be aware of the path format and respect it. I would call a set of files compliant to the path format spec as `MaterialRepository`. I need a set of Java/Groovy library (jar) which implements `MaterialRepository`.
+1. [org.openqa.selenium.TakesScreenshot()](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/TakesScreenshot.html) enables taking screen shots. But the image taken by this is not full-page.
 
 # Solution
 
 As for the file path problem,
-I have developed another project titled ['UsingMaterialsInKatalonStudio'](https://github.com/kazurayam/UsingMaterialsInKatalonStudio). This project demonstrates how to take multiple screenshots of web pages and store them into a well-structured file system tree. I named it as **Materials** diretory.
+I have developed another project titled ['UsingMaterialsInKatalonStudio'](https://github.com/kazurayam/UsingMaterialsInKatalonStudio). This project demonstrates how to take multiple sets of web page screen shots and store them into a well-structured file system tree. Another GitHub repository [`Materials`](https://github.com/kazurayam/Materials) implements the tree and provides access methods.
 
-As for the full-page screenshot problem, I found that the library [aShot](https://github.com/yandex-qatools/ashot) solves it like a charm. I wrote a report how I utilized aShot in Katalon Studio:
+As for the full-page screenshot problem, I found that the library [`aShot`](https://github.com/yandex-qatools/ashot) solves like a charm. I wrote a report how I utilized aShot in Katalon Studio:
 - [Entire page screenshot by aShot in Katalon Studio](https://github.com/kazurayam/EntirePageScreenshotByAShotInKatalonStudio)
 
-I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java). This utility class enabled me to check very easily how much differences there are amongst 2 images. 
+I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java). This utility class enabled me to check very easily how much differences there are amongst 2 images.
+
+I have developed another GibHub repository [`ksbackyard`](https://github.com/kazurayam/ksbackyard). In there I have developed Katalon Custume Keyword [com.kazurayam.ksbackyard.ScreenshotDriver](https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy). ScreenshotDriver is just a small wrapper for aShot. This makes it a bit easier to use aShot functionality in Katalon Test Cases.
 
 # Setup
 
