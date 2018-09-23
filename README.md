@@ -46,15 +46,13 @@ This implements the file tree and provides access methods.
 As for the full-page screenshot problem, I found that the library [`aShot`](https://github.com/yandex-qatools/ashot) solves like a charm. I wrote a report how I utilized aShot in Katalon Studio:
 - [Entire page screenshot by aShot in Katalon Studio](https://github.com/kazurayam/EntirePageScreenshotByAShotInKatalonStudio)
 
-I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java). This utility class enables me to check very easily how much differences there are amongst 2 images. I wanted to use `ImageDiff` in Katalon Studio. So I have developed another GibHub repository
-- [`ksbackyard`](https://github.com/kazurayam/ksbackyard).
+I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java). This utility class enables me to check very easily how much differences there are amongst 2 images. I wanted to use `ImageDiff` in Katalon Studio. So I have developed another GibHub repository:
+- [`ksbackyard`](https://github.com/kazurayam/ksbackyard)
 
 In there I have developed Katalon Custume Keyword [com.kazurayam.ksbackyard.ScreenshotDriver](https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy). ScreenshotDriver is just a small wrapper for aShot. This makes it a bit easier to use aShot functionality in Katalon Test Cases.
 
 
-
-
-# Description the demo
+# Description of the demo
 
 The Test Suite Collection `Executes` calls Test Suite `Main/TS1` twice; each time targeting the following URLs:
 1. http://demoaut.katalon.com/  --- called *Production environment*
