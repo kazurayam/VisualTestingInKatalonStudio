@@ -25,6 +25,8 @@ If the target Web site has 100 pages, it would take me more than 60 minutes to r
 
 - I want to automate it.
 
+I just want to be notified if 2 environments have any visual differences now. I would not require the tool to be equipped with full fledged debugging functionalities. Preferably it should be free of charge.
+
 ## More specificcally ...
 
 In terms of coding test scripts, I found 2 problems.
@@ -51,21 +53,9 @@ I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatool
 
 In there I have developed Katalon Custume Keyword [com.kazurayam.ksbackyard.ScreenshotDriver](https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy). ScreenshotDriver is just a small wrapper for aShot. This makes it a bit easier to use aShot functionality in Katalon Test Cases.
 
+I have integrated those external resources to build a toolset of 'Visual Testing' in Katalon Studio.
 
-# Description of the demo
-
-The Test Suite Collection `Executes` calls Test Suite `Main/TS1` twice; each time targeting the following URLs:
-1. http://demoaut.katalon.com/  --- called *Production environment*
-2. http://demoaut-mimic.kazurayam.com/ --- called *Development environment*
-
-The Test Suite `Main/TS1` visits the target URL and traverse pages while taking screen shots. Directory named  `./Materials/Main.TS1/yyyyMMdd_hhmmss/Main.Basic` will be created where 5 PNG files are stored.
-
-`Executes` calls Test Suite `ImageDiff`. The Test Suite `ImageDiff` scans 2 directories previously created by `Main/TS1` and compares pairs of PNG files with same file name: e.g. `CURA_Homepage.png`.
-
-The test suite `ImageDiff` generates an PNG file in directory named `./Materials/ImageDiff/yyyyMMdd_hhmmss/ImageDiff`. If any visual difference found, the generated PNG file will show the difference in red color like this:
-![ImageDiff](docs/images/CURA_Homepage.diff.png)
-
-## How to run the demo
+# How to run the demo
 
 1. git clone this project
 1. start Katalon Studio, open this project
@@ -77,14 +67,31 @@ The test suite `ImageDiff` generates an PNG file in directory named `./Materials
 
 Unfortunately you can not view the  `<projectDir>/Materials` directory and its contents inside Katalon Studio GUI. I would recommend you to bookmark  `<projectDir>/Materials/index.html` in your favorite browser for quick access.
 
-## Processing sequence
+
+# Description of the demo
+
+## Input
+
+The Test Suite Collection `Executes` calls Test Suite `Main/TS1` twice; each time targeting the following URLs:
+1. http://demoaut.katalon.com/  --- called *Production environment*
+2. http://demoaut-mimic.kazurayam.com/ --- called *Development environment*
+
+## Processing
+
+The Test Suite `Main/TS1` visits the target URL and traverse pages while taking screen shots. Directory named  `./Materials/Main.TS1/yyyyMMdd_hhmmss/Main.Basic` will be created where 5 PNG files are stored.
+
+`Executes` calls Test Suite `ImageDiff`. The Test Suite `ImageDiff` scans 2 directories previously created by `Main/TS1` and compares pairs of PNG files with same file name: e.g. `CURA_Homepage.png`.
+
+The test suite `ImageDiff` generates an PNG file in directory named `./Materials/ImageDiff/yyyyMMdd_hhmmss/ImageDiff`. If any visual difference found, the generated PNG file will show the difference in red color like this:
+![ImageDiff](docs/images/CURA_Homepage.diff.png)
 
 The following picture shows how our Visual Testing in Katalon Studio goes.
 
 ![sequence-diagram](docs/images/sequence-diagram.png)
 
 
-## ImageDiff filename
+## ImageDiff file naming rule
+
 The file name of ImageDiff will be in the format as follows
 
 1. An ImageDiff file has a name for example: `CURA_Homepage.20180920_165543_product-20180920_165544_develop.(6.30)FAILED.png`
@@ -117,11 +124,11 @@ If you click the line with purple background color, you will see a ImageDiff wit
 File path: `<projectDir>/Materials/ImageDiff/yyyyMMdd_hhmmss/ImageDiff/CURA_Homepage.yyyyMMdd_hhmmss_product-yyyyMMdd_hhmmss_develop.(6.30)FAILED.png`
 ![ImageDiff](docs/images/ImageDiff_CURA_Homepage.png)
 
-## External dependencies
+# External dependencies
 
 This Katalon project depends on the following external resources.
 
-### jar
+## jar
 
 1. ['Materials-x.x.x.jar'](https://github.com/kazurayam/Materials/releases)
 2. ['ashot-1.5.4.jar'](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4)
