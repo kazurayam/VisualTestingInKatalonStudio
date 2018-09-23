@@ -52,17 +52,7 @@ I was impressed that aShot provides [ImageDiff](https://github.com/yandex-qatool
 In there I have developed Katalon Custume Keyword [com.kazurayam.ksbackyard.ScreenshotDriver](https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy). ScreenshotDriver is just a small wrapper for aShot. This makes it a bit easier to use aShot functionality in Katalon Test Cases.
 
 
-# How to run the demo
 
-1. git clone this project
-1. start Katalon Studio, open this project
-1. in `Tests Explorer` pane, click `Test Suites`
-1. choose and open a Test Suite Collection `Execute`
-1. `Execute` assumes you have Firefox browser installed. In not, please install Firefox
-1. execute the Test Suite Collection. it will take a few minutes to finish.
-1. find the resulting file `<projectDir>/Materials/index.html`, open it with your favorite web browser.  
-
-Unfortunately you can not view the  `<projectDir>/Materials` directory and its contents inside Katalon Studio. I would recommend you to create a Bookmark in your browser to the `<projectDir>/Materials/index.html` file for quick access.
 
 # Description the demo
 
@@ -75,7 +65,39 @@ The Test Suite `Main/TS1` visits the target URL and traverse pages while taking 
 `Executes` calls Test Suite `ImageDiff`. The Test Suite `ImageDiff` scans 2 directories previously created by `Main/TS1` and compares pairs of PNG files with same file name: e.g. `CURA_Homepage.png`. `ImageDiff` generates an PNG file in directory named `./Materials/ImageDiff/yyyyMMdd_hhmmss/ImageDiff`. If any visual difference found, the generated PNG file will show the difference in red color like this:
 ![ImageDiff](docs/images/CURA_Homepage.diff.png)
 
-### ImageDiff filename
+## External dependencies
+
+This Katalon project depends on the following external resources.
+
+### jar
+
+1. ['Materials-x.x.x.jar'](https://github.com/kazurayam/Materials/releases)
+2. ['ashot-1.5.4.jar'](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4)
+
+These are already bundled in the `<projectDir>/Drivers/` directory.
+
+You can download them from their sites and import into the project again. Refer to Katalon
+Documentation ["External Libraries"](https://docs.katalon.com/display/KD/External+Libraries).
+
+### Custom Keywords
+
+1. ['ksbackyard'](https://github.com/kazurayam/ksbackyard)
+
+This project imports and uses the CustomKeyword `com.kazurayam.ksbackyard.ScreenshotDriver` developed by the 'ksbackyard' project. You can re-import/update the CustomKeyword. You first download the source of the 'ksbackyard' project from the [Release page](https://github.com/kazurayam/ksbackyard/releases). And copy to Keyword Source from the zip content into the project. See the Katalon documentation ['Import/Export Keywords'](https://docs.katalon.com/pages/viewpage.action?pageId=13698840) for importing operation..
+
+## How to run the demo
+
+1. git clone this project
+1. start Katalon Studio, open this project
+1. in `Tests Explorer` pane, click `Test Suites`
+1. choose and open a Test Suite Collection `Execute`
+1. `Execute` assumes you have Firefox browser installed. In not, please install Firefox
+1. execute the Test Suite Collection. it will take a few minutes to finish.
+1. find the resulting file `<projectDir>/Materials/index.html`, open it with your favorite web browser.  
+
+Unfortunately you can not view the  `<projectDir>/Materials` directory and its contents inside Katalon Studio. I would recommend you to create a Bookmark in your browser to the `<projectDir>/Materials/index.html` file for quick access.
+
+## ImageDiff filename
 The file name of ImageDiff will be in the format as follows
 
 1. e.g.
@@ -92,18 +114,18 @@ The 4th argument is called *criteria%*. If the difference is larger than the cri
 
 ## Output
 
+For example, we have the following 2 images as source to compare.
+
 | Production | Development |
 |:-----------|:------------|
 | File path: `<projectDir>/Materials/Main.TS1/20180920_165543/Main.Basic/CURA_Homepage.png`  ![Production](docs/images/Production_CURA_Homepage.png) | File path: ./Materials/Main.TS1/20180920_165544/Main.Basic/CURA_Homepage.png  ![Development](docs/images/Development_CURA_Homepage.png) |
 
+The test suite collection generates `./Materials/index.html`. This HTML shows a list of source images plus the images as comparison result.
+
 File path: `<projectDir>/Materials/index.html`
 ![index](docs/images/Materials_index.png)
 
+If you click the line with purple background color, you will see a ImageDiff with a lot of red-portion. The red portion shows the differences between the two source images.
+
 File path: `<projectDir>/Materials/ImageDiff/yyyyMMdd_hhmmss/ImageDiff/CURA_Homepage.yyyyMMdd_hhmmss_product-yyyyMMdd_hhmmss_develop.(6.30)FAILED.png`
 ![ImageDiff](docs/images/ImageDiff_CURA_Homepage.png)
-
-# Related resources
-
-1. [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio)
-2. [Materials](https://github.com/kazurayam/Materials)
-3. [Materials API doc](https://kazurayam.github.io/Materials/)
