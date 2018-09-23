@@ -25,7 +25,7 @@ If the target Web site has 100 pages, it would take me more than 60 minutes to r
 
 - I want to automate it.
 
-I just want to be notified if 2 environments have any visual differences now. I would not require the tool to be equipped with full fledged debugging functionalities. Preferably it should be free of charge.
+I just want to be notified if 2 environments have any significant enough visual differences now. I would not require the tool to be equipped with full fledged debugging functionalities. Preferably it should be free of charge.
 
 ## More specificcally ...
 
@@ -110,14 +110,19 @@ The 4th argument is called *criteria%*. If the difference is larger than the cri
 
 For example, we have the following 2 images as source to compare.
 
-| Production | Development |
-|:-----------|:------------|
-| File path: `<projectDir>/Materials/Main.TS1/20180920_165543/Main.Basic/CURA_Homepage.png`  ![Production](docs/images/Production_CURA_Homepage.png) | File path: ./Materials/Main.TS1/20180920_165544/Main.Basic/CURA_Homepage.png  ![Development](docs/images/Development_CURA_Homepage.png) |
+### Production page
+File path: `<projectDir>/Materials/Main.TS1/20180920_165543/Main.Basic/CURA_Homepage.png`  ![Production](docs/images/Production_CURA_Homepage.png) |
 
+### Development page
+File path: ./Materials/Main.TS1/20180920_165544/Main.Basic/CURA_Homepage.png  ![Development](docs/images/Development_CURA_Homepage.png) |
+
+### index.html
 The test suite collection generates `./Materials/index.html`. This HTML shows a list of source images plus the images as comparison result.
 
 File path: `<projectDir>/Materials/index.html`
 ![index](docs/images/Materials_index.png)
+
+### ImageDiff
 
 If you click the line with purple background color, you will see a ImageDiff with a lot of red-portion. The red portion shows the differences between the two source images.
 
@@ -128,7 +133,6 @@ File path: `<projectDir>/Materials/ImageDiff/yyyyMMdd_hhmmss/ImageDiff/CURA_Home
 
 This Katalon project depends on the following external resources.
 
-## jar
 
 1. ['Materials-x.x.x.jar'](https://github.com/kazurayam/Materials/releases)
 2. ['ashot-1.5.4.jar'](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4)
