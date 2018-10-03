@@ -114,6 +114,7 @@ public class ScreenshotDriver {
 			}
 			Path pngFile = mr.resolveMaterialPath(
 					GlobalVariable.CURRENT_TESTCASE_ID,
+					expMate.getDirpathRelativeToTSuiteResult(),
 					"${fileId}.${expTimestamp}_${profileExpected}-${actTimestamp}_${profileActual}" +
 					".(${String.format('%.2f', diffRatioPercent)})${(failed) ? 'FAILED' : ''}.png")
 			ImageIO.write(markedImage, "PNG", pngFile.toFile())
