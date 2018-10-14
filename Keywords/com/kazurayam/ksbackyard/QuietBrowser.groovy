@@ -14,37 +14,43 @@ import org.openqa.selenium.remote.DesiredCapabilities
 
 import com.kazurayam.materials.FileType
 import com.kms.katalon.core.annotation.Keyword
+import com.kms.katalon.core.configuration.RunConfiguration
+import com.kms.katalon.core.network.ProxyInformation
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.driver.WebUIDriverType
 
 
 class QuietBrowser {
 
+	static ProxyInformation proxyInformation = RunConfiguration.getProxyInformation()
+
 	@Keyword
-	def openBrowser() {
+	static WebDriver openBrowser() {
 		WebUIDriverType executedBrowser = DriverFactory.getExecutedBrowser()
+		WebDriver driver
 		switch (executedBrowser) {
 			case WebUIDriverType.CHROME_DRIVER:
 				System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
-				WebDriver driver = createChromeDriver()
+				driver = createChromeDriver()
 				DriverFactory.changeWebDriver(driver)
 				break
 			case WebUIDriverType.HEADLESS_DRIVER:
 				System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
-				WebDriver driver = createChromeHeadlessDriver()
+				driver = createChromeHeadlessDriver()
 				DriverFactory.changeWebDriver(driver)
 				break
 			case WebUIDriverType.FIREFOX_DRIVER:
-				System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
-				WebDriver driver = createFirefoxDriver()
+				System.setProperty('webdriver.gecko.driver', DriverFactory.getGeckoDriverPath())
+				driver = createFirefoxDriver()
 				DriverFactory.changeWebDriver(driver)
 				break
 			default:
 				throw new UnsupportedOperationException("Unsuported WebUIDriverType ${executedBrowser}")
 		}
+		return driver
 	}
 
-	def createChromeDriver() {
+	static ChromeDriver createChromeDriver() {
 		Map<String, Object> chromePreferences = new HashMap<>()
 		// Below two preference settings will disable popup dialog when download file
 		chromePreferences.put('profile.default_content_settings.popups', 0)
@@ -68,13 +74,13 @@ class QuietBrowser {
 		return new ChromeDriver(cap)
 	}
 
-	def createChromeHeadlessDriver() {
+	static ChromeDriver createChromeHeadlessDriver() {
 		ChromeOptions o = new ChromeOptions()
 		o.addArguments('headless')
 		return new ChromeDriver(o)
 	}
 
-	def createFirefoxDriver() {
+	static FirefoxDriver createFirefoxDriver() {
 		/**
 		 * see https://stackoverflow.com/questions/36309314/set-firefox-profile-to-download-files-automatically-using-selenium-and-java
 		 *
@@ -88,70 +94,36 @@ class QuietBrowser {
 		 *
 		 */
 		FirefoxProfile profile = new FirefoxProfile()
+
 		// set location to store files after downloading
 		profile.setPreference("browser.download.useDownloadDir", true)
 		profile.setPreference("browser.download.folderList", 2)
 		Path downloads = Paths.get(System.getProperty('user.home'), 'Downloads')
 		profile.setPreference("browser.download.dir", downloads.toString())
+
 		// set preference not to show file download donfirmation dialog
 		def mimeTypes = FileType.getAllMimeTypesAsString()
 		println "mimeTypes=${mimeTypes}"
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk", mimeTypes)
 		profile.setPreference("browser.helperApps.neverAsk.openFile", mimeTypes)
+
 		// profile.setPreference("browser.download.manager.showWhenStarting", false) // you can not modify this particular profile any more
 		profile.setPreference("pdfjs.disable", true)
+
 		FirefoxOptions options = new FirefoxOptions()
 		options.setProfile(profile)
 		return new FirefoxDriver(options)
 	}
 
-
-
-
-
-
-	/**
-	 * Refresh browser
-	 *
-	 @Keyword
-	 def refreshBrowser() {
-	 KeywordUtil.logInfo("Refreshing")
-	 WebDriver webDriver = DriverFactory.getWebDriver()
-	 webDriver.navigate().refresh()
-	 KeywordUtil.markPassed("Refresh successfully")
-	 }
-	 */
-
-	/**
-	 * Click element
-	 * @param to Katalon test object
-	 *
-	 @Keyword
-	 def clickElement(TestObject to) {
-	 try {
-	 WebElement element = WebUiBuiltInKeywords.findWebElement(to);
-	 KeywordUtil.logInfo("Clicking element")
-	 element.click()
-	 KeywordUtil.markPassed("Element has been clicked")
-	 } catch (WebElementNotFoundException e) {
-	 KeywordUtil.markFailed("Element not found")
-	 } catch (Exception e) {
-	 KeywordUtil.markFailed("Fail to click on element")
-	 }
-	 }
-	 */
-
-	/**
-	 * Get all rows of HTML table
-	 * @param table Katalon test object represent for HTML table
-	 * @param outerTagName outer tag name of TR tag, usually is TBODY
-	 * @return All rows inside HTML table
-	 *
-	 @Keyword
-	 def List<WebElement> getHtmlTableRows(TestObject table, String outerTagName) {
-	 WebElement mailList = WebUiBuiltInKeywords.findWebElement(table)
-	 List<WebElement> selectedRows = mailList.findElements(By.xpath("./" + outerTagName + "/tr"))
-	 return selectedRows
-	 }
-	 */
+	@Keyword
+	static String getProxyInformation() {
+		StringBuilder sb = new StringBuilder()
+		sb.append("proxyInformation.getProxyOption()        = ${proxyInformation.getProxyOption()}\n")
+		sb.append("proxyInformation.getProxyServerType()    = ${proxyInformation.getProxyServerType()}\n")
+		sb.append("proxyInformation.getProxyServerAddress() = ${proxyInformation.getProxyServerAddress()}\n")
+		sb.append("proxyInformation.getProxyServerPort()    = ${proxyInformation.getProxyServerPort()}\n")
+		sb.append("proxyInformation.getUsername()           = ${proxyInformation.getUsername()}\n")
+		sb.append("proxyInformation.getPassword()           = ${proxyInformation.getPassword()}\n")
+		return sb.toString()
+	}
 }

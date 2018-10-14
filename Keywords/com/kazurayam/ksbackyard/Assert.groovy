@@ -23,6 +23,14 @@ class Assert {
 			stepFailed(message, flowControl)
 		}
 	}
+	@Keyword
+	static def assertFalse(String message, Boolean condition,
+			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
+		if (condition) {
+			stepFailed(message, flowControl)
+		}
+	}
+
 
 	/**
 	 *
@@ -34,24 +42,29 @@ class Assert {
 			stepFailed(message, flowControl)
 		}
 	}
-
 	/**
 	 *
 	 */
 	@Keyword
 	static def assertEquals(String message, Number expected, Number actual,
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
-		if (expected != actual) {
+		if (expected == actual) {
 			stepFailed(message, flowControl)
 		}
 	}
 
-	private static def stepFailed(String message, FailureHandling flowControl) {
+
+	static def stepFailed(String message, FailureHandling flowControl) {
 		if (flowControl == FailureHandling.OPTIONAL) {
+			println "#stepFailed('${message}',FailureHandling.OPTIONAL)"
 			logger.logWarning(message)
 		} else if (flowControl == FailureHandling.CONTINUE_ON_FAILURE) {
+			println "#stepFailed('${message}',FailureHandling.CONTINUE_ON_FAILURE)"
 			logger.logFailed(message)
-		} else {// flowControl == FailureHandling.STOP_ON_FAILURE
+			KeywordUtil.markFailed(message)
+		} else {
+			// in the case where flowControl == FailureHandling.STOP_ON_FAILURE
+			println "#stepFailed('${message}',FailureHandling.STOP_ON_FAILURE)"
 			logger.logFailed(message)
 			KeywordUtil.markFailedAndStop(message)
 		}
