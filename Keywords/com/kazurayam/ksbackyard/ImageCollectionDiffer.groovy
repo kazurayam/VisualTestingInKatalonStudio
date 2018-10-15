@@ -76,36 +76,51 @@ class ImageCollectionDiffer {
 			throw new IllegalArgumentException('tCaseName is required')
 		}
 
+		// find out the list of pair of PNG Material to compare to find difference
 		List<MaterialPair> materialPairs =
-				mr_.getRecentMaterialPairs(profileExpected, profileActual, tSuiteName).
+				// we use Java 8 Stream API to filter entries
+				mr_.getRecentMaterialPairs(
+				profileExpected, profileActual, tSuiteName).
 				stream().filter { mp ->
 					mp.getLeft().getFileType() == FileType.PNG
 				}.collect(Collectors.toList())
+
 		if (materialPairs.size() == 0) {
 			listener_.fatal(">>> materialPairs.size() is 0. there must be something wrong.")
 		}
 
 		Statistics stats = new Statistics()
 
+		// iterate over the list of Materials
 		for (MaterialPair pair : materialPairs) {
+
 			Material expMate = pair.getExpected()
 			Material actMate = pair.getActual()
+
+			// look up the difference of 2 images
 			ImageDifference diff = new ImageDifference(
 					ImageIO.read(expMate.getPath().toFile()),
 					ImageIO.read(actMate.getPath().toFile()))
 
+			// record this pair
 			stats.add(diff)
 
-			String fileName = resolveImageDiffFilename(profileExpected,
+			// resolve the name of output file to save the ImageDiff
+			String fileName = resolveImageDiffFilename(
+					profileExpected,
 					profileActual,
 					expMate,
 					actMate,
 					diff,
 					criteriaPercent)
 
-			Path pngFile = mr_.resolveMaterialPath(tCaseName,
-					expMate.getDirpathRelativeToTSuiteResult(),fileName)
+			// resolve the path of output file to save the ImageDiff
+			Path pngFile = mr_.resolveMaterialPath(
+					tCaseName,
+					expMate.getDirpathRelativeToTSuiteResult(),
+					fileName)
 
+			// write the ImageDiff into the output file
 			ImageIO.write(diff.getDiffImage(), "PNG", pngFile.toFile())
 
 			// verify the diffRatio, fail the test if the ratio is greater than criteria
@@ -115,7 +130,7 @@ class ImageCollectionDiffer {
 
 		}
 
-		// show statistics
+		// show statistics for making debugging easier
 		listener_.info(">>> #makeDiffs ${stats.toString()}")
 		listener_.info(">>> #makeDiffs average of diffRatios is ${String.format('%.2f', stats.diffRatioAverage())}")
 		listener_.info(">>> #makeDiffs standard deviation of diffRatio is ${String.format('%.2f', stats.evalStandardDeviation())}")
@@ -125,8 +140,15 @@ class ImageCollectionDiffer {
 
 
 	/**
-	 *
-	 * @return
+	 * Given with the following arguments:
+	 *     ExecutionProfile profileExpected: 'product',
+	 *     ExecutionProfile profileActual:   'develop',
+	 *     Material expMate:                 'Materials/Main/TS1/20181014_131314/CURA_Homepage'
+	 *     Material actMate:                 'Materials/Main/TS1/20181014_131315/CURA_Homepage'
+	 *     ImageDifference:                  6.71
+	 *     Double criteriaPercent:           3.0
+	 *      
+	 * @return 'CURA_Homepage.20181014_131314_product-20181014_131315_develop.(6.71)FAILED.png'
 	 */
 	String resolveImageDiffFilename(
 			ExecutionProfile profileExpected,
