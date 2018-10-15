@@ -15,16 +15,16 @@ import internal.GlobalVariable
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
-// scan the ./Materials directory to make a list of MaterialPair object.
-// The latest TSuiteResult 'Test Suites/Main/TS1' with ExecutionProfile 'product' and
-// the latest TSuiteResult 'Test Suites/Main/TS1' with ExecutionProfile 'develop' are looked up.
+// scan the ./Materials directory to make a list of MateriaPair object.
+// The latest TSuiteResult 'Test Suites/TS1' with ExecutionProfile 'product' and
+// the latest TSuiteResult 'Test Suites/TS1' with ExecutionProfile 'develop' are looked up.
 // The list will be filtered to include PNG files only.
 List<MaterialPair> materialPairs =
 // we use Java 8 Stream API to filter entries
-mr.getRecentMaterialPairs(
+mr.createMaterialPairs(
+	new TSuiteName('Test Suites/Main/TS1'),
 	new ExecutionProfile('product'),
-	new ExecutionProfile('develop'),
-	new TSuiteName('Test Suites/Main/TS1')
+	new ExecutionProfile('develop')
 	).stream().filter { mp ->
 		mp.getLeft().getFileType() == FileType.PNG
 		}.collect(Collectors.toList())
@@ -40,3 +40,4 @@ icd.makeImageCollectionDifferences(
 		materialPairs,
 		new TCaseName(GlobalVariable.CURRENT_TESTCASE_ID),  // 'Test Cases/ImageDiff'
 		3.68)
+
