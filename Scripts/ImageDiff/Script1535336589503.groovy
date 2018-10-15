@@ -19,14 +19,12 @@ assert mr != null
 // The latest TSuiteResult 'Test Suites/TS1' with ExecutionProfile 'product' and
 // the latest TSuiteResult 'Test Suites/TS1' with ExecutionProfile 'develop' are looked up.
 // The list will be filtered to include PNG files only.
-List<MaterialPair> materialPairs =
-// we use Java 8 Stream API to filter entries
-mr.createMaterialPairs(
-	new TSuiteName('Test Suites/Main/TS1'),
-	new ExecutionProfile('product'),
-	new ExecutionProfile('develop')
-	).stream().filter { mp ->
-		mp.getLeft().getFileType() == FileType.PNG
+List<MaterialPair> materialPairs = mr.createMaterialPairs(
+		new TSuiteName('Test Suites/Main/TS1'),
+		new ExecutionProfile('product'),
+		new ExecutionProfile('develop')
+		).stream().filter { mp ->
+			mp.getLeft().getFileType() == FileType.PNG
 		}.collect(Collectors.toList())
 
 // make sure the list of MateriaPairs is not empty
@@ -35,8 +33,7 @@ Assert.assertTrue(">>> materialPairs.size() is 0. there must be something wrong.
 	FailureHandling.STOP_ON_FAILURE)
 
 // make ImageDiff files in the ./Materials/ImageDiff directory
-ImageCollectionDiffer icd = new ImageCollectionDiffer(mr)
-icd.makeImageCollectionDifferences(
+new ImageCollectionDiffer(mr).makeImageCollectionDifferences(
 		materialPairs,
 		new TCaseName(GlobalVariable.CURRENT_TESTCASE_ID),  // 'Test Cases/ImageDiff'
 		3.68)
