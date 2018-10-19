@@ -33,7 +33,7 @@ You need to define them in the Execution Profiles in your project. Following scr
 
 The demo project has 2 more profiles named `develop` and `product`. The profile `develop` stands for the Development Environment for the AUT (*Application Under Test*). The profile `product` stands for the Production Environment for the AUT.
 
-Each profiles contains a set of GlobalVariables: `Hostname`, `Username`, `Password` as parameters which are environment-dependent. It depends which parameters to define here on the AUT you are going to work on. You may not need `Username` and `Password` here.
+Each profiles contains a set of GlobalVariables: `Hostname`, `Username`, `Password` as parameters which are environment-dependent. Which parameters to define here? it depends on the AUT you are going to work on. Possibly you need `Hostname` but may not need `Username` and `Password` for your AUT.
 
 Please note the `GlobalVariable.Hostname` are environment-specific. In other words, URL differentiates 2  environments.
 
@@ -41,21 +41,20 @@ Profle > `develop`
 ![Profile_develop](./images/Profile_develop.PNG)
 
 Profile > `product`
-![Profile_product](./images/profile_product.PNG)
-
-The Materials library does NOT require `Hostname`, `Username`, `Password`.
+![Profile_product](./images/Profile_product.PNG)
 
 The Materials libare does require
 `GlobalVariable.MATERIAL_REPOSITORY` and `GlobalVariable.CURRENT_TESTCASE_ID` to be defined in the `develop` and `product` profiles as well.
 
+The Materials library does NOT require `Hostname`, `Username`, `Password`.
 
 ## (5) create a Test Listener
 
-You need to create a Test Listener named `Test Listeners/TL` in your project. All `TL` does is to set value to `GlobalVariable.MATERIAL_REPOSITORY` and `GlobalVariable.CURRENT_TESTCASE_ID`.
+You need to create a Test Listener named `Test Listeners/TL` in your project. All `TL` does is to set appropriate values to `GlobalVariable.MATERIAL_REPOSITORY` and `GlobalVariable.CURRENT_TESTCASE_ID`.
 
-You can copy the code of the [`Test Listners/TL`](Test%20Lisneners/TL.groovy) into you test listener. You need not to modify it at all.
+You can copy the code of the [`Test Listners/TL`](Test%20Listeners/TL.groovy) into you test listener `TL`. You need not to modify it at all.
 
-Or if you want you make your own test listener, you can do so of course. Please merge the codes of [`Test Listners/TL`](Test%20Lisneners/TL.groovy) into yours carefully.
+Or if you want you make your own test listener, you can do so of course. Please merge the codes of [`Test Listners/TL`](Test%20Listeners/TL.groovy) into yours carefully.
 
 
 
