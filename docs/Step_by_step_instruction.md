@@ -33,7 +33,7 @@ You need to define them in the Execution Profiles in your project. Following scr
 
 The demo project has 2 more profiles named `develop` and `product`. The profile `develop` stands for the Development Environment for the AUT (*Application Under Test*). The profile `product` stands for the Production Environment for the AUT.
 
-Each profiles contains a set of GlobalVariables: `Hostname`, `Username`, `Password` as parameters which are environment-dependent. It depends which parameters to define here on the AUT you are going to work on.
+Each profiles contains a set of GlobalVariables: `Hostname`, `Username`, `Password` as parameters which are environment-dependent. It depends which parameters to define here on the AUT you are going to work on. You may not need `Username` and `Password` here.
 
 Please note the `GlobalVariable.Hostname` are environment-specific. In other words, URL differentiates 2  environments.
 
@@ -43,8 +43,10 @@ Profle > `develop`
 Profile > `product`
 ![Profile_product](./images/profile_product.PNG)
 
-Please note that
-`GlobalVariable.MATERIAL_REPOSITORY` and `GlobalVariable.CURRENT_TESTCASE_ID` should be defined in the `develop` and `product` profiles as well.
+The Materials library does NOT require `Hostname`, `Username`, `Password`.
+
+The Materials libare does require
+`GlobalVariable.MATERIAL_REPOSITORY` and `GlobalVariable.CURRENT_TESTCASE_ID` to be defined in the `develop` and `product` profiles as well.
 
 
 ## (5) create a Test Listener
