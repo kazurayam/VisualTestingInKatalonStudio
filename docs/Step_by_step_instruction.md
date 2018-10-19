@@ -5,11 +5,11 @@ In this note, I will describe how you create a new Katalon Studio project and se
 
 I will use a term '*the demo project*' for short for the  [VisualTestingInKatalonStudio](https://github.com/kazurayam/VisualTestingInKatalonStudio) project.
 
-#### (1) create a new Katalon Studio project
+## (1) create a new Katalon Studio project
 
 Do it as usual.
 
-#### (2) resolving the external dependencies
+## (2) resolving the external dependencies
 
 You need to include 2 external jar files into your new project.
 
