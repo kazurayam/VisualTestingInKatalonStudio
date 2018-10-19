@@ -16,7 +16,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'demoaut.katalon.com'</initValue>
+      <initValue>'demoaut-mimic.kazurayam.com'</initValue>
       <name>Hostname</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

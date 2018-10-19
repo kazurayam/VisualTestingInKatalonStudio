@@ -3,6 +3,12 @@ Step by step instruction how to create your own visual testing project
 
 In this note, I will describe how you create a new Katalon Studio project and set it up to carry out *Visual Testing* as I did.
 
+I assume that you want your new project:
+1. to take screenshots of 2 environments of your AUT (*Application Under Test*) : *Development* and *Production*
+2. to compare images to find any significant visual differences
+3. to make a HTML view of generated image files
+4. to make the HTML view shows the summary of test results (PASS/FAILED)
+
 I will use a term '*the demo project*' for short for the  [VisualTestingInKatalonStudio](https://github.com/kazurayam/VisualTestingInKatalonStudio) project.
 
 ## (1) create a new Katalon Studio project
@@ -55,6 +61,8 @@ You need to create a Test Listener named `Test Listeners/TL` in your project. Al
 You can copy the code of the [`Test Listners/TL`](../Test%20Listeners/TL.groovy) into you test listener `TL`. You need not to modify it at all.
 
 Or if you want you make your own test listener, you can do so of course. Please merge the codes of [`Test Listners/TL`](../Test%20Listeners/TL.groovy) into yours carefully.
+
+## (6) make a Test Case and Test Suite to take screen shots of your AUT
 
 
 

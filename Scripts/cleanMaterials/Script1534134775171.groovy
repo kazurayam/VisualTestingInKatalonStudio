@@ -6,7 +6,7 @@ import com.kazurayam.materials.MaterialRepository
 import internal.GlobalVariable
 
 /**
- * delete the contents of the Materials directory
+ * delete the contents of the ./Materials directory
  */
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null

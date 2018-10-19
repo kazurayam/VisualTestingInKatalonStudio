@@ -12,12 +12,20 @@ import com.kms.katalon.core.model.FailureHandling
 
 import internal.GlobalVariable
 
+/**
+ * This test case reads 2 sets of PNG files and creates a set of PNG files.
+ * 
+ * This test case compares 2 img files, calculate how much different these are, and
+ * generates 1 ImageDiff file.
+ * 
+ * This test case makes no interaction with web.
+ */
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
 // scan the ./Materials directory to make a list of MateriaPair object.
-// The latest TSuiteResult 'Test Suites/TS1' with ExecutionProfile 'product' and
-// the latest TSuiteResult 'Test Suites/TS1' with ExecutionProfile 'develop' are looked up.
+// The latest TSuiteResult 'Test Suites/TS1' with Execution Profile 'product' and
+// the latest TSuiteResult 'Test Suites/TS1' with Execution Profile 'develop'     are looked up.
 // The list will be filtered to include PNG files only.
 List<MaterialPair> materialPairs = mr.createMaterialPairs(
 		new TSuiteName('Test Suites/Main/TS1'),
