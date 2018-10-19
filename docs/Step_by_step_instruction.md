@@ -9,11 +9,11 @@ I will use a term '*the demo project*' for short for the  [VisualTestingInKatalo
 
 Do it as usual.
 
-## (2) resolving the external dependencies
+## (2) resolve external dependencies
 
 You need to include 2 external jar files into your new project.
 
-1. `aShot` : WebDriver Screenshot utility. Its jar is public at the [MavenCentral repository](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4). Also you can reuse the `ashot-1.5.4.jar` contained in the demo projct's `./Drivers` folder.
+1. `aShot` : WebDriver Screenshot utility. Its jar is public at the [MavenCentral repository](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4). Also you can reuse the `ashot-1.5.4.jar` contained in the demo project's [`./Drivers`](../Drivers) directory.
 
 2. `Materials` : Utility that manages the `<project dir>/Materials` folder where you can store any files created by test cases in a well structured path format. Another project  [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio) describes how to use the `Materials` library in detail. The Materials-0.22.0.jar file is public at the [releases](https://github.com/kazurayam/Materials/releases) page. Also you can reuse the jar file contained in the demo project's `./Drivers` folder.
 
