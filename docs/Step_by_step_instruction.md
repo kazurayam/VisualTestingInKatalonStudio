@@ -19,9 +19,9 @@ You need to include 2 external jar files into your new project.
 
 Please refer to the Katalon Documentation [*How to import external libarary into your automation project*](https://docs.katalon.com/katalon-studio/tutorials/import_java_library.html) for Katalon GUI operation.
 
-## (3) create GlobalVariables for the Materials library
+## (3) create GlobalVariables for the Materials library to run
 
-The Materials library require 2 GlobalVariables defined.
+The Materials library requires 2 GlobalVariables defined.
 
 1. `GlobalVariable.MATERIAL_REPOSITORY` : its type must be Null
 2. `GlobalVariable.CURRENT_TESTCASE_ID` : its type must be String
@@ -35,20 +35,26 @@ The demo project has 2 more profiles named `develop` and `product`. The profile 
 
 Each profiles contains a set of GlobalVariables: `Hostname`, `Username`, `Password` as parameters which are environment-dependent. It depends which parameters to define here on the AUT you are going to work on.
 
+Please note the `GlobalVariable.Hostname` are environment-specific. In other words, URL differentiates 2  environments.
+
 Profle > `develop`
 ![Profile_develop](./images/Profile_develop.PNG)
 
 Profile > `product`
 ![Profile_product](./images/profile_product.PNG)
 
-Please note the `GlobalVariable.Hostname` are environement-specific. In short, URL of the AUT in the production env and the development env differ. I think this is a usual case.
+Please note that
+`GlobalVariable.MATERIAL_REPOSITORY` and `GlobalVariable.CURRENT_TESTCASE_ID` should be defined in the `develop` and `product` profiles as well.
 
 
 ## (5) create a Test Listener
 
-You need to create a Test Listener named `Test Listeners/TL` in your project. Copy the code of the [`Test Listners/TL`](Test%20Lisneners/TL.groovy) into you test listener. You need not to modify it at all.
+You need to create a Test Listener named `Test Listeners/TL` in your project. All `TL` does is to set value to `GlobalVariable.MATERIAL_REPOSITORY` and `GlobalVariable.CURRENT_TESTCASE_ID`.
+
+You can copy the code of the [`Test Listners/TL`](Test%20Lisneners/TL.groovy) into you test listener. You need not to modify it at all.
 
 Or if you want you make your own test listener, you can do so of course. Please merge the codes of [`Test Listners/TL`](Test%20Lisneners/TL.groovy) into yours carefully.
+
 
 
 
