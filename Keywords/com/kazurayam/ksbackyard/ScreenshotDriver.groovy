@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
 import com.kms.katalon.core.annotation.Keyword
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import ru.yandex.qatools.ashot.AShot
@@ -41,19 +43,35 @@ class ScreenshotDriver {
 	}
 
 	/**
-	 * take the screenshot of the specified WebElement in the target Web page, 
-	 * and save it into the output file in PNG format.
+	 * provides the same function as takeElementImage(WebDriver, WebElement)
 	 * 
-	 * @param webDriver
-	 * @param webElement
-	 * @param output
+	 * @param testObject
+	 * @return
 	 */
+	@Keyword
+	static BufferedImage takeElementImage(TestObject testObject) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		WebElement webElement = WebUI.findWebElement(testObject, 30)
+		return takeElementImage(webDriver, webElement)
+	}
+
 	@Keyword
 	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
 		BufferedImage image = takeElementImage(webDriver, webElement)
 		ImageIO.write(image, "PNG", file)
 	}
 
+	/**
+	 * provides the same function as saveElementImage(WebDriver, WebElement, File)
+	 * @param testObject
+	 * @param file
+	 */
+	@Keyword
+	static void saveElementImage(TestObject testObject, File file) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		WebElement webElement = WebUI.findWebElement(testObject,30)
+		saveElementImage(webDriver, webElement, file)
+	}
 
 
 	/**
@@ -62,7 +80,7 @@ class ScreenshotDriver {
 	 *
 	 * @param webDriver
 	 * @param webElement
-	 * @param timeout millisecond, wait for page to be displayed after scrolling downward to view next viewport
+	 * @param timeout millisecond, wait for page to be displayed stable after scrolling downward
 	 * @return BufferedImage
 	 */
 	@Keyword
@@ -71,6 +89,19 @@ class ScreenshotDriver {
 				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
 				takeScreenshot(webDriver)
 		return screenshot.getImage()
+	}
+
+
+	/**
+	 * provides the same function as takeEntirePageImage(WebDriver, Integer)
+	 * 
+	 * @timeout millisecond, wait for page to displayed stable after scrolling downward
+	 * @return
+	 */
+	@Keyword
+	static BufferedImage takeEntirePageImage(Integer timeout = 300) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		return takeEntirePageImage(webDriver, timeout)
 	}
 
 	/**
@@ -88,7 +119,20 @@ class ScreenshotDriver {
 	}
 
 	/**
-	 * @deprecated use saveEntirePageImage(WebDriver, File, Integer) instead
+	 * provides the same function as saveEntirePageImage(WebDriver, File, Integer)
+	 * @param file
+	 */
+	@Keyword
+	static void saveEntirePageImage(File file, Integer timeout = 300) {
+		WebDriver driver = DriverFactory.getWebDriver()
+		saveEntirePageImage(driver, file, timeout)
+	}
+
+
+
+	/**
+	 * similar to saveEntirePageImage(WebDriver, File, Integer)
+	 * @deprecated use saveEntirePageImage(File, Integer) instead
 	 * @param webDriver
 	 * @param file
 	 */
@@ -98,14 +142,13 @@ class ScreenshotDriver {
 	}
 
 
-
-
 	/**
+	 * compare 2 images, calcuralte the magnitude of difference between the two
 	 * 
 	 * @param BufferedImage expectedImage
 	 * @param BufferedImage actualImage
 	 * @param Double criteriaPercentage, e.g. 90.0%
-	 * @return
+	 * @return ImageDifference object which represents how much different the input 2 images are
 	 */
 	@Keyword
 	static ImageDifference verifyImages(BufferedImage expectedImage,
@@ -117,98 +160,10 @@ class ScreenshotDriver {
 	}
 
 
-	/**
-	 * return a Map object containing 'evaluated': true when the video is autoplayed,
-	 * otherwise false.
-	 * 
-	 * 1. when the video is loaded, push the playButton so that the vido is stopped
-	 * 2. 1st screenshot is taken.
-	 * 3. push the playButton so that the video is restarted, wait for some seconds so that the video goes forward
-	 * 4. 2nd screenshot is taken.
-	 * 5. compare the screenshots. Return true if they are different enough.
-	 * 
-	 * @param driver WebDriver
-	 * @param video  <video> WebElement
-	 * @param playButton <button> WebElement to start/stop the video
-	 * @param gapTimeSecs 1st screenshot --> gapTimeSecs --> 2nd screenshot  
-	 * @return an ImageDifference object
-	 */
-	@Keyword
-	static ImageDifference verifyVideoInMotion(
-			WebDriver driver,
-			WebElement video,
-			WebElement playButton,
-			Integer gapTimeSecs,
-			Double criteriaPercent) {
-
-
-		// click the start/stop button
-		WebUI.executeJavaScript("arguments[0].click()", Arrays.asList(playButton))
-
-		// take the 1st screen shot
-		BufferedImage image1 = ScreenshotDriver.takeElementImage(driver, video)
-
-		// again click the start/stop button and wait
-		if (gapTimeSecs > 0) {
-			WebUI.executeJavaScript("arguments[0].click()", Arrays.asList(playButton))
-			WebUI.delay(gapTimeSecs)
-		}
-
-		// take the 2nd screenshot
-		BufferedImage image2 = ScreenshotDriver.takeElementImage(driver, video)
-
-		// how differenct these are?
-		ImageDifference difference = new ImageDifference(image1, image2)
-
-		difference.setCriteria(criteriaPercent)
-
-		// return true if the movie autoplay in motion, otherwise false
-		return difference
-	}
-
 
 	/**
-	 * return a Map object containing 'evaluated': true when the video is staying still = is not autoplayed,
-	 * otherwise false.
-	 * 
-	 * 1. when the video is loaded, 1st screenshot is taken.
-	 * 2. wait for some seconds
-	 * 3. 2nd screenshot is taken.
-	 * 4. compare the screenshots. Return true if they have no or just a little difference.
-	 * 
-	 * @return an ImageDifference object
-	 */
-	@Keyword
-	static ImageDifference verifyVideoStartsStill(
-			WebDriver driver,
-			WebElement video,
-			WebElement playButton = null /* not used */,
-			Integer gapTimeSecs = 5,
-			Double criteriaPercent = 10.0) {
-
-		// take the 1st screen shot
-		BufferedImage image1 = ScreenshotDriver.takeElementImage(driver, video)
-
-		// wait for some seconds
-		if (gapTimeSecs > 0) {
-			WebUI.delay(gapTimeSecs)
-		}
-
-		// take the 2nd screenshot
-		BufferedImage image2 = ScreenshotDriver.takeElementImage(driver, video)
-
-		// make KSImageDiff
-		ImageDifference difference = new ImageDifference(image1, image2)
-
-		difference.setCriteria(criteriaPercent)
-
-		// return true if the movie start still, otherwise false
-		return difference
-	}
-
-
-	/**
-	 * wraps aShot's ImageDiff object, plus a few getter methods
+	 * accepts 2 BufferedImages as input, compare them, make a difference image,
+	 * and calcurate the ratio of difference of the 2 input images.
 	 */
 	static class ImageDifference {
 
