@@ -52,9 +52,9 @@ The Materials library does NOT require `Hostname`, `Username`, `Password`.
 
 You need to create a Test Listener named `Test Listeners/TL` in your project. All `TL` does is to set appropriate values to `GlobalVariable.MATERIAL_REPOSITORY` and `GlobalVariable.CURRENT_TESTCASE_ID`.
 
-You can copy the code of the [`Test Listners/TL`](Test%20Listeners/TL.groovy) into you test listener `TL`. You need not to modify it at all.
+You can copy the code of the [`Test Listners/TL`](../Test%20Listeners/TL.groovy) into you test listener `TL`. You need not to modify it at all.
 
-Or if you want you make your own test listener, you can do so of course. Please merge the codes of [`Test Listners/TL`](Test%20Listeners/TL.groovy) into yours carefully.
+Or if you want you make your own test listener, you can do so of course. Please merge the codes of [`Test Listners/TL`](../Test%20Listeners/TL.groovy) into yours carefully.
 
 
 
