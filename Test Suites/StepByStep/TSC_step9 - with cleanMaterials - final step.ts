@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteCollectionEntity>
    <description></description>
-   <name>TSC8 - with cleanMaterials - final step</name>
+   <name>TSC_step9 - with cleanMaterials - final step</name>
    <tag></tag>
    <executionMode>SEQUENTIAL</executionMode>
    <testSuiteRunConfigurations>
@@ -21,7 +21,7 @@
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/TS4 - for ImageDiff</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/TS_step5 - for ImageDiff</testSuiteEntity>
       </TestSuiteRunConfiguration>
       <TestSuiteRunConfiguration>
          <configuration>
@@ -30,7 +30,7 @@
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/TS4 - for ImageDiff</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/TS_step5 - for ImageDiff</testSuiteEntity>
       </TestSuiteRunConfiguration>
       <TestSuiteRunConfiguration>
          <configuration>

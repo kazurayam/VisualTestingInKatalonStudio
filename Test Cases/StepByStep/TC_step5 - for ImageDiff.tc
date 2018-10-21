@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TC_step3 - parameterized URL</name>
+   <name>TC_step5 - for ImageDiff</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>54d9334b-ebc5-4397-a8bd-cbcfc193974d</testCaseGuid>
+   <testCaseGuid>98507c55-f22f-453f-91c9-49b29baa8d07</testCaseGuid>
 </TestCaseEntity>

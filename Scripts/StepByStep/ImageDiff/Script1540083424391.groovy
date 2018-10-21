@@ -28,7 +28,7 @@ assert mr != null
 // the latest TSuiteResult 'Test Suites/TS4 - for ImageDiff' with Execution Profile 'google.com hl=zh-ON'     are looked up.
 // The list will be filtered to include PNG files only.
 List<MaterialPair> materialPairs = mr.createMaterialPairs(
-		new TSuiteName('Test Suites/StepByStep/TS4 - for ImageDiff'),
+		new TSuiteName('Test Suites/StepByStep/TS_step5 - for ImageDiff'),
 		new ExecutionProfile('google.com'),
 		new ExecutionProfile('google.com hl=zh-ON')
 		).stream().filter { mp ->

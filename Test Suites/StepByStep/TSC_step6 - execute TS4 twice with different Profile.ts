@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteCollectionEntity>
    <description></description>
-   <name>TSC6 - with makeIndex</name>
+   <name>TSC_step6 - execute TS4 twice with different Profile</name>
    <tag></tag>
    <executionMode>SEQUENTIAL</executionMode>
    <testSuiteRunConfigurations>
@@ -12,7 +12,7 @@
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/TS4 - for ImageDiff</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/TS_step5 - for ImageDiff</testSuiteEntity>
       </TestSuiteRunConfiguration>
       <TestSuiteRunConfiguration>
          <configuration>
@@ -21,16 +21,7 @@
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/TS4 - for ImageDiff</testSuiteEntity>
-      </TestSuiteRunConfiguration>
-      <TestSuiteRunConfiguration>
-         <configuration>
-            <groupName>Web Desktop</groupName>
-            <profileName>default</profileName>
-            <runConfigurationId>Firefox</runConfigurationId>
-         </configuration>
-         <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/makeIndex</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/TS_step5 - for ImageDiff</testSuiteEntity>
       </TestSuiteRunConfiguration>
    </testSuiteRunConfigurations>
 </TestSuiteCollectionEntity>
