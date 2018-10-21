@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>ImageDiff</name>
+   <name>TS4 - for ImageDiff</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-10-19T15:22:08</lastRun>
+   <lastRun>2018-10-21T11:30:06</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>4f169b0d-73ec-4ab8-834f-79b1fd36e5b4</testSuiteGuid>
+   <testSuiteGuid>cfb97e3e-8bef-47b1-b8d3-7efe878b396d</testSuiteGuid>
    <testCaseLink>
-      <guid>224806cd-61e3-4100-9e72-7c34903903cd</guid>
+      <guid>0c703afa-2dc3-43c6-96d3-96facabe3431</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/ImageDiff</testCaseId>
+      <testCaseId>Test Cases/StepByStep/TC_step4 - for ImageDiff</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

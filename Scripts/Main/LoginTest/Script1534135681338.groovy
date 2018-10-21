@@ -11,13 +11,13 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl("http://${GlobalVariable.Hostname}/")
 
 // ホーム・ページが開く
-WebUI.verifyElementPresent(findTestObject('Page_CuraHomepage/a_Make Appointment'),
+WebUI.verifyElementPresent(findTestObject('KatalonDemoAut/Page_CuraHomepage/a_Make Appointment'),
 	10, FailureHandling.STOP_ON_FAILURE)
 
 
 // Make AppointmentボタンをクリックしてLogin画面を呼び出しUsernameとPasswordを入力しログインするまでを
 // 別のTest Caseで実行する
-WebUI.callTestCase(findTestCase('Common/Login'),
+WebUI.callTestCase(findTestCase('Main/Login'),
 	[
 		'Username': GlobalVariable.Username,
 		'Password': GlobalVariable.Password
