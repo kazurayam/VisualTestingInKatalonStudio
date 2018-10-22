@@ -28,6 +28,9 @@ MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 WebUI.openBrowser('')
 WebUI.setViewPortSize(1279, 720)
 
+/**
+ * The target URL is parameterized
+ */
 assert GlobalVariable.URL != null
 WebUI.navigateToUrl(GlobalVariable.URL)
 // https://www.google.com.hk/webhp?hl=zh-CN&sourceid=cnhp

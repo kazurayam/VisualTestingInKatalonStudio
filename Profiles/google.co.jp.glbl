@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalVariableEntities>
    <description></description>
-   <name>google.com hl=zh-ON</name>
+   <name>google.co.jp</name>
    <tag></tag>
    <defaultProfile>false</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>null</initValue>
+      <initValue>''</initValue>
       <name>MATERIAL_REPOSITORY</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -16,7 +16,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'https://www.google.com.hk/webhp?hl=zh-CN'</initValue>
+      <initValue>'https://www.google.co.jp/ncr'</initValue>
       <name>URL</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

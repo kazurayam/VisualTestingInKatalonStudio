@@ -21,16 +21,16 @@
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/TS_step5 - for ImageDiff</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/TS_step5</testSuiteEntity>
       </TestSuiteRunConfiguration>
       <TestSuiteRunConfiguration>
          <configuration>
             <groupName>Web Desktop</groupName>
-            <profileName>google.com hl=zh-ON</profileName>
+            <profileName>google.co.jp</profileName>
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/TS_step5 - for ImageDiff</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/TS_step5</testSuiteEntity>
       </TestSuiteRunConfiguration>
       <TestSuiteRunConfiguration>
          <configuration>
