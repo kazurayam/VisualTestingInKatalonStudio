@@ -7,8 +7,12 @@ import com.kms.katalon.core.logging.KeywordLogger
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.util.KeywordUtil
 
-// see https://forum.katalon.com/discussion/2269/keywordutil-markfailed-method for failure handling
-
+/**
+ * This class provides a few JUnit-like assertion methods which accepts a String as message
+ * which is emitted when the condition value is found unexpected.
+ * 
+ * see https://forum.katalon.com/discussion/2269/keywordutil-markfailed-method for failure handling
+ */
 class Assert {
 
 	private static KeywordLogger logger = new KeywordLogger()

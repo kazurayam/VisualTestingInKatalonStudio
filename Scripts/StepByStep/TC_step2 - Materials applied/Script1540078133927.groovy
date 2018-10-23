@@ -7,10 +7,10 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
 
-//Path projectDir = Paths.get(RunConfiguration.getProjectDir())
-//Path basedir = projectDir.resolve('tmp')
-//Path outdir = basedir.resolve('a')
-//Files.createDirectories(outdir)
+/**
+ * StepByStep/TC_step2 - Materials applied
+ * 
+ */
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 
 WebUI.openBrowser('')

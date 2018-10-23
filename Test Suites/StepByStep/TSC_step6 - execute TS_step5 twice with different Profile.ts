@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteCollectionEntity>
    <description></description>
-   <name>TSC_step6 - execute TS4 twice with different Profile</name>
+   <name>TSC_step6 - execute TS_step5 twice with different Profile</name>
    <tag></tag>
    <executionMode>SEQUENTIAL</executionMode>
    <testSuiteRunConfigurations>

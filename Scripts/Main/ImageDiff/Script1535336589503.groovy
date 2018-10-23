@@ -24,13 +24,10 @@ MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
 // scan the ./Materials directory to make a list of MateriaPair object.
-// The latest TSuiteResult 'Test Suites/TS1' with Execution Profile 'product' and
-// the latest TSuiteResult 'Test Suites/TS1' with Execution Profile 'develop'     are looked up.
+// The 1st and 2nd latest TSuiteResult 'Test Suites/Main/TS1' are looked up.
 // The list will be filtered to include PNG files only.
 List<MaterialPair> materialPairs = mr.createMaterialPairs(
-		new TSuiteName('Test Suites/Main/TS1'),
-		new ExecutionProfile('product'),
-		new ExecutionProfile('develop')
+		new TSuiteName('Test Suites/Main/TS1')
 		).stream().filter { mp ->
 			mp.getLeft().getFileType() == FileType.PNG
 		}.collect(Collectors.toList())
@@ -43,6 +40,6 @@ Assert.assertTrue(">>> materialPairs.size() is 0. there must be something wrong.
 // make ImageDiff files in the ./Materials/ImageDiff directory
 new ImageCollectionDiffer(mr).makeImageCollectionDifferences(
 		materialPairs,
-		new TCaseName(GlobalVariable.CURRENT_TESTCASE_ID),  // 'Test Cases/ImageDiff'
+		new TCaseName(GlobalVariable.CURRENT_TESTCASE_ID),  // 'Test Cases/Main/ImageDiff'
 		3.68)
 

@@ -13,6 +13,8 @@ import com.kms.katalon.core.model.FailureHandling
 import internal.GlobalVariable
 
 /**
+ * StepByStep/ImageDiff
+ * 
  * This test case reads 2 sets of PNG files and creates a set of PNG files.
  * 
  * This test case compares 2 img files, calculate how much different these are, and
@@ -24,13 +26,10 @@ MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
 // scan the ./Materials directory to make a list of MateriaPair object.
-// The latest TSuiteResult 'Test Suites/TS4 - for ImageDiff' with Execution Profile 'google.com' and
-// the latest TSuiteResult 'Test Suites/TS4 - for ImageDiff' with Execution Profile 'google.com hl=zh-ON'     are looked up.
+// The 1st and 2nd latest TSuiteResult 'Test Suites/StepByStep/TS_step5' are looked up.
 // The list will be filtered to include PNG files only.
 List<MaterialPair> materialPairs = mr.createMaterialPairs(
-		new TSuiteName('Test Suites/StepByStep/TS_step5'),
-		new ExecutionProfile('google.com'),
-		new ExecutionProfile('google.co.jp')
+		new TSuiteName('Test Suites/StepByStep/TS_step5')
 		).stream().filter { mp ->
 			mp.getLeft().getFileType() == FileType.PNG
 		}.collect(Collectors.toList())
@@ -43,6 +42,6 @@ Assert.assertTrue(">>> materialPairs.size() is 0. there must be something wrong.
 // make ImageDiff files in the ./Materials/ImageDiff directory
 new ImageCollectionDiffer(mr).makeImageCollectionDifferences(
 		materialPairs,
-		new TCaseName(GlobalVariable.CURRENT_TESTCASE_ID),  // 'Test Cases/ImageDiff'
-		3.68)
+		new TCaseName(GlobalVariable.CURRENT_TESTCASE_ID),  // 'Test Cases/StepByStep/ImageDiff'
+		0.50)
 

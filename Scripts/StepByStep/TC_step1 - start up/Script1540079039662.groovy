@@ -8,6 +8,8 @@ import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
+ * StepByStep/TC_step1 - start up
+ * 
  * We are starting up an ordinary Test Case.
  * This test case opens Google and make search query, take screenshots, saves images into ./tmp directory.
  * No "Visual Testing" feature is implemented yet. 

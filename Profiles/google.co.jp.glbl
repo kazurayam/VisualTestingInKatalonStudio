@@ -6,7 +6,7 @@
    <defaultProfile>false</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
+      <initValue>null</initValue>
       <name>MATERIAL_REPOSITORY</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
