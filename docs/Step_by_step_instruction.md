@@ -174,7 +174,7 @@ The step2 script used the `WebUI.takeScreenshot()` built-in method to take scree
 
 We want entire page screen shots. Therefore we will use a custom kyword `com.kazurayam.ksbackyard.ScreenshotDriver` backed by [AShot](https://github.com/yandex-qatools/ashot).
 
-Here is the scritp source: [`Test Cases/StepByStep/TC_step3`](Scripts\StepByStep\TC_step3 - Entire page screenshot\Script1540091299462.groovy)
+Here is the scritp source: [`Test Cases/StepByStep/TC_step3`](../Scripts/StepByStep/TC_step3 - Entire page screenshot/Script1540091299462.groovy)
 ```
 ...
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
@@ -185,6 +185,10 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 	fileRnamedByURL.toFile())
 ```
+
+The `saveEntirePageImage()` method generates a entire-page screen shot like this:
+
+![step3 search result](images/StepByStep/step3_search_result.png)
 
 ### step4: Parameterize URL in question by Execution Profiles
 
