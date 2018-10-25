@@ -22,7 +22,7 @@ We will create a Katalon Studio project where we will do the following:
 2. compare images to find any visual differences
 3. make a HTML view of generated image files.
 
-Here is a sample output:
+Here is a example output:
 ![output](./images/StepByStep/step9_search_result.20181025_161316_google.com-20181025_161317_google.co.jp.%280.01%29.png)
 
 The 2 URLs were same for 99.99%, but had 0.01% of difference. In the above image, you can find a very small section (just a few characters) painted red. This section was the time taken for table search in milliseconds. *Without comparison by the tool, nobody would notice this difference.* :-)
@@ -42,7 +42,7 @@ You need to include 2 external jar files into the new project.
 
 1. `aShot` : WebDriver Screenshot utility. Its jar is public at the [MavenCentral repository](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4). Also you can reuse the `ashot-1.5.4.jar` contained in the demo project's [`Drivers`](../Drivers) directory.
 
-2. `Materials` : Utility that manages the `<project dir>/Materials` directory where you can store any files created by test cases in a well structured path format. Another project  [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio) describes how to use the `Materials` library in detail. The Materials-0.22.0.jar file is public at the [releases](https://github.com/kazurayam/Materials/releases) page. Also you can reuse the jar file contained in the demo project's [`Drivers`](../Drivers) directory.
+2. `Materials` : Utility that manages the `<project dir>/Materials` directory where you can store any files created by test cases in a well structured path format. Another project  [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio) describes how to use the `Materials` library in detail. The Materials-0.24.0.jar file is public at the [releases](https://github.com/kazurayam/Materials/releases) page. Also you can reuse the jar file contained in the demo project's [`Drivers`](../Drivers) directory.
 
 Please refer to the Katalon Documentation [*How to import external libarary into your automation project*](https://docs.katalon.com/katalon-studio/tutorials/import_java_library.html) for Katalon GUI operation.
 
@@ -224,7 +224,7 @@ Profile > `google.co.jp`
 The Materials libary does require 2 GlobalVariables:
 `MATERIAL_REPOSITORY` and `CURRENT_TESTCASE_ID` to be defined in the Profile `google.com` and `google.co.jp` as well.
 
-### step5: Convention file names
+### step5: Identical file names
 
 The test case [step4](../Scripts/StepByStep/TC_step4%20-%20parameterized%20URL/Script1540091257737.groovy) uses [`MaterialRepository#resolveScreenshotPath(String testCaseId, URL url)`](https://kazurayam.github.io/Materials/com/kazurayam/materials/MaterialRepository.html). The generated file names as follows:
 
@@ -233,16 +233,16 @@ The test case [step4](../Scripts/StepByStep/TC_step4%20-%20parameterized%20URL/S
 | google.co.jp | https://wwww.google.co.jp/ | https%3A%2F%2Fwww.google.co.jp%2F.png |
 | google.com   | https://www.google.com/    | https%3A%2F%2Fwww.google.com%2F.png   |
 
-Now we want to compare the two files. In order to make the processing simple, we need to put the same name to the pair of files 
+Now we want to compare the two files. In order to make the processing simple (more precisely, `com.kazurayam.materials.MaterialRepository#createMaterialPairs()` method requires it`), we need to put the same name to the pair of files
 
-| Profile      | URL                        | File name |
+| Profile      | URL                        | File names |
 | ------------ | -------------------------- | --------------- |
-| google.co.jp | https://wwww.google.co.jp/ | search_form.png |
-| google.com   | https://www.google.com/    | search_form.png |
+| google.co.jp | https://wwww.google.co.jp/ | search_form.png  and serach_result.png |
+| google.com   | https://www.google.com/    | search_form.png  and search_result.png |
 
 The test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) would use `MaterialRepository#resolveMaterialPath(String testCaseId, String fileName)` as follows:
 ```
-//DONT Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
+// Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
 Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
 ```
 
