@@ -1,18 +1,37 @@
-Step by step instruction how to create your own visual testing project
+Step by step instruction - how to create a visual testing project from scratch
 ===========
+
+- Author: kazurayam
+- Date: Oct 2018
+
+## Required Katalon Studio version
+
+Katalon Studio 5.7.1 and LOWER is required.
+
+Unfortunately Katalon Studio 5.8.0 and NEWER has a restriction: https://forum.katalon.com/discussion/10315/5-8-0-globalvariable-of-type-null-is-not-allowed-no-longer-store-instances-of-user-defined-class
+
+Due to this restriction, Visual Testing has become difficult in Katalon Studio 5.8.0 and higher.
 
 ## Overview
 
 In this note, I will describe how you create a new Katalon Studio project and set it up to carry out *Visual Testing* as I did.
 
-I assume that you want to:
-1. take screenshots of 2 environments of your AUT (*Application Under Test*) = a pair of different URLs
-2. compare images to find any significant visual differences
-3. make a HTML view of generated image files
+We will create a Katalon Studio project where we will do the following:
+
+1. take screenshots of 2 environments of your AUT (*Application Under Test*) = a pair of different URLs. As a test bed, we will use the Google Search ( https://www.google.com/ and https://www.google.co.jp/ ). We will make a single query with `q=katalon`
+2. compare images to find any visual differences
+3. make a HTML view of generated image files.
+
+Here is a sample output:
+![output](./images/StepByStep/step9_search_result.20181025_161316_google.com-20181025_161317_google.co.jp.%280.01%29.png)
+
+The 2 URLs were same for 99.99%, but had 0.01% of difference. In the above image, you can find a very small section (just a few characters) painted red. This section was the time taken for table search in milliseconds. *Without comparison by the tool, nobody would notice this difference.* :-)
 
 I will use a term '*the demo project*' for short for the  [VisualTestingInKatalonStudio](https://github.com/kazurayam/VisualTestingInKatalonStudio) project.
 
+
 ## Preparation
+
 ### prep1: create a new Katalon Studio project
 
 Do it as usual.
@@ -31,7 +50,7 @@ Please refer to the Katalon Documentation [*How to import external libarary into
 
 The Materials library requires 2 GlobalVariables defined in the Execution Profile.
 
-1. `GlobalVariable.MATERIAL_REPOSITORY` : its type should be Null or String
+1. `GlobalVariable.MATERIAL_REPOSITORY` : its type should be Null
 2. `GlobalVariable.CURRENT_TESTCASE_ID` : its type should be String
 
 You need to define them in the Execution Profiles in your project. Following screen shot shows 2 variables defined in the *default* Profile.
@@ -205,7 +224,27 @@ Profile > `google.co.jp`
 The Materials libary does require 2 GlobalVariables:
 `MATERIAL_REPOSITORY` and `CURRENT_TESTCASE_ID` to be defined in the Profile `google.com` and `google.co.jp` as well.
 
-### step5: Convention of file names
+### step5: Convention file names
+
+The test case [step4](../Scripts/StepByStep/TC_step4%20-%20parameterized%20URL/Script1540091257737.groovy) uses [`MaterialRepository#resolveScreenshotPath(String testCaseId, URL url)`](https://kazurayam.github.io/Materials/com/kazurayam/materials/MaterialRepository.html). The generated file names as follows:
+
+| Profile      | URL                        | File name |
+| ------------ | -------------------------- | ------------------------------------- |
+| google.co.jp | https://wwww.google.co.jp/ | https%3A%2F%2Fwww.google.co.jp%2F.png |
+| google.com   | https://www.google.com/    | https%3A%2F%2Fwww.google.com%2F.png   |
+
+Now we want to compare the two files. In order to make the processing simple, we need to put the same name to the pair of files 
+
+| Profile      | URL                        | File name |
+| ------------ | -------------------------- | --------------- |
+| google.co.jp | https://wwww.google.co.jp/ | search_form.png |
+| google.com   | https://www.google.com/    | search_form.png |
+
+The test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) would use `MaterialRepository#resolveMaterialPath(String testCaseId, String fileName)` as follows:
+```
+//DONT Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
+Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
+```
 
 ### step6: Test Suite Collection to activate a Test Suite multiple times using different profiles
 
