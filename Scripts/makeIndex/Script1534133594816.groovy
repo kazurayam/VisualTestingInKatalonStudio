@@ -15,4 +15,5 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 Path materialsFolder = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
 MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder)
 Path index = mr.makeIndex()
+
 WebUI.comment(">>> ${index.toString()} is updated")

@@ -268,9 +268,27 @@ When you execute the Test Suite Collection  `Test Suites/TSC_step6`, you will fi
 
 ### step7: Make Materials/index.html
 
-### step8: compare images of 2 URLs, generate ImageDiff
+You can create *&lt;projectDir&gt;*`/Materials/index.html` file by calling `makeIndex()` method of `com.kazurayam.materials.MaterialRepository` object. The index page will looks like this:
+![step7_Materials_index](images/StepByStep/step7_Materials_index.png)
+
+You can open a screenshot image in a modal window.
+![step7_Materials_index_modal](images/StepByStep/step7_Materials_index_modal.png)
+
+The index pages shows what you can see by Windows Explorer or Mac Finder. No more than that. The index page is more convenient to view contents of *&lt;projectDir&gt;*`/Materials/index.html` than those generic tools. Why? In the index page,
+
+1. Test Suite results are sorted by reverse order of timestamp. You always find the newest result at the page top.
+2. Meta data of Test Suite execution: which browser was used, which Profile was applied, how many test cases were run, how many failed.
+3. In the modal window, various types of files are rendered nicely: json is pretty-printed, xml is indented, images are auto-resized to fit the modal window's width, etc.
+4. Web Browsers does not LOCK the files in the Materials directory at all. On the other hand, Windows Explorer LOCKs the files and directories when you select them in the Explorer windows. Sometimes this LOCK causes Katalon Studio can not access files in the Materials directory. You should avoid using Windows Exploer as much as possible. Rather you should see the `Materials/index.html` in browser to view the contents.
+
+You can create *&lt;projectDir&gt;*`/Materials/index.html` file by running [Test Cases/cleanIndex](../Scripts/cleanMaterials/Script1534134775171.groovy)
+
+You want to create a Test Suite Collection `Test Suites/StepByStep/TSC_step7 - plus makeIndex`. It will look like this.
+![TSC_step7](images/StepByStep/step7_TSC_step7.png)
+
+Here you run the Test Suite `TS_step5` twice applying Profile `google.com` and `google.co.jp`. After that you run the Test Suite `Test Suites/makeIndex`.
+
+### step8: run ImageDiff = compare screenshots of 2 URLs
+
 
 ### step9: clearing ./Materials dir first
-
-
-so.
