@@ -9,19 +9,19 @@ import internal.GlobalVariable as GlobalVariable
 
 /**
  * StepByStep/TC_step5
- * 
+ *
  * The screenshot files have fixed name 'search_form.png' and 'search_result.png'
  * rather than URL-dependent file names.
- * 
+ *
  * Fixed file name is required to do image file comparison. Why?
- * 
+ *
  * The following 2 PNG files make a MaterialPair:
  * - .\Materials\StepByStep.TS_step5\20181023_141006\StepByStep.TC_step5\search_form.png
  * - .\Materials\StepByStep.TS_step5\20181023_141008\StepByStep.TC_step5\search_form.png
- * 
+ *
  * But the following 2 PNG files does not make a MaterialPair:
- * - 
- * - 
+ * -
+ * -
  */
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 
@@ -34,6 +34,8 @@ WebUI.navigateToUrl(GlobalVariable.URL)
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_search/input_q'), 10)
 WebUI.setText(findTestObject('StepByStep/Page_Google_search/input_q'), 'katalon')
 WebUI.delay(1)
+
+//DONT Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
 Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 	fileF.toFile())

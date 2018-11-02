@@ -17,6 +17,7 @@ import com.kazurayam.materials.TSuiteName
 import com.kms.katalon.core.logging.KeywordLogger
 import com.kms.katalon.core.util.KeywordUtil
 
+
 /**
  * This class is designed to implement the "Visual Testing in Katalon Studio" feature.
  * 
@@ -64,6 +65,9 @@ class ImageCollectionDiffer {
 
 
 	/**
+	 * compare 2 Material files in each MaterialPair object, create ImageDiff and
+	 * store the diff image files under the directory ./Materials/<tSuiteName>/yyyyMMdd_hhmmss/<tCaseName>.
+	 * The difference ratio is compared with the criteriaPercent given. marked FAILED if greater.
 	 * 
 	 * @param materialPairs created by com.kazurayam.materials.MaterialRpository#createMaterialPairs() method
 	 * @param tCaseName     created by com.kazurayam.materials.TCaseName(String)

@@ -6,11 +6,9 @@ Step by step instruction - how to create a visual testing project from scratch
 
 ## Required Katalon Studio version
 
-Katalon Studio 5.7.1 and LOWER is required.
+Katalon Studio 5.7.1 and lower, or 5.8.4 and upper is required.
 
-Unfortunately Katalon Studio 5.8.0 and NEWER has a restriction: https://forum.katalon.com/discussion/10315/5-8-0-globalvariable-of-type-null-is-not-allowed-no-longer-store-instances-of-user-defined-class
-
-Due to this restriction, Visual Testing has become difficult in Katalon Studio 5.8.0 and higher.
+Unfortunately Katalon Studio 5.8.0 .. 5.8.3 has a restriction: https://forum.katalon.com/discussion/10315/5-8-0-globalvariable-of-type-null-is-not-allowed-no-longer-store-instances-of-user-defined-class
 
 ## Overview
 
@@ -19,18 +17,19 @@ In this note, I will describe how you create a new Katalon Studio project and se
 We will create a Katalon Studio project where we will do the following:
 
 1. take screenshots of 2 environments of your AUT (*Application Under Test*) = a pair of different URLs. As a test bed, we will use the Google Search ( https://www.google.com/ and https://www.google.co.jp/ ). We will make a single query with `q=katalon`
-2. compare images to find any visual differences
+2. compare screenshots to find any visual differences
 3. make a HTML view of generated image files.
 
 Here is a example output:
+
 ![output](./images/StepByStep/step9_search_result.20181025_161316_google.com-20181025_161317_google.co.jp.%280.01%29.png)
 
-The 2 URLs were same for 99.99%, but had 0.01% of difference. In the above image, you can find a very small section (just a few characters) painted red. This section was the time taken for table search in milliseconds. *Without comparison by the tool, nobody would notice this difference.* :-)
+The 2 URLs were almost the same for 99.99% except 0.01% of difference. In the above image, you can find a very small area (just a few characters) is painted red. This section was the milliseconds taken for table search. *Without comparison by the tool, this difference would never be found.* :-)
+
+## Preparation
 
 I will use a term '*the demo project*' for short for the  [VisualTestingInKatalonStudio](https://github.com/kazurayam/VisualTestingInKatalonStudio) project.
 
-
-## Preparation
 
 ### prep1: create a new Katalon Studio project
 
@@ -233,7 +232,9 @@ The test case [step4](../Scripts/StepByStep/TC_step4%20-%20parameterized%20URL/S
 | google.co.jp | https://wwww.google.co.jp/ | https%3A%2F%2Fwww.google.co.jp%2F.png |
 | google.com   | https://www.google.com/    | https%3A%2F%2Fwww.google.com%2F.png   |
 
-Now we want to compare the two files. In order to make the processing simple (more precisely, `com.kazurayam.materials.MaterialRepository#createMaterialPairs()` method requires it`), we need to put the same name to the pair of files
+Now we want to compare the two files. In order to make the processing simple, we need to give the same name to files that makes a pair. Or more precisely saying, `com.kazurayam.materials.MaterialRepository#createMaterialPairs()`  method requires.
+
+Therefore the test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) gives simple file names `search_form.png` and `search_result.png` to both files taken from 2 URLs.
 
 | Profile      | URL                        | File names |
 | ------------ | -------------------------- | --------------- |
@@ -241,12 +242,29 @@ Now we want to compare the two files. In order to make the processing simple (mo
 | google.com   | https://www.google.com/    | search_form.png  and search_result.png |
 
 The test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) would use `MaterialRepository#resolveMaterialPath(String testCaseId, String fileName)` as follows:
+
 ```
 // Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
 Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
 ```
 
 ### step6: Test Suite Collection to activate a Test Suite multiple times using different profiles
+
+We want to take 2 sets of screenshots of https://www.google.com/  https://www.google.co.jp/. You can take a set of screenshots by executing the test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) while specifying a URL via Execution Profile. Therefore you need to execute the test case step5 twice while specifying 2 Profiles `google.com` and `google.co.jp`.
+
+You can implement this by creating a Test Suite `Test Suites/StepByStep/TS_step5` and a Test Suite Collection `Test Suites/StepByStep/TSC_step6 - execute TS_step5 twice with different Profile`.
+
+The `Test Suites/TSC_step6` looks like this:
+![step6](./images/StepByStep/step6_execute_step5_twice_with_different_profile.png)
+
+Please note that the Test Suite Collection `TSC_step6` executes the Test Suite `TS_step5` twice while applying Profile `google.com` and `google.co.jp` each.
+
+The Test Suite `Test Suites/TS_step5` looks like this:
+![TS_step5](images/StepByStep/step5_just_calls_TC_Step5.png)
+All it does is to call `Test Cases/StepByStep/TC_step5`. Not tricks there.
+
+When you execute the Test Suite Collection  `Test Suites/TSC_step6`, you will find PNG files are saved under the *&lt;projectDir&gt;*`/Materials` directory.
+![step6_Materials](images/StepByStep/step6_Materials.png)
 
 ### step7: Make Materials/index.html
 
