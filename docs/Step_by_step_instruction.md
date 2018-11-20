@@ -279,14 +279,19 @@ The index pages shows what you can see by Windows Explorer or Mac Finder. No mor
 1. Test Suite results are sorted by reverse order of timestamp. You always find the newest result at the page top.
 2. Meta data of Test Suite execution: which browser was used, which Profile was applied, how many test cases were run, how many failed.
 3. In the modal window, various types of files are rendered nicely: json is pretty-printed, xml is indented, images are auto-resized to fit the modal window's width, etc.
-4. Web Browsers does not LOCK the files in the Materials directory at all. On the other hand, Windows Explorer LOCKs the files and directories when you select them in the Explorer windows. Sometimes this LOCK causes Katalon Studio can not access files in the Materials directory. You should avoid using Windows Exploer as much as possible. Rather you should see the `Materials/index.html` in browser to view the contents.
+4. Web Browsers does not *LOCK* the files in the Materials directory at all. On the other hand, Windows Explorer does *LOCK* the files and directories while you are viewing them in the Explorer windows. Sometimes this LOCK causes Katalon Studio to fail getting access to the files in the Materials directory. Once race condition occurs, you have to restart Windows OS. This is very annoying. Therefore you should avoid using Windows Exploer as much as possible. You should use `Materials/index.html` in browser as it does not cause any race condition.
 
 You can create *&lt;projectDir&gt;*`/Materials/index.html` file by running [Test Cases/cleanIndex](../Scripts/cleanMaterials/Script1534134775171.groovy)
 
 You want to create a Test Suite Collection `Test Suites/StepByStep/TSC_step7 - plus makeIndex`. It will look like this.
 ![TSC_step7](images/StepByStep/step7_TSC_step7.png)
 
-Here you run the Test Suite `TS_step5` twice applying Profile `google.com` and `google.co.jp`. After that you run the Test Suite `Test Suites/makeIndex`.
+Here you run the Test Suite `TS_step5` twice applying the Profiles `google.com` and `google.co.jp` each. After that you run the Test Suite `Test Suites/makeIndex`.
+
+The source of `Test Cases/makeIndex` is here:
+- [Test Cases/makeIndex](../Scripts/makeIndex/Script1534133594816.groovy)
+
+This test case is just calling `makeIndex()` method of `com.kazurayam.materials.MaterialRepository` object without any parameters. The method scans the  *&lt;projectDir&gt;*`/Materials` directory for all contained files and generates *&lt;projectDir&gt;*`/Materials/index.html` file. 
 
 ### step8: run ImageDiff = compare screenshots of 2 URLs
 
