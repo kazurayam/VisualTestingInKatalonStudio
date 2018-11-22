@@ -97,7 +97,8 @@ We need a test scenario anyway. Let me set our scenario as follows:
 
 ### step1: A simple test case as starting point
 
-At first you want a simple test case where you use ordinary Katalon-built-in features only. No tricks at all. Here is the source: [`Test Cases/StepByStep/TC_step1 - start up`](../Scripts/StepByStep/TC_step1%20-%20start up/Script1540079039662.groovy)
+At first you want a simple test case where you use ordinary Katalon-built-in features only. No tricks at all. Here is the source:
+[`Test Cases/StepByStep/TC_step1 - start up`](../Scripts/StepByStep/TC_step1%20-%20start%20up/Script1540079039662.groovy)
 
 ```
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
