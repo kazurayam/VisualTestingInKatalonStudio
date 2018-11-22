@@ -76,7 +76,7 @@ Following 3 Custom Keywords are required to carry out "Visual Testing". Please m
 2. [Keywords/com/kazurayam/ksbackyard/ImageCollectionDiffer](../Keywords/com/kazurayam/ksbackyard/ImageCollectionDiffer.groovy)
 3. [Keywords/com/kazurayam/ksbackyard/ScreenshotDriver](../Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy)
 
-The `ScreenshotDriver` enables you to take page screenshot using [AShot API](https://github.com/yandex-qatools/ashot). The `ImageCollectionDiffer` enables to to compare 2 sets of PNG files and generates a set of ImagDiff files. The `Assert` is a utility to manage exceptional cases with logging and flow control.
+The `ScreenshotDriver` keyword enables you to take page screenshot using [AShot API](https://github.com/yandex-qatools/ashot). The `ImageCollectionDiffer` keyword processes a List of pairs of screenshots and generates a set of difference image files. The `Assert` keyword is a utility to manage exceptional cases with logging and flow control.
 
 ## Creating your Visual Testing test
 
@@ -89,17 +89,15 @@ We need a test scenario anyway. Let me set our scenario as follows:
 1. We will visit the following 2 URL.
    - https://www.google.com/ncr
    - https://www.google.co.jp/ncr
-2. We will perform search with `q="katalon"`
+2. We will perform Google search with `q="katalon"`
 3. We will take entire-page screen shots of the search form page and the search result page.
-4. We will compare the images. If not identical, we want to know how much of visual differences are there, and reason why.
+4. We will compare the images of a URL. If not identical, we want to know how much of visual differences are there.
 
-*[NCR(no country redirect)](https://whatis.techtarget.com/definition/NCR-no-country-redirect) is a Google search parameter that tells the search engine to show results for the country specified in the URL rather than redirecting to the country from which the search is being conducted. You can override the redirection by adding `/ncr` (No Country Redirect) to the Google URL for the country in question : https://www.google.com/ncr*
+>*[NCR(no country redirect)](https://whatis.techtarget.com/definition/NCR-no-country-redirect) is a Google search parameter that tells the search engine to show results for the country specified in the URL rather than redirecting to the country from which the search is being conducted. You can override the redirection by adding `/ncr` (No Country Redirect) to the Google URL for the country in question : https://www.google.com/ncr*
 
 ### step1: A simple test case as starting point
 
-At first you want a simple test case where you use ordinary Katalon-built-in features only. No tricks at all. The test case would do the following.
-
-Here is the source: [`Test Cases/StepByStep/TC_step1 - start up`](../Scripts/StepByStep/TC_step1 - start upScript1540079039662.groovy)
+At first you want a simple test case where you use ordinary Katalon-built-in features only. No tricks at all. Here is the source: [`Test Cases/StepByStep/TC_step1 - start up`](../Scripts/StepByStep/TC_step1%20-%20start upScript1540079039662.groovy)
 
 ```
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
