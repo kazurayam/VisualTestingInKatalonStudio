@@ -253,9 +253,11 @@ Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_
 
 ### step6: Test Suite Collection to activate a Test Suite multiple times using different profiles
 
-We want to take 2 sets of screenshots of https://www.google.com/  https://www.google.co.jp/. You can take a set of screenshots by executing the test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) while specifying a URL via Execution Profile. Therefore you need to execute the test case step5 twice while specifying 2 Profiles `google.com` and `google.co.jp`.
+I want to take screenshots of https://www.google.com/  https://www.google.co.jp/. I can do that by executing the test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) while specifying a URL via Execution Profile. Therefore you need to execute the test case step5 twice while specifying 2 Profiles `google.com` and `google.co.jp`.
 
-You can implement this by creating a Test Suite `Test Suites/StepByStep/TS_step5` and a Test Suite Collection `Test Suites/StepByStep/TSC_step6 - execute TS_step5 twice with different Profile`.
+You can implement this by creating
+- a Test Suite `Test Suites/StepByStep/TS_step5`
+- a Test Suite Collection `Test Suites/StepByStep/TSC_step6 - execute TS_step5 twice with different Profile`.
 
 The `Test Suites/TSC_step6` looks like this:
 ![step6](./images/StepByStep/step6_execute_step5_twice_with_different_profile.png)
