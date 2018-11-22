@@ -213,7 +213,7 @@ The `saveEntirePageImage()` method generates a entire-page screen shot like this
 
 ### step4: Parameterize URL in question by Execution Profiles
 
-We are going to visit 2 URL using a single set of test scripts. We should parameterize the URL out of the test scripts. The best way is to create 2 Execution Profiles for each URLs.
+I am going to visit 2 URL using a single set of test scripts. Therefore I need to parameterize the URL out of the test scripts. The best way is to create 2 Execution Profiles for each URLs.
 
 I made 2 profiles named `google.com` and `google.co.jp` in the demo  project. Principally the name of Profile can be any. Each profiles contains a set of GlobalVariables: `URL`. as parameters which are environment-dependent.
 
@@ -235,14 +235,14 @@ The test case [step4](../Scripts/StepByStep/TC_step4%20-%20parameterized%20URL/S
 | google.co.jp | https://wwww.google.co.jp/ | https%3A%2F%2Fwww.google.co.jp%2F.png |
 | google.com   | https://www.google.com/    | https%3A%2F%2Fwww.google.com%2F.png   |
 
-Now we want to compare the two files. In order to make the processing simple, we need to give the same name to files that makes a pair. Or more precisely saying, `com.kazurayam.materials.MaterialRepository#createMaterialPairs()`  method requires.
+Now we want to compare the two files. In order to make the processing simple, we will use  `com.kazurayam.materials.MaterialRepository#createMaterialPairs()`. This method requires 2 files should have the same name.
 
 Therefore the test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) gives simple file names `search_form.png` and `search_result.png` to both files taken from 2 URLs.
 
 | Profile      | URL                        | File names |
 | ------------ | -------------------------- | --------------- |
-| google.co.jp | https://wwww.google.co.jp/ | search_form.png  and serach_result.png |
-| google.com   | https://www.google.com/    | search_form.png  and search_result.png |
+| google.co.jp | https://wwww.google.co.jp/ | search_form.png,  serach_result.png |
+| google.com   | https://www.google.com/    | search_form.png, search_result.png |
 
 The test case [step5](../Scripts/StepByStep/TC_step5/Script1540190327767.groovy) would use `MaterialRepository#resolveMaterialPath(String testCaseId, String fileName)` as follows:
 
