@@ -2,7 +2,7 @@ Step by step instruction - how to create a visual testing project from scratch
 ===========
 
 - Author: kazurayam
-- Date: Oct 2018
+- Date: 22 November 2018
 
 ## Required Katalon Studio version
 
@@ -12,19 +12,19 @@ Unfortunately Katalon Studio 5.8.0 .. 5.8.3 has a restriction: https://forum.kat
 
 ## Overview
 
-In this note, I will describe how you create a new Katalon Studio project and set it up to carry out *Visual Testing* as I did.
+In this note, I will describe how you create a new Katalon Studio project and set it up to carry out a *Visual Testing* as I did.
 
-We will create a Katalon Studio project where we will do the following:
+I will create a Katalon Studio project where I do the following:
 
 1. take screenshots of 2 environments of your AUT (*Application Under Test*) = a pair of different URLs. As a test bed, we will use the Google Search ( https://www.google.com/ and https://www.google.co.jp/ ). We will make a single query with `q=katalon`
-2. compare screenshots to find any visual differences
+2. compare screenshots to find visual differences
 3. make a HTML view of generated image files.
 
 Here is a example output:
 
 ![output](./images/StepByStep/step9_search_result.20181025_161316_google.com-20181025_161317_google.co.jp.%280.01%29.png)
 
-The 2 URLs were almost the same for 99.99% except 0.01% of difference. In the above image, you can find a very small area (just a few characters) is painted red. This section was the milliseconds taken for table search. *Without comparison by the tool, this difference would never be found.* :-)
+The 2 URLs were almost the same for 99.99% except 0.01% of difference. In the above image, you can find a very small area (just a few characters) is painted red. This section was the milliseconds taken for table search. *Without comparison by the tool, this difference would never be noticed.* :-)
 
 ## Preparation
 
@@ -41,11 +41,13 @@ You need to include 2 external jar files into the new project.
 
 1. `aShot` : WebDriver Screenshot utility. Its jar is public at the [MavenCentral repository](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4). Also you can reuse the `ashot-1.5.4.jar` contained in the demo project's [`Drivers`](../Drivers) directory.
 
-2. `Materials` : Utility that manages the `<project dir>/Materials` directory where you can store any files created by test cases in a well structured path format. Another project  [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio) describes how to use the `Materials` library in detail. The Materials-0.24.0.jar file is public at the [releases](https://github.com/kazurayam/Materials/releases) page. Also you can reuse the jar file contained in the demo project's [`Drivers`](../Drivers) directory.
+2. `Materials` : Utility that manages the `<project dir>/Materials` directory where you can store any files created by test cases in a well structured path format. The Materials-0.24.0.jar file is public at the [releases](https://github.com/kazurayam/Materials/releases) page. Also you can reuse the jar file contained in the demo project's [`Drivers`](../Drivers) directory.
+
+>Another project  [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio) describes how to use the `Materials` library in detail.
 
 Please refer to the Katalon Documentation [*How to import external libarary into your automation project*](https://docs.katalon.com/katalon-studio/tutorials/import_java_library.html) for Katalon GUI operation.
 
-### prep3: create GlobalVariables for the Materials library to run
+### prep3: create GlobalVariables for the Materials library
 
 The Materials library requires 2 GlobalVariables defined in the Execution Profile.
 
@@ -63,16 +65,16 @@ You need to create a Test Listener named `Test Listeners/TL` in your project. Al
 
 You can copy the code of the [`Test Listners/TL`](../Test%20Listeners/TL.groovy) into you test listener `TL`. You need not to modify it at all.
 
-Or if you want you make your own test listener, you can do so of course. Please merge the codes of [`Test Listners/TL`](../Test%20Listeners/TL.groovy) into yours carefully.
+Or if you want you make your own test listener, you can do so of course. Please merge the codes of [`Test Listners/TL`](../Test%20Listeners/TL.groovy) into your one  carefully.
 
 
 ### prep5: create Custom Keywords
 
 Following 3 Custom Keywords are required to carry out "Visual Testing". Please make the keyword files and copy the source from the demo project. You do no need to change the source at all.
 
-1. [Keywords/com/kazurayam/ksbackyard/Assert](Keywords/com/kazurayam/ksbackyard/Assert.groovy)
-2. [Keywords/com/kazurayam/ksbackyard/ImageCollectionDiffer](Keywords/com/kazurayam/ImageCollectionDiffer.groovy)
-3. [Keywords/com/kazurayam/ksbackyard/ScreenshotDriver](Keywords/com/kazurayam/ScreenshotDriver.groovy)
+1. [Keywords/com/kazurayam/ksbackyard/Assert](../Keywords/com/kazurayam/ksbackyard/Assert.groovy)
+2. [Keywords/com/kazurayam/ksbackyard/ImageCollectionDiffer](../Keywords/com/kazurayam/ImageCollectionDiffer.groovy)
+3. [Keywords/com/kazurayam/ksbackyard/ScreenshotDriver](../Keywords/com/kazurayam/ScreenshotDriver.groovy)
 
 The `ScreenshotDriver` enables you to take page screenshot using [AShot API](https://github.com/yandex-qatools/ashot). The `ImageCollectionDiffer` enables to to compare 2 sets of PNG files and generates a set of ImagDiff files. The `Assert` is a utility to manage exceptional cases with logging and flow control.
 
