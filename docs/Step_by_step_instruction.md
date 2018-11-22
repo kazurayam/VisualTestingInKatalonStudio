@@ -286,7 +286,7 @@ The index pages shows what you can see by Windows Explorer or Mac Finder. No mor
 3. In the modal window, various types of files are rendered nicely: JSON is pretty-printed, XML is indented, images are auto-resized to fit the modal window's width, etc.
 4. Windows Explorer does *LOCK* the files and directories while you are viewing them in the Explorer windows. Sometimes this LOCK causes Katalon Studio to fail getting access to the files in the Materials directory. Once race condition occurs, you have to restart Windows OS. This is very annoying. Therefore you should avoid using Windows Explorer as much as possible. On the other hand, Web Browsers does not *LOCK* the files in the Materials directory at all. You should use `Materials/index.html` in browser as it does not cause any race condition.
 
-You can create *&lt;projectDir&gt;*`/Materials/index.html` file by running [Test Cases/cleanIndex](../Scripts/cleanMaterials/Script1534134775171.groovy)
+You can create *&lt;projectDir&gt;*`/Materials/index.html` file by running [Test Cases/makeIndex](../Scripts/makeIndex/Script1534133594816.groovy)
 
 The `Test Suites/StepByStep/TSC_step7 - plus makeIndex` shows how to make index.html in practice. It will look like this.
 ![TSC_step7](images/StepByStep/step7_TSC_step7.png)
