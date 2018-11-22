@@ -268,32 +268,179 @@ When you execute the Test Suite Collection  `Test Suites/TSC_step6`, you will fi
 
 ### step7: Make Materials/index.html
 
-You can create *&lt;projectDir&gt;*`/Materials/index.html` file by calling `makeIndex()` method of `com.kazurayam.materials.MaterialRepository` object. The index page will looks like this:
+You can generate *&lt;projectDir&gt;*`/Materials/index.html` file by calling `makeIndex()` method of `com.kazurayam.materials.MaterialRepository` object. The index page generated will looks like this:
 ![step7_Materials_index](images/StepByStep/step7_Materials_index.png)
 
-You can open a screenshot image in a modal window.
+By clicking one of the row in the index.html You can open a screenshot image in a modal window.
 ![step7_Materials_index_modal](images/StepByStep/step7_Materials_index_modal.png)
 
-The index pages shows what you can see by Windows Explorer or Mac Finder. No more than that. The index page is more convenient to view contents of *&lt;projectDir&gt;*`/Materials/index.html` than those generic tools. Why? In the index page,
+The index pages shows what you can see by Windows Explorer or Mac Finder. No more than that. But the index page is more convenient to view contents of *&lt;projectDir&gt;*`/Materials/index.html` than those generic tools. Why? In the index page,
 
-1. Test Suite results are sorted by reverse order of timestamp. You always find the newest result at the page top.
-2. Meta data of Test Suite execution: which browser was used, which Profile was applied, how many test cases were run, how many failed.
+1. Test Suite results are sorted by reverse order of the timestamp of Test Suites' execution. You always find the newest result at the page top.
+2. Meta data of Test Suite execution are shown: which browser was used, which Profile was applied, how many test cases were run and how many test cases failed.
 3. In the modal window, various types of files are rendered nicely: json is pretty-printed, xml is indented, images are auto-resized to fit the modal window's width, etc.
-4. Web Browsers does not *LOCK* the files in the Materials directory at all. On the other hand, Windows Explorer does *LOCK* the files and directories while you are viewing them in the Explorer windows. Sometimes this LOCK causes Katalon Studio to fail getting access to the files in the Materials directory. Once race condition occurs, you have to restart Windows OS. This is very annoying. Therefore you should avoid using Windows Exploer as much as possible. You should use `Materials/index.html` in browser as it does not cause any race condition.
+4. Windows Explorer does *LOCK* the files and directories while you are viewing them in the Explorer windows. Sometimes this LOCK causes Katalon Studio to fail getting access to the files in the Materials directory. Once race condition occurs, you have to restart Windows OS. This is very annoying. Therefore you should avoid using Windows Exploer as much as possible. On the other hand, Web Browsers does not *LOCK* the files in the Materials directory at all. You should use `Materials/index.html` in browser as it does not cause any race condition.
 
 You can create *&lt;projectDir&gt;*`/Materials/index.html` file by running [Test Cases/cleanIndex](../Scripts/cleanMaterials/Script1534134775171.groovy)
 
-You want to create a Test Suite Collection `Test Suites/StepByStep/TSC_step7 - plus makeIndex`. It will look like this.
+The `Test Suites/StepByStep/TSC_step7 - plus makeIndex` shows how to make index.html in practice. It will look like this.
 ![TSC_step7](images/StepByStep/step7_TSC_step7.png)
 
-Here you run the Test Suite `TS_step5` twice applying the Profiles `google.com` and `google.co.jp` each. After that you run the Test Suite `Test Suites/makeIndex`.
-
-The source of `Test Cases/makeIndex` is here:
+In the Test Suite Collection `TSC_step7` you run the Test Suite `TS_step5` twice applying the Profiles `google.com` and `google.co.jp` for each. After that you run the Test Suite `Test Suites/makeIndex`. The source of `Test Cases/makeIndex` is here:
 - [Test Cases/makeIndex](../Scripts/makeIndex/Script1534133594816.groovy)
 
-This test case is just calling `makeIndex()` method of `com.kazurayam.materials.MaterialRepository` object without any parameters. The method scans the  *&lt;projectDir&gt;*`/Materials` directory for all contained files and generates *&lt;projectDir&gt;*`/Materials/index.html` file. 
+This test case is just calling `makeIndex()` method of `com.kazurayam.materials.MaterialRepository` object without any parameters. The method scans the  *&lt;projectDir&gt;*`/Materials` directory for all contained files and generates *&lt;projectDir&gt;*`/Materials/index.html` file.
 
-### step8: run ImageDiff = compare screenshots of 2 URLs
+### step8: running ImageDiff to compare screenshots of two URLs
+
+We will go one step forward. We will first take screenshots of 2 URLS and store the images into the `Materials` directory, and then we will compare the images to find visual differences. The `Test Suites/StepByStep/TSC_step8 - plus ImageDiff` executes this processing.
+![TSC_step8_imageDiff](images/StepByStep/step8_TSC_step8_imageDiff.png)
+
+The difference between the step7 and step8 is only one point: Step8 calls `Test Suites/StepByStep/ImageDiff` immediately after calling `Test Suites/StepByStep/TSC_step5` twice.
+
+The Test Suite `Test Suites/StepByStep/ImageDiff` simply calls a Test Case `Test Cases/StepByStep/ImageDiff`. Click the following link to see the source of the test case:
+- [ImageDiff](../Scripts/StepByStep/ImageDiff/Script1540083424391.groovy)
+
+The core part of the test case `ImageDiff` is as follows:
+```
+MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
+
+List<MaterialPair> materialPairs = mr.createMaterialPairs(
+		new TSuiteName('Test Suites/StepByStep/TS_step5')
+		).stream().filter { mp ->
+			mp.getLeft().getFileType() == FileType.PNG
+		}.collect(Collectors.toList())
+
+new ImageCollectionDiffer(mr).makeImageCollectionDifferences(
+		materialPairs,
+		new TCaseName(GlobalVariable.CURRENT_TESTCASE_ID),  // 'Test Cases/StepByStep/ImageDiff'
+		0.50)
+```
+
+This code snippet is short but in fact a lot of details are hidden in the external Java classes.
+
+`com.kazurayam.materials.MaterialRepository#createMaterialPairs(TSuiteName)` returns a List<MaterialPairs>. See the javadoc comment of the method at the line 340 of [MaterialRepositoryImpl](https://github.com/kazurayam/Materials/blob/develop/src/main/groovy/com/kazurayam/materials/MaterialRepositoryImpl.groovy)
 
 
-### step9: clearing ./Materials dir first
+>Scans the Materials directory to look up pairs of Material objects to compare.
+>
+>This method perform the following search under the &lt;projectDir&gt;/Materials directory in order to identify which Material object to be included.
+>
+> 1. selects all &lt;projectDir&gt;/Materials/&lt;Test Suite Name&gt;/&lt;yyyyMMdd_hhmmss&gt; directories with the name equals to the Test Suite Name specified as argument tSuiteName
+>
+> 2. among them, select the directory with the 1st latest timestamp. This one is regarded as "Actual one".
+> 3. among them, select the directory with the 2nd latest timestamp. This one is regarded as "Expected one".
+> 4. please note that we do not check the profile name which was applied to each Test Suite run. also we do not check the browser type used to each Test Suite run.
+> 5. Scan the 2 directories selected and create a List of Material objects. 2 files which have the same path under the &lt;yyyyMMdd_hhmmss&gt; directory will be packaged as a pair to form a MaterialPair object.
+> 6. A List&lt;MaterialPair&gt; is created, fulfilled and returned as the result
+
+
+The `com.kazurayam.ksbackyard.ImageCollectionDiffer` class is a custom keyword , it is located [here](../Keywords/com/kazurayam/ksbackyard/ImageCollectionDiffer.groovy) in the Keywords directory.
+
+```
+/**
+ * compare 2 Material files in each MaterialPair object,
+ * create ImageDiff and store the diff image files under the directory
+ * ./Materials/<tSuiteName>/yyyyMMdd_hhmmss/<tCaseName>.
+ * The difference ratio is compared with the criteriaPercent given.
+ * Will be marked FAILED if any of the pairs has greater difference.
+ *
+ * @param materialPairs created by
+ *     com.kazurayam.materials.MaterialRpository#createMaterialPairs() method
+ * @param tCaseName     created by com.kazurayam.materials.TCaseName(String)
+ * @param criteriaPercent e.g. 3.00 percent. If the difference of
+ *     a MaterialPair is greater than this,
+ *     the MaterialPair is evaluated FAILED   
+ */
+void makeImageCollectionDifferences(
+        List<MaterialPair> materialPairs,
+        TCaseName tCaseName,
+        Double criteriaPercent) {
+
+    ...
+
+}
+
+```
+
+Executing `Test Suites/StepByStep/TSC_step8 - plus ImageDiff` will creates `<projectDir>/Materials/StepByStep.ImageDiff` directory as well as `<projectDir>/Materials/StepByStep.TS_step5`. In the `<projectDir>/Materials/StepByStep.ImageDiff` directory you will find image files which shows the difference of each pairs of screenshots.
+
+```
+C:\USERS\QCQ0264\KATALON-WORKSPACE\VISUALTESTINGINKATALONSTUDIO\MATERIALS
+│  
+│  index.html
+│  
+├─StepByStep.ImageDiff
+│  └─20181122_143352
+│      └─StepByStep.ImageDiff
+│          └─StepByStep.TC_step5
+│                  search_form.20181122_143351_google.com-20181122_143352_google.co.jp.(0.00).png
+│                  search_result.20181122_143351_google.com-20181122_143352_google.co.jp.(0.01).png
+│                  
+└─StepByStep.TS_step5
+    ├─20181122_143351
+    │  └─StepByStep.TC_step5
+    │          search_form.png
+    │          search_result.png
+    │          
+    └─20181122_143352
+        └─StepByStep.TC_step5
+                search_form.png
+                search_result.png
+```
+
+An ImageDiff file has following format of file name:
+`search_result.20181122_143351_google.com-20181122_143352_google.co.jp.(0.01).png`
+
+| file name element | meaning |
+|:------------------|:--------|
+| `search_result`   | Material file name without extension (`.png`)  |
+| `.`               |   |
+| `20181122_143351` | Timestamp of Expected image  |
+| `_`               |   |
+| `google.com`      | Execution Profile applied to the Test Suite run as Expected one |
+| `_`               |   |
+| `20181122_143352` | Timestamp of Actual image  |
+| `-`               |   |
+| `google.co.jp`    | Execution Profile applied to the Test Suite run as Actual one  |
+| `.`               |   |
+| `(0.01)`          | Difference of Expected & Actual images in percentage  |
+| `.`               |   |
+| `png`             | image file type: PNG  |
+
+The &lt;projectDir&gt;`Materials/index.html` page now includes the contents of `StepByStep.ImageDiff` directory as follows:
+
+![step8_Materials_index](images/StepByStep/step8_Materials_index.png)
+
+
+
+### step9: clearing ./Materials directory first
+
+If you execute the `Test Suites/StepByStep/step8` and other test suites
+multiple times, in the Materials repository many subdirectories will be created.
+![Materials_index_with_old_records](images\StepByStep\step9_Materials_index_with_old_records.png)
+
+
+Old records are, in most cases, useless but will NOT be removed automatically.
+These subdirectories will be retained unless you intensionaly removed them.
+
+The Test Suite Collection `Test Suites/StepByStep/TSC_step9 - with cleanMaterials - final step` shows how to clea the Materials directory.
+
+![TSC_step9_cleanMaterials](images\StepByStep\step9_TSC_step9_cleanMaterials.png)
+
+The `TSC_step9` calls `Test Suites/cleanMaterials` which calls [`Test Cases/cleanMaterials`](../Scripts\cleanMaterials\Script1534134775171.groovy)
+
+```
+MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
+
+Helpers.deleteDirectoryContents(mr.getBaseDir())
+```
+
+This code removes all the contents under the `Materials` directory recursively but retains the `Materials` directory itself.
+
+The `Test Suites/StepByStep/TSC_step9 - with cleanMaterials - final step` will generate `Materials/index.html` cleared out as follows:
+![cleaned](images\StepByStep\step9_Materials_index_cleared.png)
+
+## Conclusion
+
+I believe that automated visual testing is an effective to detect unplanned/accidental changes made somehow in your Web app. In this document I have tried to describe in detail how to get started with "Visual Testing in Katalon Studio" --- comparing 2 sites (production & developement) visually by taking screenshots and making diffs. Please try.

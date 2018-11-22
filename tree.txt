@@ -1,0 +1,23 @@
+フォルダー パスの一覧
+ボリューム シリアル番号は DAFE-2537 です
+C:\USERS\QCQ0264\KATALON-WORKSPACE\VISUALTESTINGINKATALONSTUDIO\MATERIALS
+│  index.html
+│  
+├─StepByStep.ImageDiff
+│  └─20181122_143352
+│      └─StepByStep.ImageDiff
+│          └─StepByStep.TC_step5
+│                  search_form.20181122_143351_google.com-20181122_143352_google.co.jp.(0.00).png
+│                  search_result.20181122_143351_google.com-20181122_143352_google.co.jp.(0.01).png
+│                  
+└─StepByStep.TS_step5
+    ├─20181122_143351
+    │  └─StepByStep.TC_step5
+    │          search_form.png
+    │          search_result.png
+    │          
+    └─20181122_143352
+        └─StepByStep.TC_step5
+                search_form.png
+                search_result.png
+                

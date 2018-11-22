@@ -63,16 +63,19 @@ class ImageCollectionDiffer {
 		listener_ = listener
 	}
 
-
 	/**
-	 * compare 2 Material files in each MaterialPair object, create ImageDiff and
-	 * store the diff image files under the directory ./Materials/<tSuiteName>/yyyyMMdd_hhmmss/<tCaseName>.
-	 * The difference ratio is compared with the criteriaPercent given. marked FAILED if greater.
-	 * 
-	 * @param materialPairs created by com.kazurayam.materials.MaterialRpository#createMaterialPairs() method
+	 * compare 2 Material files in each MaterialPair object,
+	 * create ImageDiff and store the diff image files under the directory
+	 * ./Materials/<tSuiteName>/yyyyMMdd_hhmmss/<tCaseName>.
+	 * The difference ratio is compared with the criteriaPercent given.
+	 * Will be marked FAILED if any of the pairs has greater difference.
+	 *
+	 * @param materialPairs created by
+	 *     com.kazurayam.materials.MaterialRpository#createMaterialPairs() method
 	 * @param tCaseName     created by com.kazurayam.materials.TCaseName(String)
-	 * @param criteriaPercent e.g. 3.00 percent. If the difference of a MaterialPair is greater than this, 
-	 *                        the MaterialPair is evaluated FAILED   
+	 * @param criteriaPercent e.g. 3.00 percent. If the difference of
+	 *     a MaterialPair is greater than this,
+	 *     the MaterialPair is evaluated FAILED
 	 */
 	void makeImageCollectionDifferences(
 			List<MaterialPair> materialPairs,
