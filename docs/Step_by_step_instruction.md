@@ -283,8 +283,8 @@ The index pages shows what you can see by Windows Explorer or Mac Finder. No mor
 
 1. Test Suite results are sorted by reverse order of the timestamp of Test Suites' execution. You always find the newest result at the page top.
 2. Meta data of Test Suite execution are shown: which browser was used, which Profile was applied, how many test cases were run and how many test cases failed.
-3. In the modal window, various types of files are rendered nicely: json is pretty-printed, xml is indented, images are auto-resized to fit the modal window's width, etc.
-4. Windows Explorer does *LOCK* the files and directories while you are viewing them in the Explorer windows. Sometimes this LOCK causes Katalon Studio to fail getting access to the files in the Materials directory. Once race condition occurs, you have to restart Windows OS. This is very annoying. Therefore you should avoid using Windows Exploer as much as possible. On the other hand, Web Browsers does not *LOCK* the files in the Materials directory at all. You should use `Materials/index.html` in browser as it does not cause any race condition.
+3. In the modal window, various types of files are rendered nicely: JSON is pretty-printed, XML is indented, images are auto-resized to fit the modal window's width, etc.
+4. Windows Explorer does *LOCK* the files and directories while you are viewing them in the Explorer windows. Sometimes this LOCK causes Katalon Studio to fail getting access to the files in the Materials directory. Once race condition occurs, you have to restart Windows OS. This is very annoying. Therefore you should avoid using Windows Explorer as much as possible. On the other hand, Web Browsers does not *LOCK* the files in the Materials directory at all. You should use `Materials/index.html` in browser as it does not cause any race condition.
 
 You can create *&lt;projectDir&gt;*`/Materials/index.html` file by running [Test Cases/cleanIndex](../Scripts/cleanMaterials/Script1534134775171.groovy)
 
@@ -423,7 +423,7 @@ The &lt;projectDir&gt;`Materials/index.html` page now includes the contents of `
 
 If you execute the `Test Suites/StepByStep/step8` and other test suites
 multiple times, in the Materials repository many subdirectories will be created.
-![Materials_index_with_old_records](images\StepByStep\step9_Materials_index_with_old_records.png)
+![Materials_index_with_old_records](images/StepByStep/step9_Materials_index_with_old_records.png)
 
 
 Old records are, in most cases, useless but will NOT be removed automatically.
@@ -431,7 +431,7 @@ These subdirectories will be retained unless you intensionaly removed them.
 
 The Test Suite Collection `Test Suites/StepByStep/TSC_step9 - with cleanMaterials - final step` shows how to clea the Materials directory.
 
-![TSC_step9_cleanMaterials](images\StepByStep\step9_TSC_step9_cleanMaterials.png)
+![TSC_step9_cleanMaterials](images/StepByStep/step9_TSC_step9_cleanMaterials.png)
 
 The `TSC_step9` calls `Test Suites/cleanMaterials` which calls [`Test Cases/cleanMaterials`](../Scripts\cleanMaterials\Script1534134775171.groovy)
 
