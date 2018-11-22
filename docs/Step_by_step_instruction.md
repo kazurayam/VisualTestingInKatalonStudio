@@ -447,4 +447,4 @@ The `Test Suites/StepByStep/TSC_step9 - with cleanMaterials - final step` will g
 
 ## Conclusion
 
-I believe that automated visual testing is an effective to detect unplanned/accidental changes made somehow in your Web app. In this document I have tried to describe in detail how to get started with "Visual Testing in Katalon Studio" --- comparing 2 sites (production & developement) visually by taking screenshots and making diffs. Please try.
+I believe that automated visual testing is an effective method to detect unplanned/accidental changes made somehow in your Web app. In this document I have tried to describe in detail how to get started with "Visual Testing in Katalon Studio" --- comparing 2 sites (production & developement) visually by taking screenshots and making diffs. Please try.
