@@ -97,7 +97,7 @@ We need a test scenario anyway. Let me set our scenario as follows:
 
 ### step1: A simple test case as starting point
 
-At first you want a simple test case where you use ordinary Katalon-built-in features only. No tricks at all. Here is the source:
+At first you want a simple test case where you use ordinary Katalon-built-in features only. Here is the source:
 [`Test Cases/StepByStep/TC_step1 - start up`](../Scripts/StepByStep/TC_step1%20-%20start%20up/Script1540079039662.groovy)
 
 ```
@@ -140,6 +140,7 @@ WebUI.takeScreenshot(fileR.toString())
 // close browser
 WebUI.closeBrowser()
 ```
+No tricks at all.
 
 You can run this test case just as usual. Once ran it, you will find output files created in the *&lt;projectDir&gt;*`/tmp` folder.
 ![outputs](images/StepByStep/step1_outputs_in_tmp.png)
@@ -148,7 +149,7 @@ You can run this test case just as usual. Once ran it, you will find output file
 
 We want the output files are located at path managed by the Materials library. We are to change the test case slightly.
 
-Here is the source: [`Test Cases/StepByStep/TC_step2 - Materials applied`](../Scripts/StepByStep/TC_step2 - Materials applied/Script1540078133927.groovy)
+Here is the source: [`Test Cases/StepByStep/TC_step2 - Materials applied`](../Scripts/StepByStep/TC_step2%20-%20Materials%20applied/Script1540078133927.groovy)
 ```
 import com.kazurayam.materials.MaterialRepository
 import internal.GlobalVariable as GlobalVariable
