@@ -422,18 +422,17 @@ The &lt;projectDir&gt;`Materials/index.html` page now includes the contents of `
 ### step9: clearing ./Materials directory first
 
 If you execute the `Test Suites/StepByStep/step8` and other test suites
-multiple times, in the Materials repository many subdirectories will be created.
+multiple times, in the Materials repository many sub-directories will be created.
 ![Materials_index_with_old_records](images/StepByStep/step9_Materials_index_with_old_records.png)
 
 
-Old records are, in most cases, useless but will NOT be removed automatically.
-These subdirectories will be retained unless you intensionaly removed them.
+Old records are, in most cases, useless but will NOT be removed automatically. These sub-directories will be retained until you intentionally remove them.
 
-The Test Suite Collection `Test Suites/StepByStep/TSC_step9 - with cleanMaterials - final step` shows how to clea the Materials directory.
+The Test Suite Collection `Test Suites/StepByStep/TSC_step9 - with cleanMaterials - final step` shows how to clear the Materials directory.
 
 ![TSC_step9_cleanMaterials](images/StepByStep/step9_TSC_step9_cleanMaterials.png)
 
-The `TSC_step9` calls `Test Suites/cleanMaterials` which calls [`Test Cases/cleanMaterials`](../Scripts\cleanMaterials\Script1534134775171.groovy)
+The `TSC_step9` calls `Test Suites/cleanMaterials` which calls [`Test Cases/cleanMaterials`](../Scripts/cleanMaterials/Script1534134775171.groovy)
 
 ```
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
@@ -444,7 +443,7 @@ Helpers.deleteDirectoryContents(mr.getBaseDir())
 This code removes all the contents under the `Materials` directory recursively but retains the `Materials` directory itself.
 
 The `Test Suites/StepByStep/TSC_step9 - with cleanMaterials - final step` will generate `Materials/index.html` cleared out as follows:
-![cleaned](images\StepByStep\step9_Materials_index_cleared.png)
+![cleaned](images/StepByStep/step9_Materials_index_cleared.png)
 
 ## Conclusion
 
