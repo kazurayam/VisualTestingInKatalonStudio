@@ -4,7 +4,7 @@
    <name>ImageDiff</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-11-20T10:28:55</lastRun>
+   <lastRun>2018-12-01T19:03:48</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
