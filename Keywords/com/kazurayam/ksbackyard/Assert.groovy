@@ -15,8 +15,6 @@ import com.kms.katalon.core.util.KeywordUtil
  */
 class Assert {
 
-	private static KeywordLogger logger = new KeywordLogger()
-
 	/**
 	 *
 	 */
@@ -27,6 +25,7 @@ class Assert {
 			stepFailed(message, flowControl)
 		}
 	}
+
 	@Keyword
 	static def assertFalse(String message, Boolean condition,
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
@@ -42,7 +41,7 @@ class Assert {
 	@Keyword
 	static def assertEquals(String message, String expected, String actual,
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
-		if (expected != actual) {
+		if (! expected.equals(actual)) {
 			stepFailed(message, flowControl)
 		}
 	}
@@ -50,9 +49,9 @@ class Assert {
 	 *
 	 */
 	@Keyword
-	static def assertEquals(String message, Number expected, Number actual,
+	static def assertEquals(String message, Number expected, Number actual, 
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
-		if (expected == actual) {
+		if (expected != actual) {
 			stepFailed(message, flowControl)
 		}
 	}
@@ -60,16 +59,14 @@ class Assert {
 
 	static def stepFailed(String message, FailureHandling flowControl) {
 		if (flowControl == FailureHandling.OPTIONAL) {
-			println "#stepFailed('${message}',FailureHandling.OPTIONAL)"
-			logger.logWarning(message)
+			//println "#stepFailed('${message}',FailureHandling.OPTIONAL)"
+			KeywordUtil.logInfo(message)
 		} else if (flowControl == FailureHandling.CONTINUE_ON_FAILURE) {
-			println "#stepFailed('${message}',FailureHandling.CONTINUE_ON_FAILURE)"
-			logger.logFailed(message)
+			//println "#stepFailed('${message}',FailureHandling.CONTINUE_ON_FAILURE)"
 			KeywordUtil.markFailed(message)
 		} else {
 			// in the case where flowControl == FailureHandling.STOP_ON_FAILURE
-			println "#stepFailed('${message}',FailureHandling.STOP_ON_FAILURE)"
-			logger.logFailed(message)
+			//println "#stepFailed('${message}',FailureHandling.STOP_ON_FAILURE)"
 			KeywordUtil.markFailedAndStop(message)
 		}
 	}

@@ -63,7 +63,7 @@ I have integrated those external resources to build a toolset of 'Visual Testing
 1. choose and open a Test Suite Collection `Execute`
 1. `Execute` assumes you have Firefox browser installed. In not, please install Firefox
 1. execute the Test Suite Collection. it will take a few minutes to finish.
-1. find the resulting file `<projectDir>/Materials/index.html`, open it with your favorite web browser.  
+1. find the resulting file `<projectDir>/Materials/index.html`, open it with your favorite web browser.
 
 Unfortunately you can not view the  `<projectDir>/Materials` directory and its contents inside Katalon Studio GUI. I would recommend you to bookmark  `<projectDir>/Materials/index.html` in your favorite browser for quick access.
 
@@ -151,3 +151,7 @@ This project imports and uses the CustomKeyword `com.kazurayam.ksbackyard.Screen
 # How to create your own project capable of visual testing?
 
 see [*Step by step instruction*](docs/Step_by_step_instruction.md)
+
+# Revision history
+
+see [Revision History](docs/revision_history.md)
