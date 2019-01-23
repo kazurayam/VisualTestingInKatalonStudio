@@ -45,6 +45,8 @@ You need to include 2 external jar files into the new project.
 
 >Another project  [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio) describes how to use the `Materials` library in detail.
 
+3. `ImageDifference` : Utility that compares two images or two sets of images files. Its jar is public at the [releases](https://github.com/kazurayam/ImageDifference/releases) page.
+
 Please refer to the Katalon Documentation [*How to import external libarary into your automation project*](https://docs.katalon.com/katalon-studio/tutorials/import_java_library.html) for Katalon GUI operation.
 
 ### prep3: create GlobalVariables for the Materials library
@@ -190,7 +192,7 @@ Are you curious about the strange path *&lt;projectDir&gt;*`/Materials/_/_` ? Th
 ### step3: Take entire page screen shots
 
 The step2 script uses built-in `WebUI.takeScreenshot()` method to take screen shot of web pages. Unfortunately this method can not take entire page screenshot. For example, the screen shot of the search result page will show just top 3 or 4 links.
-![step2_search_result](images/StepByStep/step2_search_result.png)  
+![step2_search_result](images/StepByStep/step2_search_result.png)
 
 But I want entire page screen shots. Therefore I will use a custom keyword `com.kazurayam.ksbackyard.ScreenshotDriver` backed by [AShot](https://github.com/yandex-qatools/ashot).
 
@@ -355,7 +357,7 @@ The `com.kazurayam.ksbackyard.ImageCollectionDiffer` class is a custom keyword ,
  * @param tCaseName     created by com.kazurayam.materials.TCaseName(String)
  * @param criteriaPercent e.g. 3.00 percent. If the difference of
  *     a MaterialPair is greater than this,
- *     the MaterialPair is evaluated FAILED   
+ *     the MaterialPair is evaluated FAILED
  */
 void makeImageCollectionDifferences(
         List<MaterialPair> materialPairs,
@@ -372,22 +374,22 @@ Executing `Test Suites/StepByStep/TSC_step8 - plus ImageDiff` will creates `<pro
 
 ```
 C:\USERS\QCQ0264\KATALON-WORKSPACE\VISUALTESTINGINKATALONSTUDIO\MATERIALS
-│  
+│
 │  index.html
-│  
+│
 ├─StepByStep.ImageDiff
 │  └─20181122_143352
 │      └─StepByStep.ImageDiff
 │          └─StepByStep.TC_step5
 │                  search_form.20181122_143351_google.com-20181122_143352_google.co.jp.(0.00).png
 │                  search_result.20181122_143351_google.com-20181122_143352_google.co.jp.(0.01).png
-│                  
+│
 └─StepByStep.TS_step5
     ├─20181122_143351
     │  └─StepByStep.TC_step5
     │          search_form.png
     │          search_result.png
-    │          
+    │
     └─20181122_143352
         └─StepByStep.TC_step5
                 search_form.png
