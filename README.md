@@ -136,6 +136,8 @@ This Katalon project depends on the following external resources.
 
 1. ['Materials-x.x.x.jar'](https://github.com/kazurayam/Materials/releases)
 2. ['ashot-1.5.4.jar'](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4)
+3. [`ImageDifference-x.x.x.jar`](https://github.com/kazurayam/ImageDifference/releases)
+
 
 These are already bundled in the `<projectDir>/Drivers/` directory.
 
@@ -146,7 +148,8 @@ Documentation ["External Libraries"](https://docs.katalon.com/display/KD/Externa
 
 1. ['ksbackyard'](https://github.com/kazurayam/ksbackyard)
 
-This project imports and uses the CustomKeyword `com.kazurayam.ksbackyard.ScreenshotDriver` developed by the 'ksbackyard' project. You can re-import/update the CustomKeyword. You first download the source of the 'ksbackyard' project from the [Release page](https://github.com/kazurayam/ksbackyard/releases). And copy to Keyword Source from the zip content into the project. See the Katalon documentation ['Import/Export Keywords'](https://docs.katalon.com/pages/viewpage.action?pageId=13698840) for importing operation..
+This project imports and uses the custom yeywords developed by the 'ksbackyard' project.
+If you want to, you can re-import them. You first download the source of the 'ksbackyard' project from the [Release page](https://github.com/kazurayam/ksbackyard/releases). And copy to Keyword Source from the zip content into the project. See the Katalon documentation ['Import/Export Keywords'](https://docs.katalon.com/pages/viewpage.action?pageId=13698840) for importing operation..
 
 # How to create your own project capable of visual testing?
 
