@@ -51,11 +51,15 @@ Path fileS = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID,
 									"search_result.ignoreStats.png")
 
 /*
- *　Let's cast a spell to paint specific web element grey 
+ *　Let's paint specific web elements grey to ignore
  */
 TestObject resultStats = findTestObject('StepByStep/Page_Google_result/div_resultStats')
+
 Builder builder = new ScreenshotDriver.Options.Builder()
-Options options = builder.timeout(300).addIgnoredElement(resultStats).build()
+Options options = builder.timeout(300).
+					addIgnoredElement(resultStats).    
+					// you can give multiple addIgnoreElement() here
+					build()          // don't forget to call build()
 
 // take screenshot of Google Result page,
 // and paint <div id="resultStats"> with a grey rectangle to ignore insignificant difference

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>TS_step10</name>
+   <name>ImageDiff_step10 - ignoring specific web elements</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <mailRecipient></mailRecipient>
@@ -9,11 +9,11 @@
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>10a8f6ad-4572-4876-97bc-6d4220918680</testSuiteGuid>
+   <testSuiteGuid>455cb973-27ae-4e89-86e7-9201a2183a19</testSuiteGuid>
    <testCaseLink>
-      <guid>9c1cb1ea-bbe1-4faa-aff7-e035e4a2c25f</guid>
+      <guid>fef59b99-7157-4b21-ab14-c7b57d84fa84</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/StepByStep/TC_step10 - ignoring specifc web elements</testCaseId>
+      <testCaseId>Test Cases/StepByStep/ImageDiff_step10 - ignoring specific web elements</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

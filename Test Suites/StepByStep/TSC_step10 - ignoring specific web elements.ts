@@ -22,7 +22,7 @@
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/TS_step10</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/TS_step10 - ignoring specific web elements</testSuiteEntity>
       </TestSuiteRunConfiguration>
       <TestSuiteRunConfiguration>
          <configuration>
@@ -31,7 +31,7 @@
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/TS_step10</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/TS_step10 - ignoring specific web elements</testSuiteEntity>
       </TestSuiteRunConfiguration>
       <TestSuiteRunConfiguration>
          <configuration>
@@ -40,7 +40,7 @@
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/StepByStep/ImageDiff</testSuiteEntity>
+         <testSuiteEntity>Test Suites/StepByStep/ImageDiff_step10 - ignoring specific web elements</testSuiteEntity>
       </TestSuiteRunConfiguration>
       <TestSuiteRunConfiguration>
          <configuration>
