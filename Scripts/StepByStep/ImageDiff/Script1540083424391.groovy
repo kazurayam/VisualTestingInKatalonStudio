@@ -26,10 +26,10 @@ MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
 // scan the ./Materials directory to make a list of MateriaPair object.
-// The 1st and 2nd latest TSuiteResult 'Test Suites/StepByStep/TS_step5' are looked up.
+// The 1st and 2nd latest TSuiteResult 'Test Suites/StepByStep/TS_step10' are looked up.
 // The list will be filtered to include PNG files only.
 List<MaterialPair> materialPairs = mr.createMaterialPairs(
-		new TSuiteName('Test Suites/StepByStep/TS_step5')
+		new TSuiteName('Test Suites/StepByStep/TS_step10')
 		).stream().filter { mp ->
 			mp.getLeft().getFileType() == FileType.PNG
 		}.collect(Collectors.toList())
