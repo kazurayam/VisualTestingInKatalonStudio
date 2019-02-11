@@ -49,7 +49,7 @@ class Assert {
 	 *
 	 */
 	@Keyword
-	static def assertEquals(String message, Number expected, Number actual, 
+	static def assertEquals(String message, Number expected, Number actual,
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
 		if (expected != actual) {
 			stepFailed(message, flowControl)

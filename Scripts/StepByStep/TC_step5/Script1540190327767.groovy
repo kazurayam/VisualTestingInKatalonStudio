@@ -2,7 +2,11 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import java.nio.file.Path
 
+import com.kazurayam.ksbackyard.ScreenshotDriver
+import com.kazurayam.ksbackyard.ScreenshotDriver.Options
+import com.kazurayam.ksbackyard.ScreenshotDriver.Options.Builder
 import com.kazurayam.materials.MaterialRepository
+import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
@@ -43,9 +47,22 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 WebUI.submit(findTestObject('StepByStep/Page_Google_search/input_q'))
 
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_result/div_g_1'), 10)
-WebUI.delay(1)
+WebUI.delay(3)
 Path fileR = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_result.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 	fileR.toFile())
+
+// take screenshot of Google Result page
+// and paint <div id="resultStats"> with a grey rectangle 
+// to ignore insignificant difference
+Path fileS = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID,
+									"search_result.ignoreStats.png")
+TestObject resultStats = findTestObject('StepByStep/Page_Google_result/div_resultStats')
+Builder builder = new ScreenshotDriver.Options.Builder()
+Options options = builder.timeout(300).addIgnoredElement(resultStats).build()
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
+	fileS.toFile(),
+	options)
+
 
 WebUI.closeBrowser()
