@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>TS_step10 - ignoring specific web elements</name>
+   <name>step10_TS</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <mailRecipient></mailRecipient>
@@ -14,6 +14,6 @@
       <guid>9c1cb1ea-bbe1-4faa-aff7-e035e4a2c25f</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/StepByStep/TC_step10 - ignoring specifc web elements</testCaseId>
+      <testCaseId>Test Cases/StepByStep/step10_TC</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

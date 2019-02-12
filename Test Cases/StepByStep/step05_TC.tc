@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TC_step5</name>
+   <name>step05_TC</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>98507c55-f22f-453f-91c9-49b29baa8d07</testCaseGuid>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>ImageDiff_step10 - ignoring specific web elements</name>
+   <name>step01_TC - start up</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>9aa056fa-c839-4113-aa9b-cc6131e3c203</testCaseGuid>
+   <testCaseGuid>2084f09d-c2c2-4e4b-b3ea-92b99ab55227</testCaseGuid>
 </TestCaseEntity>

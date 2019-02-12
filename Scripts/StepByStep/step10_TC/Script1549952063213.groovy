@@ -48,7 +48,7 @@ WebUI.submit(findTestObject('StepByStep/Page_Google_search/input_q'))
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_result/div_g_1'), 10)
 
 Path fileS = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID,
-									"search_result.ignoreStats.png")
+									"search_result-ignoreStats.png")
 
 /*
  *　Let's paint specific web elements grey to ignore

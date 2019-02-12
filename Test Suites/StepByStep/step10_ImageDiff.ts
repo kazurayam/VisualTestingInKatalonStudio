@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>ImageDiff_step10 - ignoring specific web elements</name>
+   <name>step10_ImageDiff</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <mailRecipient></mailRecipient>
@@ -14,6 +14,6 @@
       <guid>fef59b99-7157-4b21-ab14-c7b57d84fa84</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/StepByStep/ImageDiff_step10 - ignoring specific web elements</testCaseId>
+      <testCaseId>Test Cases/StepByStep/step10_ImageDiff</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

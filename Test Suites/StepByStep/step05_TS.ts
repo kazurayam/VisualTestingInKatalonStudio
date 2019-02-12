@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>TS_step5</name>
+   <name>step05_TS</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <mailRecipient></mailRecipient>
@@ -14,6 +14,6 @@
       <guid>0c703afa-2dc3-43c6-96d3-96facabe3431</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/StepByStep/TC_step5</testCaseId>
+      <testCaseId>Test Cases/StepByStep/step05_TC</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

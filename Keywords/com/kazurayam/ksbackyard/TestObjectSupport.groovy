@@ -15,7 +15,7 @@ import groovy.json.JsonOutput
  * @author kazurayam
  */
 class TestObjectSupport {
-	
+
 	/**
 	 * convert a TestObject object into a String in JSON format.
 	 * will list active properites only.
