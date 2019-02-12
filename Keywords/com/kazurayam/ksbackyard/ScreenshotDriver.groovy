@@ -40,6 +40,7 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 class ScreenshotDriver {
 
 	static private Boolean forceSnapshots_ = false
+	static private int DEFAULT_SCROLLING_TIMEOUT = 500
 
 	static void setForceSnapshots(Boolean wanted) {
 		forceSnapshots_ = wanted
@@ -59,35 +60,13 @@ class ScreenshotDriver {
 	 * @return BufferedImage
 	 */
 	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement) {
-		int timeout = 500
 		Screenshot screenshot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
-				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
+				shootingStrategy(ShootingStrategies.viewportPasting(DEFAULT_SCROLLING_TIMEOUT)).
 				takeScreenshot(webDriver, webElement)
 		return screenshot.getImage()
 	}
 
-
-	/**
-	 * This method is solely for DEBUGGING purpose.
-	 * This method calls com.kazurayam.ksbackyard.test.ashot.AshotMock class which is a copy of real AShot.
-	 * We will insert print statements to investigate the behavior of AShot.
-	 *
-	 * @param webDriver
-	 * @param webElement
-	 * @return
-	 *
-	 @Keyword
-	 static BufferedImage takeElementImage_mock(WebDriver webDriver, WebElement webElement)
-	 {
-	 int timeout = 500
-	 Screenshot screenshot = new AShotMock().
-	 coordsProvider(new WebDriverCoordsProvider()).
-	 shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
-	 takeScreenshot(webDriver, webElement)
-	 return screenshot.getImage()
-	 }
-	 */
 
 	/**
 	 * provides the same function as takeElementImage(WebDriver, WebElement).
@@ -103,14 +82,6 @@ class ScreenshotDriver {
 		return takeElementImage(webDriver, webElement)
 	}
 
-	/*
-	 static BufferedImage takeElementImage_mock(TestObject testObject)
-	 {
-	 WebDriver webDriver = DriverFactory.getWebDriver()
-	 WebElement webElement = WebUI.findWebElement(testObject, 30)
-	 return takeElementImage_mock(webDriver, webElement)
-	 }
-	 */
 
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
@@ -197,7 +168,7 @@ class ScreenshotDriver {
 	 * @param timeout millisecond, wait for page to be displayed stable after scrolling downward
 	 * @return BufferedImage
 	 */
-	static BufferedImage takeEntirePageImage(WebDriver webDriver, Integer timeout = 300)
+	static BufferedImage takeEntirePageImage(WebDriver webDriver, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
 	{
 		Screenshot screenshot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
@@ -227,7 +198,7 @@ class ScreenshotDriver {
 	 * @return
 	 */
 	@Keyword
-	static BufferedImage takeEntirePageImage(Integer timeout = 300)
+	static BufferedImage takeEntirePageImage(Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
 	{
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		return takeEntirePageImage(webDriver, timeout)
@@ -249,7 +220,7 @@ class ScreenshotDriver {
 	 * @param webElement
 	 * @param output
 	 */
-	static void saveEntirePageImage(WebDriver webDriver, File file, Integer timeout = 300)
+	static void saveEntirePageImage(WebDriver webDriver, File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
 	{
 		BufferedImage image = takeEntirePageImage(webDriver, timeout)
 		ImageIO.write(image, "PNG", file)
@@ -275,7 +246,7 @@ class ScreenshotDriver {
 	 * @param file
 	 */
 	@Keyword
-	static void saveEntirePageImage(File file, Integer timeout = 300)
+	static void saveEntirePageImage(File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
 	{
 		WebDriver driver = DriverFactory.getWebDriver()
 		saveEntirePageImage(driver, file, timeout)
@@ -291,7 +262,7 @@ class ScreenshotDriver {
 	 * @param webDriver
 	 * @param file
 	 */
-	static void takeEntirePage(WebDriver webDriver, File file, Integer timeout = 300)
+	static void takeEntirePage(WebDriver webDriver, File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
 	{
 		saveEntirePageImage(webDriver, file, timeout)
 	}
@@ -499,6 +470,8 @@ class ScreenshotDriver {
 	 */
 	static class Options {
 
+		static private int DEFAULT_SCROLLING_TIMEOUT = 500
+		
 		private int timeout
 		private List<TestObject> ignoredElements
 
@@ -508,12 +481,22 @@ class ScreenshotDriver {
 			private List<TestObject> ignoredElements
 
 			Builder() {
-				timeout = 300   // default is 300 milli seconds
+				timeout = DEFAULT_SCROLLING_TIMEOUT
 				ignoredElements = new ArrayList<TestObject>()   // no elements to ignore
 			}
+			/**
+			 * set scrolling timeout
+			 * @param value in millisecond. Optional. Defaults to 500 milli seconds
+			 * @return
+			 */
 			Builder timeout(int value) {
-				if (value < 0) throw new IllegalArgumentException("value(${value}) must not be negative")
-				if (value > 10000) throw new IllegalArgumentException("value(${value}) must be <= 10000 milli-seconds.")
+				if (value < 0) {
+					throw new IllegalArgumentException("value(${value}) must not be negative")
+				}
+				if (value > DEFAULT_SCROLLING_TIMEOUT * 10) {
+					throw new IllegalArgumentException("value(${value}) must be less than " +
+						"or equal to ${DEFAULT_SCROLLING_TIMEOUT * 10} milli-seconds.")
+				}
 				this.timeout = value
 				return this
 			}
