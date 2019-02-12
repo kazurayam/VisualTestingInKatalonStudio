@@ -41,22 +41,22 @@ WebUI.delay(1)
 //DONT Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
 Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
-	fileF.toFile())
+	fileF.toFile(),
+	1000)   // timeout: 500 mili second
 
 WebUI.submit(findTestObject('StepByStep/Page_Google_search/input_q'))
 
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_result/div_g_1'), 10)
 
 Path fileS = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID,
-									"search_result-ignoreStats.png")
-
+									"search_result.png")
 /*
  *　Let's paint specific web elements grey to ignore
  */
 TestObject resultStats = findTestObject('StepByStep/Page_Google_result/div_resultStats')
 
 Builder builder = new ScreenshotDriver.Options.Builder()
-Options options = builder.timeout(300).
+Options options = builder.timeout(1000).
 					addIgnoredElement(resultStats).    
 					// you can give multiple addIgnoreElement() here
 					build()          // don't forget to call build()

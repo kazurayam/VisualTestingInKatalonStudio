@@ -42,13 +42,15 @@ WebUI.delay(1)
 //DONT Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
 Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
-	fileF.toFile())
+	fileF.toFile(),
+	1000)
 
 WebUI.submit(findTestObject('StepByStep/Page_Google_search/input_q'))
 
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_result/div_g_1'), 10)
 Path fileR = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_result.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
-	fileR.toFile())
+	fileR.toFile(),
+	1000)
 
 WebUI.closeBrowser()
