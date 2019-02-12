@@ -36,17 +36,17 @@ WebUI.navigateToUrl(GlobalVariable.URL)
 
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_search/input_q'), 10)
 WebUI.setText(findTestObject('StepByStep/Page_Google_search/input_q'), 'katalon')
-WebUI.delay(1)
 
 //DONT Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
 Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 	fileF.toFile(),
-	1000)   // timeout: 500 mili second
+	1000)   // timeout: 1000 mili second
 
 WebUI.submit(findTestObject('StepByStep/Page_Google_search/input_q'))
-
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_result/div_g_1'), 10)
+
+WebUI.delay(3)   // wait for the page to settle down
 
 Path fileS = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID,
 									"search_result.png")
@@ -56,7 +56,7 @@ Path fileS = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID,
 TestObject resultStats = findTestObject('StepByStep/Page_Google_result/div_resultStats')
 
 Builder builder = new ScreenshotDriver.Options.Builder()
-Options options = builder.timeout(1000).
+Options options = builder.timeout(1500).    // 1500 milli seconds
 					addIgnoredElement(resultStats).    
 					// you can give multiple addIgnoreElement() here
 					build()          // don't forget to call build()

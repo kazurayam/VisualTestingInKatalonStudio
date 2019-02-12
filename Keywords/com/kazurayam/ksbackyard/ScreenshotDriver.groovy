@@ -513,7 +513,7 @@ class ScreenshotDriver {
 			}
 			Builder timeout(int value) {
 				if (value < 0) throw new IllegalArgumentException("value(${value}) must not be negative")
-				if (value > 1000) throw new IllegalArgumentException("value(${value}) is regared milli-seconds.")
+				if (value > 10000) throw new IllegalArgumentException("value(${value}) must be <= 10000 milli-seconds.")
 				this.timeout = value
 				return this
 			}

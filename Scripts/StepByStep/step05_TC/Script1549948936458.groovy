@@ -37,7 +37,7 @@ WebUI.navigateToUrl(GlobalVariable.URL)
 
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_search/input_q'), 10)
 WebUI.setText(findTestObject('StepByStep/Page_Google_search/input_q'), 'katalon')
-WebUI.delay(1)
+WebUI.delay(3)
 
 //DONT Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
 Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
@@ -47,10 +47,12 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 
 WebUI.submit(findTestObject('StepByStep/Page_Google_search/input_q'))
 
+WebUI.delay(3)   // wait for the page to settle down
+
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_result/div_g_1'), 10)
 Path fileR = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_result.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 	fileR.toFile(),
-	1000)
+	1500)
 
 WebUI.closeBrowser()
