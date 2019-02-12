@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>TS_step5</name>
+   <name>TS_step10 - ignoring specific web elements</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <mailRecipient></mailRecipient>
@@ -9,11 +9,11 @@
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>cfb97e3e-8bef-47b1-b8d3-7efe878b396d</testSuiteGuid>
+   <testSuiteGuid>10a8f6ad-4572-4876-97bc-6d4220918680</testSuiteGuid>
    <testCaseLink>
-      <guid>0c703afa-2dc3-43c6-96d3-96facabe3431</guid>
+      <guid>9c1cb1ea-bbe1-4faa-aff7-e035e4a2c25f</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/StepByStep/TC_step5</testCaseId>
+      <testCaseId>Test Cases/StepByStep/TC_step10 - ignoring specifc web elements</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

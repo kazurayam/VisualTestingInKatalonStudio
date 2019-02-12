@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_step10 - ignoring specifc web elements</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>912cefbe-d364-436c-a028-856242f3bc31</testCaseGuid>
+</TestCaseEntity>
