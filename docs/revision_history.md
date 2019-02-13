@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Revision History](#revision-history)
+  - [Changes from 1.6.0 to 1.8.0](#changes-from-160-to-180)
+  - [Changes from 1.4.1 to 1.6.0](#changes-from-141-to-160)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Revision History
 
 ## Changes from 1.6.0 to 1.8.0
