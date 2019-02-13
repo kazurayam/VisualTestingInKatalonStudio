@@ -23,6 +23,9 @@
     - [step08 : running ImageDiff to compare screenshots of two URLs](#step08--running-imagediff-to-compare-screenshots-of-two-urls)
     - [step09 : clearing ./Materials directory first](#step09--clearing-materials-directory-first)
     - [step10 : ignoring particular web elements](#step10--ignoring-particular-web-elements)
+      - [Limitation of the "ignoring web elements" feature](#limitation-of-the-ignoring-web-elements-feature)
+        - [Parameterized Test Object is not supported.](#parameterized-test-object-is-not-supported)
+        - [Test Object addressed to a web element inside `<iframe>` is not supported](#test-object-addressed-to-a-web-element-inside-iframe-is-not-supported)
   - [Conclusion](#conclusion)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -546,6 +549,50 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
 	fileS.toFile(),
 	options)
 ```
+
+#### Limitation of the "ignoring web elements" feature
+
+There are a few limitation.
+
+##### Parameterized Test Object is not supported.
+
+If you have ever read [Parameterize Web/Mobile Test Object Properties](https://docs.katalon.com/katalon-studio/docs/parameterize-webmobile-test-object-properties.html),
+you would want to write this:
+
+```
+Options option = builder.
+    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':1,'tdx':1]).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':1,'tdx':2]).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':1,'tdx':3]).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':2,'tdx':1]).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':2,'tdx':2]).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':2,'tdx':3]).
+    build()
+```
+
+where the TestObject 'Page_data_trx_tdx' has `Basic` Selctor Method with xpath
+`//div[@id='data']/table/tbody/tr[${trx}]/td[${tdx}]`.
+
+Unfortunately interpolating `${trx}`` to value (e.g, `1`) is not supported
+for building a `ScreenshotDriver.Options` object. Rather you have to define 6 indivisual
+TestObject with xpath WITHOUT ${trx} or ${tdx}, and write as follows:
+
+```
+Options option = builder.
+    addIgnoredElement(findTestObject('Page_data_tr1_td1')).
+    addIgnoredElement(findTestObject('Page_data_tr1_td2')).
+    addIgnoredElement(findTestObject('Page_data_tr1_td3')).
+    addIgnoredElement(findTestObject('Page_data_tr2_td1')).
+    addIgnoredElement(findTestObject('Page_data_tr2_td2')).
+    addIgnoredElement(findTestObject('Page_data_tr2_td3')).
+    build()
+```
+
+##### Test Object addressed to a web element inside `<iframe>` is not supported
+
+You can paint a `<iframe>` element as a whole. But unfortunately
+you can not select a single web element inside a `<iframe>` and paint it with
+a grey rectangle.
 
 ## Conclusion
 
