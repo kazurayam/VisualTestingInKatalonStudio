@@ -16,6 +16,6 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 WebUI.callTestCase(findTestCase('StepByStep/ImageDiff'),
 	[
 		'TESTSUITE_ID': 'StepByStep/step10_TS',
-		'CRITERIA_PERCANTAGE': '0.10'
+		'CRITERIA_PERCENTAGE': '0.10'
 	])
 
