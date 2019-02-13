@@ -561,12 +561,12 @@ you would want to write this:
 
 ```
 Options option = builder.
-    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':1,'tdx':1]).
-    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':1,'tdx':2]).
-    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':1,'tdx':3]).
-    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':2,'tdx':1]).
-    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':2,'tdx':2]).
-    addIgnoredElement(findTestObject('Page_data_trx_tdx'), ['trx':2,'tdx':3]).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx', ['trx':1,'tdx':1])).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx', ['trx':1,'tdx':2])).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx', ['trx':1,'tdx':3])).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx', ['trx':2,'tdx':1])).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx', ['trx':2,'tdx':2])).
+    addIgnoredElement(findTestObject('Page_data_trx_tdx', ['trx':2,'tdx':3])).
     build()
 ```
 
