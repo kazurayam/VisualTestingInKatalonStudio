@@ -11,7 +11,7 @@ You can find the full difference between the two versions at https://github.com/
 2. New class was added in the `Keywords` directory. This class is required by the revised `ScreenshotDriver`.
   - [`Keywords/com/kazurayam/ksbackyard/TestObjectSupport`](../Keywords/com/kazurayam/ksbackyard/TestObjectSupport.groovy)
 3. Some scripts as test case and test suites are added in oder to give an example of "ignoring web elements".
-  - [Test Cases/step10_TC](../ScriptsStepByStep/step10_TC/Script1549952063213.groovy)
+  - [Test Cases/step10_TC](../Scripts/StepByStep/step10_TC/Script1549952063213.groovy)
   - [Test Cases/step10_ImageDiff](../Scripts/StepByStep/step10_ImageDiff/Script1549948805708.groovy)
   - `Test Suites/StepByStep/step10_ImageDiff`
   - `Test Suites/StepByStep/step10_TS`
