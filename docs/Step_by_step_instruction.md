@@ -573,9 +573,10 @@ Options option = builder.
 where the TestObject 'Page_data_trx_tdx' has `Basic` Selctor Method with xpath
 `//div[@id='data']/table/tbody/tr[${trx}]/td[${tdx}]`.
 
-Unfortunately interpolating `${trx}`` to value (e.g, `1`) is not supported
-for building a `ScreenshotDriver.Options` object. Rather you have to define 6 indivisual
-TestObject with xpath WITHOUT ${trx} or ${tdx}, and write as follows:
+Unfortunately interpolating `${trx}` to value (e.g, `1`) is not supported
+for building a `ScreenshotDriver.Options` object. Rather you have to define
+6 individual TestObjects with xpath WITHOUT `${trx}` and `${tdx}`,
+and write your test case script as follows:
 
 ```
 Options option = builder.
@@ -590,9 +591,9 @@ Options option = builder.
 
 ##### Test Object addressed to a web element inside `<iframe>` is not supported
 
-You can paint a `<iframe>` element as a whole. But unfortunately
-you can not select a single web element inside a `<iframe>` and paint it with
-a grey rectangle.
+You can paint a `<iframe>` element in the target HTML as a whole.
+But unfortunately you can not select a single web element inside
+a `<iframe>` and paint it with a grey rectangle.
 
 ## Conclusion
 
