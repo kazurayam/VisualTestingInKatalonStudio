@@ -471,7 +471,7 @@ class ScreenshotDriver {
 	static class Options {
 
 		static private int DEFAULT_SCROLLING_TIMEOUT = 500
-		
+
 		private int timeout
 		private List<TestObject> ignoredElements
 
@@ -495,7 +495,7 @@ class ScreenshotDriver {
 				}
 				if (value > DEFAULT_SCROLLING_TIMEOUT * 10) {
 					throw new IllegalArgumentException("value(${value}) must be less than " +
-						"or equal to ${DEFAULT_SCROLLING_TIMEOUT * 10} milli-seconds.")
+					"or equal to ${DEFAULT_SCROLLING_TIMEOUT * 10} milli-seconds.")
 				}
 				this.timeout = value
 				return this

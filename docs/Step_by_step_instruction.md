@@ -2,7 +2,8 @@ Step by step instruction - how to create a visual testing project from scratch
 ===========
 
 - Author: kazurayam
-- Date: 22 November 2018
+- #2 Date: 14 Feb 2019
+- #1 Date: 22 November 2018
 
 ## Required Katalon Studio version
 
@@ -16,15 +17,17 @@ In this note, I will describe how you create a new Katalon Studio project and se
 
 I will create a Katalon Studio project where I do the following:
 
-1. take screenshots of 2 environments of your AUT (*Application Under Test*) = a pair of different URLs. As a test bed, we will use the Google Search ( https://www.google.com/ and https://www.google.co.jp/ ). We will make a single query with `q=katalon`
-2. compare screenshots to find visual differences
-3. make a HTML view of generated image files.
+1. take screenshots of 2 environments of your AUT (*Application Under Test*) = a pair of different URLs. As a test bed, we will use the Google Search:
+    - https://www.google.com/?q=katalon
+    - https://www.google.co.jp/?q=katalon
+2. compare each pairs of screenshots to find out any visual differences
+3. make a HTML file as the viewer of generated images.
 
-Here is a example output:
+Here is a example visual difference output:
 
 ![output](./images/StepByStep/step9_search_result.20181025_161316_google.com-20181025_161317_google.co.jp.%280.01%29.png)
 
-The 2 URLs were almost the same for 99.99% except 0.01% of difference. In the above image, you can find a very small area (just a few characters) is painted red. This section was the milliseconds taken for table search. *Without comparison by the tool, this difference would never be noticed.* :-)
+The 2 URLs were almost identical for 99.99% except 0.01% of difference. In the above image, you can find a very small area (just a few characters) is painted <span style="color: red; ">red</span>. This section was the milli-seconds taken for table search. *Without comparison by the tool, this difference would never be noticed.* :-)
 
 ## Preparation
 
@@ -41,7 +44,7 @@ You need to include 2 external jar files into the new project.
 
 1. `aShot` : WebDriver Screenshot utility. Its jar is public at the [MavenCentral repository](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4). Also you can reuse the `ashot-1.5.4.jar` contained in the demo project's [`Drivers`](../Drivers) directory.
 
-2. `Materials` : Utility that manages the `<project dir>/Materials` directory where you can store any files created by test cases in a well structured path format. The Materials-0.24.0.jar file is public at the [releases](https://github.com/kazurayam/Materials/releases) page. Also you can reuse the jar file contained in the demo project's [`Drivers`](../Drivers) directory.
+2. `Materials` : Utility that manages the `<project dir>/Materials` directory where you can store any files created by test cases in a well structured path format. The Materials-0.26.0.jar file is public at the [releases](https://github.com/kazurayam/Materials/releases) page. Also you can reuse the jar file contained in the demo project's [`Drivers`](../Drivers) directory.
 
 >Another project  [UsingMaterialsInKatalonStudio](https://github.com/kazurayam/UsingMaterialsInKatalonStudio) describes how to use the `Materials` library in detail.
 
@@ -72,11 +75,12 @@ Or if you want you make your own test listener, you can do so of course. Please 
 
 ### prep5: create Custom Keywords
 
-Following 3 Custom Keywords are required to carry out "Visual Testing". Please make the keyword files and copy the source from the demo project. You do no need to change the source at all.
+Following Custom Keywords are required to carry out "Visual Testing". Please make the keyword files and copy the source from the demo project. You do no need to change the source at all.
 
 1. [Keywords/com/kazurayam/ksbackyard/Assert](../Keywords/com/kazurayam/ksbackyard/Assert.groovy)
 2. [Keywords/com/kazurayam/ksbackyard/ImageCollectionDiffer](../Keywords/com/kazurayam/ksbackyard/ImageCollectionDiffer.groovy)
 3. [Keywords/com/kazurayam/ksbackyard/ScreenshotDriver](../Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy)
+4. [Keywords/com/kazurayam/ksbackyard/TestObjectSupport](../Keywords/com/kazurayam/ksbackyard/TestObjectSupport.groovy)
 
 The `ScreenshotDriver` keyword enables you to take page screenshot using [AShot API](https://github.com/yandex-qatools/ashot). The `ImageCollectionDiffer` keyword processes a List of pairs of screenshots and generates a set of difference image files. The `Assert` keyword is a utility to manage exceptional cases with logging and flow control.
 
