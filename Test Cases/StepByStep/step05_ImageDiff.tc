@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>ImageDiff</name>
+   <name>step05_ImageDiff</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>d77aa665-ad9d-448f-991f-ed7cdf97c671</testCaseGuid>
+   <testCaseGuid>e1db3db6-fe35-4e23-8d78-a5fa8bff1a3c</testCaseGuid>
    <variable>
       <defaultValue>'Test Suites/StepByStep/TS_step5'</defaultValue>
       <description></description>
-      <id>975d8bee-cc4f-4daf-a0d3-243d03453cef</id>
+      <id>65232107-9fc4-4be1-941c-690aed0e6bad</id>
       <masked>false</masked>
       <name>TESTSUITE_ID</name>
    </variable>
    <variable>
-      <defaultValue>0.50</defaultValue>
-      <description>unit: %</description>
-      <id>83bcd8e5-9af2-4c11-8237-9160216ea9ca</id>
+      <defaultValue>5.0</defaultValue>
+      <description>%</description>
+      <id>85f876e3-b202-40a6-a863-27e1a105ab19</id>
       <masked>false</masked>
       <name>CRITERIA_PERCENTAGE</name>
    </variable>

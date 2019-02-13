@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TC_step2 - Materials applied</name>
+   <name>step10_ImageDiff</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>674cc393-db27-4530-b737-ac021826e99a</testCaseGuid>
+   <testCaseGuid>9aa056fa-c839-4113-aa9b-cc6131e3c203</testCaseGuid>
 </TestCaseEntity>

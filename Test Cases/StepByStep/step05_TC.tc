@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TC_step3 - Entire page screenshot</name>
+   <name>step05_TC</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>f4bc1a2e-c4f4-4773-ad23-c6a217b21d39</testCaseGuid>
+   <testCaseGuid>98507c55-f22f-453f-91c9-49b29baa8d07</testCaseGuid>
 </TestCaseEntity>

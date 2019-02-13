@@ -3,7 +3,7 @@ package com.kazurayam.ksbackyard
 /**
  * Administrative class to keep track of the version number of
  * the ksbackyard release.
- * 
+ *
  * @author kazurayam
  */
 class Version {
@@ -21,7 +21,7 @@ class Version {
 	}
 
 	static int getReleaseVersionNum() {
-		return 19
+		return 22
 	}
 
 	static int getDevelopmentVersionNum() {

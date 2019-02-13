@@ -2,7 +2,11 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import java.nio.file.Path
 
+import com.kazurayam.ksbackyard.ScreenshotDriver
+import com.kazurayam.ksbackyard.ScreenshotDriver.Options
+import com.kazurayam.ksbackyard.ScreenshotDriver.Options.Builder
 import com.kazurayam.materials.MaterialRepository
+import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
@@ -33,19 +37,22 @@ WebUI.navigateToUrl(GlobalVariable.URL)
 
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_search/input_q'), 10)
 WebUI.setText(findTestObject('StepByStep/Page_Google_search/input_q'), 'katalon')
-WebUI.delay(1)
+WebUI.delay(3)
 
 //DONT Path fileFnamedByURL = mr.resolveScreenshotPath(GlobalVariable.CURRENT_TESTCASE_ID, urlF)
 Path fileF = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_form.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
-	fileF.toFile())
+	fileF.toFile(),
+	1000)
 
 WebUI.submit(findTestObject('StepByStep/Page_Google_search/input_q'))
 
+WebUI.delay(3)   // wait for the page to settle down
+
 WebUI.verifyElementPresent(findTestObject('StepByStep/Page_Google_result/div_g_1'), 10)
-WebUI.delay(1)
 Path fileR = mr.resolveMaterialPath(GlobalVariable.CURRENT_TESTCASE_ID, "search_result.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage'(
-	fileR.toFile())
+	fileR.toFile(),
+	1500)
 
 WebUI.closeBrowser()
