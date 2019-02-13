@@ -1,3 +1,32 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Step by step instruction - how to create a visual testing project from scratch](#step-by-step-instruction---how-to-create-a-visual-testing-project-from-scratch)
+  - [Required Katalon Studio version](#required-katalon-studio-version)
+  - [Overview](#overview)
+  - [Preparation](#preparation)
+    - [prep1: create a new Katalon Studio project](#prep1-create-a-new-katalon-studio-project)
+    - [prep2: resolve external dependencies](#prep2-resolve-external-dependencies)
+    - [prep3: create GlobalVariables for the Materials library](#prep3-create-globalvariables-for-the-materials-library)
+    - [prep4: create a Test Listener](#prep4-create-a-test-listener)
+    - [prep5: create Custom Keywords](#prep5-create-custom-keywords)
+  - [Creating your Visual Testing test](#creating-your-visual-testing-test)
+    - [Test scenario](#test-scenario)
+    - [step01 : A simple test case as starting point](#step01--a-simple-test-case-as-starting-point)
+    - [step02 : Resolve output file path using Materials library](#step02--resolve-output-file-path-using-materials-library)
+    - [step03 : Take entire page screen shots](#step03--take-entire-page-screen-shots)
+    - [step04 : Parameterize URL in question by Execution Profiles](#step04--parameterize-url-in-question-by-execution-profiles)
+    - [step05 : Identical file names](#step05--identical-file-names)
+    - [step06 : Introducing Test Suite Collection to activate a Test Suite multiple times using different profiles](#step06--introducing-test-suite-collection-to-activate-a-test-suite-multiple-times-using-different-profiles)
+    - [step07 : Make Materials/index.html](#step07--make-materialsindexhtml)
+    - [step08 : running ImageDiff to compare screenshots of two URLs](#step08--running-imagediff-to-compare-screenshots-of-two-urls)
+    - [step09 : clearing ./Materials directory first](#step09--clearing-materials-directory-first)
+    - [step10 : ignoring particular web elements](#step10--ignoring-particular-web-elements)
+  - [Conclusion](#conclusion)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Step by step instruction - how to create a visual testing project from scratch
 ===========
 
