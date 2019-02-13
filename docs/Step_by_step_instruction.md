@@ -575,7 +575,7 @@ where the TestObject 'Page_data_trx_tdx' has `Basic` Selctor Method with xpath
 
 Unfortunately interpolating `${trx}` to value (e.g, `1`) is not supported
 for building a `ScreenshotDriver.Options` object. Rather you have to define
-6 individual TestObjects with xpath WITHOUT `${trx}` and `${tdx}`,
+6 individual TestObjects with xpath WITHOUT placeholders `${trx}` and `${tdx}`,
 and write your test case script as follows:
 
 ```
