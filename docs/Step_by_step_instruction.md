@@ -507,7 +507,7 @@ You will find a small portion painted <span style="color: red; ">red</span>. Thi
 About 357,000 results (0.36 seconds)
 ```
 
-The turn-around time (0.36) is variable. www.google.com and www.google.co.jp tends show different value here. I am not interested in the turn-around time very much. The the visual difference caused by this varying statistics data is a noise for me. Therefore I want ignore this specific web element when I compare screen shots.
+The turn-around time (0.36) is variable. www.google.com and www.google.co.jp tends to show different value. The turn-around time is not interesting very much. The the visual difference caused by the statistics is a noise for visual image comparison. Therefore I want ignore this specific web element when I compare screen shots.
 
 You can modify the PNG image file: paint specific web elements with <span style="color:white; background-color:grey;">grey rectangles</span>.
 
