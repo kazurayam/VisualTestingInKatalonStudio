@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalVariableEntities>
    <description></description>
-   <name>default</name>
+   <name>DevelopmentEnv</name>
    <tag></tag>
-   <defaultProfile>true</defaultProfile>
+   <defaultProfile>false</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'http://www.47news.jp'</initValue>
-      <name>URL_PREFIX</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'demoaut.katalon.com'</initValue>
+      <initValue>'demoaut-mimic.kazurayam.com'</initValue>
       <name>Hostname</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

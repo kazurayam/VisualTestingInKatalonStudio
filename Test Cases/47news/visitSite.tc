@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>visitSite</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>a9dcae1b-04e4-49d1-8999-5afbd2b2ee73</testCaseGuid>
+   <variable>
+      <defaultValue>false</defaultValue>
+      <description></description>
+      <id>3499687e-65ea-4c3b-bde7-1dc745b7d0fd</id>
+      <masked>false</masked>
+      <name>DEBUG_MODE</name>
+   </variable>
+   <variable>
+      <defaultValue>1</defaultValue>
+      <description></description>
+      <id>e6ea7cf4-2f32-4a4c-a181-35bad53b84e0</id>
+      <masked>false</masked>
+      <name>DEBUG_MAX_PAGES</name>
+   </variable>
+</TestCaseEntity>
