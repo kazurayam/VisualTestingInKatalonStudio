@@ -17,3 +17,7 @@
 /Reports/
 /Materials/
 /tmp/
+
+# Gradle
+.gradle
+build/
