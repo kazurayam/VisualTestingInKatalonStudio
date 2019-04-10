@@ -23,9 +23,9 @@
       <testCaseId>Test Cases/VT/backupCurrentTSuiteResult</testCaseId>
    </testCaseLink>
    <testCaseLink>
-      <guid>76a06580-3cd4-4add-b804-a4d41d9c4784</guid>
+      <guid>cbec7f36-1c4f-4ede-ae10-35dbfc07d946</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/47news/restorePreviousScreenshots</testCaseId>
+      <testCaseId>Test Cases/CURA/restorePrevisousScreenshots</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

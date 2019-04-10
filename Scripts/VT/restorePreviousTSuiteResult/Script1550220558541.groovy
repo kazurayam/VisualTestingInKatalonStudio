@@ -28,19 +28,31 @@ int count = 0
 switch(STRATEGY) {   // is defined in the Variables tab
 	case 'last':
 		// restore tha last shot previous to the current
-		count = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
-		break
+	    try {
+		    count = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
+	    } catch (IllegalArgumentException e) {
+		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
+		}
+	    break
 		
 	case '1hourAgo':
 		// restore the shot of 1 hour ago or older
-		LocalDateTime base = LocalDateTime.now().minusHours(1)
-		count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+	    try {
+		    LocalDateTime base = LocalDateTime.now().minusHours(1)
+		    count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+	    } catch (IllegalArgumentException e) {
+		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
+		}
 		break
 		
 	case '18pmLastEvening':
 	    // restore the shot of last evenng 18:00 or older
-	    LocalDateTime base = LocalDateTime.now().minusDays(1)
-		count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
+	    try {
+	        LocalDateTime base = LocalDateTime.now().minusDays(1)
+		    count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
+	    } catch (IllegalArgumentException e) {
+		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
+		}
 		break
 		
 	default:
