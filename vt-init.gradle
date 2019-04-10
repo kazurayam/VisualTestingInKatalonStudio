@@ -30,7 +30,7 @@ ext {
 
     VT_COMPONENTS_FILENAME   = 'vt-components.zip'
     VT_EXAMPLE_FILENAME      = 'vt-example.zip'
-    VT_VERSION               = '1.8.1'
+    VT_VERSION               = '1.9.2'
 }
 
 
