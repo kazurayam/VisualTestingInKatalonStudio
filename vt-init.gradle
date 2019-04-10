@@ -47,17 +47,21 @@ def downloadFile = { String remoteUrl->
   return outFile
 }
 
-task unzipVTComponents(type: Copy) {
-  from zipTree(downloadFile("https://github.com/kazurayam/VisualTestingInKatalonStudio/releases/download/${VT_VERSION}/${VT_COMPONENTS_FILENAME}"))
-  into file("${targetDir}")
-  eachFile { String s = it.toString(); println "\"${s.substring(s.indexOf('!') + 1)}\"" }
+task unzipVTComponents {
+  copy {
+    from zipTree(downloadFile("https://github.com/kazurayam/VisualTestingInKatalonStudio/releases/download/${VT_VERSION}/${VT_COMPONENTS_FILENAME}"))
+    into file("${targetDir}")
+    eachFile { String s = it.toString(); println "\"${s.substring(s.indexOf('!') + 1)}\"" }
+  }
 }
 
 
-task unzipVTExample(type: Copy) {
-  from zipTree(downloadFile("https://github.com/kazurayam/VisualTestingInKatalonStudio/releases/download/${VT_VERSION}/${VT_EXAMPLE_FILENAME}"))
-  into file("${targetDir}")
-  eachFile { String s = it.toString(); println "\"${s.substring(s.indexOf('!') + 1)}\"" }
+task unzipVTExample {
+  copy {
+    from zipTree(downloadFile("https://github.com/kazurayam/VisualTestingInKatalonStudio/releases/download/${VT_VERSION}/${VT_EXAMPLE_FILENAME}"))
+    into file("${targetDir}")
+    eachFile { String s = it.toString(); println "\"${s.substring(s.indexOf('!') + 1)}\"" }
+  }
 }
 
 task importVT {
@@ -67,7 +71,7 @@ task importVT {
 
 task importDrivers(type: GradleBuild) {
   buildFile = "${targetDir}/vt-drivers.gradle"
-  tasks = [ 'build' ]
+  tasks = [ 'drivers' ]
 }
 
 importVT.finalizedBy('importDrivers')
