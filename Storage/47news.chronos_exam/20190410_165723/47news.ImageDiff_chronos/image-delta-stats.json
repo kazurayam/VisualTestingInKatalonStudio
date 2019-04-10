@@ -1,0 +1,331 @@
+{
+    "storageScannerOptions": {
+        "shiftCriteriaPercentageBy": 1.0,
+        "filterDataLessThan": 1.0,
+        "maximumNumberOfImageDeltas": 10,
+        "onlySince": "19990101_000000",
+        "onlySinceInclusive": true,
+        "probability": 0.95,
+        "projectDirectory": "",
+        "previousImageDeltaStats": "C:\\Users\\qcq0264\\katalon-workspace\\VisualTestingInKatalonStudio\\Storage\\47news.chronos_exam\\20190410_165533\\47news.ImageDiff_chronos\\image-delta-stats.json"
+    },
+    "imageDeltaStatsEntries": [
+        {
+            "TSuiteName": "47news.chronos_capture",
+            "materialStatsList": [
+                {
+                    "path": "47news.visitSite/47reporters.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 0.10,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/culture.png",
+                    "degree": 1,
+                    "sum": 6.08,
+                    "mean": 6.08,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 6.08,
+                        "uppderBound": 6.08,
+                        "confidenceLevel": 0.95
+                    },
+                    "criteriaPercentage": 7.09,
+                    "data": [
+                        6.08
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 6.08,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/economics.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 0.07,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/localnews.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 0.07,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/national.png",
+                    "degree": 1,
+                    "sum": 6.69,
+                    "mean": 6.69,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 6.69,
+                        "uppderBound": 6.69,
+                        "confidenceLevel": 0.95
+                    },
+                    "criteriaPercentage": 7.70,
+                    "data": [
+                        6.69
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 6.69,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/news.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 0.08,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/photo.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 0.00,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/politics.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 0.03,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/ranking.png",
+                    "degree": 1,
+                    "sum": 2.31,
+                    "mean": 2.31,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 2.31,
+                        "uppderBound": 2.31,
+                        "confidenceLevel": 0.95
+                    },
+                    "criteriaPercentage": 3.32,
+                    "data": [
+                        2.31
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 2.31,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/sports.png",
+                    "degree": 1,
+                    "sum": 1.53,
+                    "mean": 1.53,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 1.53,
+                        "uppderBound": 1.53,
+                        "confidenceLevel": 0.95
+                    },
+                    "criteriaPercentage": 2.54,
+                    "data": [
+                        1.53
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 1.53,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/top.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 0.01,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/world.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20190410_165722",
+                            "b": "20190410_165532",
+                            "d": 0.12,
+                            "cached": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

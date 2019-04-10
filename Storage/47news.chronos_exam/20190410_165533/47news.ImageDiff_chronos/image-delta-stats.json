@@ -1,0 +1,271 @@
+{
+    "storageScannerOptions": {
+        "shiftCriteriaPercentageBy": 1.0,
+        "filterDataLessThan": 1.0,
+        "maximumNumberOfImageDeltas": 10,
+        "onlySince": "19990101_000000",
+        "onlySinceInclusive": true,
+        "probability": 0.95,
+        "projectDirectory": "",
+        "previousImageDeltaStats": "C:\\Users\\qcq0264\\katalon-workspace\\VisualTestingInKatalonStudio"
+    },
+    "imageDeltaStatsEntries": [
+        {
+            "TSuiteName": "47news.chronos_capture",
+            "materialStatsList": [
+                {
+                    "path": "47news.visitSite/47reporters.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/culture.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/economics.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/localnews.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/national.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/news.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/photo.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/politics.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/ranking.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/sports.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/top.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                },
+                {
+                    "path": "47news.visitSite/world.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 1.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        
+                    ]
+                }
+            ]
+        }
+    ]
+}

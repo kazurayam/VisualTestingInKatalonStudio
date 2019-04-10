@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalVariableEntities>
    <description></description>
-   <name>default</name>
+   <name>ProductionEnv</name>
    <tag></tag>
-   <defaultProfile>true</defaultProfile>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'http://www.47news.jp'</initValue>
-      <name>URL_PREFIX</name>
-   </GlobalVariableEntity>
+   <defaultProfile>false</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
       <initValue>'demoaut.katalon.com'</initValue>

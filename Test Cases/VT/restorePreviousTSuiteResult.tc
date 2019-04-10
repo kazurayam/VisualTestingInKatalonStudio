@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>restorePreviousTSuiteResult</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>5023572c-a2e6-4fb0-ab7a-62b0417c6e33</testCaseGuid>
+   <variable>
+      <defaultValue>'last'</defaultValue>
+      <description></description>
+      <id>737523c0-e55e-4415-a49c-9d1015dee824</id>
+      <masked>true</masked>
+      <name>STRATEGY</name>
+   </variable>
+</TestCaseEntity>

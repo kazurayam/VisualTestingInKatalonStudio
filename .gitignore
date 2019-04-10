@@ -8,11 +8,16 @@
 /\.classpath
 /\.project
 /\.settings/
-/bin/lib/
+/bin/
 /Libs/
+/Drivers/
+/settings/
 
 ## I do not want Report to be published
 /Reports/
 /Materials/
 /tmp/
-/bin/
+
+# Gradle
+.gradle
+build/
