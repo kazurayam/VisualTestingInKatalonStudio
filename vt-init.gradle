@@ -1,0 +1,79 @@
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+
+
+/**
+ * vt-init.gradle
+ *
+ * execute this with --project-cache-dir
+ * <PRE>
+ * $ cd $projectDir
+ * $ ./gradlew -b vt-init.gradle --project-cache-dir=../cache
+ * </PRE>
+ *
+ * otherwise you will get error from Gradle
+ * <PRE>
+ * $ ./gradlew -b vt-init.gradle --stacktrace
+ * > Task :unzipVTComponents FAILED
+ *
+ * FAILURE: Build failed with an exception.
+ *
+ * * What went wrong:
+ * Execution failed for task ':unzipVTComponents'.
+ * > Failed to create MD5 hash for file content.
+ * </PRE>
+ */
+ext {
+    targetDir = project.projectDir
+    //targetDir = project.buildDir  // for debug
+
+    VT_COMPONENTS_FILENAME   = 'vt-components.zip'
+    VT_EXAMPLE_FILENAME      = 'vt-example.zip'
+    VT_VERSION               = '1.9.2'
+}
+
+
+def downloadFile = { String remoteUrl->
+  Path dir = Files.createTempDirectory('vt-temp')  // dir will be created under System.getProperty("java.io.tmpdir")
+  File outFile = dir.resolve("${remoteUrl.tokenize('/')[-1]}").toFile()
+  //println "outFile is ${outFile}"
+  outFile.withOutputStream { out ->
+    new URL(remoteUrl).withInputStream { from ->
+      out << from
+    }
+  }
+  // println "downloaded ${remoteUrl} into ${outFile}"
+  return outFile
+}
+
+task unzipVTComponents {
+  copy {
+    from zipTree(downloadFile("https://github.com/kazurayam/VisualTestingInKatalonStudio/releases/download/${VT_VERSION}/${VT_COMPONENTS_FILENAME}"))
+    into file("${targetDir}")
+    eachFile { String s = it.toString(); println "\"${s.substring(s.indexOf('!') + 1)}\"" }
+  }
+}
+
+
+task unzipVTExample {
+  copy {
+    from zipTree(downloadFile("https://github.com/kazurayam/VisualTestingInKatalonStudio/releases/download/${VT_VERSION}/${VT_EXAMPLE_FILENAME}"))
+    into file("${targetDir}")
+    eachFile { String s = it.toString(); println "\"${s.substring(s.indexOf('!') + 1)}\"" }
+  }
+}
+
+task importVT {
+  dependsOn unzipVTComponents
+  dependsOn unzipVTExample
+}
+
+task importDrivers(type: GradleBuild) {
+  buildFile = "${targetDir}/vt-drivers.gradle"
+  tasks = [ 'drivers' ]
+}
+
+importVT.finalizedBy('importDrivers')
+
+defaultTasks = [ 'importVT' ]
