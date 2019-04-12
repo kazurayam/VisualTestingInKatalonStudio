@@ -16,6 +16,7 @@
 ## I do not want Report to be published
 /Reports/
 /Materials/
+/Storage/
 /tmp/
 
 # Gradle

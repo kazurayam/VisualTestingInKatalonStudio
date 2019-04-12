@@ -6,7 +6,7 @@ import com.kazurayam.visualtesting.ImageCollectionDifferDriver.ChronosOptions
  */
 String TESTSUITE_ID = 'CURA/chronos_capture'
 ChronosOptions options = new ChronosOptions.Builder().
-							filterDataLessThan(1.0).
+							filterDataLessThan(0.05).
 							shiftCriteriaPercentageBy(3.0).
 							build()
 

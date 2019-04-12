@@ -55,6 +55,7 @@
         <br>
         <a id="btn-make-appointment" href="http://demoaut.katalon.com/profile.php#login" class="btn btn-dark btn-lg">Make Appointment</a>
         <h2 style="background-color:white;">THIS IS A MIMIC FOR DEMONSTRATION PURPOSE</h2>
+        <h1><span id="clock"></span> UTC</h1>
     </div>
 </header>
 
@@ -99,11 +100,15 @@
 
 <script>
   d = new Date();
+  /**
+   * make the background image a bit dark sometimes;
+   */
   ss = d.getSeconds()
-  if (getParam('demo')=='yes' || ss % 2 == 0) {
+  factor = 5
+  if (getParam('demo')=='yes' || ss % factor == 0) {
       $('#top > div').css('background-color', 'rgba(0,0,0,.3)')
   }
-  
+
   /**
    * Get the URL parameter value
    */
@@ -111,13 +116,24 @@
       if (!url) url = window.location.href;
       name = name.replace(/[\[\]]/g, "\\$&");
       var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-	  results = regex.exec(url);
+	        results = regex.exec(url);
       if (!results) return null;
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
+
+  /**
+   * display the current timestamp in the format of "07:22:13"
+   */
+  $(document).ready(function() {
+    var m = new Date();
+    var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+
+                     m.getUTCDate() + " " + m.getUTCHours() + ":" +
+                    m.getUTCMinutes() + ":" + m.getUTCSeconds();
+    $('#clock').text(dateString);
+  })
+
 </script>
 
 </body>
 </html>
-

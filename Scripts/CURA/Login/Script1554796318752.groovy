@@ -26,7 +26,12 @@ WebUI.setText(findTestObject('KatalonDemoAut/Page_Login/input_username'), Userna
 WebUI.setText(findTestObject('KatalonDemoAut/Page_Login/input_password'), Password)
 
 // takes Screenshot of the Login page
-Path png2 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Login.png")
+//Path png2 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Login.png")
+Path png2 = mr.resolveScreenshotPathByURLPathComponents(
+	GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+	new URL(WebUI.getUrl()),
+	0,
+	'top.png')
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
 
 WebUI.click(findTestObject('KatalonDemoAut/Page_Login/button_Login'))

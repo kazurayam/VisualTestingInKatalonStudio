@@ -24,19 +24,21 @@ WebUI.openBrowser('')
 WebUI.setViewPortSize(1024, 768)
 WebDriver driver = DriverFactory.getWebDriver()
 
-if (RunConfiguration.getExecutionProfile() == 'develop') {
-	// open the mimic CURA Homepage and take entire page screenshot
-	WebUI.navigateToUrl('http://demoaut-mimic.kazurayam.com')
-} else {
-	// open the production CURA Homepage and take entire page screenshot
-	WebUI.navigateToUrl("http://${GlobalVariable.Hostname}/")
-}
+assert GlobalVariable.Hostname != null
+URL url = new URL("http://${GlobalVariable.Hostname}/")
+
+WebUI.navigateToUrl(url.toExternalForm())
 WebUI.verifyElementPresent(findTestObject('KatalonDemoAut/Page_CuraHomepage/a_Make Appointment'),
 		10, FailureHandling.STOP_ON_FAILURE)
 
 WebUI.delay(1)
 
-Path png1 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Homepage.png")
+//Path png1 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Homepage.png")
+Path png1 = mr.resolveScreenshotPathByURLPathComponents(
+					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					url,
+					0,
+					'home')
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png1.toFile(), 500)
 
 
@@ -68,7 +70,11 @@ WebUI.setText(findTestObject('KatalonDemoAut/Page_CuraAppointment/textarea_comme
 
 
 // takes Screenshot of the CURA Appointment page
-Path png3 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Appointment.png")
+//Path png3 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Appointment.png")
+Path png3 = mr.resolveScreenshotPathByURLPathComponents(
+					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					new URL(WebUI.getUrl()),
+					0)
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png3.toFile(), 500)
 
 
@@ -112,7 +118,11 @@ if (comment != null) {
 }
 
 // takes Screenshot of the Appointment Confirmation page
-Path png4 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_AppointmentConfirmation.png")
+//Path png4 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_AppointmentConfirmation.png")
+Path png4 = mr.resolveScreenshotPathByURLPathComponents(
+					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					new URL(WebUI.getUrl()),
+					0)
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png4.toFile(), 500)
 
 
@@ -124,7 +134,12 @@ WebUI.verifyElementPresent(findTestObject('KatalonDemoAut/Page_CuraHomepage/a_Ma
 	10, FailureHandling.STOP_ON_FAILURE)
 
 // takes Screenshot of the Homepage revisited
-Path png5 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Homepage_revisited.png")
+//Path png5 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Homepage_revisited.png")
+Path png5 = mr.resolveScreenshotPathByURLPathComponents(
+					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					new URL(WebUI.getUrl()),
+					0,
+					'revisited')
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png5.toFile(), 500)
 
 WebUI.closeBrowser()
