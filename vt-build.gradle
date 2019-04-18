@@ -100,13 +100,11 @@ task createVTExampleZip(type: Zip) {
     
     // include sample codes of capturing web pages and examining image pairs 
     from(".") {
-        include "Object Repository/47news/**"
-        include "Test Cases/47news/**"
-	include "Scripts/47news/**"
-	include "Test Suites/47news/**"
-	include "Profiles/**"
-	include "Data Files/URL_SUBPATHS*"
-        include "Include/resources/URL_SUBPATHS*"
+        include "Object Repository/CURA/**"
+        include "Test Cases/CURA/**"
+	include "Scripts/CURA/**"
+	include "Test Suites/CURA/**"
+	include "Profiles/**/CURA*"
     }
 }
 
