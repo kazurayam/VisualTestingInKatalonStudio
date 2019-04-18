@@ -18,7 +18,7 @@
       <TestSuiteRunConfiguration>
          <configuration>
             <groupName>Web Desktop</groupName>
-            <profileName>DevelopmentEnv</profileName>
+            <profileName>CURA_DevelopmentEnv</profileName>
             <runConfigurationId>Firefox</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
