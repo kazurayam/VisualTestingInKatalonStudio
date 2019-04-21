@@ -47,7 +47,6 @@ task publishGroovydoc(type: Copy) {
 groovydoc.finalizedBy publishGroovydoc
 
 
-
 // ===== tasks to generate zip files for distributing Visual Testing in Katalon Studio =====
 
 task cleanDist() {
@@ -64,12 +63,12 @@ task createGradlewPackaged(type: Zip) {
     from(".") {
         // include the gradle wrapper
         include "gradlew"
-	include "gradlew.bat"
-	include "gradlewks.bat"    // customized launcher using Java bundled in %KATALONSTUDIO_HOME%\jre
-	include "gradle/**/*"
-	
-	// include initializing script for Visual Testing in Katalon Studio
-	include "vt-init.gradle"
+        include "gradlew.bat"
+        include "gradlewks.bat"    // customized launcher using Java bundled in %KATALONSTUDIO_HOME%\jre
+        include "gradle/**/*"
+
+        // include initializing script for Visual Testing in Katalon Studio
+        include "vt-init.gradle"
     }
 }
 
@@ -79,13 +78,13 @@ task createVTComponentsZip(type:Zip) {
     destinationDirectory = file("$buildDir/dist")
     // include Visual Testing components
     from (".") {
-    	include "vt-drivers.gradle"
+        include "vt-drivers.gradle"
         include "Test Cases/VT/**"
-	include "Scripts/VT/**"
-	include "Test Listeners/*"
-	include "Test Suites/VT/**"
-	include "Keywords/com/kazurayam/visualtesting/**"
-	include "run-console-mode.*"
+        include "Scripts/VT/**"
+        include "Test Listeners/*"
+        include "Test Suites/VT/**"
+        include "Keywords/com/kazurayam/visualtesting/**"
+        include "run-console-mode.*"
     }
 
     // include Git related configurations
@@ -97,14 +96,14 @@ task createVTComponentsZip(type:Zip) {
 task createVTExampleZip(type: Zip) {
     archiveFileName = "vt-example.zip"
     destinationDirectory = file("$buildDir/dist")
-    
-    // include sample codes of capturing web pages and examining image pairs 
+
+    // include sample codes of capturing web pages and examining image pairs
     from(".") {
         include "Object Repository/CURA/**"
         include "Test Cases/CURA/**"
-	include "Scripts/CURA/**"
-	include "Test Suites/CURA/**"
-	include "Profiles/**/CURA*"
+        include "Scripts/CURA/**"
+        include "Test Suites/CURA/**"
+        include "Profiles/**/CURA*"
     }
 }
 
