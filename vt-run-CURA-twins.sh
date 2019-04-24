@@ -6,7 +6,7 @@ PROJECT_DIR=$(pwd)
 echo PROJECT_DIR="$PROJECT_DIR"
 
 cd "$KATALONSTUDIO_HOME"
-./katalon -noSplash -runMode=console -summaryReport -projectPath="$PROJECT_DIR" -testSuiteCollectionPath="Test Suites/47news/Execute_chronos_headless" -reportFolder="Reports" -reportFileName=console_mode
+./katalon -noSplash -runMode=console -summaryReport -projectPath="$PROJECT_DIR" -testSuiteCollectionPath="Test Suites/CURA/Execute_twins_headless" -reportFolder="Reports" -reportFileName=console_mode
 exitCode=$?
 cd "$PROJECT_DIR"
 
