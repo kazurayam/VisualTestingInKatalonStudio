@@ -1,0 +1,78 @@
+// load the plugin via the Maval Local repository
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath "com.kazurayam:visualtestinginks:0.1.0"
+    }
+}
+apply plugin: 'com.github.kazurayam.visualtestinginks'
+
+// once your plugin is restered into the Gradle Plugin Portal https://plugins.gradle.org/ you can load it by plugins DSL as follows:
+//plugins {
+//    id "com.github.kazurayam.visualtestinginks" version="0.1.0"
+//}
+
+
+// The developer (kazurayam, it's me!) can generate
+// 1. build/dist/packaged-gradlew.zip
+// 2. build/dist/vt-components.zip
+// 3. build/dist/vt-examples.zip
+// by executing the following command:
+//     $ .\gradlewks.bat distributables
+//
+// once the distributables are generated, the developer should upload them
+// onto the Releases page of the project on Github at
+// https://github.com/kazurayam/VisualTestingInKatalonStudio/releases
+
+
+
+// ---------------------------------------------------------------------
+// codes for generating groovydoc
+
+apply plugin: 'groovy'
+
+ext {
+    groovyVersion   = '2.4.7'
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['Keywords', 'Include/scripts/groovy']
+	    srcDir 'Libs'
+        }
+    }
+}
+
+configurations {
+    generateDocs
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    generateDocs "org.codehaus.groovy:groovy-all:${groovyVersion}"
+}
+
+/**
+ * generate Groovydoc for the com.kazurayam.visualtesting package
+ */
+task groovydoc(type: Groovydoc, overwrite: true) {
+    source = sourceSets.main.groovy
+    classpath = configurations.compile
+    groovyClasspath = project.configurations.generateDocs
+    include 'com/kazurayam/visualtesting/*'
+    exclude '**/*Test.groovy'
+}
+task publishGroovydoc(type: Copy) {
+    from 'build/docs/groovydoc'
+    into 'docs/api'
+}
+groovydoc.finalizedBy publishGroovydoc
