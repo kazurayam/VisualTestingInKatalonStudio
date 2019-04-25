@@ -6,14 +6,16 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath "com.kazurayam:visualtestinginks:0.1.0"
+        classpath "com.kazurayam:visualtestinginks:0.1.1"
     }
 }
 apply plugin: 'com.github.kazurayam.visualtestinginks'
 
+vt.version = '1.10.0'
+
 // once your plugin is restered into the Gradle Plugin Portal https://plugins.gradle.org/ you can load it by plugins DSL as follows:
 //plugins {
-//    id "com.github.kazurayam.visualtestinginks" version="0.1.0"
+//    id "com.github.kazurayam.visualtestinginks" version="0.1.1"
 //}
 
 
@@ -30,6 +32,10 @@ apply plugin: 'com.github.kazurayam.visualtestinginks'
 
 
 
+
+
+
+
 // ---------------------------------------------------------------------
 // codes for generating groovydoc
 
@@ -43,7 +49,7 @@ sourceSets {
     main {
         groovy {
             srcDirs = ['Keywords', 'Include/scripts/groovy']
-	    srcDir 'Libs'
+            srcDir 'Libs'
         }
     }
 }
