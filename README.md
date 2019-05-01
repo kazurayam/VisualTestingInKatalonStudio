@@ -128,13 +128,13 @@ The output of `Execute_chronos` is just similart to the one created by `Execute_
 
 ## How to make your Katalon Studio project capable of *Visual Testing*
 
-Are you interested in this? Do you want to the same in your own Katalon Studio project?
+Are you interested in this? Do you want to do similar screenshot-comparison testing against your own Application Under Test in your own Katalon Studio project?
 
 The following page describes how to import `Test Suites/CURA/Execute_twins` and `Test Suites/CURA/Execute_chrones` into your own Katalon Studio project:
 
 - [visualtestinginks --- a Gradle Plugin](https://github.com/kazurayam/visualtestinginks-gradle-plugin)
 
-You can develop screenshot-comparison testing against your own Application Under test (Web site). You make a copy of "CURA" and rename it to your own AUT name. And modify the code as you want. The following page describe how to getting started with custom Visual Testing.
+You can make a copy of "CURA" resources and rename them to your own AUT symbol. You want to modify the code as you want to accomplish your own Visual Testing. The following page describe how to getting started with customization.
 
 - [customVisualTesting](docs/customVisualTesting.md)
 
