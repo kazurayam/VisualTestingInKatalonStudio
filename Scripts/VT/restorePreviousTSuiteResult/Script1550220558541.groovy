@@ -20,21 +20,21 @@ import java.time.LocalDateTime
 
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
 MaterialStorage    ms = (MaterialStorage)   GlobalVariable[MGV.MATERIAL_STORAGE.getName()]
-TSuiteName tsn        = new TSuiteName(mr.getCurrentTestSuiteId()) 
+TSuiteName tsn        = new TSuiteName(mr.getCurrentTestSuiteId())
 TSuiteTimestamp tst   = TSuiteTimestamp.newInstance(mr.getCurrentTestSuiteTimestamp())
 
 int count = 0
 
 switch(STRATEGY) {   // is defined in the Variables tab
 	case 'last':
-		// restore tha last shot previous to the current
+		// restore the last shot previous to the current
 	    try {
 		    count = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
 	    } catch (IllegalArgumentException e) {
 		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
 	    break
-	
+
 	case '10minutesAgo':
 		// restore the shot of 1 hour ago or older
 		try {
@@ -64,7 +64,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
 		break
-	
+
 	case '2hoursAgo':
 		// restore the shot of 2 hours ago or older
 		try {
@@ -74,7 +74,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
 		break
-		
+
 	case '6amToday':
 	    // restore the shot taken before 6AM today
 	    try {
@@ -84,7 +84,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
 	    }
 	    break
-		
+
 	case '9amToday':
 		// restore the shot taken before 6AM today
 		try {
@@ -136,7 +136,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		break
 
 	case '18pmLastEvening':
-		// restore the shot of last evenng 18:00 or older
+		// restore the shot of last evening 18:00 or older
 		try {
 			LocalDateTime base = LocalDateTime.now().minusDays(1)
 			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
@@ -147,6 +147,6 @@ switch(STRATEGY) {   // is defined in the Variables tab
 
 	default:
 		KeywordUtil.markFailedAndStop("unknown STRATEGY: ${STRATEGY}")
-} 
+}
 
 WebUI.comment("copied ${count} files from ${mr.getBaseDir().toString()} to ${ms.getBaseDir().toString()}")
