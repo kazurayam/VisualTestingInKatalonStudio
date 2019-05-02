@@ -1,3 +1,24 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Visual Testing in Katalon Studio](#visual-testing-in-katalon-studio)
+  - [Overview of this project](#overview-of-this-project)
+  - [Motivation](#motivation)
+  - [Technical issues](#technical-issues)
+  - [Solutions](#solutions)
+  - [How to run the build-in examples](#how-to-run-the-build-in-examples)
+    - [Execute_twins](#execute_twins)
+      - [Input](#input)
+      - [Output](#output)
+    - [Execute_chronos](#execute_chronos)
+      - [Input](#input-1)
+      - [Output](#output-1)
+  - [How to make your Katalon Studio project capable of *Visual Testing*](#how-to-make-your-katalon-studio-project-capable-of-visual-testing)
+- [Revision history](#revision-history)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Visual Testing in Katalon Studio
 ======
 
@@ -138,6 +159,9 @@ You can make a copy of "CURA" resources and rename them to your own AUT symbol. 
 
 - [customVisualTesting](docs/customVisualTesting.md)
 
+## other notes
+
+[Miscellaneous](docs/miscSpecifications.md)
 
 # Revision history
 
