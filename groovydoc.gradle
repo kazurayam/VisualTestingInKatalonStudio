@@ -1,0 +1,48 @@
+// ---------------------------------------------------------------------
+// codes for generating groovydoc
+
+apply plugin: 'groovy'
+
+ext {
+    groovyVersion   = '2.4.7'
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['Keywords', 'Include/scripts/groovy']
+            srcDir 'Libs'
+        }
+    }
+}
+
+configurations {
+    generateDocs
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    generateDocs "org.codehaus.groovy:groovy-all:${groovyVersion}"
+}
+
+/**
+ * generate Groovydoc for the com.kazurayam.visualtesting package
+ */
+task groovydoc(type: Groovydoc, overwrite: true) {
+    source = sourceSets.main.groovy
+    classpath = configurations.compile
+    groovyClasspath = project.configurations.generateDocs
+    include 'com/kazurayam/visualtesting/*'
+    exclude '**/*Test.groovy'
+}
+task publishGroovydoc(type: Copy) {
+    from 'build/docs/groovydoc'
+    into 'docs/api'
+}
+groovydoc.finalizedBy publishGroovydoc
+
+defaultTasks 'groovydoc'

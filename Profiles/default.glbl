@@ -4,29 +4,4 @@
    <name>default</name>
    <tag></tag>
    <defaultProfile>true</defaultProfile>
-   <GlobalVariableEntity>
-      <description>e.g., 'Test Cases/TC1'</description>
-      <initValue>''</initValue>
-      <name>CURRENT_TESTCASE_ID</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>null</initValue>
-      <name>MATERIAL_REPOSITORY</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'demoaut.katalon.com'</initValue>
-      <name>Hostname</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'John Doe'</initValue>
-      <name>Username</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'ThisIsNotAPassword'</initValue>
-      <name>Password</name>
-   </GlobalVariableEntity>
 </GlobalVariableEntities>

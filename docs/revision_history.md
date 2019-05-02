@@ -3,12 +3,23 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Revision History](#revision-history)
+  - [Changes from 1.10.0 to 1.12.0](#changes-from-1100-to-1120)
+  - [Changes from 1.8.0 to 1.10.0](#changes-from-180-to-1100)
   - [Changes from 1.6.0 to 1.8.0](#changes-from-160-to-180)
   - [Changes from 1.4.1 to 1.6.0](#changes-from-141-to-160)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Revision History
+
+## Changes from 1.10.0 to 1.12.0
+
+[Gradle Plugin com.github.kazurayam.visualtestinginks](https://github.com/kazurayam/visualtestinginks-gradle-plugin) was introduced. This Gradle Plugin makes resources of VisualTestingInKatalonStudio portable to other projects.
+
+## Changes from 1.8.0 to 1.10.0
+
+Introduced Carousel format of `Materials/index.html` : 3 images of "Back" > ImageDiff > "Forth".
+
 
 ## Changes from 1.6.0 to 1.8.0
 
