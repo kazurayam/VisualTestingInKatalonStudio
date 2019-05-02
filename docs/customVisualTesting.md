@@ -29,23 +29,22 @@ Here I assume you have read the following articles.
 1. [README of Gradle Plugin com.github.kazurayam.visualtestinginks](https://github.com/kazurayam/visualtestinginks-gradle-plugin)
 2. [User Guide of visualtestinginks](https://github.com/kazurayam/visualtestinginks-gradle-plugin/blob/master/docs/userguide.md)
 
-I assume you have created a new Katalon Studio project. Of course, you can
-name it, but here I assume the project is called `TheProject`.
+and you have created a new Katalon Studio project. Of course, you can name it as you want, but here I assume the project is called `TheProject`.
 
-I assume that you have imported `vt-components-X.X.X.zip` and `vt-example-X.X.X.zip` into `ThePoject`.
+I assume that you have imported `vt-components-X.X.X.zip` and `vt-example-X.X.X.zip` into `ThePoject` using `com.github.kazurayam.visualtestinginks`
 
 ## Define a symbol of your target application
 
 When you start developing custom Visual Testing in Katalon Studio, the 1st thing you should do is to define a short name which identifies
 your target AUT. The example uses `CURA`. So what would you call your test? Any name you like. I would recommend the symbol to be short to make the codes readable.
 
-Just in the following description, let me assume here you selected `MAYA`.
+Just in the following description, let me assume that you selected a symbol `MAYA`.
 
 ## Copy CURA resources to make the base of MAYA
 
 As [User Guide of visualtestinginks](https://github.com/kazurayam/visualtestinginks-gradle-plugin/blob/master/docs/userguide.md) described, you should have got a set of Katalon Studio resources named `CURA`.
 Now you want to copy them and rename them with new name `MAYA`.
-
+```
 .
 ├── Object Repository
 │   └── MAYA
@@ -106,26 +105,26 @@ Now you want to copy them and rename them with new name `MAYA`.
 ├── vt-run-MAYA-chronos.sh
 ├── vt-run-MAYA-twins.bat
 └── vt-run-MAYA-twins.sh
-
+```
 
 ## Modify codes to target your AUT
 
 1. In the `Test Suites/MAYA` folder, there are few resources that need to be changed. For example `Test Suites/MAPA/Execute_twins` still has the definition refering to `CURA` components: ![MAYA_Execute_twins](../docs/images/customVisualTesting/MAYA_Execute_twins.png)
 Please edit the definition so that refer to `CURA` -> `MAYA` resources. The following resources needs to be edited similarly.
-  1. `Test Suites/MAYA/chronos_capture`
-  2. `Test Suites/MAYA/chronos_exam`
-  3. `Test Suites/MAYA/Execute_chronos`
-  4. `Test Suites/MAYA/Execute_chronos_headless`
-  5. `Test Suites/MAYA/Execute_twins`
-  6. `Test Suites/MAYA/Execute_twins_headless`
-  7. `Test Suites/MAYA/twins_capture`
-  8. `Test Suites/MAYA/twins_exam`
+  - `Test Suites/MAYA/chronos_capture`
+  - `Test Suites/MAYA/chronos_exam`
+  - `Test Suites/MAYA/Execute_chronos`
+  - `Test Suites/MAYA/Execute_chronos_headless`
+  - `Test Suites/MAYA/Execute_twins`
+  - `Test Suites/MAYA/Execute_twins_headless`
+  - `Test Suites/MAYA/twins_capture`
+  - `Test Suites/MAYA/twins_exam`
 2. In the `Test Cases/MAYA` folder, there are some resources that need to be corrected: `CURA` -> `MAYA`.
-  1. `Test Cases/MAYA/ImageDiff_chronos`
+  - `Test Cases/MAYA/ImageDiff_chronos`
   ```
   String TESTSUITE_ID = 'CURA/chronos_capture' // should be changed to 'MAYA_chronos_capture'
   ```
-  2. `Test Cases/MAYA/ImageDiff_twins`
+  - `Test Cases/MAYA/ImageDiff_twins`
   ```
   String TESTSUITE_ID = 'CURA/twins_capture' // -> 'MAYA/twins_capture'
   ```
@@ -135,6 +134,8 @@ your customization should be on this script.
 4. You would want to renew the `Object Repository` as you want. Just do it.
 
 ## Developing "Test Cases/MAYA/visitSite"
+
+You would want to rewrite The `Test Casees/MAYA/visitSite` completely to target your AUT. Just do it as orginaly Katalon Studio programming. All you need to know is how to save screenshots into files.
 
 ### How to take screenshot and save into file
 
