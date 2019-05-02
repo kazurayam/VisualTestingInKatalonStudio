@@ -1,4 +1,4 @@
-Miscellaneous specifications
+Miscellaneous descriptions
 =========
 
 ## Sequence diagram

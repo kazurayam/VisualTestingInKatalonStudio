@@ -88,7 +88,7 @@ Now you open and run a Test Suite Collection named "`Test Suites/CURA/Execute_tw
 
 #### Input
 
-The Test Suite Collection `Executes_twins` takes screenshots of a pair of URLs:
+The Test Suite Collection `Executes_twins` takes screenshots of **a pair of URLs**:
 1. http://demoaut.katalon.com/  --- can be regarded as *Production environment*
 2. http://demoaut-mimic.kazurayam.com/ --- can be regarded as *Development environment*
 
@@ -112,7 +112,7 @@ If you click the line with purple background color, you will see a ImageDiff wit
 File path: `<projectDir>/Materials/ImageDiff/yyyyMMdd_hhmmss/ImageDiff/CURA_Homepage.yyyyMMdd_hhmmss_product-yyyyMMdd_hhmmss_develop.(6.30)FAILED.png`
 ![ImageDiff](docs/images/ImageDiff_CURA_Homepage.png)
 
-Why red? --- You should investigate it. The tool just let you know of the redness.
+The area painted red indicates that the pair of screenshots of 2 hosts are different. This tool does not tell you why. It just lets you know of the difference. You, as a developer, should be able to investigate the reason of the difference.
 
 ### Execute_chronos
 
@@ -124,28 +124,30 @@ The example provides one more interesting script named `Test Suites/CURA/Execute
 
 `Execute_chronos` takes screenshots of a single URL:
 - http://demoaut-mimic.kazurayam.com/
-and compares it to another set of screenshots taken beforehand to find out if there is any visual differences between the 2 : the current and the previous.
 
-It can compare the current set of screenshot
-1. to the last previous one (default)
-2. to the one taken before 10 minutes ago
-3. to the one taken before 30 minutes ago
-4. to the one taken before 1 hour ago
-5. to the one taken before 2 hours ago
-6. to the one taken before 6AM today
-7. to the one taken before 9AM today
-8. to the one taken before 12AM today
-9. to the one taken before 15PM today
-10. to the one taken before 18PM today
-11. to the one taken before 21PM today
-12. to the one taken before 18PM last evening
+and compares it **to another set of screenshots of the same URL taken previously**. It can compare the current set of screenshot to another set proviously taken. You can choose one of the following:
+
+1. the last previous set of screenshots (default)
+2. the one taken before 10 minutes ago
+3. the one taken before 30 minutes ago
+4. the one taken before 1 hour ago
+5. the one taken before 2 hours ago
+6. the one taken before 6AM today
+7. the one taken before 9AM today
+8. the one taken before 12AM today
+9. the one taken before 15PM today
+10. the one taken before 18PM today
+11. the one taken before 21PM today
+12. the one taken before 18PM last evening
 
 you can see how these STRATEGIES are implemented in [Test Cases/VT/restorePreviousTSuiteResult](https://github.com/kazurayam/VisualTestingInKatalonStudio/blob/develop/Scripts/VT/restorePreviousTSuiteResult/Script1550220558541.groovy)
 
 #### Output
 
-The output of `Execute_chronos` is just similart to the one created by `Execute_twins`. Please find `<projectDir>/Materials/index.html`.
+The output of `Execute_chronos` is just similar to the one created by `Execute_twins`. Please find `<projectDir>/Materials/index.html`.
 
+As of v1.10.0, the index page presents 3 images in a carousel format. This format makes it easy to location of visual differences.
+![carousel](docs/images/index_carousel.png)
 
 ## How to make your Katalon Studio project capable of *Visual Testing*
 
