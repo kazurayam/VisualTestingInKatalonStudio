@@ -14,8 +14,9 @@
 
 ## Changes from 1.8.0 to 1.10.0
 
-1. Introduced Carousel format of `Materials/index.html` : 3 images of "Back" > ImageDiff > "Forth".
-2. [Gradle Plugin com.github.kazurayam.visualtestinginks](https://github.com/kazurayam/visualtestinginks-gradle-plugin) was introduced. This Gradle Plugin makes resources of VisualTestingInKatalonStudio portable to other projects.
+1. Chronological approache of screenshot-comparison testing, namely "Chronos", was supported in addition to the 2 hostname comparison, namely "Twins".
+2. `Materials/index.html` now presents 3 screenshot images (Back > diff > Forth) in Carousel format.
+3. [Gradle Plugin com.github.kazurayam.visualtestinginks](https://github.com/kazurayam/visualtestinginks-gradle-plugin) was introduced. This Gradle Plugin makes resources of VisualTestingInKatalonStudio portable to other projects.
 
 
 ## Changes from 1.6.0 to 1.8.0
