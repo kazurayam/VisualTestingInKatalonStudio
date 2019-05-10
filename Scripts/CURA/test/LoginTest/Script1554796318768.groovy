@@ -11,7 +11,7 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl("http://${GlobalVariable.Hostname}/")
 
 // ホーム・ページが開く
-WebUI.verifyElementPresent(findTestObject('KatalonDemoAut/Page_CuraHomepage/a_Make Appointment'),
+WebUI.verifyElementPresent(findTestObject('CURA/Page_Homepage/a_Make Appointment'),
 	10, FailureHandling.STOP_ON_FAILURE)
 
 

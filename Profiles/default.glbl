@@ -4,24 +4,4 @@
    <name>default</name>
    <tag></tag>
    <defaultProfile>true</defaultProfile>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'http://www.47news.jp'</initValue>
-      <name>URL_PREFIX</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'demoaut.katalon.com'</initValue>
-      <name>Hostname</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'John Doe'</initValue>
-      <name>Username</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'ThisIsNotAPassword'</initValue>
-      <name>Password</name>
-   </GlobalVariableEntity>
 </GlobalVariableEntities>

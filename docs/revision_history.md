@@ -3,12 +3,21 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Revision History](#revision-history)
+  - [Changes from 1.8.0 to 1.10.0](#changes-from-180-to-1100)
   - [Changes from 1.6.0 to 1.8.0](#changes-from-160-to-180)
   - [Changes from 1.4.1 to 1.6.0](#changes-from-141-to-160)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Revision History
+
+
+## Changes from 1.8.0 to 1.10.0
+
+1. Chronological approache of screenshot-comparison testing, namely "Chronos", was supported in addition to the 2 hostname comparison, namely "Twins".
+2. `Materials/index.html` now presents 3 screenshot images (Back > diff > Forth) in Carousel format.
+3. [Gradle Plugin com.github.kazurayam.visualtestinginks](https://github.com/kazurayam/visualtestinginks-gradle-plugin) was introduced. This Gradle Plugin makes resources of VisualTestingInKatalonStudio portable to other projects.
+
 
 ## Changes from 1.6.0 to 1.8.0
 

@@ -16,14 +16,14 @@ MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITO
 assert mr != null
 WebDriver driver = DriverFactory.getWebDriver()
 
-WebUI.click(findTestObject('KatalonDemoAut/Page_CuraHomepage/a_Make Appointment'))
+WebUI.click(findTestObject('CURA/Page_Homepage/a_Make Appointment'))
 
 // transfered to the Login page
-WebUI.verifyElementPresent(findTestObject('KatalonDemoAut/Page_Login/button_Login'),
+WebUI.verifyElementPresent(findTestObject('CURA/Page_Login/button_Login'),
 	10, FailureHandling.STOP_ON_FAILURE)
 
-WebUI.setText(findTestObject('KatalonDemoAut/Page_Login/input_username'), Username)
-WebUI.setText(findTestObject('KatalonDemoAut/Page_Login/input_password'), Password)
+WebUI.setText(findTestObject('CURA/Page_Login/input_username'), Username)
+WebUI.setText(findTestObject('CURA/Page_Login/input_password'), Password)
 
 // takes Screenshot of the Login page
 //Path png2 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Login.png")
@@ -34,8 +34,8 @@ Path png2 = mr.resolveScreenshotPathByURLPathComponents(
 	'top.png')
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
 
-WebUI.click(findTestObject('KatalonDemoAut/Page_Login/button_Login'))
+WebUI.click(findTestObject('CURA/Page_Login/button_Login'))
 
 // ここで入力ページに遷移
-WebUI.verifyElementPresent(findTestObject('KatalonDemoAut/Page_CuraAppointment/button_Book Appointment'),
+WebUI.verifyElementPresent(findTestObject('CURA/Page_Appointment/button_Book Appointment'),
 	10, FailureHandling.STOP_ON_FAILURE)
