@@ -1,23 +1,9 @@
 // load the plugin via the Maval Local repository
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath "com.kazurayam:visualtestinginks:0.1.1"
-    }
+plugins {
+  id "com.github.kazurayam.visualtestinginks" version "0.1.4"
 }
-apply plugin: 'com.github.kazurayam.visualtestinginks'
 
 vt.version = '1.10.0'
-
-// once your plugin is restered into the Gradle Plugin Portal https://plugins.gradle.org/ you can load it by plugins DSL as follows:
-//plugins {
-//    id "com.github.kazurayam.visualtestinginks" version="0.1.1"
-//}
-
 
 // The developer (kazurayam, it's me!) can generate
 // 1. build/dist/packaged-gradlew.zip
@@ -29,3 +15,7 @@ vt.version = '1.10.0'
 // once the distributables are generated, the developer should upload them
 // onto the Releases page of the project on Github at
 // https://github.com/kazurayam/VisualTestingInKatalonStudio/releases
+
+
+// In order to update the jars in the Drivers directory, you want to
+//    $ .\gradlewks.bat importExternalLibraries
