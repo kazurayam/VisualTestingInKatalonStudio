@@ -1,6 +1,6 @@
 // load the plugin via the Maval Local repository
 plugins {
-  id "com.github.kazurayam.visualtestinginks" version "0.1.3"
+  id "com.github.kazurayam.visualtestinginks" version "0.1.4"
 }
 
 vt.version = '1.10.0'
@@ -15,3 +15,7 @@ vt.version = '1.10.0'
 // once the distributables are generated, the developer should upload them
 // onto the Releases page of the project on Github at
 // https://github.com/kazurayam/VisualTestingInKatalonStudio/releases
+
+
+// In order to update the jars in the Drivers directory, you want to
+//    $ .\gradlewks.bat importExternalLibraries
