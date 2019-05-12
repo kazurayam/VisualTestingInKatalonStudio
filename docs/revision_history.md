@@ -11,6 +11,11 @@
 
 # Revision History
 
+## Changes from 1.10.0 to 1.10.1
+
+1. upgrade Materials from version 0.68.0 to 0.70.0
+2. Keywords are changed to be in sync with Materials-0.70.0.jar
+3. Difference of the sets of screenshot images are managed. An orphan image is accompanied with a generated image which shows 'file xxx is not found'.
 
 ## Changes from 1.8.0 to 1.10.0
 
