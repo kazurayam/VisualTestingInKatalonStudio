@@ -7,6 +7,7 @@ import java.util.stream.Collectors
 
 import com.kazurayam.materials.FileType
 import com.kazurayam.materials.MaterialPair
+import com.kazurayam.materials.MaterialPairs
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.materials.MaterialStorage
 import com.kazurayam.materials.TCaseName
@@ -69,7 +70,7 @@ public class ImageCollectionDifferDriver {
 		if (logger_ != null) {
 			imageCollectionDiffer.setVisualTestingLogger(logger_)
 		}
-		List<MaterialPair> materialPairs = this.createMaterialPairs(this.mr_, capturingTSuiteName)
+		MaterialPairs materialPairs = this.createMaterialPairs(this.mr_, capturingTSuiteName)
 		boolean result = imageCollectionDiffer.makeImageCollectionDifferences(
 				materialPairs,
 				new TCaseName( GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()] ),
@@ -97,7 +98,7 @@ public class ImageCollectionDifferDriver {
 		if (logger_ != null) {
 			imageCollectionDiffer.setVisualTestingLogger(logger_)
 		}
-		List<MaterialPair> materialPairs = this.createMaterialPairs(this.mr_, capturingTSuiteName)
+		MaterialPairs materialPairs = this.createMaterialPairs(this.mr_, capturingTSuiteName)
 		return imageCollectionDiffer.makeImageCollectionDifferences(
 				materialPairs,
 				new TCaseName( GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()] ),
@@ -146,12 +147,8 @@ public class ImageCollectionDifferDriver {
 	 * @param mr
 	 * @return
 	 */
-	private List<MaterialPair> createMaterialPairs(MaterialRepository mr, TSuiteName capturingTSuiteName) {
-		List<MaterialPair> materialPairs = mr.createMaterialPairs(
-				capturingTSuiteName
-				).stream().filter { mp ->
-					mp.getLeft().getFileType() == FileType.PNG
-				}.collect(Collectors.toList())
+	private MaterialPairs createMaterialPairs(MaterialRepository mr, TSuiteName capturingTSuiteName) {
+		MaterialPairs materialPairs = mr.createMaterialPairs(capturingTSuiteName)
 
 		if (materialPairs.size() == 0) {
 			KeywordUtil.markFailedAndStop(

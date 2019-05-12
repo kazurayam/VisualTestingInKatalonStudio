@@ -15,6 +15,8 @@ import internal.GlobalVariable as GlobalVariable
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
 assert mr != null
 
+mr.scan()
+
 Path index = mr.makeIndex()
 
 WebUI.comment(">>> ${index.toString()} is updated")
