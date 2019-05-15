@@ -22,3 +22,4 @@
 # Gradle
 .gradle
 build/
+tmp/
