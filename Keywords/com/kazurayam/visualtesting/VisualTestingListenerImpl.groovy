@@ -16,21 +16,69 @@ import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.context.TestCaseContext
 import com.kms.katalon.core.context.TestSuiteContext
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.util.KeywordUtil
+import internal.GlobalVariable as GlobalVariable
 
 public class VisualTestingListenerImpl {
-
+	
+	/**
+	 * Ｙｏｕ　ｃａｎ　ｌｏｃａｌｔｅ　Ｍａｔｅｒｉａｌｓ　ａｎｄ　Ｓｔｏｒａｇｅ　ｄｉｒｅｃｔｏｒｙ　ｏｎ　a nｅｔwork drive.
+	 * 
+	 * GlobalVariable.AUXILIARY_VT_PROJECT_DIR = 'G:/マイドライブ/VisualTestingInKatalonStudio'
+	 */
+	public static final String GVNAME_AUX = 'AUXILIARY_VT_PROJECT_DIR'
+	
 	private Path reportDir
 	private Path materialsDir
 	private Path storageDir
 
+	/**
+	 * (1) resolve reportDir, materialDir, storageDir. For example,
+	 * 
+     *     reportDir    -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Reports/TS1/20180618_165141
+	 *     materialsDir -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Materials
+	 *     storageDir   -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Storage
+	 *
+	 *     If you set GlobalVariable.AUXILIARY_VT_PROJECT_DIR = 'G:/マイドライブ/VisualTestingInKatalonStudio', then you will have
+	 *     reportDir    -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Reports/TS1/20180618_165141
+	 *     materialsDir -> G:/マイドライブ/VisualTestingInKatalonStudio/Materials
+	 *     storageDir   -> G:/マイドライブ/VisualTestingInKatalonStudio/Storage
+	 *
+	 */
 	VisualTestingListenerImpl() {
-		// For example,
-		// reportDir    -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Reports/TS1/20180618_165141
-		// materialsDir -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Materials
-		// storageDir   -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Storage
 		reportDir    = Paths.get(RunConfiguration.getReportFolder())
-		materialsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('Materials')
-		storageDir   = Paths.get(RunConfiguration.getProjectDir()).resolve('Storage')
+		materialsDir = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Materials')
+		storageDir   = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Storage')
+	}
+
+	/**
+	 * This method resturn a string as the Path of "alternative project directory" where the Materials directory and the Storage directory
+	 * are found. The default is equal to the usual project directory.
+	 * You can specify "alternative project directory" by defining a GlobalVariable.ALTERNATIVE_PROJECT_DIR in the Execution Profile.
+	 * For example, you can specify
+	 *     <PRE>GlobalVarialbe.ALTERNATIVE_PROJECT_DIR == "G:\マイドライブ\VisualTestingWorkspace\CorporateVT"</PRE>
+	 *     
+	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is defined, the dir exists and is writable, returns that path.
+	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is defined but does not exist, log warning message, returns the value of RunConfiguration.getProjectDir() call.
+	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is not defined, returns the value of RunConfiguration.getProjectDir() call.
+	 * 
+	 * @return a Path string as the project directory possible on a network drive. Windows Network Drive, Google Drive Stream or UNIX NFS.
+	 */
+	static String resolveProjectDir() {
+		String v = VisualTestingListenerImpl.GVNAME_AUX
+		if ( GlobalVariableHelpers.isGlobalVariablePresent(v) ) {
+			String s = (String)GlobalVariableHelpers.getGlobalVariableValue(v)
+			Path dir = Paths.get(s)
+			if (!Files.exists(dir)) {
+				KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory is not found. Alternatively ${RunConfiguration.getProjectDir()} is used.")
+				return RunConfiguration.getProjectDir()
+			} else {
+				return dir.toString()
+			}
+		} else {
+			KeywordUtil.logInfo("GlobalVariable.${v} is not defined. Alternatively ${RunConfiguration.getProjectDir()} is used.")
+			return RunConfiguration.getProjectDir()
+		}
 	}
 
 	/**
