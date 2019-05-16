@@ -20,14 +20,14 @@ import com.kms.katalon.core.util.KeywordUtil
 import internal.GlobalVariable as GlobalVariable
 
 public class VisualTestingListenerImpl {
-	
+
 	/**
 	 * Ｙｏｕ　ｃａｎ　ｌｏｃａｌｔｅ　Ｍａｔｅｒｉａｌｓ　ａｎｄ　Ｓｔｏｒａｇｅ　ｄｉｒｅｃｔｏｒｙ　ｏｎ　a nｅｔwork drive.
 	 * 
 	 * GlobalVariable.AUXILIARY_VT_PROJECT_DIR = 'G:/マイドライブ/VisualTestingInKatalonStudio'
 	 */
 	public static final String GVNAME_AUX = 'AUXILIARY_VT_PROJECT_DIR'
-	
+
 	private Path reportDir
 	private Path materialsDir
 	private Path storageDir
@@ -35,7 +35,7 @@ public class VisualTestingListenerImpl {
 	/**
 	 * (1) resolve reportDir, materialDir, storageDir. For example,
 	 * 
-     *     reportDir    -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Reports/TS1/20180618_165141
+	 *     reportDir    -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Reports/TS1/20180618_165141
 	 *     materialsDir -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Materials
 	 *     storageDir   -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Storage
 	 *
