@@ -33,7 +33,7 @@ public class VisualTestingListenerImpl {
 	private Path storageDir
 
 	/**
-	 * (1) resolve reportDir, materialDir, storageDir. For example,
+	 * resolve reportDir, materialDir, storageDir. For example,
 	 * 
 	 *     reportDir    -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Reports/TS1/20180618_165141
 	 *     materialsDir -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Materials
@@ -44,6 +44,9 @@ public class VisualTestingListenerImpl {
 	 *     materialsDir -> G:/マイドライブ/VisualTestingInKatalonStudio/Materials
 	 *     storageDir   -> G:/マイドライブ/VisualTestingInKatalonStudio/Storage
 	 *
+	 * By the way, when you open your Katalon project with GUI, then the Reports directory is located at "<project dir>/Reports", and 
+	 * you can not change it. But when you run Katalon Studio in Console mode you can specify the Reports directory by command line option
+	 * '-reportFolder=<path>'
 	 */
 	VisualTestingListenerImpl() {
 		reportDir    = Paths.get(RunConfiguration.getReportFolder())
