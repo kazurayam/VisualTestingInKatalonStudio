@@ -1,6 +1,6 @@
 // load the plugin via the Maval Local repository
 plugins {
-  id "com.github.kazurayam.visualtestinginks" version "0.1.5"
+  id "com.github.kazurayam.visualtestinginks" version "0.1.8"
 }
 
 vt.version = '1.10.3'
