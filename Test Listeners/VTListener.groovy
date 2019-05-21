@@ -12,13 +12,13 @@ class VTListener {
 		
 	@BeforeTestSuite
 	def beforeTestSuite(TestSuiteContext testSuiteContext) {
-		WebUI.comment("VTListener#beforeTestSuite() was invoked")
+		//WebUI.comment("VTListener#beforeTestSuite() was invoked")
 		listener.beforeTestSuite(testSuiteContext)
 	}
 	
 	@BeforeTestCase
 	def beforeTestCase(TestCaseContext testCaseContext) {
-		WebUI.comment("VTListener#beforeTestCase() was invoked")
+		//WebUI.comment("VTListener#beforeTestCase() was invoked")
 		listener.beforeTestCase(testCaseContext)
 	}
 

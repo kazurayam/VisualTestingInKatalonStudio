@@ -50,6 +50,7 @@ public class VisualTestingListenerImpl {
 	 */
 	VisualTestingListenerImpl() {
 		reportDir    = Paths.get(RunConfiguration.getReportFolder())
+		KeywordUtil.logInfo("Reports directory is located at ${reportDir.toString()}")
 		materialsDir = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Materials')
 		storageDir   = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Storage')
 	}
@@ -68,7 +69,7 @@ public class VisualTestingListenerImpl {
 	 * @return a Path string as the project directory possible on a network drive. Windows Network Drive, Google Drive Stream or UNIX NFS.
 	 */
 	static String resolveProjectDir() {
-		KeywordUtil.logInfo("Execution Profile \'${RunConfiguration.getExecutionProfile()}\' is used")
+		KeywordUtil.logInfo("Execution Profile \'${RunConfiguration.getExecutionProfile()}\' is applied")
 		String v = VisualTestingListenerImpl.GVNAME_AUX
 		if ( GlobalVariableHelpers.isGlobalVariablePresent(v) ) {
 			String s = (String)GlobalVariableHelpers.getGlobalVariableValue(v)
@@ -77,7 +78,7 @@ public class VisualTestingListenerImpl {
 				KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory does not exist. Alternatively ${RunConfiguration.getProjectDir()} is used.")
 				return RunConfiguration.getProjectDir()
 			} else {
-			    KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory is present.")
+				KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory is present.")
 				return dir.toString()
 			}
 		} else {
@@ -100,7 +101,9 @@ public class VisualTestingListenerImpl {
 
 		// create the MaterialRepository object
 		Files.createDirectories(materialsDir)
-		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
+		WebUI.comment("materialsDir=${materialsDir}")
+		WebUI.comment("reportDir=${reportDir}")
+		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir, reportDir)
 		mr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
 		GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
 
