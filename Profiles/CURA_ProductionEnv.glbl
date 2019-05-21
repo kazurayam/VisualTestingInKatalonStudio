@@ -19,4 +19,9 @@
       <initValue>'ThisIsNotAPassword'</initValue>
       <name>Password</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'G:\\マイドライブ\\vtprojects\\VisualTestingInKatalonStudio'</initValue>
+      <name>AUXILIARY_VT_PROJECT_DIR</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

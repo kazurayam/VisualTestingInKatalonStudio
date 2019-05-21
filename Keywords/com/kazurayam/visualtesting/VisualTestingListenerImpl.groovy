@@ -68,14 +68,16 @@ public class VisualTestingListenerImpl {
 	 * @return a Path string as the project directory possible on a network drive. Windows Network Drive, Google Drive Stream or UNIX NFS.
 	 */
 	static String resolveProjectDir() {
+		KeywordUtil.logInfo("Execution Profile \'${RunConfiguration.getExecutionProfile()}\' is used")
 		String v = VisualTestingListenerImpl.GVNAME_AUX
 		if ( GlobalVariableHelpers.isGlobalVariablePresent(v) ) {
 			String s = (String)GlobalVariableHelpers.getGlobalVariableValue(v)
 			Path dir = Paths.get(s)
 			if (!Files.exists(dir)) {
-				KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory is not found. Alternatively ${RunConfiguration.getProjectDir()} is used.")
+				KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory does not exist. Alternatively ${RunConfiguration.getProjectDir()} is used.")
 				return RunConfiguration.getProjectDir()
 			} else {
+			    KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory is present.")
 				return dir.toString()
 			}
 		} else {
