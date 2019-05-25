@@ -28,9 +28,11 @@ public class VisualTestingListenerImpl {
 	 */
 	public static final String GVNAME_AUX = 'AUXILIARY_VT_PROJECT_DIR'
 
-	private Path reportsDir
 	private Path materialsDir
 	private Path storageDir
+	private Path reportsDir
+	private Path reportFolder
+
 
 	/**
 	 * resolve reportDir, materialDir, storageDir. For example,
@@ -49,16 +51,19 @@ public class VisualTestingListenerImpl {
 	 * '-reportFolder=<path>'
 	 */
 	VisualTestingListenerImpl() {
-		reportsDir   = new Helpers().lookupAncestorOrSelfPathOfName(Paths.get(RunConfiguration.getReportFolder()), 'Reports')
-		KeywordUtil.logInfo("Reports folder is located at ${reportsDir.toString()}")
 		materialsDir = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Materials')
 		storageDir   = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Storage')
+		reportFolder = Paths.get(RunConfiguration.getReportFolder())
+		reportsDir   = new Helpers().lookupAncestorOrSelfPathOfName(reportFolder, 'Reports')
+		KeywordUtil.logInfo("Reports dir is located at ${reportsDir.toString()}")
 	}
 
 	/**
-	 * This method return a string as the Path of "alternative project directory" where the Materials directory and the Storage directory
+	 * This method return a string as the Path of "alternative project directory" 
+	 * where the Materials directory and the Storage directory
 	 * are found. The default is equal to the usual project directory.
-	 * You can specify "alternative project directory" by defining a GlobalVariable.ALTERNATIVE_PROJECT_DIR in the Execution Profile.
+	 * You can specify "alternative project directory" by defining 
+	 * a GlobalVariable.ALTERNATIVE_PROJECT_DIR in the Execution Profile.
 	 * For example, you can specify
 	 *     <PRE>GlobalVarialbe.ALTERNATIVE_PROJECT_DIR == "G:\マイドライブ\VisualTestingWorkspace\CorporateVT"</PRE>
 	 *     
@@ -94,7 +99,7 @@ public class VisualTestingListenerImpl {
 	void beforeTestSuite(TestSuiteContext testSuiteContext) {
 		Objects.requireNonNull(testSuiteContext, "testSuiteContext must not be null")
 		String testSuiteId        = testSuiteContext.getTestSuiteId()     // e.g. 'Test Suites/TS1'
-		String testSuiteTimestamp = reportsDir.getFileName().toString()    // e.g. '20180618_165141'
+		String testSuiteTimestamp = reportFolder.getFileName().toString()    // e.g. '20180618_165141'
 		//
 		GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_ID, testSuiteId)
 		GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_TIMESTAMP, testSuiteTimestamp)
@@ -103,6 +108,7 @@ public class VisualTestingListenerImpl {
 		Files.createDirectories(materialsDir)
 		WebUI.comment("materialsDir=${materialsDir}")
 		WebUI.comment("reportsDir=${reportsDir}")
+		WebUI.comment("reportFolder=${reportFolder}")
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir, reportsDir)
 		mr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
 		GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
