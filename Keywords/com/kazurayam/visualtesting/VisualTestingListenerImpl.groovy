@@ -4,6 +4,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
+import com.kazurayam.KatalonProperties
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.materials.MaterialRepositoryFactory
 import com.kazurayam.materials.MaterialStorage
@@ -20,13 +21,6 @@ import com.kms.katalon.core.util.KeywordUtil
 import internal.GlobalVariable as GlobalVariable
 
 public class VisualTestingListenerImpl {
-
-	/**
-	 * Ｙｏｕ　ｃａｎ　ｌｏｃａｌｔｅ　Ｍａｔｅｒｉａｌｓ　ａｎｄ　Ｓｔｏｒａｇｅ　ｄｉｒｅｃｔｏｒｙ　ｏｎ　a nｅｔwork drive.
-	 * 
-	 * GlobalVariable.AUXILIARY_VT_PROJECT_DIR = 'G:/マイドライブ/VisualTestingInKatalonStudio'
-	 */
-	public static final String GVNAME_AUX = 'AUXILIARY_VT_PROJECT_DIR'
 
 	private Path materialsDir
 	private Path storageDir
@@ -75,19 +69,18 @@ public class VisualTestingListenerImpl {
 	 */
 	static String resolveProjectDir() {
 		KeywordUtil.logInfo("Execution Profile \'${RunConfiguration.getExecutionProfile()}\' is applied")
-		String v = VisualTestingListenerImpl.GVNAME_AUX
-		if ( GlobalVariableHelpers.isGlobalVariablePresent(v) ) {
-			String s = (String)GlobalVariableHelpers.getGlobalVariableValue(v)
-			Path dir = Paths.get(s)
+		VTConfig vtConfig = new VTConfig()
+		String path = vtConfig.getAuxiliaryVTProjectDir()
+		if ( path != null ) {
+			Path dir = Paths.get(path)
 			if (!Files.exists(dir)) {
-				KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory does not exist. Alternatively ${RunConfiguration.getProjectDir()} is used.")
+				KeywordUtil.logInfo("{path} does not exist. Materials and Storage dir will be located in ${RunConfiguration.getProjectDir()}")
 				return RunConfiguration.getProjectDir()
 			} else {
-				KeywordUtil.logInfo("GlobalVariable.${v}=${dir.toString()}: the directory is present.")
 				return dir.toString()
 			}
 		} else {
-			KeywordUtil.logInfo("GlobalVariable.${v} is not defined. Alternatively ${RunConfiguration.getProjectDir()} is used.")
+			KeywordUtil.logInfo("${VTConfig.PROPERTY_AUX_DIR} is not defined in vt-config.json. Materials and Storage dir will be located in ${RunConfiguration.getProjectDir()}")
 			return RunConfiguration.getProjectDir()
 		}
 	}

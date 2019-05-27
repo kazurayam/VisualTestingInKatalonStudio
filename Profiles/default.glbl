@@ -19,5 +19,4 @@
       <initValue>'ThisIsNotAPassword'</initValue>
       <name>Password</name>
    </GlobalVariableEntity>
-
 </GlobalVariableEntities>
