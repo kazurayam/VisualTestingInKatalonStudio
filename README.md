@@ -161,6 +161,15 @@ You can make a copy of "CURA" resources and rename them to your own AUT symbol. 
 
 - [customVisualTesting](docs/customVisualTesting.md)
 
+## External Dependencies
+
+- [ashot](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4)
+- [commons-math3](https://mvnrepository.com/artifact/org.apache.commons/commons-math3/3.6.1)
+- [junit4ks](https://github.com/kazurayam/junit4ks)
+- [ksbackyard](https://github.com/kazurayam/ksbackyard)
+- [Materials](https://github.com/kazurayam/Materials)
+- [thumbnailator](https://mvnrepository.com/artifact/net.coobird/thumbnailator/0.4.8)
+
 ## other notes
 
 [Miscellaneous](docs/miscSpecifications.md)

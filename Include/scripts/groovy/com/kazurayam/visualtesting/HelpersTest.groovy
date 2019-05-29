@@ -30,5 +30,4 @@ class HelpersTest {
 		assertThat(actual, is(notNullValue()))
 		assertThat(actual, is(expected))
 	}
-
 }

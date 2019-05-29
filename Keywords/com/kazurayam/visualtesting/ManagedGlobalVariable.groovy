@@ -24,7 +24,8 @@ public enum ManagedGlobalVariable {
 	CURRENT_TESTSUITE_TIMESTAMP ('VT_CURRENT_TESTSUITE_TIMESTAMP'),
 	CURRENT_TESTCASE_ID         ('VT_CURRENT_TESTCASE_ID'),
 	MATERIAL_REPOSITORY         ('VT_MATERIAL_REPOSITORY'),
-	MATERIAL_STORAGE            ('VT_MATERIAL_STORAGE')
+	MATERIAL_STORAGE            ('VT_MATERIAL_STORAGE'),
+	REPORTS_ACCESSOR            ('VT_REPORTS_ACCESSOR')
 	;
 	private String name_
 	public ManagedGlobalVariable(String name) {
