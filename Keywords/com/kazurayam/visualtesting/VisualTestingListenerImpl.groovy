@@ -4,11 +4,12 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.KatalonProperties
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.materials.MaterialRepositoryFactory
 import com.kazurayam.materials.MaterialStorage
 import com.kazurayam.materials.MaterialStorageFactory
+import com.kazurayam.materials.ReportsAccessor
+import com.kazurayam.materials.ReportsAccessorFactory
 import com.kazurayam.materials.TSuiteName
 import com.kazurayam.materials.TSuiteTimestamp
 import com.kazurayam.visualtesting.GlobalVariableHelpers as GVH
@@ -45,11 +46,28 @@ public class VisualTestingListenerImpl {
 	 * '-reportFolder=<path>'
 	 */
 	VisualTestingListenerImpl() {
+		// the Materials dir and the Storage dir are located usually under the <projectDir>,
+		// but you can change the location by specifying the AUXILIARY_VT_PROJECT_DIR property in the <projectDir>/vt-config.json file
 		materialsDir = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Materials')
 		storageDir   = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Storage')
+
+		// the location of the Reports directory is defined by Katalon Studio,
+		// usually it is located under the <projectDir>,
+		// and when you invoke KS by Console Mode you have an option of changing the location by -reportFolder=<Path> option
 		reportFolder = Paths.get(RunConfiguration.getReportFolder())
+		KeywordUtil.logInfo("reportFolder=${reportFolder}")
+		
+		// when you run "Test Cases/VT/makeIndex" directly (you do not run "Test Suites/VT/makeIndex"), 
+		// Katalon Studio's RunConfiguration.getReportFolder() will return a path of temporary directory such as 
+		// "C:\Users\qcq0264\AppData\Local\Temp\Katalon\Test Cases\VT\makeIndex\20190529_124909"
+		// In this case, the following line results null
 		reportsDir   = new Helpers().lookupAncestorOrSelfPathOfName(reportFolder, 'Reports')
-		KeywordUtil.logInfo("Reports dir is located at ${reportsDir.toString()}")
+		if (reportsDir == null) {
+			// let's assume <projectDir>/Reports directory is there
+			reportsDir = Paths.get(VisualTestingListenerImpl.resolveProjectDir()).resolve('Reports')
+			Files.createDirectories(reportsDir)
+		}
+		KeywordUtil.logInfo("reportsDir=${reportsDir}")
 	}
 
 	/**
@@ -62,7 +80,8 @@ public class VisualTestingListenerImpl {
 	 *     <PRE>GlobalVarialbe.ALTERNATIVE_PROJECT_DIR == "G:\マイドライブ\VisualTestingWorkspace\CorporateVT"</PRE>
 	 *     
 	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is defined, the dir exists and is writable, returns that path.
-	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is defined but does not exist, log warning message, returns the value of RunConfiguration.getProjectDir() call.
+	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is defined but does not exist, log warning message, 
+	 *     returns the value of RunConfiguration.getProjectDir() call.
 	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is not defined, returns the value of RunConfiguration.getProjectDir() call.
 	 * 
 	 * @return a Path string as the project directory possible on a network drive. Windows Network Drive, Google Drive Stream or UNIX NFS.
@@ -102,16 +121,29 @@ public class VisualTestingListenerImpl {
 		WebUI.comment("materialsDir=${materialsDir}")
 		WebUI.comment("reportsDir=${reportsDir}")
 		WebUI.comment("reportFolder=${reportFolder}")
-		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir, reportsDir)
+
+		// create the MaterialRepository object, save it as a GlobalVariable
+		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
 		mr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
 		GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
 
-		// create the MaterialStorage object
+		// create the MaterialStorage object, save it as a GlobalVariable
 		Files.createDirectories(storageDir)
 		MaterialStorage ms = MaterialStorageFactory.createInstance(storageDir)
 		GVH.ensureGlobalVariable(MGV.MATERIAL_STORAGE, ms)
+
+		// create the ReportsAccessor object, save it as a GlobalVariable
+		ReportsAccessor ra = ReportsAccessorFactory.createInstance(reportsDir)
+		GVH.ensureGlobalVariable(MGV.REPORTS_ACCESSOR, ra)
 	}
 
+
+
+
+	/**
+	 * 
+	 * @param testCaseContext
+	 */
 	void beforeTestCase(TestCaseContext testCaseContext) {
 		Objects.requireNonNull(testCaseContext, "testCaseContext must not be null")
 
@@ -129,28 +161,45 @@ public class VisualTestingListenerImpl {
 		WebUI.comment("${hd} ${MGV.CURRENT_TESTSUITE_TIMESTAMP} is \"${GVH.getGlobalVariableValue(MGV.CURRENT_TESTSUITE_TIMESTAMP)}\"")
 		WebUI.comment("${hd} ${MGV.CURRENT_TESTCASE_ID} is \"${GVH.getGlobalVariableValue(MGV.CURRENT_TESTCASE_ID)}\"")
 
-		//
+		// if not exist, create the MaterialRepository object, save it as a GlobalVariable
 		if ( ! GVH.isGlobalVariablePresent(MGV.MATERIAL_REPOSITORY) ) {
 			Files.createDirectories(materialsDir)
 			MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
 			mr.putCurrentTestSuite(TSuiteName.SUITELESS_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
 			GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
 		}
-		WebUI.comment("${hd} ${MGV.MATERIAL_REPOSITORY} is \"${GVH.getGlobalVariableValue(MGV.MATERIAL_REPOSITORY).toString()}\"")
+		WebUI.comment("${hd} ${MGV.MATERIAL_REPOSITORY} is located at \"${GVH.getGlobalVariableValue(MGV.MATERIAL_REPOSITORY).toString()}\"")
 
+		// if not exist, create the MaterialStorage object, save it as a GlobalVariable
 		if ( ! GVH.isGlobalVariablePresent(MGV.MATERIAL_STORAGE) ) {
 			Files.createDirectories(storageDir)
 			MaterialStorage ms = MaterialStorageFactory.createInstance(storageDir)
 			GVH.ensureGlobalVariable(MGV.MATERIAL_STORAGE, ms)
 		}
-		WebUI.comment("${hd} ${MGV.MATERIAL_STORAGE} is \"${GVH.getGlobalVariableValue(MGV.MATERIAL_STORAGE).toString()}\"")
+		WebUI.comment("${hd} ${MGV.MATERIAL_STORAGE} is located at \"${GVH.getGlobalVariableValue(MGV.MATERIAL_STORAGE).toString()}\"")
 
+		// if not exist, create the ReportsAccessor object, save it as a GlobalVariable
+		if ( ! GVH.isGlobalVariablePresent(MGV.REPORTS_ACCESSOR)) {
+			ReportsAccessor ra = ReportsAccessorFactory.createInstance(reportsDir)
+			GVH.ensureGlobalVariable(MGV.REPORTS_ACCESSOR, ra)
+		}
+		WebUI.comment("${hd} ${MGV.REPORTS_ACCESSOR} is located at \"${GVH.getGlobalVariableValue(MGV.MATERIAL_STORAGE).toString()}\"")
 	}
 
+
+
+	/**
+	 * 
+	 * @param testCaseContext
+	 */
 	void afterTestCase(TestCaseContext testCaseContext) {
 		// nothing to do
 	}
 
+	/**
+	 * 
+	 * @param testSuiteContext
+	 */
 	void afterTestSuite(TestSuiteContext testSuiteContext) {
 		// nothing to do
 	}

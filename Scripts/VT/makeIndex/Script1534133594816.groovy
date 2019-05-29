@@ -1,22 +1,34 @@
 import java.nio.file.Path
 
+import com.kazurayam.materials.Indexer
+import com.kazurayam.materials.IndexerFactory
 import com.kazurayam.materials.MaterialRepository
+import com.kazurayam.materials.ReportsAccessor
 import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
 
 /**
- * This test case creates ./Materials/index.html file
- *
+ * This test case creates ./Materials/index.html file.
+ * The index.html shows the result of screenshots comparison tests.
+ * 
+ * This test case just read files from the local file system and write a file into the local file system.
  * This test case makes no interaction with web.
- * It just read files and write a file.
  */
+
+
+// resolve the directories to read/write
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
-assert mr != null
+ReportsAccessor    ra = (ReportsAccessor)   GlobalVariable[MGV.REPORTS_ACCESSOR.getName()]
+Path baseDir          = mr.getBaseDir()
+Path reportsDir       = ra.getReportsDir()
+Path index            = baseDir.resolve('index.html')
 
-mr.scan()
+// create an Indexer object
+Indexer indexer = IndexerFactory.newIndexer()
+indexer.setBaseDir(baseDir)
+indexer.setReportsDir(reportsDir)
+indexer.setOutput(index)
 
-Path index = mr.makeIndex()
-
-WebUI.comment(">>> ${index.toString()} is updated")
+// finally we generate the index.html
+indexer.execute()

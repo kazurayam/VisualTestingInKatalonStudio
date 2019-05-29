@@ -168,7 +168,6 @@ You can make a copy of "CURA" resources and rename them to your own AUT symbol. 
 - [junit4ks](https://github.com/kazurayam/junit4ks)
 - [ksbackyard](https://github.com/kazurayam/ksbackyard)
 - [Materials](https://github.com/kazurayam/Materials)
-- [MutliSourcedProperties](https://github.com/kazurayam/MultiSourcedProperties)
 - [thumbnailator](https://mvnrepository.com/artifact/net.coobird/thumbnailator/0.4.8)
 
 ## other notes
