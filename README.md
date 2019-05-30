@@ -101,6 +101,8 @@ For example, the test may capture screenshots as follows.
 
 This test generates a report at `<projectDir>/Materials/index.html` where you will find screenshot-comparison result.
 
+You can see an example output in action uploaded public : http://vtprojects.kazurayam.com/VisualTestingInKatalonStudio/Materials/index.html
+
 Please find the html using Windows Explorer or Mac Finder. Unfortunately Katalon Studio GUI does not let us see the Materials/index.html. Open the html with your favorite web browser. You should bookmark it.
 
 The Materials/index.html would show a list of source images plus the images as comparison result.
