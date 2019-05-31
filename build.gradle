@@ -3,7 +3,7 @@ plugins {
   id "com.github.kazurayam.visualtestinginks" version "0.1.18"
 }
 
-vt.version = '1.10.6'
+vt.version = '1.10.7'
 
 // The developer (kazurayam, it's me!) can generate
 // 1. build/dist/packaged-gradlew.zip
