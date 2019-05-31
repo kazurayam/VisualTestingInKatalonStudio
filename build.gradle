@@ -1,9 +1,9 @@
 // load the plugin via the Maval Local repository
 plugins {
-  id "com.github.kazurayam.visualtestinginks" version "0.1.14"
+  id "com.github.kazurayam.visualtestinginks" version "0.1.18"
 }
 
-vt.version = '1.10.5'
+vt.version = '1.10.6'
 
 // The developer (kazurayam, it's me!) can generate
 // 1. build/dist/packaged-gradlew.zip

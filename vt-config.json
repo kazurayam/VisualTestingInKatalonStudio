@@ -3,6 +3,6 @@
     "_comment": "  when you do not want to use the network drive (in other words you want to locate Materials and Storage into the project directory),",
     "_comment": "  rename the key AUXILIARY_VT_PROJECT_DIR to something else (e.g, __AUXILIARY_VT_PROJECT_DIR) to make the key undefined",
     
-    "__AUXILIARY_VT_PROJECT_DIR" : "G:/マイドライブ/vtprojects/VisualTestingInKatalonStudio"
+    "AUXILIARY_VT_PROJECT_DIR" : "G:/マイドライブ/vtprojects/VisualTestingInKatalonStudio"
     
 }
