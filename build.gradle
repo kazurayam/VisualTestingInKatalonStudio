@@ -1,21 +1,145 @@
-// load the plugin via the Maval Local repository
-plugins {
-  id "com.github.kazurayam.visualtestinginks" version "0.1.18"
+// VisualTestingInKatalonStudio/build.gradle
+
+apply plugin: 'groovy'
+
+version = "1.10.8"
+
+ext {
+    groovyVersion = '2.4.7'
+
+    VT_TEXTERNALLIBRARY_PREFIX = 'vt-'
+    VT_DIST_GRADLEW_PREFIX     = 'distributable-gradlew'
+    VT_DIST_COMPONENTS_PREFIX  = 'vt-components'
+    VT_DIST_EXAMPLE_PREFIX     = 'vt-example'
 }
 
-vt.version = '1.10.6'
+// ---------------------------------------------------------------------
+// codes to generate groovydoc
 
-// The developer (kazurayam, it's me!) can generate
-// 1. build/dist/packaged-gradlew.zip
-// 2. build/dist/vt-components.zip
-// 3. build/dist/vt-examples.zip
-// by executing the following command:
-//     $ .\gradlewks.bat distributables
-//
-// once the distributables are generated, the developer should upload them
-// onto the Releases page of the project on Github at
-// https://github.com/kazurayam/VisualTestingInKatalonStudio/releases
+sourceSets {
+    main {
+        groovy {
+            srcDirs = [ 'Keywords', 'Include/scripts/groovy' ]
+            srcDir 'Libs'
+        }
+    }
+}
+
+configurations {
+    generateDocs
+}
+
+dependencies {
+    generateDocs "org.codehaus.groovy:groovy-all:${groovyVersion}"
+}
+
+task groovydoc(type: Groovydoc, overwrite: true) {
+    source = sourceSets.main.groovy
+    classpath = configurations.compile
+    groovyClasspath = project.configurations.generateDocs
+    include 'com/kazurayam/visualtesting/*'
+    exclude '**/*Test.groovy'
+}
+
+task publishGroovydoc(type: Copy) {
+    from 'build/docs/groovydoc'
+    into 'docs/api'
+}
+
+groovydoc.finalizedBy publishGroovydoc
+
+// ---------------------------------------------------------------------
+
+String DIST = "${project.buildDir}/dist"
+
+task createDist {
+    doLast {
+        project.mkdir "${DIST}"
+    }
+}
+
+task cleanDist(type: Delete) {
+    def dirName = "${DIST}"
+    project.file( dirName).list().each { f ->
+        delete "${dirName}/${f}"
+    }
+}
+cleanDist.dependsOn(createDist)
+
+task createDistributableGradlew(type:Zip) {
+    archiveFileName = "${VT_DIST_GRADLEW_PREFIX}.zip"
+    destinationDirectory = file("${DIST}")
+    from(".") {
+        // include the Gradle Wrapper
+        include "gradlew"
+        include "gradlew.bat"
+        include "gradlewks.bat"    // custom launcher that uses Java in %KATALONSTUDIO_HOME%\jre
+        include "gradle/**/*"
+    }
+}
+task createDistributableGradlewWithVersion {
+    doLast {
+        new File("${DIST}/${VT_DIST_GRADLEW_PREFIX}.zip")
+            .renameTo("${DIST}/${VT_DIST_GRADLEW_PREFIX}-${project.version}.zip")
+    }
+}
+createDistributableGradlewWithVersion.dependsOn(createDistributableGradlew)
 
 
-// In order to update the jars in the Drivers directory, you want to
-//    $ .\gradlewks.bat importExternalLibraries
+// tasks to create vt-components-X.X.X.zip
+task createVTComponents(type:Zip) {
+    archiveFileName = "${VT_DIST_COMPONENTS_PREFIX}.zip"
+    destinationDirectory = file("${DIST}")
+    from(".") {
+        // include the Visual Testing components
+        include "Test Cases/VT/**"
+        include "Scripts/VT/**"
+        include "Test Listeners/**/VT*"
+        include "Test Suites/VT/**"
+        include "Keywords/com/kazurayam/visualtesting/**"
+    }
+}
+task createVTComponentsWithVersion {
+    doLast {
+        new File("${DIST}/${VT_DIST_COMPONENTS_PREFIX}.zip")
+            .renameTo("${DIST}/${VT_DIST_COMPONENTS_PREFIX}-${project.version}.zip")
+    }
+}
+createVTComponentsWithVersion.dependsOn(createVTComponents)
+
+
+// tasks to create vt-example-X.X.X.zip
+task createVTExample(type: Zip) {
+    archiveFileName = "${VT_DIST_EXAMPLE_PREFIX}.zip"
+    destinationDirectory = file("${DIST}")
+    from(".") {
+        // include the sample Visual Testing for the CURA web site
+        include "Profiles/CURA*"
+        include "Test Cases/CURA/**"
+        include "Object Repository/CURA/**"
+        include "Test Suites/CURA/**"
+        include "Scripts/CURA/**"
+        include "vt-config.json"
+        include "vt-run-CURA*"
+    }
+}
+task createVTExampleWithVersion {
+    doLast {
+        new File("${DIST}/${VT_DIST_EXAMPLE_PREFIX}.zip")
+            .renameTo("${DIST}/${VT_DIST_EXAMPLE_PREFIX}-${project.version}.zip")
+    }
+}
+createVTExampleWithVersion.dependsOn(createVTExample)
+
+
+task distributables() {
+    dependsOn 'createDistributableGradlewWithVersion'
+    dependsOn 'createVTComponentsWithVersion'
+    dependsOn 'createVTExampleWithVersion'
+    dependsOn 'cleanDist'
+    tasks.findByName('createDistributableGradlewWithVersion').mustRunAfter 'cleanDist'
+    tasks.findByName('createVTComponents').mustRunAfter 'cleanDist'
+    tasks.findByName('createVTExample').mustRunAfter 'cleanDist'
+}
+
+defaultTasks = [ 'distributables' ]
