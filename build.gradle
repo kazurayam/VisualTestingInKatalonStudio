@@ -7,7 +7,7 @@ version = "1.10.8"
 ext {
     groovyVersion = '2.4.7'
 
-    VT_TEXTERNALLIBRARY_PREFIX = 'vt-'
+    VT_EXTERNAL_LIBRARY_PREFIX = 'VT-'
     VT_DIST_GRADLEW_PREFIX     = 'distributable-gradlew'
     VT_DIST_COMPONENTS_PREFIX  = 'vt-components'
     VT_DIST_EXAMPLE_PREFIX     = 'vt-example'
@@ -25,13 +25,13 @@ task deleteJarsInDriversDir(type: Delete) {
 }
 
 def downloadFile = { remoteUrl, localDir ->
-    Path outFile = Paths.get(localDir).resolve("${remoteUrl.tokenize('/')[-1]}")
+    Path outFile = Paths.get(localDir).resolve("${VT_EXTERNAL_LIBRARY_PREFIX}${remoteUrl.tokenize('/')[-1]}")
     outFile.toFile().withOutputStream { out ->
         new URL(remoteUrl).withInputStream { from ->
             out << from
         }
     }
-    println "downloaded ${remoteUrl} into ${localDir} directory"
+    println "downloaded ${remoteUrl} into ${localDir} directory as ${outFile.getFileName()}"
 }
 
 task downloadJarsIntoDriversDir {
