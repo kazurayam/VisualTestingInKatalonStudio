@@ -36,7 +36,7 @@ public class VisualTestingListenerImpl {
 	 *     materialsDir -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Materials
 	 *     storageDir   -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Storage
 	 *
-	 *     If you set GlobalVariable.AUXILIARY_VT_PROJECT_DIR = 'G:/マイドライブ/VisualTestingInKatalonStudio', then you will have
+	 *     If you set GlobalVariable.AUXILIARY_VT_PROJECTS_DIR = 'G:/マイドライブ', then you will have
 	 *     reportDir    -> C:/Users/username/katalon-workspace/VisualTestingInKatalonStudio/Reports
 	 *     materialsDir -> G:/マイドライブ/VisualTestingInKatalonStudio/Materials
 	 *     storageDir   -> G:/マイドライブ/VisualTestingInKatalonStudio/Storage
@@ -47,16 +47,16 @@ public class VisualTestingListenerImpl {
 	 */
 	VisualTestingListenerImpl() {
 		String hd = '#VisualTestingListenerImpl()'
-		
+
 		KeywordUtil.logInfo("${hd} Execution Profile \'${RunConfiguration.getExecutionProfile()}\' is applied")
-		
+
 		// the Materials dir and the Storage dir are located usually under the <projectDir>,
 		// but you can change the location by specifying the AUXILIARY_VT_PROJECT_DIR property in the <projectDir>/vt-config.json file
 		materialsDir = Paths.get(this.resolveProjectDir()).resolve('Materials')
 		storageDir   = Paths.get(this.resolveProjectDir()).resolve('Storage')
 		KeywordUtil.logInfo("${hd} materialsDir=${materialsDir}")
 		KeywordUtil.logInfo("${hd} storageDir=${storageDir}")
-		
+
 		// the location of the Reports directory is defined by Katalon Studio,
 		// usually it is located under the <projectDir>,
 		// and when you invoke KS by Console Mode you have an option of changing the location by -reportFolder=<Path> option
@@ -83,7 +83,7 @@ public class VisualTestingListenerImpl {
 	 * You can specify "alternative project directory" by defining 
 	 * a GlobalVariable.ALTERNATIVE_PROJECT_DIR in the Execution Profile.
 	 * For example, you can specify
-	 *     <PRE>GlobalVarialbe.ALTERNATIVE_PROJECT_DIR == "G:\マイドライブ\VisualTestingWorkspace\CorporateVT"</PRE>
+	 *     <PRE>GlobalVarialbe.ALTERNATIVE_PROJECT_DIR == "G:\マイドライブ\vtprojects\VisualTestingWorkspace\CorporateVT"</PRE>
 	 *     
 	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is defined, the dir exists and is writable, returns that path.
 	 * If GlobalVariable.ALTERNATIVE_PROJECT_DIR is defined but does not exist, log warning message, 
@@ -93,11 +93,11 @@ public class VisualTestingListenerImpl {
 	 * @return a Path string as the project directory possible on a network drive. Windows Network Drive, Google Drive Stream or UNIX NFS.
 	 */
 	String resolveProjectDir() {
-		VTConfig vtConfig = new VTConfig()
-		String path = vtConfig.getAuxiliaryVTProjectDir()
 		String hd = this.class.getSimpleName() + '#resolveProjectDir()'
-		if ( path != null ) {
-			Path dir = Paths.get(path)
+		VTConfig vtConfig = new VTConfig()
+		String projectsDir = vtConfig.getAuxiliaryVTProjectDir()
+		if ( projectsDir != null ) {
+			Path dir = Paths.get(projectsDir, getProjectName())
 			if (!Files.exists(dir)) {
 				KeywordUtil.logInfo("${hd} {path} does not exist. Materials and Storage dir will be located in ${RunConfiguration.getProjectDir()}")
 				return RunConfiguration.getProjectDir()
@@ -111,14 +111,27 @@ public class VisualTestingListenerImpl {
 	}
 
 	/**
+	 * @return a String as the name of Project. When the project dir is "C:/Users/me/my/projectX", then returns "projectX"
+	 */
+	static String getProjectName() {
+		String projectDir = RunConfiguration.getProjectDir()
+		//println "projectDir=${projectDir}"
+		if (projectDir.lastIndexOf('/') >= 0) {
+		    return projectDir.substring(projectDir.lastIndexOf('/'))
+		} else {
+		    return projectDir
+		}
+	}
+
+	/**
 	 * 
 	 * @param testSuiteContext
 	 */
 	void beforeTestSuite(TestSuiteContext testSuiteContext) {
 		Objects.requireNonNull(testSuiteContext, "testSuiteContext must not be null")
-		
+
 		String hd = 'VisualTestingListenerImpl#beforeTestSuite'
-		
+
 		String testSuiteId        = testSuiteContext.getTestSuiteId()     // e.g. 'Test Suites/TS1'
 		String testSuiteTimestamp = reportFolder.getFileName().toString()    // e.g. '20180618_165141'
 		GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_ID, testSuiteId)
@@ -128,7 +141,7 @@ public class VisualTestingListenerImpl {
 
 		// create the MaterialRepository object
 		Files.createDirectories(materialsDir)
-		
+
 		// create the MaterialRepository object, save it as a GlobalVariable
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
 		mr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
@@ -155,7 +168,7 @@ public class VisualTestingListenerImpl {
 		Objects.requireNonNull(testCaseContext, "testCaseContext must not be null")
 
 		String hd = 'VisualTestingListenerImpl#beforeTestCase'
-		
+
 		if ( ! GVH.isGlobalVariablePresent(MGV.CURRENT_TESTSUITE_ID) ) {
 			GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_ID, TSuiteName.SUITELESS_DIRNAME)
 		}

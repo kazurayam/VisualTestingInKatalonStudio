@@ -22,7 +22,7 @@ class VTConfigTest {
 		File jsonFile = caseOutputDir.resolve(VTConfig.CONFIG_FILE_NAME).toFile()
 		jsonFile.text = '''
 		{
-		    "AUXILIARY_VT_PROJECT_DIR" : "/Users/myname/tmp"
+		    "AUXILIARY_VT_PROJECTS_DIR" : "/Users/myname/tmp"
 		}
 		'''
 		// when:

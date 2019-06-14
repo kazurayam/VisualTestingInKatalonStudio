@@ -1,8 +1,8 @@
 {
-    "_comment": "You can locate the Materials directory and the Storage directory into a directory located on a network drive or NFS.",
+    "_comment": "On Windows Network drive or directory mounted by FNS, you can locate the project directory with Materials and Storage directory underneath.",
     "_comment": "  when you do not want to use the network drive (in other words you want to locate Materials and Storage into the project directory),",
     "_comment": "  rename the key AUXILIARY_VT_PROJECT_DIR to something else (e.g, __AUXILIARY_VT_PROJECT_DIR) to make the key undefined",
     
-    "AUXILIARY_VT_PROJECT_DIR" : "G:/マイドライブ/vtprojects/VisualTestingInKatalonStudio"
+    "AUXILIARY_VT_PROJECTS_DIR" : "G:/マイドライブ/vtprojects"
     
 }
