@@ -17,14 +17,14 @@ public class VTConfig {
 
 	static final String CONFIG_FILE_NAME = 'vt-config.json'
 	/**
-	 * Ｙｏｕ　ｃａｎ　ｌｏｃａｌｔｅ　Ｍａｔｅｒｉａｌｓ　ａｎｄ　Ｓｔｏｒａｇｅ　ｄｉｒｅｃｔｏｒｙ　ｏｎ　a nｅｔwork drive by writing as followins in <project dir>/vt-config.json
+	 * Ｙｏｕ　ｃａｎ　ｌｏｃａｌｔｅ　Ｍａｔｅｒｉａｌｓ　ａｎｄ　Ｓｔｏｒａｇｅ　ｄｉｒｅｃｔｏｒｙ　ｏｎ　a nｅｔwork drive by writing as followings in <project dir>/vt-config.json
 	 * <PRE>
 	 * {
-	 *     "AUXILIARY_VT_PROJECT_DIR": "G:/マイドライブ/VisualTestingInKatalonStudio"
+	 *     "AUXILIARY_VT_PROJECT_DIR": "G:/マイドライブ/vtprojects"
 	 * }
 	 * </PRE>
 	 */
-	static final String PROPERTY_AUX_DIR = 'AUXILIARY_VT_PROJECT_DIR'
+	static final String PROPERTY_AUX_DIR = 'AUXILIARY_VT_PROJECTS_DIR'
 
 	private def config_
 
