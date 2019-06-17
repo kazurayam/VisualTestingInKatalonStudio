@@ -14,6 +14,8 @@ import com.kms.katalon.core.util.KeywordUtil
 import java.time.LocalDateTime
 
 /**
+ * Test Cases/VT/restorePreviousTSuiteResult
+ * 
  * restore the previous TSuiteResult from the Storage dir into the Materials dir
  */
 

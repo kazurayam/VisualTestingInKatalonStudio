@@ -6,6 +6,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
 /**
+ * Test Cases/VT/reduceStorageSize
+ * 
  * Reduce the size of 'Storage' directory 
  * This script will remove old files of the current TSuiteName sub-directory.
  */

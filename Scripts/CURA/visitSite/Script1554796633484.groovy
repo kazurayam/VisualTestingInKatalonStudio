@@ -17,6 +17,10 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.Keys as Keys
 import internal.GlobalVariable as GlobalVariable
 
+/**
+ * Test Cases/CURA/visitSite
+ */
+
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
 assert mr != null
 

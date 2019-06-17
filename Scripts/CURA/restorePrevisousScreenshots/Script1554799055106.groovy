@@ -2,7 +2,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-/*
+/**
+ * Test Cases/CURA/restorePreviousScreenshots
+ * 
  * You can choose 1 line out the following 3 lines
  */
 
