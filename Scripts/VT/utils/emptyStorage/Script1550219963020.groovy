@@ -3,6 +3,8 @@ import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
 import internal.GlobalVariable as GlobalVariable
 
 /**
+ * Test Cases/VT/utils/emptyStorage
+ * 
  * remove ALL files and directories in the MaterialStorage
  * 
  */

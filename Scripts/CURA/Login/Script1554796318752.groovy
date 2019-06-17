@@ -12,6 +12,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
 
+/**
+ * Test Cases/CURA/Login
+ */
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
 assert mr != null
 WebDriver driver = DriverFactory.getWebDriver()

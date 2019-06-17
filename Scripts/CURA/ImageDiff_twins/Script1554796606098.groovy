@@ -1,7 +1,7 @@
 import com.kazurayam.visualtesting.ImageCollectionDifferDriver
 
 /*
- * CURA/ImageDiff_twins
+ * Test Cases/CURA/ImageDiff_twins
  */
 String TESTSUITE_ID = 'CURA/twins_capture'
 double criteriaPercentage = 1.0

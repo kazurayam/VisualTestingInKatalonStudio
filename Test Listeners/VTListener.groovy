@@ -1,3 +1,6 @@
+/**
+ * Test Listeners/VTListener
+ */
 import com.kazurayam.visualtesting.VisualTestingListenerImpl
 
 import com.kms.katalon.core.annotation.BeforeTestCase

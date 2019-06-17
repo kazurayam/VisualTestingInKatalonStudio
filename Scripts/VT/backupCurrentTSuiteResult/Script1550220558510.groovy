@@ -9,6 +9,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
 /**
+ * Test Cases/VT/backupCurrentTSuiteResult
+ * 
  * copy the Material files under the ./Materials/<Test Suite Name> directory.
  */
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]

@@ -117,9 +117,9 @@ public class VisualTestingListenerImpl {
 		String projectDir = RunConfiguration.getProjectDir()
 		//println "projectDir=${projectDir}"
 		if (projectDir.lastIndexOf('/') >= 0) {
-		    return projectDir.substring(projectDir.lastIndexOf('/'))
+			return projectDir.substring(projectDir.lastIndexOf('/'))
 		} else {
-		    return projectDir
+			return projectDir
 		}
 	}
 

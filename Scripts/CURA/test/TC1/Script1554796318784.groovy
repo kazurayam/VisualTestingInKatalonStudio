@@ -10,6 +10,8 @@ import internal.GlobalVariable as GlobalVariable
 
 
 /**
+ * Test Cases/CURA/test/TC1
+ * 
  * Take a screenshot of a Web page, save PNG file to make it a Material
  */
 WebUI.openBrowser('')

@@ -7,7 +7,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
 /**
- * listRepository
+ * Test Cases/VT/utils/listRepository
  */
 MaterialRepository mr = (MaterialRepository)GlobalVariable[ManagedGlobalVariable.MATERIAL_REPOSITORY.getName()]
 

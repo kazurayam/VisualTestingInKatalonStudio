@@ -9,6 +9,8 @@ import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
 import internal.GlobalVariable as GlobalVariable
 
 /**
+ * Test Cases/VT/makeIndex
+ * 
  * This test case creates ./Materials/index.html file.
  * The index.html shows the result of screenshots comparison tests.
  * 
