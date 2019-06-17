@@ -152,7 +152,7 @@ public class ImageCollectionDifferDriver {
 
 		if (materialPairs.size() == 0) {
 			KeywordUtil.markFailedAndStop(
-					"The size of materialParis of the Test Suite \"${capturingTSuiteName.getId()}\" is found == 0. " +
+					"The size of materialPairs of the Test Suite \"${capturingTSuiteName.getId()}\" is found == 0. " +
 					"Please make sure your test suite for capturing screenshots successfully ran. " +
 					"And you may have executed the test suite for the 1st time, " +
 					"or you had erased all previous records of its execution in the Storage directory. " +
