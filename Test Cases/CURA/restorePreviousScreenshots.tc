@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>restorePrevisousScreenshots</name>
+   <name>restorePreviousScreenshots</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>3dbd92af-c981-4d9d-83ec-576933ad4d90</testCaseGuid>

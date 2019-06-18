@@ -26,6 +26,6 @@
       <guid>cbec7f36-1c4f-4ede-ae10-35dbfc07d946</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/CURA/restorePrevisousScreenshots</testCaseId>
+      <testCaseId>Test Cases/CURA/restorePreviousScreenshots</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>
