@@ -1,5 +1,6 @@
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.materials.MaterialStorage
+import com.kazurayam.materials.RestoreResult
 import com.kazurayam.materials.RetrievalBy
 import com.kazurayam.materials.RetrievalBy.SearchContext
 import com.kazurayam.materials.TSuiteName
@@ -25,13 +26,13 @@ MaterialStorage    ms = (MaterialStorage)   GlobalVariable[MGV.MATERIAL_STORAGE.
 TSuiteName tsn        = new TSuiteName(mr.getCurrentTestSuiteId())
 TSuiteTimestamp tst   = TSuiteTimestamp.newInstance(mr.getCurrentTestSuiteTimestamp())
 
-int count = 0
+RestoreResult restoreResult = null
 
 switch(STRATEGY) {   // is defined in the Variables tab
 	case 'last':
 		// restore the last shot previous to the current
 	    try {
-		    count = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
+		    restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
 	    } catch (IllegalArgumentException e) {
 		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -41,7 +42,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot of 1 hour ago or older
 		try {
 			LocalDateTime base = LocalDateTime.now().minusMinutes(10)
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -51,7 +52,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot of 1 hour ago or older
 		try {
 			LocalDateTime base = LocalDateTime.now().minusMinutes(10)
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -61,7 +62,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot of 1 hour ago or older
 	    try {
 		    LocalDateTime base = LocalDateTime.now().minusHours(1)
-		    count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+		    restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
 	    } catch (IllegalArgumentException e) {
 		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -71,7 +72,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot of 2 hours ago or older
 		try {
 			LocalDateTime base = LocalDateTime.now().minusHours(2)
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -81,7 +82,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 	    // restore the shot taken before 6AM today
 	    try {
 		    LocalDateTime base = LocalDateTime.now()
-		    count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 6, 0, 0))
+		    restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 6, 0, 0))
 	    } catch (IllegalArgumentException e) {
 		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
 	    }
@@ -91,7 +92,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot taken before 6AM today
 		try {
 			LocalDateTime base = LocalDateTime.now()
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 9, 0, 0))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 9, 0, 0))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -101,7 +102,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot taken before 6AM today
 		try {
 			LocalDateTime base = LocalDateTime.now()
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 12, 0, 0))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 12, 0, 0))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -111,7 +112,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot taken before 6AM today
 		try {
 			LocalDateTime base = LocalDateTime.now()
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 15, 0, 0))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 15, 0, 0))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -121,7 +122,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot taken before 6AM today
 		try {
 			LocalDateTime base = LocalDateTime.now()
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -131,7 +132,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot taken before 6AM today
 		try {
 			LocalDateTime base = LocalDateTime.now()
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 21, 0, 0))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 21, 0, 0))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -141,7 +142,7 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		// restore the shot of last evening 18:00 or older
 		try {
 			LocalDateTime base = LocalDateTime.now().minusDays(1)
-			count = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
 		} catch (IllegalArgumentException e) {
 			KeywordUtil.markFailedAndStop("${e.getMessage()}")
 		}
@@ -151,4 +152,4 @@ switch(STRATEGY) {   // is defined in the Variables tab
 		KeywordUtil.markFailedAndStop("unknown STRATEGY: ${STRATEGY}")
 }
 
-WebUI.comment("copied ${count} files from ${mr.getBaseDir().toString()} to ${ms.getBaseDir().toString()}")
+WebUI.comment("copied ${restoreResult.getCount()} files from ${mr.getBaseDir().toString()} to ${ms.getBaseDir().toString()}")
