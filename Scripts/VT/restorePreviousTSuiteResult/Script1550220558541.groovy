@@ -13,6 +13,7 @@ import internal.GlobalVariable as GlobalVariable
 import com.kms.katalon.core.util.KeywordUtil
 
 import java.time.LocalDateTime
+import groovy.json.JsonOutput
 
 /**
  * Test Cases/VT/restorePreviousTSuiteResult
@@ -23,133 +24,115 @@ import java.time.LocalDateTime
 
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
 MaterialStorage    ms = (MaterialStorage)   GlobalVariable[MGV.MATERIAL_STORAGE.getName()]
+
+WebUI.comment("currentTSuiteId is ${mr.getCurrentTestSuiteId()}")
+WebUI.comment("currentTSuiteTimestamp is ${mr.getCurrentTestSuiteTimestamp()}")
+
 TSuiteName tsn        = new TSuiteName(mr.getCurrentTestSuiteId())
 TSuiteTimestamp tst   = TSuiteTimestamp.newInstance(mr.getCurrentTestSuiteTimestamp())
 
 RestoreResult restoreResult = null
 
-switch(STRATEGY) {   // is defined in the Variables tab
-	case 'last':
-		// restore the last shot previous to the current
-	    try {
-		    restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
-	    } catch (IllegalArgumentException e) {
-		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-	    break
+ms.scan()
 
-	case '10minutesAgo':
-		// restore the shot of 1 hour ago or older
-		try {
+try {
+	switch(STRATEGY) {   // is defined in the Variables tab
+		case 'last':
+			// restore the last shot previous to the current
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
+			break
+	
+		case '10minutesAgo':
+			// restore the shot of 1 hour ago or older
 			LocalDateTime base = LocalDateTime.now().minusMinutes(10)
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '30minutesAgo':
-		// restore the shot of 1 hour ago or older
-		try {
+			break
+	
+		case '30minutesAgo':
+			// restore the shot of 1 hour ago or older
 			LocalDateTime base = LocalDateTime.now().minusMinutes(10)
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '1hourAgo':
-		// restore the shot of 1 hour ago or older
-	    try {
-		    LocalDateTime base = LocalDateTime.now().minusHours(1)
-		    restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
-	    } catch (IllegalArgumentException e) {
-		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '2hoursAgo':
-		// restore the shot of 2 hours ago or older
-		try {
+			break
+	
+		case '1hourAgo':
+			// restore the shot of 1 hour ago or older
+			LocalDateTime base = LocalDateTime.now().minusHours(1)
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+			break
+	
+		case '2hoursAgo':
+			// restore the shot of 2 hours ago or older
 			LocalDateTime base = LocalDateTime.now().minusHours(2)
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '6amToday':
-	    // restore the shot taken before 6AM today
-	    try {
-		    LocalDateTime base = LocalDateTime.now()
-		    restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 6, 0, 0))
-	    } catch (IllegalArgumentException e) {
-		    KeywordUtil.markFailedAndStop("${e.getMessage()}")
-	    }
-	    break
-
-	case '9amToday':
-		// restore the shot taken before 6AM today
-		try {
+			break
+	
+		case '6amToday':
+			// restore the shot taken before 6AM today
+			LocalDateTime base = LocalDateTime.now()
+			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 6, 0, 0))
+			break
+	
+		case '9amToday':
+			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 9, 0, 0))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '12amToday':
-		// restore the shot taken before 6AM today
-		try {
+			break
+	
+		case '12amToday':
+			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 12, 0, 0))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '15pmToday':
-		// restore the shot taken before 6AM today
-		try {
+			break
+	
+		case '15pmToday':
+			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 15, 0, 0))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '18pmToday':
-		// restore the shot taken before 6AM today
-		try {
+			break
+	
+		case '18pmToday':
+			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '21pmToday':
-		// restore the shot taken before 6AM today
-		try {
+			break
+	
+		case '21pmToday':
+			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 21, 0, 0))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	case '18pmLastEvening':
-		// restore the shot of last evening 18:00 or older
-		try {
+			break
+	
+		case '18pmLastEvening':
+			// restore the shot of last evening 18:00 or older
 			LocalDateTime base = LocalDateTime.now().minusDays(1)
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
-		} catch (IllegalArgumentException e) {
-			KeywordUtil.markFailedAndStop("${e.getMessage()}")
-		}
-		break
-
-	default:
-		KeywordUtil.markFailedAndStop("unknown STRATEGY: ${STRATEGY}")
+			break
+	
+		default:
+			KeywordUtil.markFailedAndStop("unknown STRATEGY: ${STRATEGY}")
+	}
+	
+	// check if successfully restored or not
+	// if not, STOP it
+	if (restoreResult != RestoreResult.NULL) {
+		def tSuiteName = restoreResult.getTSuiteResult().getTSuiteName().getAbbreviatedId()
+		def tSuiteTimestamp = restoreResult.getTSuiteResult().getTSuiteTimestamp().format()
+		WebUI.comment("copied ${restoreResult.getCount()} files" +
+			" of ${tSuiteName}/${tSuiteTimestamp}" +
+			" from ${ms.getBaseDir().toString()}" +
+			" into ${mr.getBaseDir().toString()}")
+	} else {
+		JsonOutput jo = new JsonOutput()
+		throw new IllegalArgumentException("failed to retrieve a TSuiteResult" + 
+			" of \n${jo.prettyPrint(tsn.toJsonText())}\n" + 
+			" before \n${jo.prettyPrint(tst.toJsonText())}\n" + 
+			" from \n${jo.prettyPrint(ms.toJsonText())}\n" +
+			" into copy into \n${jo.prettyPrint(mr.toJsonText())}")
+	}
+} catch (IllegalArgumentException e) {
+    KeywordUtil.markFailedAndStop("${e.getMessage()}")
 }
 
-WebUI.comment("copied ${restoreResult.getCount()} files from ${mr.getBaseDir().toString()} to ${ms.getBaseDir().toString()}")
+
+
+

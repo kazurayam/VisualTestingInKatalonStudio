@@ -28,10 +28,16 @@ public enum ManagedGlobalVariable {
 	REPORTS_ACCESSOR            ('VT_REPORTS_ACCESSOR')
 	;
 	private String name_
+	
 	public ManagedGlobalVariable(String name) {
 		this.name_ = name
 	}
+	
 	public String getName() {
 		return name_
+	}
+	
+	public String toString() {
+		return this.getName()
 	}
 }

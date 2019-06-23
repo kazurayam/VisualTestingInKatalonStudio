@@ -37,6 +37,9 @@ WebUI.verifyElementPresent(findTestObject('CURA/Page_Homepage/a_Make Appointment
 
 WebUI.delay(1)
 
+WebUI.comment("*** GlobalVariable[${MGV.CURRENT_TESTSUITE_ID.getName()}]=${GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()]}")
+WebUI.comment("*** GlobalVariable[${MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()}]=${GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()]}")
+
 //Path png1 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Homepage.png")
 Path png1 = mr.resolveScreenshotPathByURLPathComponents(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
@@ -44,7 +47,7 @@ Path png1 = mr.resolveScreenshotPathByURLPathComponents(
 					0,
 					'home')
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png1.toFile(), 500)
-
+WebUI.comment("saved image into ${png1}")
 
 WebUI.callTestCase(findTestCase('CURA/Login'),
 	[
@@ -80,6 +83,7 @@ Path png3 = mr.resolveScreenshotPathByURLPathComponents(
 					new URL(WebUI.getUrl()),
 					0)
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png3.toFile(), 500)
+WebUI.comment("saved image into ${png3}")
 
 
 // transfer to the next page
@@ -128,6 +132,7 @@ Path png4 = mr.resolveScreenshotPathByURLPathComponents(
 					new URL(WebUI.getUrl()),
 					0)
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png4.toFile(), 500)
+WebUI.comment("saved image into ${png4}")
 
 
 WebUI.click(findTestObject('CURA/Page_AppointmentConfirmation/a_Go to Homepage'))
@@ -145,5 +150,6 @@ Path png5 = mr.resolveScreenshotPathByURLPathComponents(
 					0,
 					'revisited')
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png5.toFile(), 500)
+WebUI.comment("saved image into ${png5}")
 
 WebUI.closeBrowser()

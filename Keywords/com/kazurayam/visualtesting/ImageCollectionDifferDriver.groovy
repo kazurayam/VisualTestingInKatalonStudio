@@ -12,6 +12,7 @@ import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.materials.MaterialStorage
 import com.kazurayam.materials.TCaseName
 import com.kazurayam.materials.TSuiteName
+import com.kazurayam.materials.TSuiteResultId
 import com.kazurayam.materials.TSuiteTimestamp
 import com.kazurayam.materials.VisualTestingLogger
 import com.kazurayam.materials.imagedifference.ComparisonResultBundle
@@ -34,10 +35,11 @@ public class ImageCollectionDifferDriver {
 	ImageCollectionDifferDriver(MaterialRepository mr) {
 		Objects.requireNonNull(mr, "mr must not be null")
 		this.mr_                  = mr
-		// MaterialRepository#putCurrentTestSuite() is called to decide where to save the image diff files
-		this.mr_.putCurrentTestSuite(
-				GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()],
-				GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()] )
+		// call MaterialRepository#markAsCurrent() to specify where to save the image diff files
+		String tSuiteResultId = GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()]
+		String tSuiteTimestamp = GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()]
+		mr_.markAsCurrent(tSuiteResultId, tSuiteTimestamp)
+		def tsr = mr_.ensureTSuiteResultPresent(tSuiteResultId, tSuiteTimestamp)
 	}
 
 	void setVisualTestingLogger(VisualTestingLogger logger) {

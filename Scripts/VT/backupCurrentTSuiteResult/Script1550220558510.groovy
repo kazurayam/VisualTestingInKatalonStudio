@@ -24,4 +24,4 @@ TSuiteResultId currentTSRI = TSuiteResultId.newInstance(
 
 int count = ms.backup(mr, currentTSRI)
 
-WebUI.comment("copied ${count} files from ${mr.getBaseDir().toString()} to ${ms.getBaseDir().toString()}")
+WebUI.comment("copied ${count} files of ${currentTSRI} from ${mr.getBaseDir().toString()} to ${ms.getBaseDir().toString()}")

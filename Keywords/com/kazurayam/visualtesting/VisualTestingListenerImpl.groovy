@@ -144,7 +144,11 @@ public class VisualTestingListenerImpl {
 
 		// create the MaterialRepository object, save it as a GlobalVariable
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
-		mr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)
+		mr.markAsCurrent(testSuiteId, testSuiteTimestamp)
+		def tsr = mr.ensureTSuiteResultPresent(testSuiteId, testSuiteTimestamp)
+		if (tsr == null) {
+			throw new IllegalStateException("mr.ensureTSuiteResultPresent(${testSuiteId},${testSuiteTimestamp}) returned null")
+		}
 		GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
 
 		// create the MaterialStorage object, save it as a GlobalVariable
@@ -185,7 +189,8 @@ public class VisualTestingListenerImpl {
 		if ( ! GVH.isGlobalVariablePresent(MGV.MATERIAL_REPOSITORY) ) {
 			Files.createDirectories(materialsDir)
 			MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
-			mr.putCurrentTestSuite(TSuiteName.SUITELESS_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
+			mr.markAsCurrent(TSuiteName.SUITELESS_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
+			def tsr = mr.ensureTSuiteResultPresent(TSuiteName.SUITELESS_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
 			GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
 		}
 		MaterialRepository gvMR = (MaterialRepository)GVH.getGlobalVariableValue(MGV.MATERIAL_REPOSITORY)
