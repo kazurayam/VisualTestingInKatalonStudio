@@ -23,23 +23,28 @@ import groovy.json.JsonOutput
 
 
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
-MaterialStorage    ms = (MaterialStorage)   GlobalVariable[MGV.MATERIAL_STORAGE.getName()]
-
+WebUI.comment("MaterialRepository#getBaseDir()=${mr.getBaseDir()}")
 WebUI.comment("currentTSuiteId is ${mr.getCurrentTestSuiteId()}")
 WebUI.comment("currentTSuiteTimestamp is ${mr.getCurrentTestSuiteTimestamp()}")
-
 TSuiteName tsn        = new TSuiteName(mr.getCurrentTestSuiteId())
-TSuiteTimestamp tst   = TSuiteTimestamp.newInstance(mr.getCurrentTestSuiteTimestamp())
+TSuiteTimestamp tst   = new TSuiteTimestamp(mr.getCurrentTestSuiteTimestamp())
+
+MaterialStorage    ms = (MaterialStorage)   GlobalVariable[MGV.MATERIAL_STORAGE.getName()]
+WebUI.comment("MaterialStorage#getBaseDir()=${ms.getBaseDir()}")
 
 RestoreResult restoreResult = null
 
-ms.scan()
+//ms.scan()
 
 try {
 	switch(STRATEGY) {   // is defined in the Variables tab
 		case 'last':
 			// restore the last shot previous to the current
 			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
+			WebUI.comment("STRATEGY:last tst=${tst}")
+			WebUI.comment("STRATEGY:last restoreResult.getTSuiteResult().getTSuiteName()=${restoreResult.getTSuiteResult().getTSuiteName()}")
+			WebUI.comment("STRATEGY:last restoreResult.getTSuiteResult().getTSuiteTimestamp()=${restoreResult.getTSuiteResult().getTSuiteTimestamp()}")
+			WebUI.comment("STRATEGY:last restoreResult.getCount()=${restoreResult.getCount()}")
 			break
 	
 		case '10minutesAgo':

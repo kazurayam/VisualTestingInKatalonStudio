@@ -13,3 +13,5 @@ MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITO
 assert mr != null
 
 Helpers.deleteDirectoryContents(mr.getBaseDir())
+
+mr.scan()

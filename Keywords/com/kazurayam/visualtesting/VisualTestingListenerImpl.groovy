@@ -12,6 +12,8 @@ import com.kazurayam.materials.ReportsAccessor
 import com.kazurayam.materials.ReportsAccessorFactory
 import com.kazurayam.materials.TSuiteName
 import com.kazurayam.materials.TSuiteTimestamp
+import com.kazurayam.materials.VisualTestingLogger
+import com.kazurayam.materials.impl.VisualTestingLoggerDefaultImpl
 import com.kazurayam.visualtesting.GlobalVariableHelpers as GVH
 import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
 import com.kms.katalon.core.configuration.RunConfiguration
@@ -149,11 +151,15 @@ public class VisualTestingListenerImpl {
 		if (tsr == null) {
 			throw new IllegalStateException("mr.ensureTSuiteResultPresent(${testSuiteId},${testSuiteTimestamp}) returned null")
 		}
+		VisualTestingLogger vtLogger4Repos = new VisualTestingLoggerDefaultImpl()
+		mr.setVisualTestingLogger(vtLogger4Repos)
 		GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
 
 		// create the MaterialStorage object, save it as a GlobalVariable
 		Files.createDirectories(storageDir)
 		MaterialStorage ms = MaterialStorageFactory.createInstance(storageDir)
+		VisualTestingLogger vtLogger4Storage = new VisualTestingLoggerDefaultImpl()
+		ms.setVisualTestingLogger(vtLogger4Storage)
 		GVH.ensureGlobalVariable(MGV.MATERIAL_STORAGE, ms)
 
 		// create the ReportsAccessor object, save it as a GlobalVariable
