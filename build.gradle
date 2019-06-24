@@ -53,8 +53,10 @@ task drivers {
 }
 
 
-
-
+task materialsFromMavenLocal(type: Copy) {
+    from file("${System.getProperty('user.home')}/.m2/repository/com/kazurayam/Materials/0.63.4/Materials-0.63.4.jar")
+    into file("$buildDir/Drivers")
+}
 
 // ---------------------------------------------------------------------
 // codes to generate groovydoc

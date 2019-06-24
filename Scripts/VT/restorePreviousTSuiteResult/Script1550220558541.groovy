@@ -34,8 +34,6 @@ WebUI.comment("MaterialStorage#getBaseDir()=${ms.getBaseDir()}")
 
 RestoreResult restoreResult = null
 
-//ms.scan()
-
 try {
 	switch(STRATEGY) {   // is defined in the Variables tab
 		case 'last':
@@ -134,7 +132,8 @@ try {
 			" from \n${jo.prettyPrint(ms.toJsonText())}\n" +
 			" into copy into \n${jo.prettyPrint(mr.toJsonText())}")
 	}
-} catch (IllegalArgumentException e) {
+	
+} catch (Exception e) {
     KeywordUtil.markFailedAndStop("${e.getMessage()}")
 }
 
