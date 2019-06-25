@@ -148,9 +148,9 @@ public class VisualTestingListenerImpl {
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
 		mr.markAsCurrent(testSuiteId, testSuiteTimestamp)
 		def tsr = mr.ensureTSuiteResultPresent(testSuiteId, testSuiteTimestamp)
-		if (tsr == null) {
-			throw new IllegalStateException("mr.ensureTSuiteResultPresent(${testSuiteId},${testSuiteTimestamp}) returned null")
-		}
+		//if (tsr == null) {
+		//	throw new IllegalStateException("mr.ensureTSuiteResultPresent(${testSuiteId},${testSuiteTimestamp}) returned null")
+		//}
 		VisualTestingLogger vtLogger4Repos = new VisualTestingLoggerDefaultImpl()
 		mr.setVisualTestingLogger(vtLogger4Repos)
 		GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)

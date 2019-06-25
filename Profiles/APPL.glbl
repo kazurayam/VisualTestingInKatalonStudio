@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalVariableEntities>
+   <description></description>
+   <name>APPL</name>
+   <tag></tag>
+   <defaultProfile>false</defaultProfile>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'https://investor.apple.com/investor-relations/default.aspx'</initValue>
+      <name>URL</name>
+   </GlobalVariableEntity>
+</GlobalVariableEntities>

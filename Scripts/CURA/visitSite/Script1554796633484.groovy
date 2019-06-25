@@ -20,6 +20,8 @@ import internal.GlobalVariable as GlobalVariable
 /**
  * Test Cases/CURA/visitSite
  */
+WebUI.comment("*** GlobalVariable[${MGV.CURRENT_TESTSUITE_ID.getName()}]=${GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()]}")
+WebUI.comment("*** GlobalVariable[${MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()}]=${GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()]}")
 
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
 assert mr != null
@@ -37,8 +39,6 @@ WebUI.verifyElementPresent(findTestObject('CURA/Page_Homepage/a_Make Appointment
 
 WebUI.delay(1)
 
-WebUI.comment("*** GlobalVariable[${MGV.CURRENT_TESTSUITE_ID.getName()}]=${GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()]}")
-WebUI.comment("*** GlobalVariable[${MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()}]=${GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()]}")
 
 //Path png1 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Homepage.png")
 Path png1 = mr.resolveScreenshotPathByURLPathComponents(
