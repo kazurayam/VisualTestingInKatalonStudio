@@ -28,7 +28,7 @@ class VisualTestingListenerImplTest {
 		assertThat(actual, is(alternativeProjectDir))
 		GlobalVariableHelpers.addGlobalVariable(VisualTestingListenerImpl.GVNAME_AUX, null)
 	}
-	
+
 	@Test
 	void test_getProjectName() {
 		// when:
