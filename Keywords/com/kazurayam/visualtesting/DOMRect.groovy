@@ -6,35 +6,35 @@ package com.kazurayam.visualtesting
  * @author kazurayam
  */
 public class DOMRect {
-	
+
 	int x_ = 0
 	int y_ = 0
 	int width_ = 0
 	int height_ = 0
-	
+
 	DOMRect(int x, int y, int width, int height) {
 		x_ = x
 		y_ = y
 		width_ = width
-		height_ = height	
+		height_ = height
 	}
-	
+
 	int x() {
 		return x_
 	}
-	
+
 	int y() {
 		return y_
 	}
-	
+
 	int width() {
 		return width_
 	}
-	
+
 	int height() {
 		return height_
 	}
-	
+
 	int top() {
 		if (this.height() < 0) {
 			return this.y() + this.height()
@@ -42,7 +42,7 @@ public class DOMRect {
 			return this.y()
 		}
 	}
-	
+
 	int right() {
 		if (this.width() < 0) {
 			return this.x()
@@ -50,7 +50,7 @@ public class DOMRect {
 			return this.x() + this.width()
 		}
 	}
-	
+
 	int bottom() {
 		if (this.height() < 0) {
 			return this.y()
@@ -58,7 +58,7 @@ public class DOMRect {
 			return this.y() + this.height()
 		}
 	}
-	
+
 	int left() {
 		if (this.width() < 0) {
 			return this.x() + this.width()
@@ -66,7 +66,7 @@ public class DOMRect {
 			return this.x
 		}
 	}
-	
+
 	@Override
 	String toString() {
 		StringBuilder sb = new StringBuilder()
@@ -78,18 +78,18 @@ public class DOMRect {
 		sb.append('}')
 		return sb.toString()
 	}
-	
+
 	@Override
 	boolean equals(Object obj) {
 		if (obj == null) return false
 		if (!(obj instanceof DOMRect)) return false
 		DOMRect other = (DOMRect)obj
 		return this.x() == other.x() &&
-			this.y() == other.y() &&
-			this.width() == other.width() &&
-			this.height() == other.height()
+				this.y() == other.y() &&
+				this.width() == other.width() &&
+				this.height() == other.height()
 	}
-	
+
 	@Override
 	int hashCode() {
 		int result = 17;
@@ -97,6 +97,6 @@ public class DOMRect {
 		result = 31 * result + this.y();
 		result = 31 * result + this.width();
 		result = 31 * result + this.height();
-		return result;  
+		return result;
 	}
 }

@@ -24,7 +24,7 @@ public class HighlightElements {
 	String script = '''var rect = arguments[0].getBoundingClientRect(); 
 return rect.x + "," + rect.y + "," + rect.width + "," + rect.height;
 '''
-	
+
 	HighlightElements() {
 		highlightedElements = new HashMap<String, DOMRect>()
 	}
@@ -65,9 +65,10 @@ return rect.x + "," + rect.y + "," + rect.width + "," + rect.height;
 				sb.append(',')
 			}
 			sb.append('{')
-			sb.append('\"')
+			sb.append('\"objectId\":\"')
 			sb.append(key)
-			sb.append('\":')
+			sb.append('\",')
+			sb.append('\"DOMRect\":')
 			sb.append(val)
 			sb.append('}')
 			count++
@@ -75,19 +76,19 @@ return rect.x + "," + rect.y + "," + rect.width + "," + rect.height;
 		sb.append(']')
 		output.toFile().write(JsonOutput.prettyPrint(sb.toString()), "utf-8")
 	}
-	
+
 	static createTestObjectWithXPath(String objectId, String xpath) {
 		TestObject tobj = new TestObject(objectId)
 		tobj.addProperty('xpath', ConditionType.EQUALS, xpath)
 		return tobj
 	}
-	
+
 	static createTestObjectWithCssSelector(String objectId, String selector) {
 		TestObject tobj = new TestObject(objectId)
 		tobj.addProperty('css', ConditionType.EQUALS, selector)
 		return tobj
 	}
-	
+
 	static def stepFailed(String message, FailureHandling flowControl) {
 		if (flowControl == FailureHandling.OPTIONAL) {
 			//println "#stepFailed('${message}',FailureHandling.OPTIONAL)"
