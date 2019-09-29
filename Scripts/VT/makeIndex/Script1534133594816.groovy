@@ -27,7 +27,7 @@ Path reportsDir       = ra.getReportsDir()
 Path index            = baseDir.resolve('index.html')
 
 // create an Indexer object
-Indexer indexer = IndexerFactory.newIndexer()
+Indexer indexer = IndexerFactory.newIndexer('com.kazurayam.materials.view.IndexerConcise')
 indexer.setBaseDir(baseDir)
 indexer.setReportsDir(reportsDir)
 indexer.setOutput(index)
