@@ -148,8 +148,11 @@ you can see how these STRATEGIES are implemented in [Test Cases/VT/restorePrevio
 
 The output of `Execute_chronos` is just similar to the one created by `Execute_twins`. Please find `<projectDir>/Materials/index.html`.
 
-As of v1.10.0, the index page presents 3 images in a carousel format. This format makes it easy to location of visual differences.
-![carousel](docs/images/index_carousel.png)
+As of v1.12.0, the Modal dialog presents 2 pane in a carousel format. The first pane shows Expected image on the left, Actual image on the right.
+![concise_parallel](docs/images/index_concise_parallel.png)
+And another pane shows the Diff image.
+![concise_diff](docs/images/index_concise_diff.png)
+You can switch between the 2 panes by a single mouse click. This format makes it easy to locate and see the visual differences.
 
 ## How to make your Katalon Studio project capable of *Visual Testing*
 
