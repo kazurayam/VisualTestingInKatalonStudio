@@ -40,7 +40,6 @@ WebUI.verifyElementPresent(findTestObject('CURA/Page_Homepage/a_Make Appointment
 WebUI.delay(1)
 
 
-//Path png1 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Homepage.png")
 Path png1 = mr.resolveScreenshotPathByURLPathComponents(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
 					url,
@@ -48,6 +47,12 @@ Path png1 = mr.resolveScreenshotPathByURLPathComponents(
 					'home')
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png1.toFile(), 500)
 WebUI.comment("saved image into ${png1}")
+
+// create one more screenshot file with name in Japanese
+Path png2 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "トップ.png")
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
+WebUI.comment("saved image into ${png1}")
+
 
 WebUI.callTestCase(findTestCase('CURA/Login'),
 	[
