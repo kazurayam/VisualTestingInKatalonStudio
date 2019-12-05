@@ -31,6 +31,7 @@ public class ImageCollectionDifferDriver {
 	private TSuiteName capturingTSuiteName_
 	private VisualTestingLogger logger_
 	private Path imageDeltaStatsJson_
+	private Path comparisonResultBundleFile_
 
 	ImageCollectionDifferDriver(MaterialRepository mr) {
 		Objects.requireNonNull(mr, "mr must not be null")
@@ -79,12 +80,16 @@ public class ImageCollectionDifferDriver {
 				stats)
 		WebUI.comment("${ComparisonResultBundle.SERIALIZED_FILE_NAME} files will be saved into ${imageCollectionDiffer.getOutput()}")
 
-		// copy comparison-result-bundle.json file from Storage dir to the Materials dir to bring it visible in the Materials/index.html
-		Path toPath2 = mr_.resolveMaterialPath(GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()],ComparisonResultBundle.SERIALIZED_FILE_NAME)
-		Files.copy(imageCollectionDiffer.getOutput(), toPath2)
-		WebUI.comment("copied into ${toPath2}")
+		// save the comparison-result-bundle.json file into the Materials dir to bring it visible in the Materials/index.html
+		comparisonResultBundleFile_ = mr_.resolveMaterialPath(GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()],ComparisonResultBundle.SERIALIZED_FILE_NAME)
+		Files.copy(imageCollectionDiffer.getOutput(), comparisonResultBundleFile_)
+		WebUI.comment("copied into ${comparisonResultBundleFile_}")
 
 		return result
+	}
+
+	public Path getComparisonResultBundleFile() {
+		return this.comparisonResultBundleFile_
 	}
 
 	/**
@@ -101,10 +106,11 @@ public class ImageCollectionDifferDriver {
 			imageCollectionDiffer.setVisualTestingLogger(logger_)
 		}
 		MaterialPairs materialPairs = this.createMaterialPairs(this.mr_, capturingTSuiteName)
-		return imageCollectionDiffer.makeImageCollectionDifferences(
+		boolean result = imageCollectionDiffer.makeImageCollectionDifferences(
 				materialPairs,
 				new TCaseName( GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()] ),
 				criteriaPercentage)
+		return result
 	}
 
 	/**
