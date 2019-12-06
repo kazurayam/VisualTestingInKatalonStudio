@@ -12,4 +12,11 @@
       <masked>true</masked>
       <name>STRATEGY</name>
    </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>d87e044f-a7c6-4f49-b167-c0833ffdb375</id>
+      <masked>false</masked>
+      <name>timestamp</name>
+   </variable>
 </TestCaseEntity>

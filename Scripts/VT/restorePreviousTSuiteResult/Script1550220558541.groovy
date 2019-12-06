@@ -38,7 +38,7 @@ try {
 	switch(STRATEGY) {   // is defined in the Variables tab
 		case 'last':
 			// restore the last shot previous to the current
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(tst))
+			restoreResult = ms.retrievingRestoreUnaryExclusive(mr, tsn, RetrievalBy.by(tst))
 			WebUI.comment("STRATEGY:last tst=${tst}")
 			WebUI.comment("STRATEGY:last restoreResult.getTSuiteResult().getTSuiteName()=${restoreResult.getTSuiteResult().getTSuiteName()}")
 			WebUI.comment("STRATEGY:last restoreResult.getTSuiteResult().getTSuiteTimestamp()=${restoreResult.getTSuiteResult().getTSuiteTimestamp()}")
@@ -48,71 +48,84 @@ try {
 		case '10minutesAgo':
 			// restore the shot of 1 hour ago or older
 			LocalDateTime base = LocalDateTime.now().minusMinutes(10)
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base))
 			break
 	
 		case '30minutesAgo':
 			// restore the shot of 1 hour ago or older
 			LocalDateTime base = LocalDateTime.now().minusMinutes(10)
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base))
 			break
 	
 		case '1hourAgo':
 			// restore the shot of 1 hour ago or older
 			LocalDateTime base = LocalDateTime.now().minusHours(1)
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base))
 			break
 	
 		case '2hoursAgo':
 			// restore the shot of 2 hours ago or older
 			LocalDateTime base = LocalDateTime.now().minusHours(2)
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base))
 			break
 	
 		case '6amToday':
 			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 6, 0, 0))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base, 6, 0, 0))
 			break
 	
 		case '9amToday':
 			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 9, 0, 0))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base, 9, 0, 0))
 			break
 	
 		case '12amToday':
 			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 12, 0, 0))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base, 12, 0, 0))
 			break
 	
 		case '15pmToday':
 			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 15, 0, 0))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base, 15, 0, 0))
 			break
 	
 		case '18pmToday':
 			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base, 18, 0, 0))
 			break
 	
 		case '21pmToday':
 			// restore the shot taken before 6AM today
 			LocalDateTime base = LocalDateTime.now()
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 21, 0, 0))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base, 21, 0, 0))
 			break
 	
 		case '18pmLastEvening':
 			// restore the shot of last evening 18:00 or older
 			LocalDateTime base = LocalDateTime.now().minusDays(1)
-			restoreResult = ms.restoreUnary(mr, tsn, RetrievalBy.before(base, 18, 0, 0))
+			restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base, 18, 0, 0))
 			break
 	
+		case 'exactlyAtOrBefore':
+		    // requires additonal argument "timestamp" given as a Variable to this test case
+			Objects.requireNonNull(timestamp, "timestamp must not be null")
+			try {
+				TSuiteTimestamp tSuiteTimestamp = new TSuiteTimestamp(timestamp)
+				LocalDateTime base = tSuiteTimestamp.getValue()
+				restoreResult = ms.retrievingRestoreUnaryInclusive(mr, tsn, RetrievalBy.by(base))
+			} catch (Exception e) {
+				throw new IllegalArgumentException("timestamp=\"${timestamp}\" must be in the format of YYYYMMdd_hhmmss")
+			}
+			break
+		
 		default:
 			KeywordUtil.markFailedAndStop("unknown STRATEGY: ${STRATEGY}")
+			break
 	}
 	
 	// check if successfully restored or not
