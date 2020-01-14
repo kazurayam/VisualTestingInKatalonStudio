@@ -33,11 +33,11 @@ class HighlightElementsTest {
 		TestObject tobj = HighlightElements.createTestObjectWithXPath(objectId, xpath)
 		// then:
 		assertEquals("objctId was expected to be \'${objectId}\' but actually was \'${tobj.getObjectId()}\'",
-			objectId, tobj.getObjectId())
+				objectId, tobj.getObjectId())
 		assertEquals("xpath was expected to be \'${xpath}\' but actually was \'${tobj.findPropertyValue('xpath')}\'",
-			xpath, tobj.findPropertyValue('xpath'))
+				xpath, tobj.findPropertyValue('xpath'))
 	}
-	
+
 	@Test
 	void test_createTestObjectWithCssSelector() {
 		// setup:
@@ -47,11 +47,11 @@ class HighlightElementsTest {
 		TestObject tobj = HighlightElements.createTestObjectWithCssSelector(objectId, selector)
 		// then:
 		assertEquals("objctId was expected to be \'${objectId}\' but actually was \'${tobj.getObjectId()}\'",
-			objectId, tobj.getObjectId())
+				objectId, tobj.getObjectId())
 		assertEquals("selector was expected to be \'${selector}\' but actually was \'${tobj.findPropertyValue('css')}\'",
-			selector, tobj.findPropertyValue('css'))
+				selector, tobj.findPropertyValue('css'))
 	}
-	
+
 	@Test
 	void test_highlight() {
 		// setup:
@@ -73,8 +73,8 @@ class HighlightElementsTest {
 		instance.writeLog(log)
 		// then
 		assertTrue("log file ${log} is not found",
-			Files.exists(log))
+				Files.exists(log))
 		assertTrue("log file should contain a String 'username'",
-			((CharSequence)log.toFile().text).contains('username'))
+				((CharSequence)log.toFile().text).contains('username'))
 	}
 }
