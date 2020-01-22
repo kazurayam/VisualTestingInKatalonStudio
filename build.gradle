@@ -2,7 +2,7 @@
 
 apply plugin: 'groovy'
 
-version = "1.13.1"
+version = "1.13.2"
 
 ext {
     groovyVersion = '2.4.7'
@@ -36,9 +36,9 @@ def downloadFile = { remoteUrl, localDir = 'Drivers' ->
 
 task downloadJarsIntoDriversDir {
     doLast {
-      downloadFile('http://central.maven.org/maven2/ru/yandex/qatools/ashot/ashot/1.5.4/ashot-1.5.4.jar')
-      downloadFile('http://central.maven.org/maven2/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar')
-      downloadFile('http://central.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar')
+      downloadFile('https://repo1.maven.org/maven2/ru/yandex/qatools/ashot/ashot/1.5.4/ashot-1.5.4.jar')
+      downloadFile('https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar')
+      downloadFile('https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar')
       downloadFile('https://github.com/kazurayam/junit4ks/releases/download/1.6/junit4ks-all.jar')
       downloadFile('https://github.com/kazurayam/ksbackyard/releases/download/0.36.0/ksbackyard.jar')
       downloadFile('https://github.com/kazurayam/Materials/releases/download/0.73.3/Materials-0.73.3.jar')
