@@ -146,6 +146,7 @@ public class VisualTestingListenerImpl {
 
 		// create the MaterialRepository object, save it as a GlobalVariable
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
+		mr.setExecutionProfileName(RunConfiguration.getExecutionProfile())  // record name of the Execution Profile used
 		mr.markAsCurrent(testSuiteId, testSuiteTimestamp)
 		def tsr = mr.ensureTSuiteResultPresent(testSuiteId, testSuiteTimestamp)
 		//if (tsr == null) {
@@ -195,6 +196,7 @@ public class VisualTestingListenerImpl {
 		if ( ! GVH.isGlobalVariablePresent(MGV.MATERIAL_REPOSITORY) ) {
 			Files.createDirectories(materialsDir)
 			MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
+			mr.setExecutionProfileName(RunConfiguration.getExecutionProfile())  // record name of the Execution Profile used
 			mr.markAsCurrent(TSuiteName.SUITELESS_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
 			def tsr = mr.ensureTSuiteResultPresent(TSuiteName.SUITELESS_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
 			GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
