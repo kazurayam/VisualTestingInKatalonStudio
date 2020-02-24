@@ -22,7 +22,7 @@
 Visual Testing in Katalon Studio
 ======
 
-author: kazurayamyam
+author: kazurayam
 
 ## Overview of this project
 
