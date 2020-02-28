@@ -1,3 +1,5 @@
-import com.kazurayam.junit4ks.JUnitCustomKeywords
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
 
-JUnitCustomKeywords.runWithJUnitRunner(com.kazurayam.visualtesting.HighlightElementsTest.class)
+import com.kazurayam.visualtesting.HighlightElementsTest
+
+runWithJUnitRunner(HighlightElementsTest.class)

@@ -1,6 +1,5 @@
-/**
- * Test Cases/test/com.kazurayam.visualtesting/VTConfigTestRunner
- */
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
+
 import com.kazurayam.visualtesting.VTConfigTest
 
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(VTConfigTest.class)
+runWithJUnitRunner(VTConfigTest.class)

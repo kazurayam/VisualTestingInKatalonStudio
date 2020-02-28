@@ -1,6 +1,5 @@
-/**
- * Test Cases/test/com.kazurayam.visualtesting/HelpersTestRunner
- */
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
+
 import com.kazurayam.visualtesting.HelpersTest
 
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(HelpersTest.class)
+runWithJUnitRunner(HelpersTest.class)

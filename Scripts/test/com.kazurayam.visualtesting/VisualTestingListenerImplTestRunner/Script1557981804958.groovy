@@ -1,6 +1,5 @@
-/**
- * Test Cases/test/com.kazurayam.visualtesting/VisualTestingListenerImplTestRunner
- */
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
+
 import com.kazurayam.visualtesting.VisualTestingListenerImplTest
 
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(VisualTestingListenerImplTest.class)
+runWithJUnitRunner(VisualTestingListenerImplTest.class)
