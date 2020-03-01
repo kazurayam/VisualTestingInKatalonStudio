@@ -14,6 +14,7 @@ import com.kazurayam.materials.TSuiteName
 import com.kazurayam.materials.TSuiteTimestamp
 import com.kazurayam.materials.VisualTestingLogger
 import com.kazurayam.materials.impl.VisualTestingLoggerDefaultImpl
+import com.kazurayam.materials.metadata.MaterialMetadataBundle
 import com.kazurayam.visualtesting.GlobalVariableHelpers as GVH
 import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
 import com.kms.katalon.core.configuration.RunConfiguration
@@ -237,7 +238,20 @@ public class VisualTestingListenerImpl {
 	 * @param testSuiteContext
 	 */
 	void afterTestSuite(TestSuiteContext testSuiteContext) {
-		// nothing to do
+		String testSuiteId        = testSuiteContext.getTestSuiteId()     // e.g. 'Test Suites/TS1'
+		String testSuiteTimestamp = reportFolder.getFileName().toString()    // e.g. '20180618_165141'
+		MaterialRepository mr = (MaterialRepository)GVH.getGlobalVariableValue(MGV.MATERIAL_REPOSITORY)
+		mr.setExecutionProfileName(RunConfiguration.getExecutionProfile())  // record name of the Execution Profile used
+		mr.markAsCurrent(testSuiteId, testSuiteTimestamp)
+		
+		// write Materials/tSuiteName/tSuiteTimestamp/visited-urls.md file in Markdown format
+		File markdown = mr.getCurrentTestSuiteDirectory().resolve(MaterialMetadataBundle.URLS_MARKDOWN_FILE_NAME).toFile()
+		mr.printVisitedURLsAsMarkdown(new FileWriter(markdown))
+		
+		// write Materials/tSuiteName/tSuiteTImestamp/visited-urls.txt in Tab-Seperated-Values format
+		File tsv = mr.getCurrentTestSuiteDirectory().resolve(MaterialMetadataBundle.URLS_TSV_FILE_NAME).toFile()
+		mr.printVisitedURLsAsTSV(new FileWriter(tsv))
+		
 	}
 }
 
