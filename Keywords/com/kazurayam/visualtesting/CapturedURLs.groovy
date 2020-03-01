@@ -91,7 +91,6 @@ public class CapturedURLs {
 		}
 	}
 
-
 	class CapturedURL {
 		private String description_
 		private URL url_
