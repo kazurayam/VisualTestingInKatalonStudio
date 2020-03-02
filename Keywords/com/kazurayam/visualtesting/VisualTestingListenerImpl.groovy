@@ -20,9 +20,8 @@ import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.context.TestCaseContext
 import com.kms.katalon.core.context.TestSuiteContext
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.util.KeywordUtil
-import internal.GlobalVariable as GlobalVariable
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 public class VisualTestingListenerImpl {
 
@@ -243,15 +242,22 @@ public class VisualTestingListenerImpl {
 		MaterialRepository mr = (MaterialRepository)GVH.getGlobalVariableValue(MGV.MATERIAL_REPOSITORY)
 		mr.setExecutionProfileName(RunConfiguration.getExecutionProfile())  // record name of the Execution Profile used
 		mr.markAsCurrent(testSuiteId, testSuiteTimestamp)
-		
-		// write Materials/tSuiteName/tSuiteTimestamp/visited-urls.md file in Markdown format
-		File markdown = mr.getCurrentTestSuiteDirectory().resolve(MaterialMetadataBundle.URLS_MARKDOWN_FILE_NAME).toFile()
-		mr.printVisitedURLsAsMarkdown(new FileWriter(markdown))
-		
-		// write Materials/tSuiteName/tSuiteTImestamp/visited-urls.txt in Tab-Seperated-Values format
-		File tsv = mr.getCurrentTestSuiteDirectory().resolve(MaterialMetadataBundle.URLS_TSV_FILE_NAME).toFile()
-		mr.printVisitedURLsAsTSV(new FileWriter(tsv))
-		
+
+		// If the TestSuiteResult has a MaterialMetadataBundle property,
+		if (mr.hasMaterialMetadataBundleOfCurrentTSuite()) {
+
+			WebUI.comment("printing visited-urls report for ${testSuiteId}/${testSuiteTimestamp}")
+
+			// convert it into Markdown format and write Materials/tSuiteName/tSuiteTimestamp/visited-urls.md file
+			Path markdown = mr.getCurrentTestSuiteDirectory().resolve(MaterialMetadataBundle.URLS_MARKDOWN_FILE_NAME)
+			mr.printVisitedURLsAsMarkdown(new FileWriter(markdown.toFile()))
+
+			// convert it into TAB-Separated-Values format and write Materials/tSuiteName/tSuiteTImestamp/visited-urls.txt
+			Path tsv = mr.getCurrentTestSuiteDirectory().resolve(MaterialMetadataBundle.URLS_TSV_FILE_NAME)
+			mr.printVisitedURLsAsTSV(new FileWriter(tsv.toFile()))
+		} else {
+			WebUI.comment("There found no MaterialMetadataBundle for ${testSuiteId}/${testSuiteTimestamp}")
+		}
 	}
 }
 
