@@ -16,6 +16,7 @@
       - [Output](#output-1)
   - [How to make your Katalon Studio project capable of *Visual Testing*](#how-to-make-your-katalon-studio-project-capable-of-visual-testing)
 - [Revision history](#revision-history)
+- [API doc](#api)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -182,3 +183,7 @@ You can make a copy of "CURA" resources and rename them to your own AUT symbol. 
 # Revision history
 
 see [Revision History](docs/revision_history.md)
+
+# API doc
+
+see [Groovydoc](api/index.html)
