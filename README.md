@@ -187,4 +187,4 @@ see [Revision History](docs/revision_history.md)
 <a id="api" name="api"></a>
 # API doc
 
-see [Groovydoc](api/index.html)
+see [Groovydoc](https://kazurayam.github.io/Materials/api/index.html)
