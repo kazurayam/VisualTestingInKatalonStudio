@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>makeIndex</name>
+   <name>makeIndexAndOpen</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <mailRecipient></mailRecipient>
@@ -9,11 +9,17 @@
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>24d0f553-d2e0-4b47-89d4-0434cb3c75e0</testSuiteGuid>
+   <testSuiteGuid>ae75f0ca-4677-4057-a6a3-c692eac7e37c</testSuiteGuid>
    <testCaseLink>
       <guid>825352d9-99c4-4a2f-9c63-19b7bed2a2fc</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
       <testCaseId>Test Cases/VT/makeIndex</testCaseId>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>03bfb4e2-8f85-4466-a49b-0490cc76f3ee</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/VT/openIndexInBrowser</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

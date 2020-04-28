@@ -7,6 +7,10 @@
 # Mac
 .DS_*
 
+# IntelliJ IDEA
+.idea/
+*.iml
+
 ## proposed by https://github.com/katalon-studio/ShadowDOMSampleProject/blob/master/.gitignore#L3
 /\.classpath
 /\.project

@@ -40,7 +40,7 @@
             <runConfigurationId>Firefox (headless)</runConfigurationId>
          </configuration>
          <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/VT/makeIndex</testSuiteEntity>
+         <testSuiteEntity>Test Suites/VT/makeIndexAndOpen</testSuiteEntity>
       </TestSuiteRunConfiguration>
    </testSuiteRunConfigurations>
 </TestSuiteCollectionEntity>
