@@ -30,6 +30,10 @@ public class VisualTestingListenerImpl {
 	private Path reportsDir
 	private Path reportFolder
 
+	public static final Path GLOBAL_VARIABLES_JSON
+	static {
+		GLOBAL_VARIABLES_JSON = Paths.get(RunConfiguration.getProjectDir()).resolve("build/tmp/GlobalVariables.json")
+	}
 
 	/**
 	 * resolve reportDir, materialDir, storageDir. For example,
@@ -116,13 +120,8 @@ public class VisualTestingListenerImpl {
 	 * @return a String as the name of Project. When the project dir is "C:/Users/me/my/projectX", then returns "projectX"
 	 */
 	static String getProjectName() {
-		String projectDir = RunConfiguration.getProjectDir()
-		//println "projectDir=${projectDir}"
-		if (projectDir.lastIndexOf('/') >= 0) {
-			return projectDir.substring(projectDir.lastIndexOf('/'))
-		} else {
-			return projectDir
-		}
+		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
+		return projectDir.getFileName().toString()
 	}
 
 	/**
@@ -166,6 +165,19 @@ public class VisualTestingListenerImpl {
 		// create the ReportsAccessor object, save it as a GlobalVariable
 		ReportsAccessor ra = ReportsAccessorFactory.createInstance(reportsDir)
 		GVH.ensureGlobalVariable(MGV.REPORTS_ACCESSOR, ra)
+
+		// read the id of last executed TestSuiteId from GlobalVariables.json file if it exists
+		if (Files.exists(GLOBAL_VARIABLES_JSON)) {
+			List<String> names = [
+				MGV.LAST_EXECUTED_TESTSUITE_ID.getName()
+			]
+			Reader reader = new InputStreamReader(new FileInputStream(GLOBAL_VARIABLES_JSON.toFile()), "utf-8")
+			Map<String, Object> gvs = GlobalVariableHelpers.read(names, reader)
+			for (String name in gvs.keySet()) {
+				GlobalVariableHelpers.ensureGlobalVariable(name, gvs.get(name))
+				WebUI.comment("GlobalVariable.${name} has value \"${gvs.get(name)}\" loaded from ${GLOBAL_VARIABLES_JSON}")
+			}
+		}
 	}
 
 
@@ -258,6 +270,32 @@ public class VisualTestingListenerImpl {
 		} else {
 			WebUI.comment("There found no MaterialMetadataBundle for ${testSuiteId}/${testSuiteTimestamp}")
 		}
+
+		// write the id of Test Suite which was last executed into a GlobalVariable, and write it into json file.
+		// It is necessary to pass the info via file to the next TestSuite
+		// Because a GlobalVariable is TestSuite-scoped; it is not automatically passed across TestSuite boundaries.
+		def lastExecutedTestsuiteId = this.getRelativeTestSuiteId(testSuiteContext)
+		GVH.ensureGlobalVariable(ManagedGlobalVariable.LAST_EXECUTED_TESTSUITE_ID, lastExecutedTestsuiteId)
+		WebUI.comment("GlobalVariable.${ManagedGlobalVariable.LAST_EXECUTED_TESTSUITE_ID} is set to ${lastExecutedTestsuiteId}")
+		//
+		Files.createDirectories(GLOBAL_VARIABLES_JSON.getParent())
+		List<String> names = [
+			MGV.LAST_EXECUTED_TESTSUITE_ID.getName()
+		]
+		Writer writer = new OutputStreamWriter(new FileOutputStream(GLOBAL_VARIABLES_JSON.toFile()), "utf-8")
+		GVH.write(names, writer)
+	}
+
+	/**
+	 * if testSuiteContext.getTestSuiteId() is "Test Suites/TS1" then will return "TS1"
+	 * @param testSuiteContext
+	 * @return
+	 */
+	static String getRelativeTestSuiteId(TestSuiteContext testSuiteContext) {
+		Objects.requireNonNull(testSuiteContext, "testSuiteContext must not be null")
+		Path p = Paths.get(testSuiteContext.getTestSuiteId())
+		println "p is ${p}"
+		return p.subpath(1, p.getNameCount()).toString()
 	}
 }
 

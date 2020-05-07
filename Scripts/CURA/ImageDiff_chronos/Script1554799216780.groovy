@@ -1,11 +1,11 @@
-import com.kazurayam.visualtesting.ImageDiffer
-import com.kazurayam.visualtesting.ImageCollectionDifferDriver.ChronosOptions
 import java.nio.file.Path
 
 import com.kazurayam.materials.MaterialRepository
+import com.kazurayam.visualtesting.GlobalVariableHelpers as GVH
 import com.kazurayam.visualtesting.ImageDiffer
 import com.kazurayam.visualtesting.ImageDiffsLister
 import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
+import com.kazurayam.visualtesting.ImageCollectionDifferDriver.ChronosOptions
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
@@ -17,7 +17,9 @@ import internal.GlobalVariable
  * compare 2 sets of images and produce diff-images
  * and a summary file: comparison-result-bundle.json
  */
-String TESTSUITE_ID = 'CURA/chronos_capture'
+assert GVH.isGlobalVariablePresent(MGV.LAST_EXECUTED_TESTSUITE_ID)
+String TESTSUITE_ID = GVH.getGlobalVariableValue(MGV.LAST_EXECUTED_TESTSUITE_ID) // e.g, 'CURA/chronos_capture'
+
 ChronosOptions options = new ChronosOptions.Builder().
 							filterDataLessThan(2.0).
 							shiftCriteriaPercentageBy(0.0).

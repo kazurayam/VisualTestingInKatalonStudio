@@ -1,5 +1,7 @@
 import java.nio.file.Path
 
+import com.kazurayam.visualtesting.GlobalVariableHelpers as GVH
+
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.visualtesting.ImageDiffer
 import com.kazurayam.visualtesting.ImageDiffsLister
@@ -14,7 +16,9 @@ import internal.GlobalVariable
 /**
  * compare 2 sets of images and produce diff-images
  */
-String TESTSUITE_ID = 'CURA/twins_capture'
+assert GVH.isGlobalVariablePresent(MGV.LAST_EXECUTED_TESTSUITE_ID)
+String TESTSUITE_ID = GVH.getGlobalVariableValue(MGV.LAST_EXECUTED_TESTSUITE_ID) // e.g, 'CURA/twins_capture'
+
 double criteriaPercentage = 1.0
 ImageDiffer imageDiffer = new ImageDiffer()
 boolean result = imageDiffer.runTwins(TESTSUITE_ID, criteriaPercentage)
