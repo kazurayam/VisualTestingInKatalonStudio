@@ -33,7 +33,7 @@ class VisualTestingListenerImplTest {
 
 	@Test
 	void test_getRelativeTestSuiteId() {
-		TestSuiteContext tsc = new MyTestSuiteContext("Success", "Test Suites/VT/cleanMaterials")
+		TestSuiteContext tsc = new MyTestSuiteContext("Success", "Test Suites\\VT\\cleanMaterials")
 		String relativeTestSuiteId = VisualTestingListenerImpl.getRelativeTestSuiteId(tsc)
 		assertThat(relativeTestSuiteId, is("VT/cleanMaterials"))
 	}

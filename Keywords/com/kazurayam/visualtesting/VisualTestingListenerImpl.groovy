@@ -168,9 +168,7 @@ public class VisualTestingListenerImpl {
 
 		// read the id of last executed TestSuiteId from GlobalVariables.json file if it exists
 		if (Files.exists(GLOBAL_VARIABLES_JSON)) {
-			List<String> names = [
-				MGV.LAST_EXECUTED_TESTSUITE_ID.getName()
-			]
+			List<String> names = [MGV.LAST_EXECUTED_TESTSUITE_ID.getName()]
 			Reader reader = new InputStreamReader(new FileInputStream(GLOBAL_VARIABLES_JSON.toFile()), "utf-8")
 			Map<String, Object> gvs = GlobalVariableHelpers.read(names, reader)
 			for (String name in gvs.keySet()) {
@@ -279,23 +277,25 @@ public class VisualTestingListenerImpl {
 		WebUI.comment("GlobalVariable.${ManagedGlobalVariable.LAST_EXECUTED_TESTSUITE_ID} is set to ${lastExecutedTestsuiteId}")
 		//
 		Files.createDirectories(GLOBAL_VARIABLES_JSON.getParent())
-		List<String> names = [
-			MGV.LAST_EXECUTED_TESTSUITE_ID.getName()
-		]
+		List<String> names = [MGV.LAST_EXECUTED_TESTSUITE_ID.getName()]
 		Writer writer = new OutputStreamWriter(new FileOutputStream(GLOBAL_VARIABLES_JSON.toFile()), "utf-8")
 		GVH.write(names, writer)
 	}
 
 	/**
-	 * if testSuiteContext.getTestSuiteId() is "Test Suites/TS1" then will return "TS1"
+	 * if testSuiteContext.getTestSuiteId() is "Test Suites\CURA\chronos_capture" 
+	 * then returns "CURA/chronos_capture".
+	 * 
+	 * 1. chomp "Test Suite" prefix off
+	 * 2. replace File.separator (\ on Windows) to /
+	 * 
 	 * @param testSuiteContext
 	 * @return
 	 */
 	static String getRelativeTestSuiteId(TestSuiteContext testSuiteContext) {
 		Objects.requireNonNull(testSuiteContext, "testSuiteContext must not be null")
 		Path p = Paths.get(testSuiteContext.getTestSuiteId())
-		println "p is ${p}"
-		return p.subpath(1, p.getNameCount()).toString()
+		return p.subpath(1, p.getNameCount()).toString().replace(File.separator, '/')
 	}
 }
 

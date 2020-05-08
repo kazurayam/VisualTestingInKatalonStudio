@@ -2,7 +2,7 @@
 
 apply plugin: 'groovy'
 
-version = "1.17.0"
+version = "1.17.1"
 
 ext {
     groovyVersion = '2.4.7'
@@ -114,7 +114,6 @@ task cleanDist(type: Delete) {
 }
 cleanDist.dependsOn(createDist)
 
-
 task createDistributableGradlew(type:Zip) {
     archiveFileName = "${VT_DIST_GRADLEW_PREFIX}.zip"
     destinationDirectory = file("${DIST}")
@@ -181,15 +180,15 @@ task createVTExampleWithVersion {
 }
 createVTExampleWithVersion.dependsOn(createVTExample)
 
-
 task distributables() {
+    dependsOn 'cleanDist'
     dependsOn 'createDistributableGradlewWithVersion'
     dependsOn 'createVTComponentsWithVersion'
     dependsOn 'createVTExampleWithVersion'
-    dependsOn 'cleanDist'
     tasks.findByName('createDistributableGradlewWithVersion').mustRunAfter 'cleanDist'
     tasks.findByName('createVTComponents').mustRunAfter 'cleanDist'
     tasks.findByName('createVTExample').mustRunAfter 'cleanDist'
 }
+
 
 defaultTasks = [ 'distributables' ]
