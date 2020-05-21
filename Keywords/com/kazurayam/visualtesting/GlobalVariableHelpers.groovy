@@ -32,6 +32,8 @@ public class GlobalVariableHelpers {
 		String getterName = 'get' + ((CharSequence)name).capitalize()
 		mc.'static'."${getterName}" = {-> return value }
 		mc.'static'."${name}"       = value
+		String setterName = 'set' + ((CharSequence)name).capitalize()
+		mc.'static'."${setterName}" = { newValue -> value = newValue }
 	}
 
 	static void addGlobalVariable(ManagedGlobalVariable mgv, Object value) {
