@@ -10,6 +10,7 @@ import com.kazurayam.materials.MaterialPair
 import com.kazurayam.materials.MaterialPairs
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.materials.MaterialStorage
+import com.kazurayam.materials.TExecutionProfile
 import com.kazurayam.materials.TCaseName
 import com.kazurayam.materials.TSuiteName
 import com.kazurayam.materials.TSuiteResultId
@@ -29,6 +30,7 @@ public class ImageCollectionDifferDriver {
 
 	private MaterialRepository mr_
 	private TSuiteName capturingTSuiteName_
+	private TExecutionProfile capturingTExecutionProfile_
 	private VisualTestingLogger logger_
 	private Path imageDeltaStatsJson_
 	private Path comparisonResultBundleFile_
@@ -37,10 +39,11 @@ public class ImageCollectionDifferDriver {
 		Objects.requireNonNull(mr, "mr must not be null")
 		this.mr_                  = mr
 		// call MaterialRepository#markAsCurrent() to specify where to save the image diff files
-		String tSuiteResultId = GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()]
-		String tSuiteTimestamp = GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()]
-		mr_.markAsCurrent(tSuiteResultId, tSuiteTimestamp)
-		def tsr = mr_.ensureTSuiteResultPresent(tSuiteResultId, tSuiteTimestamp)
+		String tSuiteResultId   = GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()]
+		String executionProfile = GlobalVariable[MGV.CURRENT_EXECUTION_PROFILE.getName()]
+		String tSuiteTimestamp  = GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()]
+		mr_.markAsCurrent(tSuiteResultId, executionProfile, tSuiteTimestamp)
+		def tsr = mr_.ensureTSuiteResultPresent(tSuiteResultId, executionProfile, tSuiteTimestamp)
 	}
 
 	void setVisualTestingLogger(VisualTestingLogger logger) {
@@ -53,35 +56,52 @@ public class ImageCollectionDifferDriver {
 	 * @param ms
 	 * @param options
 	 */
-	public boolean chronos(TSuiteName capturingTSuiteName, MaterialStorage ms, ChronosOptions options) {
+	public boolean chronos(TSuiteName capturingTSuiteName,
+			TExecutionProfile capturingTExecutionProfile,
+			MaterialStorage ms,
+			ChronosOptions options) {
 		Objects.requireNonNull(capturingTSuiteName, "capturingTSuiteName must not be null")
+		Objects.requireNonNull(capturingTExecutionProfile, "capturingTExecutionProfile must not be null")
 		Objects.requireNonNull(ms, "ms must not be null")
 		Objects.requireNonNull(options, "options must not be null")
 
 		// scan the 'Storage' directory to get the statistics of previous runs
-		ImageDeltaStats stats = this.createImageDeltaStats(ms, capturingTSuiteName, options)
+		ImageDeltaStats stats = this.createImageDeltaStats(ms,
+				capturingTSuiteName,
+				capturingTExecutionProfile,
+				options)
 
-		// copy image-delta-stats.json file from Storage dir to the Materials dir to bring it visible in the Materials/index.html
-		Path toPath1 = mr_.resolveMaterialPath(GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()], ImageDeltaStats.IMAGE_DELTA_STATS_FILE_NAME)
+		// copy image-delta-stats.json file from Storage dir to the Materials dir
+		// to bring it visible in the Materials/index.html
+		Path toPath1 = mr_.resolveMaterialPath(
+				GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+				ImageDeltaStats.IMAGE_DELTA_STATS_FILE_NAME)
 		if (this.imageDeltaStatsJson_ != null) {
 			Files.copy(this.imageDeltaStatsJson_, toPath1, StandardCopyOption.REPLACE_EXISTING)
 		}
 
 		// make image diffs, write the result into the directory named
-		// 'Materials/<current TSuiteName>/<current Timestamp>/<cuurent TCaseName>'
+		// 'Materials/<current TSuiteName>/<current ExecutionProfile>/<current Timestamp>/<current TCaseName>'
 		ImageCollectionDiffer imageCollectionDiffer = new ImageCollectionDiffer(this.mr_)
 		if (logger_ != null) {
 			imageCollectionDiffer.setVisualTestingLogger(logger_)
 		}
-		MaterialPairs materialPairs = this.createMaterialPairs(this.mr_, capturingTSuiteName)
-		boolean result = imageCollectionDiffer.makeImageCollectionDifferences(
+		MaterialPairs materialPairs =
+				this.createMaterialPairsForChronosMode(this.mr_,
+				capturingTSuiteName,
+				capturingTExecutionProfile)
+		boolean result =
+				imageCollectionDiffer.makeImageCollectionDifferences(
 				materialPairs,
-				new TCaseName( GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()] ),
+				new TCaseName( GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()] ),
 				stats)
 		WebUI.comment("${ComparisonResultBundle.SERIALIZED_FILE_NAME} files will be saved into ${imageCollectionDiffer.getOutput()}")
 
-		// save the comparison-result-bundle.json file into the Materials dir to bring it visible in the Materials/index.html
-		comparisonResultBundleFile_ = mr_.resolveMaterialPath(GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()],ComparisonResultBundle.SERIALIZED_FILE_NAME)
+		// save the comparison-result-bundle.json file into the Materials dir
+		// to bring it visible in the Materials/index.html
+		comparisonResultBundleFile_ =
+				mr_.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+				ComparisonResultBundle.SERIALIZED_FILE_NAME)
 		Files.copy(imageCollectionDiffer.getOutput(), comparisonResultBundleFile_)
 		WebUI.comment("copied into ${comparisonResultBundleFile_}")
 
@@ -98,18 +118,30 @@ public class ImageCollectionDifferDriver {
 	 * @param mr
 	 * @param criteriaPercentage
 	 */
-	public boolean twins(TSuiteName capturingTSuiteName, double criteriaPercentage) {
+	public boolean twins(TSuiteName capturingTSuiteName,
+			TExecutionProfile capturingTExecutionProfile,
+			double criteriaPercentage)
+	{
 		Objects.requireNonNull(capturingTSuiteName, "capturingTSuiteName must not be null")
+		Objects.requireNonNull(capturingTExecutionProfile, "capturingTExecutionProfile must not be null")
+
 		WebUI.comment(">>> diff image files will be saved into ${mr_.getCurrentTestSuiteDirectory().toString()}")
+
 		ImageCollectionDiffer imageCollectionDiffer = new ImageCollectionDiffer(this.mr_)
 		if (logger_ != null) {
 			imageCollectionDiffer.setVisualTestingLogger(logger_)
 		}
-		MaterialPairs materialPairs = this.createMaterialPairs(this.mr_, capturingTSuiteName)
-		boolean result = imageCollectionDiffer.makeImageCollectionDifferences(
+
+		MaterialPairs materialPairs =
+				this.createMaterialPairsForTwinsMode(this.mr_, capturingTSuiteName)
+
+		boolean result =
+				imageCollectionDiffer.makeImageCollectionDifferences(
 				materialPairs,
-				new TCaseName( GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()] ),
-				criteriaPercentage)
+				new TCaseName( GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()] ),
+				criteriaPercentage
+				)
+
 		return result
 	}
 
@@ -117,33 +149,49 @@ public class ImageCollectionDifferDriver {
 	 *
 	 * @return
 	 */
-	private ImageDeltaStats createImageDeltaStats(MaterialStorage ms,
-			TSuiteName capturingTSuiteName,
-			ChronosOptions options ) {
-		TSuiteName tSuiteNameExam           = new TSuiteName(      GlobalVariable[ManagedGlobalVariable.CURRENT_TESTSUITE_ID.getName()]        )
-		TSuiteTimestamp tSuiteTimestampExam = new TSuiteTimestamp( GlobalVariable[ManagedGlobalVariable.CURRENT_TESTSUITE_TIMESTAMP.getName()] )
-		TCaseName  tCaseNameExam            = new TCaseName(       GlobalVariable[ManagedGlobalVariable.CURRENT_TESTCASE_ID.getName()]         )
+	private ImageDeltaStats createImageDeltaStats(MaterialStorage     ms,
+			TSuiteName        capturingTSuiteName,
+			TExecutionProfile capturingTExecutionProfile,
+			ChronosOptions    options )
+	{
+		TSuiteName        examiningTSuiteName        = new TSuiteName(       GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()]        )
+		TExecutionProfile examiningTExecutionProfile = new TExecutionProfile(GlobalVariable[MGV.CURRENT_EXECUTION_PROFILE.getName()]   )
+		TSuiteTimestamp   examiningTSuiteTimestamp   = new TSuiteTimestamp(  GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()] )
+		TCaseName         examiningTCaseName         = new TCaseName(        GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()]         )
 
-		Path previousIDS = StorageScanner.findLatestImageDeltaStats(ms, tSuiteNameExam, tCaseNameExam)
+		Path previousImageDeltaStats =
+				StorageScanner.findLatestImageDeltaStats(ms,
+				examiningTSuiteName,
+				examiningTExecutionProfile,
+				examiningTCaseName)
 		//
 		StorageScanner storageScanner =
 				new StorageScanner(
 				ms,
-				new StorageScanner.Options.Builder().
-				previousImageDeltaStats( previousIDS ).
-				filterDataLessThan( options.getFilterDataLessThan() ).
-				shiftCriteriaPercentageBy( options.getShiftCriteriaPercentageBy() ).
-				build())
+				new StorageScanner.Options.Builder()
+				.previousImageDeltaStats( previousImageDeltaStats )
+				.filterDataLessThan( options.getFilterDataLessThan() )
+				.shiftCriteriaPercentageBy( options.getShiftCriteriaPercentageBy() )
+				.build()
+				)
 
 		if (logger_ != null) {
 			storageScanner.setVisualTestingLogger(logger_)
 		}
 
 		// calculate the criteriaPercentages for each screenshot images based on the diffs of previous images
-		ImageDeltaStats imageDeltaStats = storageScanner.scan(capturingTSuiteName)
+		ImageDeltaStats imageDeltaStats =
+				storageScanner.scan(capturingTSuiteName,
+				capturingTExecutionProfile)
 
-		// persit the image-delta-stats.json into disk. It will be reused as previousIDS when this script run next time
-		this.imageDeltaStatsJson_ = storageScanner.persist(imageDeltaStats, tSuiteNameExam, tSuiteTimestampExam, tCaseNameExam)
+		// persist the image-delta-stats.json into disk.
+		// It will be reused as previousImageDeltaStats when this script run next time
+		this.imageDeltaStatsJson_ =
+				storageScanner.persist(imageDeltaStats,
+				examiningTSuiteName,
+				examiningTExecutionProfile,
+				examiningTSuiteTimestamp,
+				examiningTCaseName)
 
 		//
 		return imageDeltaStats
@@ -155,19 +203,57 @@ public class ImageCollectionDifferDriver {
 	 * @param mr
 	 * @return
 	 */
-	private MaterialPairs createMaterialPairs(MaterialRepository mr, TSuiteName capturingTSuiteName) {
-		MaterialPairs materialPairs = mr.createMaterialPairs(capturingTSuiteName)
+	private MaterialPairs createMaterialPairsForChronosMode(MaterialRepository mr,
+			TSuiteName capturingTSuiteName,
+			TExecutionProfile capturingTExecutionProfile)
+	{
+		Objects.requireNonNull(mr, "mr must not be null")
+		Objects.requireNonNull(capturingTSuiteName, "capturingTSuiteName must not be null")
+		Objects.requireNonNull(capturingTExecutionProfile, "capturingTExecutionProfile must not be null")
+
+		MaterialPairs materialPairs =
+				mr.createMaterialPairsForChronosMode(capturingTSuiteName, capturingTExecutionProfile)
 
 		if (materialPairs.size() == 0) {
 			KeywordUtil.markFailedAndStop(
-					"The size of materialPairs of the Test Suite \"${capturingTSuiteName.getId()}\" is found == 0. " +
+					"MaterialPairs in the Test Suite \"${capturingTSuiteName.getId()}/${capturingTExecutionProfile.getName()}\" is empty. " +
 					"Please make sure your test suite for capturing screenshots successfully ran. " +
-					"And you may have executed the test suite for the 1st time, " +
-					"or you had erased all previous records of its execution in the Storage directory. " +
+					"You may have executed the test suite for the 1st time, " +
+					"or you had erased all previous records in the Storage directory. OK. " +
 					"Don\'t mind it. " +
 					"The last execution has restored a set of screenshots. " +
-					"Just try the Test Suite again. " +
-					"Then it should run OK.")
+					"Just try again. " +
+					"It sould run OK next time.")
+		}
+
+		return materialPairs
+	}
+
+	/**
+	 *
+	 * @param tSuiteName
+	 * @param mr
+	 * @return
+	 */
+	private MaterialPairs createMaterialPairsForTwinsMode(MaterialRepository mr,
+			TSuiteName capturingTSuiteName)
+	{
+		Objects.requireNonNull(mr, "mr must not be null")
+		Objects.requireNonNull(capturingTSuiteName, "capturingTSuiteName must not be null")
+
+		MaterialPairs materialPairs =
+				mr.createMaterialPairsForTwinsMode(capturingTSuiteName)
+
+		if (materialPairs.size() == 0) {
+			KeywordUtil.markFailedAndStop(
+					"MaterialPairs in the Test Suite \"${capturingTSuiteName.getId()}\" is empty. " +
+					"Please make sure your test suite for capturing screenshots successfully ran. " +
+					"You may have executed the test suite for the 1st time, " +
+					"or you had erased all previous records in the Storage directory. OK. " +
+					"Don\'t mind it. " +
+					"The last execution has restored a set of screenshots. " +
+					"Just try again. " +
+					"It sould run OK next time.")
 		}
 
 		return materialPairs

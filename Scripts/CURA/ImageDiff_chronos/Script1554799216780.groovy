@@ -18,14 +18,15 @@ import internal.GlobalVariable
  * and a summary file: comparison-result-bundle.json
  */
 assert GVH.isGlobalVariablePresent(MGV.LAST_EXECUTED_TESTSUITE_ID)
-String TESTSUITE_ID = GVH.getGlobalVariableValue(MGV.LAST_EXECUTED_TESTSUITE_ID) // e.g, 'CURA/chronos_capture'
+String TESTSUITE_ID      = GVH.getGlobalVariableValue(MGV.LAST_EXECUTED_TESTSUITE_ID)     // e.g, 'CURA/chronos_capture'
+String EXECUTION_PROFILE = GVH.getGlobalVariableValue(MGV.LAST_APPLIED_EXECUTION_PROFILE) // e.g, 'CURA_DevelopmentEnv' 
 
 ChronosOptions options = new ChronosOptions.Builder().
 							filterDataLessThan(2.0).
 							shiftCriteriaPercentageBy(0.0).
 							build()
 ImageDiffer imageDiffer = new ImageDiffer()
-boolean result = imageDiffer.runChronos(TESTSUITE_ID, options)
+boolean result = imageDiffer.runChronos(TESTSUITE_ID, EXECUTION_PROFILE, options)
 
 /**
  * convert comparison-result-bundle.json file into a Markdown text

@@ -17,11 +17,14 @@ import internal.GlobalVariable
  * compare 2 sets of images and produce diff-images
  */
 assert GVH.isGlobalVariablePresent(MGV.LAST_EXECUTED_TESTSUITE_ID)
-String TESTSUITE_ID = GVH.getGlobalVariableValue(MGV.LAST_EXECUTED_TESTSUITE_ID) // e.g, 'CURA/twins_capture'
+String TESTSUITE_ID      = GVH.getGlobalVariableValue(MGV.LAST_EXECUTED_TESTSUITE_ID)     // e.g, 'CURA/twins_capture'
+
+assert GVH.isGlobalVariablePresent(MGV.LAST_APPLIED_EXECUTION_PROFILE)
+String EXECUTION_PROFILE = GVH.getGlobalVariableValue(MGV.LAST_APPLIED_EXECUTION_PROFILE) // e.g, 'CURA_DevelopmentEnv'
 
 double criteriaPercentage = 1.0
 ImageDiffer imageDiffer = new ImageDiffer()
-boolean result = imageDiffer.runTwins(TESTSUITE_ID, criteriaPercentage)
+boolean result = imageDiffer.runTwins(TESTSUITE_ID, EXECUTION_PROFILE, criteriaPercentage)
 
 if (! result ) {
 	KeywordUtil.markFailed("One or more pairs of screenshot are different.")
