@@ -218,8 +218,8 @@ public class VisualTestingListenerImpl {
 		if ( ! GVH.isGlobalVariablePresent(MGV.MATERIAL_REPOSITORY) ) {
 			Files.createDirectories(materialsDir)
 			MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
-			mr.markAsCurrent(TSuiteName.SUITELESS_DIRNAME, TExecutionProfile.UNUSED, TSuiteTimestamp.TIMELESS_DIRNAME)
-			def tsr = mr.ensureTSuiteResultPresent(TSuiteName.SUITELESS_DIRNAME, TExecutionProfile.UNUSED, TSuiteTimestamp.TIMELESS_DIRNAME)
+			mr.markAsCurrent(TSuiteName.SUITELESS_DIRNAME, TExecutionProfile.UNUSED_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
+			def tsr = mr.ensureTSuiteResultPresent(TSuiteName.SUITELESS_DIRNAME, TExecutionProfile.UNUSED_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
 			GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
 		}
 		MaterialRepository gvMR = (MaterialRepository)GVH.getGlobalVariableValue(MGV.MATERIAL_REPOSITORY)
