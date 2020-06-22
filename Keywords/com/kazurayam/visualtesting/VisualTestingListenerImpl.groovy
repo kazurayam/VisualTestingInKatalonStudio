@@ -10,6 +10,7 @@ import com.kazurayam.materials.MaterialStorage
 import com.kazurayam.materials.MaterialStorageFactory
 import com.kazurayam.materials.ReportsAccessor
 import com.kazurayam.materials.ReportsAccessorFactory
+import com.kazurayam.materials.TExecutionProfile
 import com.kazurayam.materials.TSuiteName
 import com.kazurayam.materials.TSuiteTimestamp
 import com.kazurayam.materials.VisualTestingLogger
@@ -133,11 +134,16 @@ public class VisualTestingListenerImpl {
 
 		String hd = 'VisualTestingListenerImpl#beforeTestSuite'
 
-		String testSuiteId        = testSuiteContext.getTestSuiteId()     // e.g. 'Test Suites/TS1'
-		String testSuiteTimestamp = reportFolder.getFileName().toString()    // e.g. '20180618_165141'
+		String testSuiteId          = testSuiteContext.getTestSuiteId()        // e.g. 'Test Suites/TS1'
+		String executionProfile     = RunConfiguration.getExecutionProfile()   // e.g, 'CURA_DevelopmentEnv'
+		String testSuiteTimestamp   = reportFolder.getFileName().toString()    // e.g. '20200621_061234'
+
 		GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_ID, testSuiteId)
+		GVH.ensureGlobalVariable(MGV.CURRENT_EXECUTION_PROFILE, executionProfile)
 		GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_TIMESTAMP, testSuiteTimestamp)
+
 		KeywordUtil.logInfo("${hd} testSuiteId=${testSuiteId}")
+		KeywordUtil.logInfo("${hd} executionProfile=${executionProfile}")
 		KeywordUtil.logInfo("${hd} testSuiteTimestamp=${testSuiteTimestamp}")
 
 		// create the MaterialRepository object
@@ -145,11 +151,10 @@ public class VisualTestingListenerImpl {
 
 		// create the MaterialRepository object, save it as a GlobalVariable
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
-		mr.setExecutionProfileName(RunConfiguration.getExecutionProfile())  // record name of the Execution Profile used
-		mr.markAsCurrent(testSuiteId, testSuiteTimestamp)
-		def tsr = mr.ensureTSuiteResultPresent(testSuiteId, testSuiteTimestamp)
+		mr.markAsCurrent(testSuiteId, executionProfile, testSuiteTimestamp)
+		def tsr = mr.ensureTSuiteResultPresent(testSuiteId, executionProfile, testSuiteTimestamp)
 		//if (tsr == null) {
-		//	throw new IllegalStateException("mr.ensureTSuiteResultPresent(${testSuiteId},${testSuiteTimestamp}) returned null")
+		//	throw new IllegalStateException("mr.ensureTSuiteResultPresent(${testSuiteId},${executionProfile},${testSuiteTimestamp}) returned null")
 		//}
 		VisualTestingLogger vtLogger4Repos = new VisualTestingLoggerDefaultImpl()
 		mr.setVisualTestingLogger(vtLogger4Repos)
@@ -166,15 +171,18 @@ public class VisualTestingListenerImpl {
 		ReportsAccessor ra = ReportsAccessorFactory.createInstance(reportsDir)
 		GVH.ensureGlobalVariable(MGV.REPORTS_ACCESSOR, ra)
 
-		// read the id of last executed TestSuiteId from GlobalVariables.json file if it exists
+		// read TestSuiteId and ExecutionProfile of the last executed test suite
+		// from GlobalVariables.json file
 		if (Files.exists(GLOBAL_VARIABLES_JSON)) {
-			List<String> names = [MGV.LAST_EXECUTED_TESTSUITE_ID.getName()]
+			List<String> names = [MGV.LAST_EXECUTED_TESTSUITE_ID.getName(), MGV.LAST_APPLIED_EXECUTION_PROFILE.getName()]
 			Reader reader = new InputStreamReader(new FileInputStream(GLOBAL_VARIABLES_JSON.toFile()), "utf-8")
 			Map<String, Object> gvs = GlobalVariableHelpers.read(names, reader)
 			for (String name in gvs.keySet()) {
 				GlobalVariableHelpers.ensureGlobalVariable(name, gvs.get(name))
 				WebUI.comment("GlobalVariable.${name} has value \"${gvs.get(name)}\" loaded from ${GLOBAL_VARIABLES_JSON}")
 			}
+		} else {
+			WebUI.comment("${GLOBAL_VARIABLE_JSON} file is not found")
 		}
 	}
 
@@ -191,14 +199,18 @@ public class VisualTestingListenerImpl {
 		String hd = 'VisualTestingListenerImpl#beforeTestCase'
 
 		if ( ! GVH.isGlobalVariablePresent(MGV.CURRENT_TESTSUITE_ID) ) {
-			GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_ID, TSuiteName.SUITELESS_DIRNAME)
+			GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_ID, TSuiteName.SUITELESS_DIRNAME)  // '_' as TSuiteName directory
+		}
+		if ( ! GVH.isGlobalVariablePresent(MGV.CURRENT_EXECUTION_PROFILE) ) {
+			GVH.ensureGlobalVariable(MGV.CURRENT_EXECUTION_PROFILE, TExecutionProfile.UNUSED) // '_' as Execution Profile directory
 		}
 		if ( ! GVH.isGlobalVariablePresent(MGV.CURRENT_TESTSUITE_TIMESTAMP) ) {
-			GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_TIMESTAMP, TSuiteTimestamp.TIMELESS_DIRNAME)
+			GVH.ensureGlobalVariable(MGV.CURRENT_TESTSUITE_TIMESTAMP, TSuiteTimestamp.TIMELESS_DIRNAME)  // '_' as TSuteTimestamp directory
 		}
 		GVH.ensureGlobalVariable(ManagedGlobalVariable.CURRENT_TESTCASE_ID, testCaseContext.getTestCaseId())
 
 		WebUI.comment("${hd} GlobalVariable.${MGV.CURRENT_TESTSUITE_ID} is \"${GVH.getGlobalVariableValue(MGV.CURRENT_TESTSUITE_ID)}\"")
+		WebUI.comment("${hd} GlobalVariable.${MGV.CURRENT_EXECUTION_PROFILE} is \"${GVH.getGlobalVariableValue(MGV.CURRENT_EXECUTION_PROFILE)}\"")
 		WebUI.comment("${hd} GlobalVariable.${MGV.CURRENT_TESTSUITE_TIMESTAMP} is \"${GVH.getGlobalVariableValue(MGV.CURRENT_TESTSUITE_TIMESTAMP)}\"")
 		WebUI.comment("${hd} GlobalVariable.${MGV.CURRENT_TESTCASE_ID} is \"${GVH.getGlobalVariableValue(MGV.CURRENT_TESTCASE_ID)}\"")
 
@@ -206,9 +218,8 @@ public class VisualTestingListenerImpl {
 		if ( ! GVH.isGlobalVariablePresent(MGV.MATERIAL_REPOSITORY) ) {
 			Files.createDirectories(materialsDir)
 			MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsDir)
-			mr.setExecutionProfileName(RunConfiguration.getExecutionProfile())  // record name of the Execution Profile used
-			mr.markAsCurrent(TSuiteName.SUITELESS_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
-			def tsr = mr.ensureTSuiteResultPresent(TSuiteName.SUITELESS_DIRNAME, TSuiteTimestamp.TIMELESS_DIRNAME)
+			mr.markAsCurrent(TSuiteName.SUITELESS_DIRNAME, TExecutionProfile.UNUSED, TSuiteTimestamp.TIMELESS_DIRNAME)
+			def tsr = mr.ensureTSuiteResultPresent(TSuiteName.SUITELESS_DIRNAME, TExecutionProfile.UNUSED, TSuiteTimestamp.TIMELESS_DIRNAME)
 			GVH.ensureGlobalVariable(MGV.MATERIAL_REPOSITORY, mr)
 		}
 		MaterialRepository gvMR = (MaterialRepository)GVH.getGlobalVariableValue(MGV.MATERIAL_REPOSITORY)
@@ -247,37 +258,43 @@ public class VisualTestingListenerImpl {
 	 * @param testSuiteContext
 	 */
 	void afterTestSuite(TestSuiteContext testSuiteContext) {
-		String testSuiteId        = testSuiteContext.getTestSuiteId()     // e.g. 'Test Suites/TS1'
+		String testSuiteId        = testSuiteContext.getTestSuiteId()        // e.g. 'Test Suites/TS1'
+		String executionProfile   = RunConfiguration.getExecutionProfile()   // e.g. 'CURA_DevelopmentEnv'
 		String testSuiteTimestamp = reportFolder.getFileName().toString()    // e.g. '20180618_165141'
 		MaterialRepository mr = (MaterialRepository)GVH.getGlobalVariableValue(MGV.MATERIAL_REPOSITORY)
-		mr.setExecutionProfileName(RunConfiguration.getExecutionProfile())  // record name of the Execution Profile used
-		mr.markAsCurrent(testSuiteId, testSuiteTimestamp)
+		mr.markAsCurrent(testSuiteId, executionProfile, testSuiteTimestamp)
 
 		// If the TestSuiteResult has a MaterialMetadataBundle property,
 		if (mr.hasMaterialMetadataBundleOfCurrentTSuite()) {
 
-			WebUI.comment("printing visited-urls report for ${testSuiteId}/${testSuiteTimestamp}")
+			WebUI.comment("printing visited-urls report for ${testSuiteId}/${executionProfile}/${testSuiteTimestamp}")
 
-			// convert it into Markdown format and write Materials/tSuiteName/tSuiteTimestamp/visited-urls.md file
+			// convert it into Markdown format and write Materials/tSuiteName/executionProfile/tSuiteTimestamp/visited-urls.md file
 			Path markdown = mr.getCurrentTestSuiteDirectory().resolve(MaterialMetadataBundle.URLS_MARKDOWN_FILE_NAME)
 			mr.printVisitedURLsAsMarkdown(new FileWriter(markdown.toFile()))
 
-			// convert it into TAB-Separated-Values format and write Materials/tSuiteName/tSuiteTImestamp/visited-urls.txt
+			// convert it into TAB-Separated-Values format and write Materials/tSuiteName/executionProfile/tSuiteTImestamp/visited-urls.txt
 			Path tsv = mr.getCurrentTestSuiteDirectory().resolve(MaterialMetadataBundle.URLS_TSV_FILE_NAME)
 			mr.printVisitedURLsAsTSV(new FileWriter(tsv.toFile()))
+
 		} else {
-			WebUI.comment("There found no MaterialMetadataBundle for ${testSuiteId}/${testSuiteTimestamp}")
+			WebUI.comment("There found no MaterialMetadataBundle for ${testSuiteId}/${executionProfile}/${testSuiteTimestamp}")
 		}
 
 		// write the id of Test Suite which was last executed into a GlobalVariable, and write it into json file.
-		// It is necessary to pass the info via file to the next TestSuite
+		// write the Execution Profile name as well.
+		// It is necessary to pass the info via file to the next TestSuite run.
 		// Because a GlobalVariable is TestSuite-scoped; it is not automatically passed across TestSuite boundaries.
-		def lastExecutedTestsuiteId = this.getRelativeTestSuiteId(testSuiteContext)
+		def lastExecutedTestsuiteId     = this.getRelativeTestSuiteId(testSuiteContext)
+		def lastAppliedExecutionProfile = RunConfiguration.getExecutionProfile()
 		GVH.ensureGlobalVariable(ManagedGlobalVariable.LAST_EXECUTED_TESTSUITE_ID, lastExecutedTestsuiteId)
+		GVH.ensureGlobalVariable(ManagedGlobalVariable.LAST_APPLIED_EXECUTION_PROFILE, lastAppliedExecutionProfile)
 		WebUI.comment("GlobalVariable.${ManagedGlobalVariable.LAST_EXECUTED_TESTSUITE_ID} is set to ${lastExecutedTestsuiteId}")
+		WebUI.comment("GlobalVariable.${ManagedGlobalVariable.LAST_APPLIED_EXECUTION_PROFILE} is set to ${lastAppliedExecutionProfile}")
+
 		//
 		Files.createDirectories(GLOBAL_VARIABLES_JSON.getParent())
-		List<String> names = [MGV.LAST_EXECUTED_TESTSUITE_ID.getName()]
+		List<String> names = [MGV.LAST_EXECUTED_TESTSUITE_ID.getName(), MGV.LAST_APPLIED_EXECUTION_PROFILE.getName()]
 		Writer writer = new OutputStreamWriter(new FileOutputStream(GLOBAL_VARIABLES_JSON.toFile()), "utf-8")
 		GVH.write(names, writer)
 	}
