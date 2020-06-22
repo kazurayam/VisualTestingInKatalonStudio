@@ -145,7 +145,7 @@ try {
 			" of \n${jo.prettyPrint(tsn.toJsonText())}\n" + 
 			" before \n${jo.prettyPrint(tst.toJsonText())}\n" + 
 			" from \n${jo.prettyPrint(ms.toJsonText())}\n" +
-			" into copy into \n${jo.prettyPrint(mr.toJsonText())}")
+			" to copy into \n${jo.prettyPrint(mr.toJsonText())}")
 	}
 	
 } catch (Exception e) {

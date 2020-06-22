@@ -174,10 +174,7 @@ public class VisualTestingListenerImpl {
 		// read TestSuiteId and ExecutionProfile of the last executed test suite
 		// from GlobalVariables.json file
 		if (Files.exists(GLOBAL_VARIABLES_JSON)) {
-			List<String> names = [
-				MGV.LAST_EXECUTED_TESTSUITE_ID.getName(),
-				MGV.LAST_APPLIED_EXECUTION_PROFILE.getName()
-			]
+			List<String> names = [MGV.LAST_EXECUTED_TESTSUITE_ID.getName(), MGV.LAST_APPLIED_EXECUTION_PROFILE.getName()]
 			Reader reader = new InputStreamReader(new FileInputStream(GLOBAL_VARIABLES_JSON.toFile()), "utf-8")
 			Map<String, Object> gvs = GlobalVariableHelpers.read(names, reader)
 			for (String name in gvs.keySet()) {
@@ -297,10 +294,7 @@ public class VisualTestingListenerImpl {
 
 		//
 		Files.createDirectories(GLOBAL_VARIABLES_JSON.getParent())
-		List<String> names = [
-			MGV.LAST_EXECUTED_TESTSUITE_ID.getName(),
-			MGV.LAST_APPLIED_EXECUTION_PROFILE.getName()
-		]
+		List<String> names = [MGV.LAST_EXECUTED_TESTSUITE_ID.getName(), MGV.LAST_APPLIED_EXECUTION_PROFILE.getName()]
 		Writer writer = new OutputStreamWriter(new FileOutputStream(GLOBAL_VARIABLES_JSON.toFile()), "utf-8")
 		GVH.write(names, writer)
 	}
