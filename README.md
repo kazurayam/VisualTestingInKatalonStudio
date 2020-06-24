@@ -44,7 +44,7 @@ This project demonstrates how to perform screenshot-comparison testings in Katal
 - After taking screenshots, I want to check them and find out if there are any visual  differences between the two.
 - If not significant difference found, OK, I am relieved and can go home. If any significant visual difference found, whatever the cause can be, I would fix it immediately.
 
-If my AUT has 100 pages and if I do it manually, it would take me more than 1 hour to go through a Twins test. It's too tiring, too boring. I don't like doing the job everyday! Therefore I would add the final term:
+If my AUT has 100 pages and if I do it manually, it would take me more than 1 hour to go through a Twins test. It's too tiring, too boring. I don't like doing such slavery labour! Therefore I would add the final term:
 
 - I want to automate it.
 
