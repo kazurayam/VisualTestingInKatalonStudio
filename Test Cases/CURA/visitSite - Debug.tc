@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>visitSite</name>
+   <name>visitSite - Debug</name>
    <tag></tag>
    <comment>*** GlobalVariable[$MGV.CURRENT_TESTSUITE_ID.getName()]=$GlobalVariable[MGV.CURRENT_TESTSUITE_ID.getName()]
 *** GlobalVariable[$MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()]=$GlobalVariable[MGV.CURRENT_TESTSUITE_TIMESTAMP.getName()]
-saved image into $png1
-saved image into $png3
-saved image into $png4
-saved image into $png5</comment>
-   <testCaseGuid>92eef6a8-847b-4ad3-a19d-208e805d5774</testCaseGuid>
+saved image into $png1</comment>
+   <testCaseGuid>f8c5e029-4b2d-4b2e-a4f3-32ae746af6b2</testCaseGuid>
 </TestCaseEntity>
