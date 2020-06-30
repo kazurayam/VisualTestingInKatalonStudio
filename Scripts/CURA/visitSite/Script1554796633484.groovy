@@ -51,10 +51,7 @@ WebUI.comment("saved image into ${png1}")
 // create one more screenshot file with name in Japanese
 Path png2 = mr.resolveMaterialPath(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
-					"1111111111/2222222222/3333333333/44444444444/5555555555/6666666666/7777777777/8888888888/9999999999/0000000000/" ,
-					"longPath.png")
-WebUI.comment("pant2=${png2.toAbsolutePath().toString()} has length of ${png2.toAbsolutePath().toString().length()} ")
-
+					"トップ.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
 WebUI.comment("saved image into ${png1}")
 
