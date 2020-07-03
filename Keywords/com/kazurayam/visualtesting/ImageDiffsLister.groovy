@@ -30,7 +30,7 @@ public class ImageDiffsLister {
 		List<Object> comparisonResultList = sortComparisonResultsByDiffRatio(slurper.parse(input_.toFile()))
 		//println JsonOutput.prettyPrint(JsonOutput.toJson(obj))
 		StringBuilder sb = new StringBuilder()
-		sb.append("|file name|diff％|criteria%|diff > criteria ?|\n")
+		sb.append("|file name|diff|criteria|diff>criteria?|\n")
 		sb.append("|---------|------|---|---|\n")
 		for (entry in comparisonResultList) {
 			def href = entry.ComparisonResult.diffMaterial.Material.hrefRelativeToRepositoryRoot
@@ -57,7 +57,7 @@ public class ImageDiffsLister {
 		List<Object> comparisonResultList = sortComparisonResultsByDiffRatio(slurper.parse(input_.toFile()))
 		//println JsonOutput.prettyPrint(JsonOutput.toJson(obj))
 		StringBuilder sb = new StringBuilder()
-		sb.append("file name,diff％,criteria%,diff > criteria ?\n")
+		sb.append("file name,diff,criteria,diff>criteria?\n")
 		for (entry in comparisonResultList) {
 			def href = entry.ComparisonResult.diffMaterial.Material.hrefRelativeToRepositoryRoot
 			List<String> pathElements = href.split('/') as List
@@ -79,7 +79,13 @@ public class ImageDiffsLister {
 	private List<Object> sortComparisonResultsByDiffRatio(Object obj) {
 		List<Object> comparisonResultList = obj.ComparisonResultBundle
 		comparisonResultList.sort { a, b ->
-			(a.ComparisonResult.diffRatio <=> b.ComparisonResult.diffRatio) * (-1) }
+			int result = (a.ComparisonResult.diffRatio <=> b.ComparisonResult.diffRatio) * (-1)
+			if (result == 0) {
+				result = (a.ComparisonResult.diffMaterial.Material.hrefRelativeToRepositoryRoot
+							<=> b.ComparisonResult.diffMaterial.Material.hrefRelativeToRepositoryRoot)
+			}
+			return result	
+		}
 		return comparisonResultList
 
 	}

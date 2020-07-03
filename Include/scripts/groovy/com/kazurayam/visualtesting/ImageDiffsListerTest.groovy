@@ -36,7 +36,7 @@ class ImageDiffsListerTest{
 		String markdown = lister.toMarkdown()
 		println("test_toMarkDown(): markdown=${markdown}")
 		// then:
-		assertTrue(markdown.contains('''|file name|diff％|criteria%|diff > criteria ?|'''))
+		assertTrue(markdown.contains('''|file name|diff|criteria|diff>criteria?|'''))
 		assertTrue(markdown.contains('''|---------|------|---|---|'''))
 		assertTrue(markdown.contains('''|home(1.02).png|1.02|2.0||'''))
 		assertTrue(markdown.contains('''|トップ(1.02).png|1.02|2.0||'''))
@@ -62,7 +62,7 @@ class ImageDiffsListerTest{
 		String csv = lister.toCsv()
 		println("test_toCSV(): markdown=${csv}")
 		// then:
-		assertTrue(csv.contains('''file name,diff％,criteria%,diff > criteria ?'''))
+		assertTrue(csv.contains('''file name,diff,criteria,diff>criteria?'''))
 		assertTrue(csv.contains('''home(1.02).png,1.02,2.0,'''))
 		assertTrue(csv.contains('''トップ(1.02).png,1.02,2.0,'''))
 		assertTrue(csv.contains('''default%23appointment(0.11).png,0.11,2.0,'''))
@@ -70,7 +70,7 @@ class ImageDiffsListerTest{
 		assertTrue(csv.contains('''profile.php%23login(0.00).png,0.0,2.0,'''))
 		assertTrue(csv.contains('''revisited(0.00).png,0.0,2.0,'''))
 		// when:
-		// assert that the rows are sorted by the descending order of the diff%
+		// assert that the rows are sorted by descending order of diffRatio + ascending order of fileName
 		List<String> lines = new ArrayList<String>()
 		BufferedReader br = new BufferedReader(new StringReader(csv))
 		String line
