@@ -54,4 +54,29 @@ class ImageDiffsListerTest{
 		}
 		assertEquals('''|home(1.02).png|1.02|2.0||''', lines[2])
 	}
+
+	@Test
+	void test_toCSV() {
+		// when:
+		ImageDiffsLister lister = new ImageDiffsLister(comparisonResultBundle)
+		String csv = lister.toCsv()
+		println("test_toCSV(): markdown=${csv}")
+		// then:
+		assertTrue(csv.contains('''file name,diff％,criteria%,diff > criteria ?'''))
+		assertTrue(csv.contains('''home(1.02).png,1.02,2.0,'''))
+		assertTrue(csv.contains('''トップ(1.02).png,1.02,2.0,'''))
+		assertTrue(csv.contains('''default%23appointment(0.11).png,0.11,2.0,'''))
+		assertTrue(csv.contains('''appointment.php%23summary(0.01).png,0.01,2.0,'''))
+		assertTrue(csv.contains('''profile.php%23login(0.00).png,0.0,2.0,'''))
+		assertTrue(csv.contains('''revisited(0.00).png,0.0,2.0,'''))
+		// when:
+		// assert that the rows are sorted by the descending order of the diff%
+		List<String> lines = new ArrayList<String>()
+		BufferedReader br = new BufferedReader(new StringReader(csv))
+		String line
+		while ((line = br.readLine()) != null) {
+			lines.add(line)
+		}
+		assertEquals('''トップ(1.02).png,1.02,2.0,''', lines[2])
+	}
 }

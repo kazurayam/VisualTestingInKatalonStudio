@@ -13,7 +13,7 @@ import groovy.json.JsonSlurper
 public class ImageDiffsLister {
 
 	private Path input_
-	
+
 
 	/**
 	 * @param comparisonResultBundle
@@ -28,12 +28,10 @@ public class ImageDiffsLister {
 	String toMarkdown() {
 		JsonSlurper slurper = new JsonSlurper()
 		List<Object> comparisonResultList = sortComparisonResultsByDiffRatio(slurper.parse(input_.toFile()))
-
 		//println JsonOutput.prettyPrint(JsonOutput.toJson(obj))
 		StringBuilder sb = new StringBuilder()
 		sb.append("|file name|diff％|criteria%|diff > criteria ?|\n")
 		sb.append("|---------|------|---|---|\n")
-
 		for (entry in comparisonResultList) {
 			def href = entry.ComparisonResult.diffMaterial.Material.hrefRelativeToRepositoryRoot
 			List<String> pathElements = href.split('/') as List
@@ -51,15 +49,38 @@ public class ImageDiffsLister {
 			line.append("\n")
 			sb.append(line)
 		}
-
 		return sb.toString()
 	}
-	
+
+	String toCsv() {
+		JsonSlurper slurper = new JsonSlurper()
+		List<Object> comparisonResultList = sortComparisonResultsByDiffRatio(slurper.parse(input_.toFile()))
+		//println JsonOutput.prettyPrint(JsonOutput.toJson(obj))
+		StringBuilder sb = new StringBuilder()
+		sb.append("file name,diff％,criteria%,diff > criteria ?\n")
+		for (entry in comparisonResultList) {
+			def href = entry.ComparisonResult.diffMaterial.Material.hrefRelativeToRepositoryRoot
+			List<String> pathElements = href.split('/') as List
+			def fileName = pathElements.last()
+			StringBuilder line = new StringBuilder()
+			line.append(fileName)
+			line.append(',')
+			line.append(entry.ComparisonResult.diffRatio)
+			line.append(',')
+			line.append(entry.ComparisonResult.criteriaPercentage)
+			line.append(',')
+			line.append((entry.ComparisonResult.imagesAreSimilar) ? '' : 'X')
+			line.append("\n")
+			sb.append(line)
+		}
+		return sb.toString()
+	}
+
 	private List<Object> sortComparisonResultsByDiffRatio(Object obj) {
 		List<Object> comparisonResultList = obj.ComparisonResultBundle
 		comparisonResultList.sort { a, b ->
 			(a.ComparisonResult.diffRatio <=> b.ComparisonResult.diffRatio) * (-1) }
 		return comparisonResultList
-		
+
 	}
 }

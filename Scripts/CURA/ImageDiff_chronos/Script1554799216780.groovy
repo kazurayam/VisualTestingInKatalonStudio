@@ -1,4 +1,6 @@
+import java.nio.file.Files
 import java.nio.file.Path
+
 
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.visualtesting.GlobalVariableHelpers as GVH
@@ -36,9 +38,19 @@ assert comparison != null
 WebUI.comment("${comparison} has been created")
 ImageDiffsLister lister = new ImageDiffsLister(comparison)
 MaterialRepository mr = (MaterialRepository)GlobalVariable[MGV.MATERIAL_REPOSITORY.getName()]
-Path output = mr.getBaseDir().resolve('imageDiffsList.md')
-output.toFile().write(lister.toMarkdown(), "utf-8")
-WebUI.comment("${output} has been created")
+Path misc = mr.getBaseDir().resolve('misc')
+Files.createDirectories(misc)
+//
+Path md = misc.resolve('imageDiffsList.md')
+md.toFile().write(lister.toMarkdown(), "utf-8")
+WebUI.comment("${md} has been created")
+
+/**
+ * and a CSV text as well
+ */
+Path csv = misc.resolve('imageDiffsList.csv')
+csv.toFile().write(lister.toCsv(), "utf-8")
+WebUI.comment("${csv} has been created")
 
 
 /**
