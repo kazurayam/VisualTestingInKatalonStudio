@@ -25,7 +25,7 @@ WebUI.click(findTestObject('CURA/Page_Homepage/a_Make Appointment'))
 WebUI.verifyElementPresent(findTestObject('CURA/Page_Login/button_Login'),
 	10, FailureHandling.STOP_ON_FAILURE)
 
-WebUI.setText(findTestObject('CURA/Page_Login/input_username'), Username)
+WebUI.sendKeys(findTestObject('CURA/Page_Login/input_username'), Username)
 WebUI.setText(findTestObject('CURA/Page_Login/input_password'), Password)
 
 // takes Screenshot of the Login page
