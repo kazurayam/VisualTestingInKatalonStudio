@@ -1,0 +1,119 @@
+{
+    "MaterialMetadataBundle": [
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/image-delta-stats.json",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "FileName": "image-delta-stats.json"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/comparison-result-bundle.json",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "FileName": "comparison-result-bundle.json"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/CURA.visitSite/appointment.php%23summary(0.01).png",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "SubPath": "CURA.visitSite",
+                "FileName": "appointment.php%23summary(0.01).png"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/CURA.visitSite/default%23appointment(0.11).png",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "SubPath": "CURA.visitSite",
+                "FileName": "default%23appointment(0.11).png"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/CURA.visitSite/home(1.02).png",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "SubPath": "CURA.visitSite",
+                "FileName": "home(1.02).png"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/CURA.visitSite/profile.php%23login(0.00).png",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "SubPath": "CURA.visitSite",
+                "FileName": "profile.php%23login(0.00).png"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/CURA.visitSite/revisited(0.00).png",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "SubPath": "CURA.visitSite",
+                "FileName": "revisited(0.00).png"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/CURA.visitSite/\u30c8\u30c3\u30d7(1.02).png",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "SubPath": "CURA.visitSite",
+                "FileName": "\u30c8\u30c3\u30d7(1.02).png"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_exam/CURA_DevelopmentEnv/20200703_150015/CURA.ImageDiff_chronos/comparison-result-bundle.json",
+                "TCaseName": "Test Cases/CURA/ImageDiff_chronos",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "SubPath": "",
+                "FileName": "comparison-result-bundle.json"
+            }
+        }
+    ]
+}

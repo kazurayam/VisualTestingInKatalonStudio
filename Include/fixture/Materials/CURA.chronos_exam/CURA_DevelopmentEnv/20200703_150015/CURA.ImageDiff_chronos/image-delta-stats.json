@@ -1,0 +1,248 @@
+{
+    "storageScannerOptions": {
+        "shiftCriteriaPercentageBy": 2.0,
+        "filterDataLessThan": 2.0,
+        "maximumNumberOfImageDeltas": 5,
+        "onlySince": "19990101_000000",
+        "onlySinceInclusive": true,
+        "probability": 0.95,
+        "projectDirectory": "",
+        "previousImageDeltaStats": "C:\\Users\\qcq0264\\katalon-workspace\\VisualTestingInKatalonStudio\\Storage\\CURA.chronos_exam\\CURA_DevelopmentEnv\\20200630_113400\\CURA.ImageDiff_chronos\\image-delta-stats.json"
+    },
+    "imageDeltaStatsEntries": [
+        {
+            "TSuiteName": "CURA.chronos_capture",
+            "TExecutionProfile": "CURA_DevelopmentEnv",
+            "materialStatsList": [
+                {
+                    "path": "CURA.visitSite/appointment.php%23summary.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 2.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20200703_150014",
+                            "b": "20200630_113359",
+                            "d": 0.01,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200630_113359",
+                            "b": "20200629_141816",
+                            "d": 0.01,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200629_141816",
+                            "b": "20200629_140936",
+                            "d": 0.00,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "CURA.visitSite/default%23appointment.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 2.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20200703_150014",
+                            "b": "20200630_113359",
+                            "d": 0.11,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200630_113359",
+                            "b": "20200629_141816",
+                            "d": 0.11,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200629_141816",
+                            "b": "20200629_140936",
+                            "d": 0.00,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "CURA.visitSite/home.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 2.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20200703_150014",
+                            "b": "20200630_113359",
+                            "d": 1.02,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200630_113359",
+                            "b": "20200629_141816",
+                            "d": 0.36,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200629_141816",
+                            "b": "20200629_140936",
+                            "d": 1.15,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "CURA.visitSite/profile.php%23login.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 2.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20200703_150014",
+                            "b": "20200630_113359",
+                            "d": 0.00,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200630_113359",
+                            "b": "20200629_141816",
+                            "d": 0.00,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200629_141816",
+                            "b": "20200629_140936",
+                            "d": 0.00,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "CURA.visitSite/revisited.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 2.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20200703_150014",
+                            "b": "20200630_113359",
+                            "d": 0.00,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200630_113359",
+                            "b": "20200629_141816",
+                            "d": 0.00,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200629_141816",
+                            "b": "20200629_140936",
+                            "d": 0.00,
+                            "cached": false
+                        }
+                    ]
+                },
+                {
+                    "path": "CURA.visitSite/\u30c8\u30c3\u30d7.png",
+                    "degree": 0,
+                    "sum": 0.0,
+                    "mean": 0.0,
+                    "variance": 0.0,
+                    "standardDeviation": 0.0,
+                    "tDistribution": 0.0,
+                    "confidenceInterval": {
+                        "lowerBound": 0.0,
+                        "uppderBound": 0.0,
+                        "confidenceLevel": 0.0
+                    },
+                    "criteriaPercentage": 2.00,
+                    "data": [
+                        
+                    ],
+                    "imageDeltaList": [
+                        {
+                            "a": "20200703_150014",
+                            "b": "20200630_113359",
+                            "d": 1.02,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200630_113359",
+                            "b": "20200629_141816",
+                            "d": 0.36,
+                            "cached": false
+                        },
+                        {
+                            "a": "20200629_141816",
+                            "b": "20200629_140936",
+                            "d": 1.15,
+                            "cached": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

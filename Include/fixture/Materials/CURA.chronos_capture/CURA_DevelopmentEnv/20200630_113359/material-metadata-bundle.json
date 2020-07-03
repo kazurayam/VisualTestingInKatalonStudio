@@ -1,0 +1,77 @@
+{
+    "MaterialMetadataBundle": [
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_capture/CURA_DevelopmentEnv/20200630_113359/CURA.visitSite/home.png",
+                "TCaseName": "Test Cases/CURA/visitSite",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveScreenshotPathByUrlPathComponents",
+                "URL": "http://demoaut-mimic.kazurayam.com/"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_capture/CURA_DevelopmentEnv/20200630_113359/CURA.visitSite/\u30c8\u30c3\u30d7.png",
+                "TCaseName": "Test Cases/CURA/visitSite",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveMaterialPath",
+                "FileName": "\u30c8\u30c3\u30d7.png"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_capture/CURA_DevelopmentEnv/20200630_113359/CURA.visitSite/profile.php%23login.png",
+                "TCaseName": "Test Cases/CURA/visitSite",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveScreenshotPathByUrlPathComponents",
+                "URL": "https://katalon-demo-cura.herokuapp.com/profile.php#login"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_capture/CURA_DevelopmentEnv/20200630_113359/CURA.visitSite/default%23appointment.png",
+                "TCaseName": "Test Cases/CURA/visitSite",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveScreenshotPathByUrlPathComponents",
+                "URL": "https://katalon-demo-cura.herokuapp.com/#appointment"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_capture/CURA_DevelopmentEnv/20200630_113359/CURA.visitSite/appointment.php%23summary.png",
+                "TCaseName": "Test Cases/CURA/visitSite",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveScreenshotPathByUrlPathComponents",
+                "URL": "https://katalon-demo-cura.herokuapp.com/appointment.php#summary"
+            }
+        },
+        {
+            "MaterialMetadata": {
+                "MaterialPath": "CURA.chronos_capture/CURA_DevelopmentEnv/20200630_113359/CURA.visitSite/revisited.png",
+                "TCaseName": "Test Cases/CURA/visitSite",
+                "MaterialDescription": {
+                    "category": "",
+                    "description": ""
+                },
+                "InvokedMethodName": "resolveScreenshotPathByUrlPathComponents",
+                "SubPath": "",
+                "URL": "https://katalon-demo-cura.herokuapp.com/"
+            }
+        }
+    ]
+}
