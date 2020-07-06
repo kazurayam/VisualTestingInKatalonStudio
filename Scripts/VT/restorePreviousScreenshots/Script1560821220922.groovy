@@ -107,7 +107,8 @@ else {
 				"yyyyMMdd_hhmmss"
 			},
 			accept:{ f ->
-				f ==~ /\d{8}_\d{6}/ && f.isDirectory()
+				//f ==~ /\d{8}_\d{6}/ && f.isDirectory()
+				f.isDirectory()
 			}
 		] as FileFilter
 	)
@@ -117,7 +118,7 @@ else {
 	}
 
 	// show the JFileChooser dialog
-	int ret = chooser.showOpenDialog(chooser)
+	int ret = chooser.showOpenDialog(null)
 
 	if (ret == JFileChooser.APPROVE_OPTION) {
 		File selectedDir = chooser.getSelectedFile()
