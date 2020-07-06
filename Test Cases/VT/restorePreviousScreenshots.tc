@@ -5,4 +5,11 @@
    <tag></tag>
    <comment></comment>
    <testCaseGuid>3dbd92af-c981-4d9d-83ec-576933ad4d90</testCaseGuid>
+   <variable>
+      <defaultValue>false</defaultValue>
+      <description></description>
+      <id>97711381-3968-476d-8e67-3ccf2d711ab2</id>
+      <masked>false</masked>
+      <name>CONSOLE_MODE</name>
+   </variable>
 </TestCaseEntity>

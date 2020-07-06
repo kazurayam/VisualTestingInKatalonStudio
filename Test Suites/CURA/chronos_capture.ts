@@ -14,7 +14,13 @@
       <guid>cbec7f36-1c4f-4ede-ae10-35dbfc07d946</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/CURA/restorePreviousScreenshots</testCaseId>
+      <testCaseId>Test Cases/VT/restorePreviousScreenshots</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>97711381-3968-476d-8e67-3ccf2d711ab2</variableId>
+      </variableLink>
    </testCaseLink>
    <testCaseLink>
       <guid>5035e212-c24d-4310-b9c9-c638daf7ab3d</guid>
