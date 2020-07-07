@@ -19,4 +19,9 @@
       <initValue>'ThisIsNotAPassword'</initValue>
       <name>Password</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>true</initValue>
+      <name>SAVE_PAGE_SOURCE</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

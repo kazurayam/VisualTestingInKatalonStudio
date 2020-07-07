@@ -52,6 +52,13 @@ Path csv = misc.resolve('imageDiffsList.csv')
 csv.toFile().write(lister.toCsv(), "utf-8")
 WebUI.comment("${csv} has been created")
 
+/**
+ * and a PS1 text (PowerShell script) as well
+ */
+Path ps1 = misc.resolve('imageDiffsList.ps1')
+ps1.toFile().write(lister.toPs1(), "utf-8")
+WebUI.comment("${ps1} has been created")
+
 
 /**
  * 

@@ -2,7 +2,7 @@
 
 apply plugin: 'groovy'
 
-version = "1.20.0"
+version = "1.20.1"
 
 ext {
     groovyVersion = '2.4.7'

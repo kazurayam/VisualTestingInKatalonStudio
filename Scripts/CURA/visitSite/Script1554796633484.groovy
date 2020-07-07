@@ -55,6 +55,14 @@ Path png2 = mr.resolveMaterialPath(
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
 WebUI.comment("saved image into ${png1}")
 
+// if required, save page source as HTML
+if (GlobalVariable.SAVE_PAGE_SOURCE != null && GlobalVariable.SAVE_PAGE_SOURCE == true) {
+	Path html = png1.getParent().resolve(png1.getFileName().toString().replace('.png', '.html'))
+    String content = driver.getPageSource()
+    html.toFile().write(content, 'utf-8')
+}
+
+
 
 WebUI.callTestCase(findTestCase('CURA/Login'),
 	[

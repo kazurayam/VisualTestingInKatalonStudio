@@ -26,6 +26,7 @@ double criteriaPercentage = 1.0
 ImageDiffer imageDiffer = new ImageDiffer()
 boolean result = imageDiffer.runTwins(TESTSUITE_ID, EXECUTION_PROFILE, criteriaPercentage)
 
+
 if (! result ) {
 	KeywordUtil.markFailed("One or more pairs of screenshot are different.")
 }
