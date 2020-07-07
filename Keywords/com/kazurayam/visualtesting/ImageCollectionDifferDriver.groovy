@@ -90,11 +90,12 @@ public class ImageCollectionDifferDriver {
 				this.createMaterialPairsForChronosMode(this.mr_,
 				capturingTSuiteName,
 				capturingTExecutionProfile)
+		
 		boolean result =
 				imageCollectionDiffer.makeImageCollectionDifferences(
-				materialPairs,
-				new TCaseName( GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()] ),
-				stats)
+					materialPairs,
+					new TCaseName( GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()] ),
+					stats)
 		WebUI.comment("${ComparisonResultBundle.SERIALIZED_FILE_NAME} files will be saved into ${imageCollectionDiffer.getOutput()}")
 
 		// save the comparison-result-bundle.json file into the Materials dir
@@ -137,11 +138,19 @@ public class ImageCollectionDifferDriver {
 
 		boolean result =
 				imageCollectionDiffer.makeImageCollectionDifferences(
-				materialPairs,
-				new TCaseName( GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()] ),
-				criteriaPercentage
+					materialPairs,
+					new TCaseName( GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()] ),
+					criteriaPercentage
 				)
 
+		// save the comparison-result-bundle.json file into the Materials dir
+		// to bring it visible in the Materials/index.html
+		comparisonResultBundleFile_ =
+				mr_.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+				ComparisonResultBundle.SERIALIZED_FILE_NAME)
+		Files.copy(imageCollectionDiffer.getOutput(), comparisonResultBundleFile_)
+		WebUI.comment("copied into ${comparisonResultBundleFile_}")
+		
 		return result
 	}
 

@@ -98,7 +98,7 @@ public class ImageDiffsLister {
 				line.append(entry.ComparisonResult.actualMaterial.Material.hrefRelativeToRepositoryRoot.replace('.png','.html'))
 				line.append(' # ')
 				line.append(entry.ComparisonResult.diffRatio)
-				line.append("\n")
+				line.append("\n\n")
 				sb.append(line)
 			}
 		}
