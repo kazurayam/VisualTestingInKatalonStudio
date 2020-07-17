@@ -91,13 +91,15 @@ public class ImageDiffsLister {
 			if (Files.exists(expectedHtmlPath) && Files.exists(actualHtmlPath)) {
 				StringBuilder line = new StringBuilder()
 				line.append('code --diff ')
+				line.append('\"')
 				line.append('./Materials/')
 				line.append(entry.ComparisonResult.expectedMaterial.Material.hrefRelativeToRepositoryRoot.replace('.png','.html'))
+				line.append('\"')
 				line.append(" ")
+				line.append('\"')
 				line.append('./Materials/')
 				line.append(entry.ComparisonResult.actualMaterial.Material.hrefRelativeToRepositoryRoot.replace('.png','.html'))
-				line.append(' # ')
-				line.append(entry.ComparisonResult.diffRatio)
+				line.append('\"')
 				line.append("\n\n")
 				sb.append(line)
 			}
