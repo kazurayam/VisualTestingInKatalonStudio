@@ -2,7 +2,7 @@
 
 apply plugin: 'groovy'
 
-version = "1.21.0"
+version = "1.21.1"
 
 ext {
     groovyVersion = '2.4.7'
@@ -41,7 +41,7 @@ task downloadJarsIntoDriversDir {
       downloadFile('https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar')
       downloadFile('https://github.com/kazurayam/junit4ks/releases/download/1.6/junit4ks-all.jar')
       downloadFile('https://github.com/kazurayam/ksbackyard/releases/download/0.40.0/ksbackyard-0.40.0.jar')
-      downloadFile('https://github.com/kazurayam/Materials/releases/download/0.78.0/Materials-0.78.0.jar')
+      downloadFile('https://github.com/kazurayam/Materials/releases/download/0.78.1/Materials-0.78.1.jar')
     }
 }
 
@@ -53,7 +53,7 @@ task drivers {
 
 
 task driversFromMavenLocal(type: Copy) {
-    from file("${System.getProperty('user.home')}/.m2/repository/com/kazurayam/Materials/0.78.0/Materials-0.78.0.jar")
+    from file("${System.getProperty('user.home')}/.m2/repository/com/kazurayam/Materials/0.78.1/Materials-0.78.1.jar")
     into file("$projectDir/Drivers")
 }
 
