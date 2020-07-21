@@ -90,6 +90,9 @@ public class ImageDiffsLister {
 			Path actualHtmlPath = Paths.get('.').resolve('Materials').resolve(actualHtmlPathStr)
 			if (Files.exists(expectedHtmlPath) && Files.exists(actualHtmlPath)) {
 				StringBuilder line = new StringBuilder()
+				line.append('# diff%: ')
+				line.append(entry.ComparisonResult.diffRatio)
+				line.append('\n')
 				line.append('code --diff ')
 				line.append('\"')
 				line.append('./Materials/')
@@ -118,6 +121,5 @@ public class ImageDiffsLister {
 			return result
 		}
 		return comparisonResultList
-
 	}
 }

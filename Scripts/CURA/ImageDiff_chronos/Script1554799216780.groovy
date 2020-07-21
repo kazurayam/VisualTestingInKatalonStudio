@@ -18,7 +18,7 @@ String TESTSUITE_ID      = GVH.getGlobalVariableValue(MGV.LAST_EXECUTED_TESTSUIT
 String EXECUTION_PROFILE = GVH.getGlobalVariableValue(MGV.LAST_APPLIED_EXECUTION_PROFILE) // e.g, 'CURA_DevelopmentEnv' 
 
 ChronosOptions options = new ChronosOptions.Builder().
-							filterDataLessThan(2.0).
+							filterDataLessThan(0.0).
 							shiftCriteriaPercentageBy(0.0).
 							build()
 ImageDiffer imageDiffer = new ImageDiffer()
