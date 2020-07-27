@@ -2,7 +2,7 @@
 
 apply plugin: 'groovy'
 
-version = "1.22.1"
+version = "1.22.2"
 
 ext {
     groovyVersion = '2.4.7'
@@ -12,7 +12,7 @@ ext {
     VT_DIST_COMPONENTS_PREFIX  = 'vt-components'
     VT_DIST_EXAMPLE_PREFIX     = 'vt-example'
 
-    materialsVersion = '0.79.0'
+    materialsVersion = '0.79.1'
 }
 
 // ---------------------------------------------------------------------

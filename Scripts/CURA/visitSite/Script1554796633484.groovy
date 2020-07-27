@@ -7,6 +7,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 
+import com.kazurayam.materials.FileType
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
 import com.kms.katalon.core.configuration.RunConfiguration
@@ -42,6 +43,7 @@ WebUI.delay(1)
 
 Path png1 = mr.resolveScreenshotPathByURLPathComponents(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					'screenshots',
 					url,
 					0,
 					'home')
@@ -51,14 +53,22 @@ WebUI.comment("saved image into ${png1}")
 // create one more screenshot file with name in Japanese
 Path png2 = mr.resolveMaterialPath(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					'screenshots',
 					"トップ.png")
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
 WebUI.comment("saved image into ${png1}")
 
 // if required, save page source as HTML
 if (GlobalVariable.SAVE_PAGE_SOURCE != null && GlobalVariable.SAVE_PAGE_SOURCE == true) {
-	Path html = png1.getParent().resolve(png1.getFileName().toString().replace('.png', '.html'))
-    String content = driver.getPageSource()
+	//Path html = png1.getParent().resolve(png1.getFileName().toString().replace('.png', '.html'))
+    Path html = mr.resolveMaterialPathByURLPathComponents(
+					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					'pagesources',
+					url,
+					0,
+					'home',
+					FileType.HTML)
+	String content = driver.getPageSource()
     html.toFile().write(content, 'utf-8')
 }
 
@@ -95,6 +105,7 @@ WebUI.setText(findTestObject('CURA/Page_Appointment/textarea_comment'), 'This is
 //Path png3 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Appointment.png")
 Path png3 = mr.resolveScreenshotPathByURLPathComponents(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					'screenshots',
 					new URL(WebUI.getUrl()),
 					0)
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png3.toFile(), 500)
@@ -144,6 +155,7 @@ if (comment != null) {
 //Path png4 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_AppointmentConfirmation.png")
 Path png4 = mr.resolveScreenshotPathByURLPathComponents(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					'screenshots',
 					new URL(WebUI.getUrl()),
 					0)
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png4.toFile(), 500)
@@ -161,6 +173,7 @@ WebUI.verifyElementPresent(findTestObject('CURA/Page_Homepage/a_Make Appointment
 //Path png5 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Homepage_revisited.png")
 Path png5 = mr.resolveScreenshotPathByURLPathComponents(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+					'screenshots',
 					new URL(WebUI.getUrl()),
 					0,
 					'revisited')

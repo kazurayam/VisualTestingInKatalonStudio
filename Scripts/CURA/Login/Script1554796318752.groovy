@@ -32,6 +32,7 @@ WebUI.setText(findTestObject('CURA/Page_Login/input_password'), Password)
 //Path png2 = mr.resolveMaterialPath(GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()], "CURA_Login.png")
 Path png2 = mr.resolveScreenshotPathByURLPathComponents(
 	GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
+	'screenshots',
 	new URL(WebUI.getUrl()),
 	0,
 	'top.png')
