@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 
 import com.kazurayam.materials.FileType
+import com.kazurayam.materials.MaterialDescription
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
 import com.kms.katalon.core.configuration.RunConfiguration
@@ -46,7 +47,8 @@ Path png1 = mr.resolveScreenshotPathByURLPathComponents(
 					'screenshots',
 					url,
 					0,
-					'home')
+					'home',
+					new MaterialDescription("1", "Home page"))
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png1.toFile(), 500)
 WebUI.comment("saved image into ${png1}")
 
@@ -54,7 +56,9 @@ WebUI.comment("saved image into ${png1}")
 Path png2 = mr.resolveMaterialPath(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
 					'screenshots',
-					"トップ.png")
+					"ホーム.png",
+					new MaterialDescription("1", "Home page"))
+
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
 WebUI.comment("saved image into ${png1}")
 
@@ -67,9 +71,10 @@ if (GlobalVariable.SAVE_PAGE_SOURCE != null && GlobalVariable.SAVE_PAGE_SOURCE =
 					url,
 					0,
 					'home',
-					FileType.HTML)
+					FileType.HTML,
+					new MaterialDescription("1", "Home page"))
 	String content = driver.getPageSource()
-    html.toFile().write(content, 'utf-8')
+	html.toFile().write(content, 'utf-8')
 }
 
 
@@ -107,7 +112,10 @@ Path png3 = mr.resolveScreenshotPathByURLPathComponents(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
 					'screenshots',
 					new URL(WebUI.getUrl()),
-					0)
+					0,
+					"default",
+					new MaterialDescription("1", "Appointment Input Form"))
+
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png3.toFile(), 500)
 WebUI.comment("saved image into ${png3}")
 
@@ -157,7 +165,10 @@ Path png4 = mr.resolveScreenshotPathByURLPathComponents(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
 					'screenshots',
 					new URL(WebUI.getUrl()),
-					0)
+					0,
+					"default",
+					new MaterialDescription("1", "Appointment Confirmation page"))
+
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png4.toFile(), 500)
 WebUI.comment("saved image into ${png4}")
 
@@ -176,7 +187,9 @@ Path png5 = mr.resolveScreenshotPathByURLPathComponents(
 					'screenshots',
 					new URL(WebUI.getUrl()),
 					0,
-					'revisited')
+					'revisited',
+					new MaterialDescription("1", "Home page revisited"))
+
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png5.toFile(), 500)
 WebUI.comment("saved image into ${png5}")
 

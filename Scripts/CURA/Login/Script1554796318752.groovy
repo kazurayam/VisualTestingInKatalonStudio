@@ -4,6 +4,7 @@ import java.nio.file.Path
 
 import org.openqa.selenium.WebDriver
 
+import com.kazurayam.materials.MaterialDescription
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.visualtesting.ManagedGlobalVariable as MGV
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
@@ -35,7 +36,8 @@ Path png2 = mr.resolveScreenshotPathByURLPathComponents(
 	'screenshots',
 	new URL(WebUI.getUrl()),
 	0,
-	'top.png')
+	'top.png',
+	new MaterialDescription("1", "Login page"))
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
 
 WebUI.click(findTestObject('CURA/Page_Login/button_Login'))
