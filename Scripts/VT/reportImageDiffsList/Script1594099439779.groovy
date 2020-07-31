@@ -39,6 +39,6 @@ WebUI.comment("${md} has been created")
  * and a CSV text as well
  */
 Path csv = misc.resolve('imageDiffsList.csv')
-csv.toFile().write(lister.toCsv(), "utf-8")
+csv.toFile().write(lister.toCsv(), System.getProperty("file.encoding"))
 WebUI.comment("${csv} has been created")
 

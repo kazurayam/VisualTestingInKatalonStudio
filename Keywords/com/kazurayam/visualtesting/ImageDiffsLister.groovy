@@ -82,7 +82,7 @@ public class ImageDiffsLister {
 		return sb.toString()
 	}
 
-	
+
 	private List<Object> sortComparisonResultsByDiffRatio(Object obj) {
 		List<Object> comparisonResultList = obj.ComparisonResultBundle
 		comparisonResultList.sort { a, b ->
