@@ -57,7 +57,7 @@ Path png2 = mr.resolveMaterialPath(
 					GlobalVariable[MGV.CURRENT_TESTCASE_ID.getName()],
 					'screenshots',
 					"ホーム.png",
-					new MaterialDescription("1", "Home page"))
+					new MaterialDescription("1", "ホームページ"))
 
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
 WebUI.comment("saved image into ${png1}")
