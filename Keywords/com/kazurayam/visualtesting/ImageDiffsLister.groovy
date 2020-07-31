@@ -31,8 +31,8 @@ public class ImageDiffsLister {
 		List<Object> comparisonResultList = sortComparisonResultsByDiffRatio(slurper.parse(input_.toFile()))
 		//println JsonOutput.prettyPrint(JsonOutput.toJson(obj))
 		StringBuilder sb = new StringBuilder()
-		sb.append("|file name|diff|criteria|diff>criteria?|\n")
-		sb.append("|---------|------|---|---|\n")
+		sb.append("|file name|description|diff|criteria|diff>criteria?|\n")
+		sb.append("|---------|-----------|----|--------|--------------|\n")
 		for (entry in comparisonResultList) {
 			def href = entry.ComparisonResult.diffMaterial.Material.hrefRelativeToRepositoryRoot
 			List<String> pathElements = href.split('/') as List
@@ -40,6 +40,8 @@ public class ImageDiffsLister {
 			StringBuilder line = new StringBuilder()
 			line.append('|')
 			line.append(fileName)
+			line.append('|')
+			line.append(entry.ComparisonResult.MaterialDescription.description.replace('|',' '))
 			line.append('|')
 			line.append(entry.ComparisonResult.diffRatio)
 			line.append('|')
@@ -58,7 +60,7 @@ public class ImageDiffsLister {
 		List<Object> comparisonResultList = sortComparisonResultsByDiffRatio(slurper.parse(input_.toFile()))
 		//println JsonOutput.prettyPrint(JsonOutput.toJson(obj))
 		StringBuilder sb = new StringBuilder()
-		sb.append("file name,diff,criteria,diff>criteria?")
+		sb.append("file name,description,diff,criteria,diff>criteria?")
 		sb.append("\n")
 		for (entry in comparisonResultList) {
 			def href = entry.ComparisonResult.diffMaterial.Material.hrefRelativeToRepositoryRoot
@@ -66,6 +68,8 @@ public class ImageDiffsLister {
 			def fileName = pathElements.last()
 			StringBuilder line = new StringBuilder()
 			line.append(fileName)
+			line.append(',')
+			line.append(entry.ComparisonResult.MaterialDescription.description.replace(',', ' '))
 			line.append(',')
 			line.append(entry.ComparisonResult.diffRatio)
 			line.append(',')
@@ -78,38 +82,7 @@ public class ImageDiffsLister {
 		return sb.toString()
 	}
 
-	String toPs1() {
-		JsonSlurper slurper = new JsonSlurper()
-		List<Object> comparisonResultList = sortComparisonResultsByDiffRatio(slurper.parse(input_.toFile()))
-		//println JsonOutput.prettyPrint(JsonOutput.toJson(obj))
-		StringBuilder sb = new StringBuilder()
-		for (entry in comparisonResultList) {
-			String expectedHtmlPathStr = entry.ComparisonResult.expectedMaterial.Material.hrefRelativeToRepositoryRoot.replace('.png', '.html')
-			String actualHtmlPathStr = entry.ComparisonResult.actualMaterial.Material.hrefRelativeToRepositoryRoot.replace('.png', '.html')
-			Path expectedHtmlPath = Paths.get('.').resolve('Materials').resolve(expectedHtmlPathStr)
-			Path actualHtmlPath = Paths.get('.').resolve('Materials').resolve(actualHtmlPathStr)
-			if (Files.exists(expectedHtmlPath) && Files.exists(actualHtmlPath)) {
-				StringBuilder line = new StringBuilder()
-				line.append('# diff% ')
-				line.append(entry.ComparisonResult.diffRatio)
-				line.append('\n')
-				line.append('code --diff ')
-				line.append('\"')
-				line.append('./Materials/')
-				line.append(entry.ComparisonResult.expectedMaterial.Material.hrefRelativeToRepositoryRoot.replace('.png','.html'))
-				line.append('\"')
-				line.append(" ")
-				line.append('\"')
-				line.append('./Materials/')
-				line.append(entry.ComparisonResult.actualMaterial.Material.hrefRelativeToRepositoryRoot.replace('.png','.html'))
-				line.append('\"')
-				line.append("\n\n")
-				sb.append(line)
-			}
-		}
-		return sb.toString()
-	}
-
+	
 	private List<Object> sortComparisonResultsByDiffRatio(Object obj) {
 		List<Object> comparisonResultList = obj.ComparisonResultBundle
 		comparisonResultList.sort { a, b ->
