@@ -4,6 +4,8 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
+import java.util.stream.Collectors
+
 import javax.swing.JFileChooser
 import javax.swing.filechooser.FileFilter
 
@@ -96,47 +98,53 @@ if (CONSOLE_MODE) {
 else {
 	// You are executing this script in interactive mode
 	
-	// prepare a JFileChooser dialog.
-	// It will ask user to specify which previous screenshots to choose as the basis of image comparison
-	def chooser = new JFileChooser(
-		currentDirectory: executionProfileDirInStorage.toFile(),
-		dialogTitle: "${projectDir.relativize(executionProfileDirInStorage)}/",
-		fileSelectionMode: JFileChooser.DIRECTORIES_ONLY,
-		fileFilter: [
-			getDescription: { ->
-				"yyyyMMdd_hhmmss"
-			},
-			accept:{ f ->
-				//f ==~ /\d{8}_\d{6}/ && f.isDirectory()
-				f.isDirectory()
-			}
-		] as FileFilter
-	)
-	if (latestBackup != null) {
-		chooser.setSelectedFile(latestBackup)
-		chooser.ensureFileIsVisible(latestBackup)
-	}
-
-	// show the JFileChooser dialog
-	int ret = chooser.showOpenDialog(null)
-
-	if (ret == JFileChooser.APPROVE_OPTION) {
-		File selectedDir = chooser.getSelectedFile()
-		if ( ! selectedDir.exists() ) {
-			throw new StepErrorException("${selectedDir} does not exist")
+	// check if one or more dirs in the executionProfileDirInStorage
+	Set<Path> dirSet = Files.list(executionProfileDirInStorage).filter {f -> Files.isDirectory(f)}.collect(Collectors.toSet())
+	if (dirSet.size() > 0) {
+	
+		// prepare a JFileChooser dialog.
+		// It will ask user to specify which previous screenshots to choose as the basis of image comparison
+		def chooser = new JFileChooser(
+			currentDirectory: executionProfileDirInStorage.toFile(),
+			dialogTitle: "${projectDir.relativize(executionProfileDirInStorage)}/",
+			fileSelectionMode: JFileChooser.DIRECTORIES_ONLY,
+			fileFilter: [
+				getDescription: { ->
+					"yyyyMMdd_hhmmss"
+				},
+				accept:{ f ->
+					//f ==~ /\d{8}_\d{6}/ && f.isDirectory()
+					f.isDirectory()
+				}
+			] as FileFilter
+		)
+		if (latestBackup != null) {
+			chooser.setSelectedFile(latestBackup)
+			chooser.ensureFileIsVisible(latestBackup)
 		}
-		String timestamp = selectedDir.getName()
-		WebUI.comment("timestamp=${timestamp} was selected")
-		// now restore the screenshots interactively specified
-		WebUI.callTestCase(findTestCase("Test Cases/VT/restorePreviousTSuiteResult"),
-			["STRATEGY":"exactlyAtOrBefore", "timestamp": timestamp ])
-	}
-	else if (ret == JFileChooser.CANCEL_OPTION) {
-		// find out the lates screenshots and restore it
-		WebUI.callTestCase(findTestCase("Test Cases/VT/restorePreviousTSuiteResult"),
-			["STRATEGY":"last"])
-	}
-	else {
-		throw new StepErrorException("You closed the dialog. Stopping the test.")
+		// show the JFileChooser dialog
+		int ret = chooser.showOpenDialog(null)
+		if (ret == JFileChooser.APPROVE_OPTION) {
+			File selectedDir = chooser.getSelectedFile()
+			if ( ! selectedDir.exists() ) {
+				throw new StepErrorException("${selectedDir} does not exist")
+			}
+			String timestamp = selectedDir.getName()
+			WebUI.comment("timestamp=${timestamp} was selected")
+			// now restore the screenshots interactively specified
+			WebUI.callTestCase(findTestCase("Test Cases/VT/restorePreviousTSuiteResult"),
+				["STRATEGY":"exactlyAtOrBefore", "timestamp": timestamp ])
+		} else if (ret == JFileChooser.CANCEL_OPTION) {
+			// find out the lates screenshots and restore it
+			WebUI.callTestCase(findTestCase("Test Cases/VT/restorePreviousTSuiteResult"),
+				["STRATEGY":"last"])
+		} else {
+			throw new StepErrorException("You closed the dialog. Stopping the test.")
+		}
+	
+	} else {
+		WebUI.comment("no previous record found in ${executionProfileDirInStorage}")
+		// no need to show the dialog,
+		// we will just go on.
 	}
 }
