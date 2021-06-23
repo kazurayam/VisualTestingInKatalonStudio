@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "42F4B2CB39A4A788CF0C5D7F7E573640",
+  "keywordClasses": [
+    {
+      "name": "com.kazurayam.visualtesting.ManagedGlobalVariable",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}

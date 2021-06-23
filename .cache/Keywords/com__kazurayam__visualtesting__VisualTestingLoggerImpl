@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "F95A39D62D9F5CFECAB8FC86834E123B",
+  "keywordClasses": [
+    {
+      "name": "com.kazurayam.visualtesting.VisualTestingLoggerImpl",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}

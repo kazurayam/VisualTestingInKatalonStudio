@@ -1,0 +1,18 @@
+{
+  "keywordFileContentHash": "17842BB5F5B5791684BAEDB9B613E25E",
+  "keywordClasses": [
+    {
+      "name": "com.kazurayam.visualtesting.ImageCollectionDifferDriver",
+      "keywordMethods": []
+    },
+    {
+      "name": "com.kazurayam.visualtesting.ImageCollectionDifferDriver$ChronosOptions",
+      "keywordMethods": []
+    },
+    {
+      "name": "com.kazurayam.visualtesting.ImageCollectionDifferDriver$ChronosOptions$Builder",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}

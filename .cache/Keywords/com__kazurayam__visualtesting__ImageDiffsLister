@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "CED03CE961BE453C02079525935C8447",
+  "keywordClasses": [
+    {
+      "name": "com.kazurayam.visualtesting.ImageDiffsLister",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}

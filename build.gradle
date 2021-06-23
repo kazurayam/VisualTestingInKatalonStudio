@@ -2,7 +2,7 @@
 
 apply plugin: 'groovy'
 
-version = "1.23.2"
+version = "1.24.0"
 
 ext {
     groovyVersion = '2.4.7'
@@ -42,7 +42,8 @@ task downloadJarsIntoDriversDir {
       downloadFile('https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar')
       downloadFile('https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar')
       downloadFile('https://github.com/kazurayam/junit4ks/releases/download/1.6/junit4ks-all.jar')
-      downloadFile('https://github.com/kazurayam/ksbackyard/releases/download/0.40.0/ksbackyard-0.40.0.jar')
+      downloadFile('https://github.com/kazurayam/ksbackyard/releases/download/0.41.0/ksbackyard-0.41.0.jar')
+      downloadFile('https://github.com/kazurayam/TestObjectExtension/releases/download/0.1.1/TestObjectExtension-0.1.1.jar')
       downloadFile("https://github.com/kazurayam/Materials/releases/download/${materialsVersion}/Materials-${materialsVersion}.jar")
     }
 }

@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "54868A924E29F6E29651D64CCB7208F1",
+  "keywordClasses": [
+    {
+      "name": "com.kazurayam.visualtesting.HighlightElements",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}

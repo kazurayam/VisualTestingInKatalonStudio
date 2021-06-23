@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "7D6E3A4AA80FAB358F7151B48EFC7C9A",
+  "keywordClasses": [
+    {
+      "name": "com.kazurayam.visualtesting.DOMRect",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}
