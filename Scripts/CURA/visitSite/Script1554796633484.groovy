@@ -7,6 +7,9 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 
+import com.kazurayam.ksbackyard.DevicePixelRatioResolver as DPRResolver
+import com.kazurayam.ksbackyard.ScreenshotDriver as ScreenshotDriver
+import com.kazurayam.ksbackyard.ScreenshotDriver.Options as Options
 import com.kazurayam.materials.FileType
 import com.kazurayam.materials.MaterialDescription
 import com.kazurayam.materials.MaterialRepository
@@ -32,6 +35,12 @@ WebUI.openBrowser('')
 WebUI.setViewPortSize(1024, 768)
 WebDriver driver = DriverFactory.getWebDriver()
 
+// query browser for the Device-Pixel-Ratio of the current platform; e.g, 2.0f for MackBook Air
+float dpr = DPRResolver.resolveDPR(driver)
+
+// prepare the options for calling ScreenshotDriver.takeEntirePage(WebDriver, File, ScreenshotDriver.Option)
+Options options = new Options.Builder().timeout(500).devicePixelRatio(dpr).build()
+
 assert GlobalVariable.Hostname != null
 URL url = new URL("http://${GlobalVariable.Hostname}/")
 
@@ -49,7 +58,7 @@ Path png1 = mr.resolveScreenshotPathByURLPathComponents(
 					0,
 					'home',
 					new MaterialDescription("1", "Home page"))
-CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png1.toFile(), 500)
+ScreenshotDriver.saveEntirePageImage(driver, png1.toFile(), options)
 WebUI.comment("saved image into ${png1}")
 
 // create one more screenshot file with name in Japanese
@@ -59,7 +68,7 @@ Path png2 = mr.resolveMaterialPath(
 					"ホーム.png",
 					new MaterialDescription("1", "ホームページ\\"))
 
-CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png2.toFile(), 500)
+ScreenshotDriver.saveEntirePageImage(driver, png2.toFile(), options)
 WebUI.comment("saved image into ${png1}")
 
 // if required, save page source as HTML
@@ -116,7 +125,7 @@ Path png3 = mr.resolveScreenshotPathByURLPathComponents(
 					"default",
 					new MaterialDescription("1", "Appointment Input Form"))
 
-CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png3.toFile(), 500)
+ScreenshotDriver.saveEntirePageImage(driver, png3.toFile(), options)
 WebUI.comment("saved image into ${png3}")
 
 
@@ -169,7 +178,7 @@ Path png4 = mr.resolveScreenshotPathByURLPathComponents(
 					"default",
 					new MaterialDescription("1", "Appointment Confirmation page"))
 
-CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png4.toFile(), 500)
+ScreenshotDriver.saveEntirePageImage(driver, png4.toFile(), options)
 WebUI.comment("saved image into ${png4}")
 
 
@@ -190,7 +199,7 @@ Path png5 = mr.resolveScreenshotPathByURLPathComponents(
 					'revisited',
 					new MaterialDescription("1", "Home page revisited"))
 
-CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(driver, png5.toFile(), 500)
+ScreenshotDriver.saveEntirePageImage(driver, png5.toFile(), options)
 WebUI.comment("saved image into ${png5}")
 
 WebUI.closeBrowser()
