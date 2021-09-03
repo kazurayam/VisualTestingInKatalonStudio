@@ -5,7 +5,7 @@ plugins {
     id "com.katalon.gradle-plugin" version "0.0.7"
 }
 
-version = "1.24.0"
+version = "2.00.0"
 
 ext {
     groovyVersion = '2.4.7'
@@ -48,6 +48,7 @@ task downloadJarsIntoDriversDir {
       downloadFile('https://github.com/kazurayam/ksbackyard/releases/download/0.41.0/ksbackyard-0.41.0.jar')
       downloadFile('https://github.com/kazurayam/TestObjectExtension/releases/download/0.1.1/TestObjectExtension-0.1.1.jar')
       downloadFile("https://github.com/kazurayam/Materials/releases/download/${materialsVersion}/Materials-${materialsVersion}.jar")
+      downloadFile("https://github.com/kazurayam/ExecutionProfilesLoader/releases/download/1.2.0/ExecutionProfilesLoader-1.2.0.jar")
     }
 }
 
